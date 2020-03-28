@@ -3,6 +3,7 @@ new Vue({
     data: {
         // Aqui inician las propiedades que vamos a necesitar
         //para almacenar nuestros objetos de trabajo
+        
         ordenes: [{id:"2345ab54c1111", fecha:"2020-10-31", mesero:"Juan",mesa:"2",cliente:"", estado:"A",total:21.10, observacion:"",
 
         detalleOrden:[
@@ -55,10 +56,31 @@ new Vue({
         ]}],
         ascendente: true,
         activos: true,
-        lactivos: null
+        lactivos: null,
+        textoBusqueda: "",
+        ordenSelected: 0,
     },
     methods: {
         //aqui van los metodos que vamos a necesitar
+        buscar:function(x){
+            
+            if(this.textoBusqueda=="")
+                return true;
+            var cad=this.ordenes[x].id+ 
+                this.ordenes[x].cliente+
+                this.ordenes[x].mesa+
+                this.ordenes[x].mesero+
+                this.ordenes[x].observacion+
+                this.ordenes[x].total;        
+            
+            cad=cad.toUpperCase();
+            
+            if(cad.indexOf(this.textoBusqueda.toUpperCase())>=0)
+                        return true;
+            else
+                return false;
+
+        },
         ordenar: function() {
             this.ascendente = !this.ascendente
             if(this.ascendente == true){

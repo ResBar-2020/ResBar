@@ -71,7 +71,7 @@
                         <!-- Filtro buscar -->
                         <div class="col-md-4 ">
                             <label class="col-form-label mx-3">Buscar:</label>
-                            <input type="text">
+                            <input type="text" v-model="textoBusqueda">
                         </div>
 
                         <!-- Boton Agregar nueva orden  -->
@@ -115,7 +115,7 @@
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr v-for = "orden in ordenes">
+                                <tr v-for = "(orden, index) in ordenes" v-show=" buscar(index)" v-on:click="ordenSelected=index;" v-bind:class="{ 'font-weight-bold' : ordenSelected==index, 'text-dark': ordenSelected==index }">
                                     <td>{{orden.id}}</td>
                                     <td>{{orden.cliente}}</td>
                                     <td>{{orden.mesa}}</td>
@@ -148,7 +148,7 @@
                                 </tr>
                             </thead>
                             <tbody >
-                                <tr v-for = "orden in lactivos">
+                                <tr v-for = "(orden, index) in lactivos" v-show=" buscar(index)" v-on:click="ordenSelected=index;" v-bind:class="{ 'font-weight-bold' : ordenSelected==index, 'text-dark': ordenSelected==index }">
                                     <td>{{orden.id}}</td>
                                     <td>{{orden.cliente}}</td>
                                     <td>{{orden.mesa}}</td>
