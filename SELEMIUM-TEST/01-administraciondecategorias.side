@@ -128,6 +128,31 @@
         ["xpath=//div[6]/div/div/div[3]/button", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "e9c53f40-4445-4598-87d1-f17d2581bd0f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.agg",
+      "targets": [
+        ["css=.agg", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Agregar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c854be94-052e-4e9d-8da5-ac1ca582a0fa",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-dialog-centered .modal-footer > .btn",
+      "targets": [
+        ["css=.modal-dialog-centered .modal-footer > .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[8]", "xpath:attributes"],
+        ["xpath=//div[@id='formModalNew']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
     }]
   }],
   "suites": [{
