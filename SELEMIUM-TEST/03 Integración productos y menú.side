@@ -1,0 +1,539 @@
+{
+  "id": "5befe386-341c-4ea4-ae15-86375dd680c6",
+  "version": "2.0",
+  "name": "03-Integracion de productos",
+  "url": "http://localhost/ResBar/productos.html",
+  "tests": [{
+    "id": "87d2c126-8d28-401d-b684-4a6ba89d7a25",
+    "name": "1agregar",
+    "commands": [{
+      "id": "904ed9ba-10eb-4f89-a415-2873cc1c0b91",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/ResBar/productos.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b0849c9f-35a9-4827-a3ce-5c00dc5645e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.agg",
+      "targets": [
+        ["css=.agg", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Agregar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aee0b672-395c-4a3e-acdb-6df79718b5e3",
+      "comment": "",
+      "command": "click",
+      "target": "id=idproducto",
+      "targets": [
+        ["id=idproducto", "id"],
+        ["css=#idproducto", "css:finder"],
+        ["xpath=//input[@id='idproducto']", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae2dc25e-d26d-43ce-ba00-87a29efb205d",
+      "comment": "",
+      "command": "type",
+      "target": "id=idproducto",
+      "targets": [
+        ["id=idproducto", "id"],
+        ["css=#idproducto", "css:finder"],
+        ["xpath=//input[@id='idproducto']", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": "platosAbebidas"
+    }, {
+      "id": "25e84390-beba-46b0-802f-4e5e9cbf7b87",
+      "comment": "",
+      "command": "select",
+      "target": "id=inputcategoria",
+      "targets": [],
+      "value": "label=Platos"
+    }, {
+      "id": "2a9a6ae2-e47c-4fe6-b0d2-955dbb6356c0",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//input[@id='precioholder']",
+      "targets": [
+        ["id=precioholder", "id"],
+        ["css=#precioholder", "css:finder"],
+        ["xpath=//input[@id='precioholder']", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[2]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7ebd1ba-c159-4b5f-94af-3e864d0661e4",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@id='precioholder']",
+      "targets": [
+        ["id=precioholder", "id"],
+        ["css=#precioholder", "css:finder"],
+        ["xpath=//input[@id='precioholder']", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[2]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a28a60a5-ce7a-4394-9ac7-555660ac4f9c",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "xpath=//input[@id='precioholder']",
+      "targets": [
+        ["id=precioholder", "id"],
+        ["css=#precioholder", "css:finder"],
+        ["xpath=//input[@id='precioholder']", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[2]/form/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "5"
+    }, {
+      "id": "355d0b8b-7592-449b-bb53-f7ee27f14d15",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-dialog-centered .btn-primary",
+      "targets": [
+        ["css=.modal-dialog-centered .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='button'])[32]", "xpath:attributes"],
+        ["xpath=//div[@id='frmagregar']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "931418c4-c232-4c70-b26d-befc4c6ed8ab",
+      "comment": "",
+      "command": "//assertAlert",
+      "target": "Guardado con exito",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "20ceda3b-5d62-4c42-845c-7ef991d9f795",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-link:nth-child(1) > span",
+      "targets": [
+        ["css=.nav-link:nth-child(1) > span", "css:finder"],
+        ["xpath=//ul[@id='accordionSidebar']/li/a/span", "xpath:idRelative"],
+        ["xpath=//a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'ORDENES')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed6812bf-0f3d-4757-8907-5155a28ec94e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(4) .fa-plus-circle",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(4) .fa-plus-circle", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/table/tbody/tr/td[4]/button/i", "xpath:idRelative"],
+        ["xpath=//td[4]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d303d27-9b14-4089-9fc0-b92c4ac4f66f",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//button[contains(.,'Platos')]",
+      "targets": [
+        ["css=.btntable:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[3]/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Platos')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c282f06e-fc45-45bf-b33f-687460dab637",
+      "comment": "",
+      "command": "click",
+      "target": "css=.my-2",
+      "targets": [
+        ["css=.my-2", "css:finder"],
+        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62abe1bb-31a3-4423-b0fe-4d54c6682550",
+      "comment": "",
+      "command": "type",
+      "target": "css=.my-2",
+      "targets": [
+        ["css=.my-2", "css:finder"],
+        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[3]/div/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/input", "xpath:position"]
+      ],
+      "value": "platosAbebidas"
+    }, {
+      "id": "91a03834-4c52-49f8-9c78-ca900d74c03a",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//td[contains(.,'platosAbebidas')]",
+      "targets": [
+        ["css=tr:nth-child(27) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr[27]/td", "xpath:idRelative"],
+        ["xpath=//tr[27]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'productoEntrada69')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea56f2a1-84fe-4ae0-91e0-aca2aefc9147",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer:nth-child(8) > .btn-secondary",
+      "targets": [
+        ["css=.modal-footer:nth-child(8) > .btn-secondary", "css:finder"],
+        ["xpath=(//button[@type='button'])[33]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb7339c5-ff6b-49d3-b16b-0b7692425631",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Agregar",
+      "targets": [
+        ["linkText=Agregar", "linkText"],
+        ["css=.agg > .text-white", "css:finder"],
+        ["xpath=//a[contains(text(),'Agregar')]", "xpath:link"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/button/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'nuevaorden.html')]", "xpath:href"],
+        ["xpath=//button/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Agregar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7ae5170c-ca72-4699-a4fd-42fd04adeff7",
+      "comment": "",
+      "command": "click",
+      "target": "id=Platos-tab",
+      "targets": [
+        ["id=Entradas-tab", "id"],
+        ["linkText=Entradas", "linkText"],
+        ["css=#Entradas-tab", "css:finder"],
+        ["xpath=//a[contains(text(),'Entradas')]", "xpath:link"],
+        ["xpath=//a[@id='Entradas-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#Entradas')]", "xpath:href"],
+        ["xpath=//div/div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Entradas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "73ea265f-eb06-4fe5-b935-6826a80906d9",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//td[contains(.,'platosAbebidas')]",
+      "targets": [
+        ["css=#Entradas tr:nth-child(6) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='Entradas']/table/tbody/tr[6]/td", "xpath:idRelative"],
+        ["xpath=//tr[6]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'productoEntrada69')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "d7547e4c-cd0b-463f-8861-a9b98c27126b",
+    "name": "2modificar",
+    "commands": [{
+      "id": "6bfb7d70-fa60-47a2-9e1d-8cb390fc153b",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/ResBar/productos.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ee666a2e-acf9-4463-902f-1c9f6ce5d168",
+      "comment": "",
+      "command": "click",
+      "target": "css=.input-group > input",
+      "targets": [
+        ["css=.input-group > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8b453841-86d2-4ebd-a57b-d4947ecb67eb",
+      "comment": "",
+      "command": "type",
+      "target": "css=.input-group > input",
+      "targets": [
+        ["css=.input-group > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "platosAbebidas"
+    }, {
+      "id": "b425876b-7ba2-45ad-b234-d7f2856235c3",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//td[contains(.,'platosAbebidas')]",
+      "targets": [
+        ["css=tr:nth-child(28) > td:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr[28]/td[2]", "xpath:idRelative"],
+        ["xpath=//tr[28]/td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'platosAbebidas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0d1b873-4c3e-4c2b-adf3-b106986184dc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.font-weight-bold .btn-primary > .fa",
+      "targets": [
+        ["css=.font-weight-bold .btn-primary > .fa", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr[28]/td[5]/button/i", "xpath:idRelative"],
+        ["xpath=//tr[28]/td[5]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0936b44a-8734-41f6-99a2-a2d6a34c9081",
+      "comment": "",
+      "command": "select",
+      "target": "id=inputacategoria",
+      "targets": [],
+      "value": "label=Bebidas"
+    }, {
+      "id": "591dad3f-192c-491e-aef8-c47a037fb69d",
+      "comment": "",
+      "command": "click",
+      "target": "id=inputacategoria",
+      "targets": [
+        ["id=inputacategoria", "id"],
+        ["css=#inputacategoria", "css:finder"],
+        ["xpath=//select[@id='inputacategoria']", "xpath:attributes"],
+        ["xpath=//div[@id='frmmodificar']/div/div/div[2]/div/form/div[3]/div[2]/select", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1d2b13ea-0898-4335-8279-59940787eb20",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-lg .btn-primary",
+      "targets": [
+        ["css=.modal-lg .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='button'])[37]", "xpath:attributes"],
+        ["xpath=//div[@id='frmmodificar']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83aa6836-411c-47b2-8c96-c8150ac0df4f",
+      "comment": "",
+      "command": "//assertAlert",
+      "target": "Guardado con exito",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9e8b9beb-5289-4703-a60b-88ebd7f86813",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-link:nth-child(1) > span",
+      "targets": [
+        ["css=.nav-link:nth-child(1) > span", "css:finder"],
+        ["xpath=//ul[@id='accordionSidebar']/li/a/span", "xpath:idRelative"],
+        ["xpath=//a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'ORDENES')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c7105cd-a6c1-4e00-89f5-b9916cc494e9",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Agregar",
+      "targets": [
+        ["linkText=Agregar", "linkText"],
+        ["css=.agg > .text-white", "css:finder"],
+        ["xpath=//a[contains(text(),'Agregar')]", "xpath:link"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/button/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'nuevaorden.html')]", "xpath:href"],
+        ["xpath=//button/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Agregar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5c8091e7-fc9b-4479-8597-9da69c55f072",
+      "comment": "",
+      "command": "click",
+      "target": "id=Bebidas-tab",
+      "targets": [
+        ["id=Bebidas-tab", "id"],
+        ["linkText=Bebidas", "linkText"],
+        ["css=#Bebidas-tab", "css:finder"],
+        ["xpath=//a[contains(text(),'Bebidas')]", "xpath:link"],
+        ["xpath=//a[@id='Bebidas-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#Bebidas')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Bebidas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "844db87f-adb5-4e8b-88a7-94a73e0d5be1",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(12) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(12) > td:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='Bebidas']/table/tbody/tr[12]/td", "xpath:idRelative"],
+        ["xpath=//tr[12]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'platosAbebidas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4417431f-0dba-4a0e-b789-1f437c16937f",
+    "name": "3eliminar",
+    "commands": [{
+      "id": "c9775e7a-fdbf-4884-b1c4-1cb758317663",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost/ResBar/productos.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a54fe8c7-32c6-40f4-88b4-3ec4d46c5267",
+      "comment": "",
+      "command": "click",
+      "target": "css=.input-group > input",
+      "targets": [
+        ["css=.input-group > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0e710179-2220-4152-bf95-ee9b755979d8",
+      "comment": "",
+      "command": "type",
+      "target": "css=.input-group > input",
+      "targets": [
+        ["css=.input-group > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "platosAbebidas"
+    }, {
+      "id": "962674fd-f849-4800-8957-f1328d46be4a",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//td[contains(.,'platosAbebidas')]/../td[5]/button[@id='btnborrar']",
+      "targets": [
+        ["css=tr:nth-child(27) #btnborrar", "css:finder"],
+        ["xpath=(//button[@id='btnborrar'])[27]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr[27]/td[5]/button[2]", "xpath:idRelative"],
+        ["xpath=//tr[27]/td[5]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8baac9e-2247-45ff-a8d8-e4f713889dad",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer > .btn-danger",
+      "targets": [
+        ["css=.modal-footer > .btn-danger", "css:finder"],
+        ["xpath=(//button[@type='button '])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='frmeliminar']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Eliminar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ff908ba-ef1e-44fb-a695-b90bf28af870",
+      "comment": "",
+      "command": "click",
+      "target": "id=buttonAlert",
+      "targets": [
+        ["id=buttonAlert", "id"],
+        ["css=#buttonAlert", "css:finder"],
+        ["xpath=//div[@id='buttonAlert']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[3]", "xpath:idRelative"],
+        ["xpath=//div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7420021b-86bb-402a-a9b0-19069f6366db",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-link:nth-child(1) > span",
+      "targets": [
+        ["css=.nav-link:nth-child(1) > span", "css:finder"],
+        ["xpath=//ul[@id='accordionSidebar']/li/a/span", "xpath:idRelative"],
+        ["xpath=//a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'ORDENES')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7f3423ad-6f75-4f5a-a6f0-b9dd8bf771ca",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Agregar",
+      "targets": [
+        ["linkText=Agregar", "linkText"],
+        ["css=.agg > .text-white", "css:finder"],
+        ["xpath=//a[contains(text(),'Agregar')]", "xpath:link"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/button/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'nuevaorden.html')]", "xpath:href"],
+        ["xpath=//button/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Agregar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "45501101-6aaa-433e-b873-0e6741f3ff8b",
+      "comment": "",
+      "command": "click",
+      "target": "id=Bebidas-tab",
+      "targets": [
+        ["id=Bebidas-tab", "id"],
+        ["linkText=Bebidas", "linkText"],
+        ["css=#Bebidas-tab", "css:finder"],
+        ["xpath=//a[contains(text(),'Bebidas')]", "xpath:link"],
+        ["xpath=//a[@id='Bebidas-tab']", "xpath:attributes"],
+        ["xpath=//ul[@id='myTab']/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#Bebidas')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Bebidas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "44a18955-bd43-41a3-962d-47cbaed7a6a5",
+      "comment": "verificar que no exita el elemento",
+      "command": "assertElementNotPresent",
+      "target": "xpath=//td[contains(.,'platosAbebidas')]",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "4158fb02-9c7e-4fe6-b296-16d30a65a051",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["87d2c126-8d28-401d-b684-4a6ba89d7a25"]
+  }],
+  "urls": ["http://localhost/ResBar/productos.html"],
+  "plugins": []
+}

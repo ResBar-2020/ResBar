@@ -108,7 +108,7 @@
       "id": "db3281ff-717d-4722-819b-ce0c99b63ab0",
       "comment": "",
       "command": "//assertAlert",
-      "target": "Alert alert=driver.switchTo().alert();alert.accept();",
+      "target": "Guardado con exito",
       "targets": [],
       "value": ""
     }, {
@@ -399,13 +399,6 @@
       "comment": "",
       "command": "click",
       "target": "css=.font-weight-bold .btn-primary",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "ad3bede4-26c1-4de4-99d0-5661ffbfd81d",
-      "comment": "",
-      "command": "//click",
-      "target": "css=.my-0:nth-child(1)",
       "targets": [],
       "value": ""
     }, {
