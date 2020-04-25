@@ -103,15 +103,9 @@
     }, {
       "id": "3a77f525-8f62-4283-9516-aec725c5b5c0",
       "comment": "",
-      "command": "type",
+      "command": "sendKeys",
       "target": "id=txtMesa",
-      "targets": [
-        ["id=txtMesa", "id"],
-        ["css=#txtMesa", "css:finder"],
-        ["xpath=//input[@id='txtMesa']", "xpath:attributes"],
-        ["xpath=//div[@id='appRESBAR']/form/div/div[2]/div[3]/div[2]/input", "xpath:idRelative"],
-        ["xpath=//div[3]/div[2]/input", "xpath:position"]
-      ],
+      "targets": [],
       "value": "8"
     }, {
       "id": "fa511178-a85c-452b-8a32-75471bc667ed",
@@ -486,13 +480,7 @@
       "comment": "",
       "command": "click",
       "target": "css=.btn:nth-child(2)",
-      "targets": [
-        ["css=.btn:nth-child(2)", "css:finder"],
-        ["xpath=(//button[@type='button'])[57]", "xpath:attributes"],
-        ["xpath=//div[@id='resumenModal']/div/div/div[2]/div/div[2]/div[5]/button[2]", "xpath:idRelative"],
-        ["xpath=//div[5]/button[2]", "xpath:position"],
-        ["xpath=//button[contains(.,'Confirmar')]", "xpath:innerText"]
-      ],
+      "targets": [],
       "value": ""
     }, {
       "id": "18902674-7023-4f30-8f4a-deeae5aac97b",
