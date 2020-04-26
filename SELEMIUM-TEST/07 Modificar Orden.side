@@ -1,0 +1,236 @@
+{
+  "id": "ed1487e2-371f-4943-a2e5-c1fb86f23737",
+  "version": "2.0",
+  "name": "07-Modificar Orden2",
+  "url": "file:///home/ark/Escritorio/ResBar-version-1.0-Texas/ordenes.html",
+  "tests": [{
+    "id": "b8d265f3-9bd7-4366-891e-081ebe4ad08b",
+    "name": "01",
+    "commands": [{
+      "id": "8e66fd9d-f678-4b3a-91c0-88752478e7f1",
+      "comment": "",
+      "command": "open",
+      "target": "file:///home/ark/Escritorio/ResBar-version-1.0-Texas/ordenes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c2738258-9d32-4a6f-9079-5ff8e0a9aff4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x722",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1ffeb0b2-37fc-43be-b3e5-9ac66b41569c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr/td[7]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c495e94-52e0-4ae9-8051-b3b7378b9bf7",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > .px-0 > .btn:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(1) > .px-0 > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/div/table/tbody/tr/td[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//td[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'+')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb6b5c0e-71dc-4a41-b5c7-c2004de2629b",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) > .px-0 > .btn:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(2) > .px-0 > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/div/table/tbody/tr[2]/td[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0cf992e6-b4e3-4e5a-bbe4-e86e7c809e03",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(4) > .px-0 > .btn:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(4) > .px-0 > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[7]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/div/table/tbody/tr[4]/td[2]/button[2]", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[2]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "10921376-5ede-48de-88a6-d807802c9072",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=(//button[@type='button '])[14]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "769e5f5a-70a0-49b2-a91b-a0ed321d328a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.alert",
+      "targets": [
+        ["css=.alert", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]", "xpath:idRelative"],
+        ["xpath=//div[4]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bf1c2478-99d5-4651-a2fa-b40894eb8b12",
+    "name": "02",
+    "commands": [{
+      "id": "c2a8098d-e9a1-42de-a840-1fa86520d678",
+      "comment": "",
+      "command": "open",
+      "target": "file:///home/ark/Escritorio/ResBar-version-1.0-Texas/ordenes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "abf3c866-8051-4ef5-8d6d-7684c2632939",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x722",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f0908539-7c6d-4c9d-b713-3441bd287701",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(2)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr/td[7]/button[2]", "xpath:idRelative"],
+        ["xpath=//button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3546e892-43e5-4f58-8eb8-dbbfbe495f94",
+      "comment": "",
+      "command": "click",
+      "target": "id=lblMesa",
+      "targets": [
+        ["id=lblMesa", "id"],
+        ["css=#lblMesa", "css:finder"],
+        ["xpath=//input[@id='lblMesa']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "72008143-97fc-4706-95db-e2e3a7b4ac8f",
+      "comment": "",
+      "command": "type",
+      "target": "id=lblMesa",
+      "targets": [
+        ["id=lblMesa", "id"],
+        ["css=#lblMesa", "css:finder"],
+        ["xpath=//input[@id='lblMesa']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "5"
+    }, {
+      "id": "9c08f5e6-97f0-4161-a438-2e42cadf79c7",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//input[@id='iptCliente ']",
+      "targets": [
+        ["id=iptCliente ", "id"],
+        ["xpath=//input[@id='iptCliente ']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "19e13849-1e33-4c25-89d5-e1f0633a12eb",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@id='iptCliente ']",
+      "targets": [
+        ["id=iptCliente ", "id"],
+        ["xpath=//input[@id='iptCliente ']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Don Roberto"
+    }, {
+      "id": "5d092834-5c3b-489d-8cdc-3f1dee9fffa4",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//input[@id='lblMesero ']",
+      "targets": [
+        ["id=lblMesero ", "id"],
+        ["xpath=//input[@id='lblMesero ']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div[3]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73dc3382-d80d-416b-ac3e-3511c920aaa4",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@id='lblMesero ']",
+      "targets": [
+        ["id=lblMesero ", "id"],
+        ["xpath=//input[@id='lblMesero ']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div/form/div[3]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/input", "xpath:position"]
+      ],
+      "value": "Carlos II"
+    }, {
+      "id": "315332b0-0227-491d-9c57-de9b5bdb5a52",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary",
+      "targets": [
+        ["css=.btn-primary", "css:finder"],
+        ["xpath=(//button[@type='button '])[14]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "10abf3cb-5bc4-484e-8529-585d94e2110b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.alert",
+      "targets": [
+        ["css=.alert", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]", "xpath:idRelative"],
+        ["xpath=//div[4]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "96519859-ccfe-4bc0-a3c3-0d725f4f0687",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["file:///home/ark/Escritorio/resBar/respaldo/ResBar-version-1.0-Texas/ordenes.html", "file:///home/ark/Escritorio/ResBar-version-1.0-Texas/ordenes.html"],
+  "plugins": []
+}
