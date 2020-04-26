@@ -1,0 +1,473 @@
+{
+  "id": "250382fa-8230-45f7-b12b-2e80d6cc20a3",
+  "version": "2.0",
+  "name": "10-1 Prueba de ventas",
+  "url": "file:///home/jcsantos/Escritorio/ResBar-2020/ResBar/informes.html",
+  "tests": [{
+    "id": "d36bb734-3b34-4abd-9b64-67d017ff8474",
+    "name": "1-Filtrar Comparar",
+    "commands": [{
+      "id": "e7e5c6ac-76d2-436c-b622-8551adde35fd",
+      "comment": "",
+      "command": "open",
+      "target": "file:///home/jcsantos/Escritorio/ResBar-2020/ResBar/informes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1afb37c1-7450-4c65-bd63-981d39b04b43",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4ff32d40-6aeb-4640-b58c-0b0c788c615a",
+      "comment": "",
+      "command": "click",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f57c0680-0a05-47b1-9489-01ad51796fc6",
+      "comment": "",
+      "command": "type",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2020-04-22"
+    }, {
+      "id": "616e6ad5-aaea-4b93-bbf4-1cd2e571516c",
+      "comment": "",
+      "command": "click",
+      "target": "id=end",
+      "targets": [
+        ["id=end", "id"],
+        ["css=#end", "css:finder"],
+        ["xpath=//input[@id='end']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c2511859-080e-4f67-b152-737cf9323430",
+      "comment": "",
+      "command": "type",
+      "target": "id=end",
+      "targets": [
+        ["id=end", "id"],
+        ["css=#end", "css:finder"],
+        ["xpath=//input[@id='end']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "2020-04-23"
+    }, {
+      "id": "2074608f-9e8d-41cf-998e-2eb164a81e64",
+      "comment": "",
+      "command": "click",
+      "target": "css=.div-encapsula-dates:nth-child(2) > .btn-hover",
+      "targets": [
+        ["css=.div-encapsula-dates:nth-child(2) > .btn-hover", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'ACEPTAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2e9842c-131a-4824-9c3e-0bc3e31dad0d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Ver todos",
+      "targets": [
+        ["linkText=Ver todos", "linkText"],
+        ["css=#segundoDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='segundoDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#ordenesFinalizadas')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cba70024-011c-4fc4-a2d6-2a3b5c63468d",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "788.5,283"
+    }, {
+      "id": "217ca705-2db9-4e7e-9bea-4472301249d6",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "788.5,283"
+    }, {
+      "id": "a294a15a-e692-419e-9331-1c255175845a",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "788.5,283"
+    }, {
+      "id": "beb32282-a699-4888-8cce-fd1b85549e7f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [
+        ["css=.modal-body > div:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ad2a48e-d2a0-4559-967f-ab7917b28f88",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [],
+      "value": "51.55"
+    }]
+  }, {
+    "id": "2a150032-34fc-4946-9cd8-27a4b6c730db",
+    "name": "2-Filtrar Comparar",
+    "commands": [{
+      "id": "a7aca743-3a24-4c75-9c0e-d25676d73c2a",
+      "comment": "",
+      "command": "open",
+      "target": "file:///home/jcsantos/Escritorio/ResBar-2020/ResBar/informes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4f377611-4ef2-4eb9-b610-3a0229a49440",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d466b954-9ce6-4b4c-ad34-5618277b8169",
+      "comment": "",
+      "command": "click",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fdcf4477-4882-4c40-a201-ef6cb0d8c3da",
+      "comment": "",
+      "command": "type",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2020-04-23"
+    }, {
+      "id": "fde30c20-9ba5-4d23-b50b-296dae846f3c",
+      "comment": "",
+      "command": "click",
+      "target": "id=end",
+      "targets": [
+        ["id=end", "id"],
+        ["css=#end", "css:finder"],
+        ["xpath=//input[@id='end']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8203aca-c0f3-43f5-b91a-a0a5fab23a68",
+      "comment": "",
+      "command": "type",
+      "target": "id=end",
+      "targets": [
+        ["id=end", "id"],
+        ["css=#end", "css:finder"],
+        ["xpath=//input[@id='end']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "2020-04-24"
+    }, {
+      "id": "d0351064-f70a-4fc3-9884-fe342b640158",
+      "comment": "",
+      "command": "click",
+      "target": "css=.div-encapsula-dates:nth-child(2) > .btn-hover",
+      "targets": [
+        ["css=.div-encapsula-dates:nth-child(2) > .btn-hover", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'ACEPTAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "28243ae6-8c02-42e8-8962-0edb2d7b3013",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Ver todos",
+      "targets": [
+        ["linkText=Ver todos", "linkText"],
+        ["css=#segundoDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='segundoDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#ordenesFinalizadas')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "102397c4-c00b-475e-8fda-62c729fb4b78",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=Ver todos",
+      "targets": [
+        ["linkText=Ver todos", "linkText"],
+        ["css=#segundoDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='segundoDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#ordenesFinalizadas')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40fc39bb-f696-413f-be61-3fe3bdc1c838",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "linkText=Ver todos",
+      "targets": [
+        ["linkText=Ver todos", "linkText"],
+        ["css=#segundoDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='segundoDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#ordenesFinalizadas')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "660747fd-8e65-4a5a-83d2-4346de1a1836",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "782.5,167"
+    }, {
+      "id": "42d90d43-46f6-4bc0-9243-3e6c0dbb1939",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "782.5,167"
+    }, {
+      "id": "9bafacb0-5fa3-4307-8e73-57e1c4ca36bb",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "782.5,167"
+    }, {
+      "id": "fe149a93-f9e9-4d49-9522-e251b600f66f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [
+        ["css=.modal-body > div:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7425f186-0463-4ee6-9bc5-cc397ea431fc",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [],
+      "value": "34.88"
+    }]
+  }, {
+    "id": "ef4cd386-cffc-4325-867a-2770f47ea8bf",
+    "name": "3-Filtrar Comparar",
+    "commands": [{
+      "id": "0ec53fc6-145d-480b-85ac-a56a3c1fbc86",
+      "comment": "",
+      "command": "open",
+      "target": "file:///home/jcsantos/Escritorio/ResBar-2020/ResBar/informes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ad1607a-60c0-4cef-82ae-8b36b31baf15",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "63a20af2-1af1-4a8e-9295-693bd20170a1",
+      "comment": "",
+      "command": "click",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "75f60610-a0f3-4418-9e14-627e353fe325",
+      "comment": "",
+      "command": "type",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2020-04-24"
+    }, {
+      "id": "43d4206c-54af-478f-b92e-a7a865039c6b",
+      "comment": "",
+      "command": "click",
+      "target": "id=end",
+      "targets": [
+        ["id=end", "id"],
+        ["css=#end", "css:finder"],
+        ["xpath=//input[@id='end']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div[2]/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "596e3f8c-a8a9-4315-90c4-0acf4ce3675a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.div-encapsula-dates:nth-child(2) > .btn-hover",
+      "targets": [
+        ["css=.div-encapsula-dates:nth-child(2) > .btn-hover", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'ACEPTAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "31124c9e-c4dc-465c-adfa-cf7f94fc24a1",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Ver todos",
+      "targets": [
+        ["linkText=Ver todos", "linkText"],
+        ["css=#segundoDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='segundoDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#ordenesFinalizadas')]", "xpath:href"],
+        ["xpath=//div[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0f5775a-32cd-4030-aff5-0d0b8ea5d8c2",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "785.5,301"
+    }, {
+      "id": "379a3429-bd9b-44ac-b481-2116a494adfb",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "785.5,301"
+    }, {
+      "id": "f87d67b8-3ab5-453d-a2f1-004c89cce4a1",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "css=#ordenesFinalizadas .modal-body",
+      "targets": [
+        ["css=#ordenesFinalizadas .modal-body", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]", "xpath:position"]
+      ],
+      "value": "785.5,301"
+    }, {
+      "id": "3597910b-92a5-4021-9153-ce7860a5243a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [
+        ["css=.modal-body > div:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='ordenesFinalizadas']/div/div/div[2]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3f7031bf-829a-4a22-9981-24040988dcb0",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.modal-body > div:nth-child(2)",
+      "targets": [],
+      "value": "21.08"
+    }]
+  }],
+  "suites": [{
+    "id": "52fd679b-f164-40a7-b6bd-872c6cd02561",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d36bb734-3b34-4abd-9b64-67d017ff8474"]
+  }],
+  "urls": ["file:///home/jcsantos/Escritorio/ResBar-2020/ResBar/informes.html"],
+  "plugins": []
+}
