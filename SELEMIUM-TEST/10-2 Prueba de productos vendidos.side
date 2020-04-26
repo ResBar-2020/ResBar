@@ -1,0 +1,104 @@
+{
+  "id": "50898279-fd45-4a77-b404-26afa02d74d9",
+  "version": "2.0",
+  "name": "10-2 Prueba de productos vendidos",
+  "url": "file:///C:/Users/Guillermo/Desktop/Dise%C3%B1o%20I/ResBar/ResBar/informes.html",
+  "tests": [{
+    "id": "b105e8a4-2083-43a2-a060-1756618d1e64",
+    "name": "Filtrar y comparar",
+    "commands": [{
+      "id": "4e964bd0-cff4-42d2-812f-0c7dd5eb1fae",
+      "comment": "",
+      "command": "open",
+      "target": "file:///C:/Users/Guillermo/Desktop/Dise%C3%B1o%20I/ResBar/ResBar/informes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ddfcf813-b3f0-40f9-addd-0f6939ac224d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x729",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ed3a3d70-02dd-4a6e-9d1b-04fdb26a6566",
+      "comment": "",
+      "command": "click",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "76d8afec-0161-4560-a541-81065f0aea10",
+      "comment": "",
+      "command": "type",
+      "target": "id=start",
+      "targets": [
+        ["id=start", "id"],
+        ["css=#start", "css:finder"],
+        ["xpath=//input[@id='start']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2020-04-24"
+    }, {
+      "id": "e6f26ac6-4e01-4e5c-9b7a-0c9f9f84f7c3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.div-encapsula-dates:nth-child(2) > .btn-hover",
+      "targets": [
+        ["css=.div-encapsula-dates:nth-child(2) > .btn-hover", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'ACEPTAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e71cc173-9aa4-4464-b738-21f4d0509b3f",
+      "comment": "",
+      "command": "click",
+      "target": "css=#tercerDiv > .d-flex:nth-child(5)",
+      "targets": [
+        ["css=#tercerDiv > .d-flex:nth-child(5)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Ver todos')])[3]", "xpath:link"],
+        ["xpath=//div[@id='tercerDiv']/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#modalProductos')]", "xpath:href"],
+        ["xpath=//div[3]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec580f41-112a-49b1-b3db-9b7d84bb5cf6",
+      "comment": "",
+      "command": "click",
+      "target": "css=#modalProductos .table-row:nth-child(2) > .col:nth-child(2)",
+      "targets": [
+        ["css=#modalProductos .table-row:nth-child(2) > .col:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='modalProductos']/div/div/div[2]/div/ul/li[2]/div[2]", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div[2]/div/ul/li[2]/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "58970d65-f4da-4090-8bb4-a815615cbeeb",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#modalProductos .table-row:nth-child(2) > .col:nth-child(2)",
+      "targets": [],
+      "value": "Cafe Americano"
+    }]
+  }],
+  "suites": [{
+    "id": "3f644074-d29c-40c5-98a4-01720c9a8d0d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["b105e8a4-2083-43a2-a060-1756618d1e64"]
+  }],
+  "urls": ["file:///C:/Users/Guillermo/Desktop/Dise%C3%B1o%20I/ResBar/ResBar/informes.html"],
+  "plugins": []
+}
