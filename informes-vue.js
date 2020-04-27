@@ -570,15 +570,12 @@ var vm = new Vue({
                 axios.get(this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + horaAdelante.toISOString() + '&filter[where][and][1][fecha][gte]=' + diaChange.toISOString() + '&filter[where][and][2][estado][like]=C').
                 then(response => {
                     let ordenes = response.data;
-                    console.log(ordenes, this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + horaAdelante.toISOString() + '&filter[where][and][1][fecha][gte]=' + diaChange.toISOString() + '&filter[where][and][2][estado][like]=C')
                     let total = 0;
                     ordenes.forEach((orden) => {
                         total = orden.total + total;
                     });
-                    console.log(index)
                     this.totalPorDiaOrdenes[index] = total;
                     this.$refs.chart.update();
-                    console.log(diaChange.format('YYYY-MM-DD HH:mm:ss'), horaAdelante.format('YYYY-MM-DD HH:mm:ss'));
                 }).catch((e) => console.log("problemas con dias " + e));
                 diaChange = horaAdelante;
                 horaAdelante = diaChange.clone().add(4, 'hours');
