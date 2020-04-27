@@ -226,8 +226,10 @@ var vm = new Vue({
             this.applyCssAlert(boolean);
         },
         divDos: function() {
-            axios.get(
-                this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde + '&filter[where][and][2][estado][like]=C').then(response => {
+            let inicio = new Date(new Date(this.desde).setHours(0, 0, 0, 0)).toISOString();
+            let fin = new Date(new Date(new Date(this.hasta).setDate(new Date(this.hasta).getDate() + 1)).setHours(23, 59, 59, 999)).toISOString();
+            axios.get(this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + fin + '&filter[where][and][1][fecha][gte]=' + inicio + '&filter[where][and][2][estado][like]=C').
+            then(response => {
                 this.ordenesCerradas = response.data;
                 this.totalModalOrdenes = 0;
                 this.numOrdenesFin = this.ordenesCerradas.length;
