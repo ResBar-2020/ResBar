@@ -564,24 +564,31 @@ var vm = new Vue({
         totalPorHora: function(param) {
             let diaChange = this.moment().set({ 'year': this.anioPicker, 'month': (this.mesPicked.id < 10 ? ('0' + this.mesPicked.id) : this.mesPicked.id), 'date': parseInt(this.horaNombre.trim().substring(1, this.horaNombre.length)) }).startOf('day');
             let horaAdelante = diaChange.clone().add(4, 'hours');
-            let i = 0;
-            while (i < 6) {
+            [0, 1, 2, 3, 4, 5].forEach((index) => {
                 axios.get(this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + horaAdelante.toISOString() + '&filter[where][and][1][fecha][gte]=' + diaChange.toISOString() + '&filter[where][and][2][estado][like]=C').
                 then(response => {
                     let ordenes = response.data;
+                    console.log(ordenes, this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + horaAdelante.toISOString() + '&filter[where][and][1][fecha][gte]=' + diaChange.toISOString() + '&filter[where][and][2][estado][like]=C')
                     let total = 0;
                     ordenes.forEach((orden) => {
                         total = orden.total + total;
                     });
-                    this.totalPorDiaOrdenes[i] = total;
+                    console.log(index)
+                    this.totalPorDiaOrdenes[index] = total;
                     this.$refs.chart.update();
                     console.log(diaChange.format('YYYY-MM-DD HH:mm:ss'), horaAdelante.format('YYYY-MM-DD HH:mm:ss'));
-                    diaChange = horaAdelante;
-                    horaAdelante = diaChange.clone().add(4, 'hours');
                 }).catch((e) => console.log("problemas con dias " + e));
+                diaChange = horaAdelante;
+                horaAdelante = diaChange.clone().add(4, 'hours');
+            })
 
-                i++;
-            }
+
+        },
+        clickDia() {
+            vm.$refs.diaId.click();
+        },
+        clickHora() {
+            this.$refs.horaId.click();
         },
     },
     watch: {
@@ -594,9 +601,6 @@ var vm = new Vue({
         },
     },
     computed: {
-        clickDia() {
-            vm.$refs.diaId.click();
-        },
         popoverConfig() {
             let unorderedList = '<ul class="ul-year">';
             this.mesPicker.forEach((value) => {
@@ -664,9 +668,7 @@ var vm = new Vue({
                 placement: "bottom",
             }
         },
-        clickHora() {
-            this.$refs.horaId.click();
-        }
+
 
     }
 });
