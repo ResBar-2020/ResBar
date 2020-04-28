@@ -10,7 +10,7 @@
       "id": "904ed9ba-10eb-4f89-a415-2873cc1c0b91",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -255,7 +255,7 @@
       "id": "6bfb7d70-fa60-47a2-9e1d-8cb390fc153b",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -408,7 +408,7 @@
       "id": "c9775e7a-fdbf-4884-b1c4-1cb758317663",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {

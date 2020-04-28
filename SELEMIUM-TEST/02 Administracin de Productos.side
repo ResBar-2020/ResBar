@@ -2,7 +2,7 @@
   "id": "ec884a63-fcd5-4dbf-b9ea-357d4a457e79",
   "version": "2.0",
   "name": "02 Administración de Productos",
-  "url": "http://localhost/ResBar/productos.html",
+  "url": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
   "tests": [{
     "id": "d291b8f0-f4e6-4e13-8314-405b5c110f47",
     "name": "1agregar",
@@ -10,7 +10,7 @@
       "id": "49c64a79-e57f-4f83-ba9d-59c1be21128f",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -126,7 +126,7 @@
       "id": "66135c64-9063-4489-9f15-c1ad57caf3cf",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -180,7 +180,7 @@
       "id": "3d81d62f-298b-4044-979a-e128bfe5e742",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -229,7 +229,7 @@
       "id": "5e0818c7-6d6f-4dc1-bfec-025e8f0f4f6b",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -321,7 +321,7 @@
       "id": "099eb004-5cec-4ab8-b28c-253dc804a6a8",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/ResBar/productos.html",
+      "target": "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html",
       "targets": [],
       "value": ""
     }, {
@@ -480,6 +480,6 @@
     "timeout": 300,
     "tests": ["d291b8f0-f4e6-4e13-8314-405b5c110f47"]
   }],
-  "urls": ["http://localhost/ResBar/productos.html"],
+  "urls": ["http://localhost/ResBar/productos.html", "file:///C:/Users/laptop/Documents/GitHub/ResBar/productos.html"],
   "plugins": []
 }
