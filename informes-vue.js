@@ -207,10 +207,11 @@ var vm = new Vue({
             return moment();
         },
         mesActual: function() {
-            this.hasta = this.moment(this.moment().calendar()).format('YYYY-MM-DD');
-            this.desde = this.moment(this.moment().calendar()).subtract(30, 'days').format('YYYY-MM-DD');
-            this.empDesde = this.moment(this.moment().calendar()).subtract(30, 'days').format('YYYY-MM-DD');
-            this.empHasta = this.moment(this.moment().calendar()).format('YYYY-MM-DD');
+            var date = new Date();
+            this.hasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
+            this.desde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
+            this.empHasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
+            this.empDesde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
         },
         getFourDivsData: function() {
             let boolean;
@@ -240,6 +241,7 @@ var vm = new Vue({
 
         },
         divTres: function() {
+            console.log(this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde);
             axios.get(
                 this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde).then(response => {
                 let producto = response.data;
