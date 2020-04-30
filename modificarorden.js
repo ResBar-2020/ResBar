@@ -100,6 +100,7 @@ new Vue({
             }
 
         },
+
         redireccionarAOrdenes() {
             window.location = `./ordenes.html?alert=se modifico la orden ${this.ordenSelected.id} Satisfactoriamente`
         }
