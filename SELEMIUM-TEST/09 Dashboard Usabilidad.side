@@ -2,7 +2,7 @@
   "id": "554943ee-92d5-4d04-9b69-f389a73f05ed",
   "version": "2.0",
   "name": "Pruebas Dashboard",
-  "url": "file:///C:/Users/HP/Desktop/Dise%C3%B1o/Resbar/ResBar/ordenes.html",
+  "url": "http://127.0.0.1:5500/ordenes.html",
   "tests": [{
     "id": "ba3daf94-5750-439c-aed7-31428f98659e",
     "name": "Prueba Agregar 1",
@@ -1024,6 +1024,314 @@
       "value": "-4 +"
     }, {
       "id": "98849488-d7ec-4b1d-8b4e-e47a0cebd79d",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "52651ea8-eb24-44fc-ab51-b6ec2846c05b",
+    "name": "Prueba buscar",
+    "commands": [{
+      "id": "c762a31d-fe8c-44f4-bf3e-63b40d753de7",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5500/ordenes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4e471916-bf6d-49e1-a090-48690bdcc443",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fe00e03c-5b9d-4088-b22f-29c2fed1ba84",
+      "comment": "",
+      "command": "click",
+      "target": "css=input:nth-child(2)",
+      "targets": [
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "79f698de-a092-420f-8592-484fd67dc5d4",
+      "comment": "",
+      "command": "type",
+      "target": "css=input:nth-child(2)",
+      "targets": [
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[2]/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Don"
+    }, {
+      "id": "75ad5b6f-f47f-46b7-8b75-77721e37e46c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.d-none tr:nth-child(1) > td:nth-child(2)",
+      "targets": [
+        ["css=.d-none tr:nth-child(1) > td:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr/td[2]", "xpath:idRelative"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Don Armando')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "78b9ca89-2336-4704-babc-10a596a32cc2",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=.d-none .font-weight-bold > td:nth-child(2)",
+      "targets": [
+        ["css=.d-none .font-weight-bold > td:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[4]/table/tbody/tr/td[2]", "xpath:idRelative"],
+        ["xpath=//td[2]", "xpath:position"],
+        ["xpath=//td[contains(.,'Don Armando')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d01129bc-4aca-477e-b6e4-4917242684b7",
+      "comment": "",
+      "command": "click",
+      "target": "css=#modalDetalle .btn",
+      "targets": [
+        ["css=#modalDetalle .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[20]", "xpath:attributes"],
+        ["xpath=//div[@id='modalDetalle']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cerrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "cc8c6182-3243-4000-ba98-c3c8c098513e",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "00551e24-ff1c-4d0d-bb35-fd3c707f07cb",
+    "name": "Prueba Botones Enlace",
+    "commands": [{
+      "id": "47609bf2-d22d-41a3-9ffc-97a8b4e2c3d1",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5500/ordenes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a0bd3b8c-943d-4a5a-a36e-97e0d52f0ca4",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e586c691-d2d4-43e1-8f7c-899533fe99e1",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(1)", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/div/table/tbody/tr/td[7]/button", "xpath:idRelative"],
+        ["xpath=//td[7]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ede6298f-10d0-4b6d-8630-fa596b652215",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer:nth-child(8) > .btn-secondary",
+      "targets": [
+        ["css=.modal-footer:nth-child(8) > .btn-secondary", "css:finder"],
+        ["xpath=(//button[@type='button'])[31]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "70e34f62-9fa5-4649-9d30-ea73795c3cb8",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) .btn:nth-child(2) > .text-white",
+      "targets": [
+        ["css=tr:nth-child(1) .btn:nth-child(2) > .text-white", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[6]/div/table/tbody/tr/td[7]/button[2]/i", "xpath:idRelative"],
+        ["xpath=//button[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a27eb4b-f850-4bc9-a001-55e91137b457",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer > .btn-secondary:nth-child(2)",
+      "targets": [
+        ["css=.modal-footer > .btn-secondary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button '])[13]", "xpath:attributes"],
+        ["xpath=//div[@id='mdlModificarOrden']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e7044f0b-af09-45f1-bb68-d009ecef75a3",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) .btn:nth-child(3) > .text-white",
+      "targets": [
+        ["css=tr:nth-child(1) .btn:nth-child(3) > .text-white", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[6]/div/table/tbody/tr/td[7]/button[3]/i", "xpath:idRelative"],
+        ["xpath=//button[3]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6fb0252c-186a-43ee-81fd-97f259cff549",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-secondary",
+      "targets": [
+        ["css=.btn-secondary", "css:finder"],
+        ["xpath=//button[@type='button ']", "xpath:attributes"],
+        ["xpath=//div[@id='mdlCobrarOrden']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Cancelar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b33daf87-8e1b-4f31-93b0-cf247371cefc",
+      "comment": "",
+      "command": "click",
+      "target": "css=#appRESBAR > div:nth-child(5) > div > table > tbody > tr:nth-child(1) > td:nth-child(7) > button:nth-child(4)",
+      "targets": [
+        ["css=#modalEliminar .btntable", "css:finder"],
+        ["xpath=(//button[@type='button'])[38]", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fea58151-3c67-46ef-a6d2-be36244490df",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(7) .fa-trash",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(7) .fa-trash", "css:finder"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/div/table/tbody/tr/td[7]/button[4]/i", "xpath:idRelative"],
+        ["xpath=//button[4]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "064b6bba-833e-4b8b-aaa8-62aadd42c61b",
+      "comment": "",
+      "command": "click",
+      "target": "css=#modalEliminar .btntable",
+      "targets": [
+        ["css=#modalEliminar .btntable", "css:finder"],
+        ["xpath=(//button[@type='button'])[38]", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[8]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a9a4a093-172e-4ab3-b3af-d9169724c256",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "f31a0f9e-f47b-4104-824f-392dfda49716",
+    "name": "Prueba Eliminar",
+    "commands": [{
+      "id": "15732b2a-a737-401b-a1c5-c8b4e153764d",
+      "comment": "",
+      "command": "open",
+      "target": "http://127.0.0.1:5500/ordenes.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87241b08-1bb3-45fe-98d1-f9f281ecf3e9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1382x768",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1361f4b6-9c9c-4638-a637-73d0babd7db9",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(4)",
+      "targets": [
+        ["css=tr:nth-child(1) > td:nth-child(7) > .btn:nth-child(4)", "css:finder"],
+        ["xpath=(//button[@type='button'])[6]", "xpath:attributes"],
+        ["xpath=//div[@id='appRESBAR']/div[5]/div/table/tbody/tr/td[7]/button[4]", "xpath:idRelative"],
+        ["xpath=//button[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e9d1da7a-d573-4f21-a898-fa5c39d8c7f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer > .btn:nth-child(2)",
+      "targets": [
+        ["css=.modal-footer > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[39]", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'ELIMINAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "343583a2-f7b5-4020-8749-57e8c6a8930e",
+      "comment": "",
+      "command": "click",
+      "target": "id=lblMotivo",
+      "targets": [
+        ["id=lblMotivo", "id"],
+        ["css=#lblMotivo", "css:finder"],
+        ["xpath=//input[@id='lblMotivo']", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[2]/div/div[8]/div[9]/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83e44ed0-bc41-4949-bcd7-884d8ed116ac",
+      "comment": "",
+      "command": "type",
+      "target": "id=lblMotivo",
+      "targets": [
+        ["id=lblMotivo", "id"],
+        ["css=#lblMotivo", "css:finder"],
+        ["xpath=//input[@id='lblMotivo']", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[2]/div/div[8]/div[9]/div/input", "xpath:idRelative"],
+        ["xpath=//div[9]/div/input", "xpath:position"]
+      ],
+      "value": "Prueba"
+    }, {
+      "id": "b433a379-898c-4ee6-96dd-35d858ab4d1e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.modal-footer > .btn:nth-child(2)",
+      "targets": [
+        ["css=.modal-footer > .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='button'])[39]", "xpath:attributes"],
+        ["xpath=//div[@id='modalEliminar']/div/div/div[3]/button[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'ELIMINAR')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "71df8cfb-2d8c-4596-b950-775a28d25ec2",
       "comment": "",
       "command": "close",
       "target": "",
