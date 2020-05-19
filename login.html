@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/googlefonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <title>Resbar Login</title>
+</head>
+<body>
+    <div class="container-fluid" id="appRESBAR">
+        <div class="box">
+            <h2 class="text-uppercase">Resbar <i class="fas fa-glass-martini"></i></h2>
+            <form>
+                <div class="inputBox">
+                    <input type="text" required><label>Nombre Completo</label>
+                </div>
+                <div class="inputBox">
+                    <input type="text" required><label>Usuario</label>
+                </div>
+                <div class="inputBox">
+                    <input type="password" required><label>password</label>
+                </div>
+                <div class="inputBox">
+                    <input type="password" required><label>Pin</label>
+                </div>
+                <div class="selectBox">
+                    <label>Rol</label>
+                    <select>
+                        <option >Seleccione</option>
+                        <option value="Admin">Administrador</option>
+                        <option value="Mesero">Mesero</option>
+                    </select>
+                </div>
+                <input type="button" value="Enviar" v-on:click="Login()">
+            </form>
+            <footer class="sticky-footer ">
+                    <div class="text-center text-white copyright"><span>Copyright © Diseño I 2020</span></div>
+            </footer>
+        </div>
+    </div>
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/vue.js "></script>
+    <script src="assets/js/axios.min.js "></script>
+    <script src="assets/js/theme.js "></script>
+    <script src="assets/js/Script.js "></script>
+        <!--Aqui va tu codigo de vue js-->
+    <script src="config.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

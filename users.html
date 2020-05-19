@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/googlefonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>AdminUsuarios</title>
+</head>
+<body>
+    <div class="container">
+        <div id="appRESBAR">
+
+            <h1 class="text-dark">Administracion de Usuarios</h1>
+            <input type="Button" class="btn btntable text-white float-right my-2" value="Agregar Usuario" v-on:click="showAgg">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Clave</th>
+                        <th scope="col">Pin</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in users">
+                        <td>{{ user.id.substring(20,24) }}</td>
+                        <td>{{ user.nombreCompleto }}</td>
+                        <td>{{ user.loggin }}</td>
+                        <td>{{ user.clave }}</td>
+                        <td>{{ user.pin }}</td>
+                        <td>{{ user.rol }}</td>
+                        <td>
+                            <button class="btn btntable btn-sm"><i class="fas text-white fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm"><i class="fas text-white fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="aggModal" data-backdrop="static" tabindex="-1">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-gradient-primary">
+                            <h4 class="text-center text-white">Registrar Usuario</h4>
+                            <button type="button" class="btn btn-danger btn-circle float-right" v-on:click="closeModal">x</button>
+                        </div>
+                        <div class="modal-body">
+                                <form>
+                                    <label id="errorMsg" class="form-text text-uppercase text-center"></label>
+                                    <div class="form-group">
+                                      <div class="col-md-12">
+                                            <label class="font-weight-bold text-dark">Nombre Completo</label>
+                                            <input v-model="user.nombreCompleto" type="text" class="form-control" required>
+                                            </div>
+                                      </div>
+                                    <div class="form-group">
+                                      <div class="col-md-12">
+                                            <label class="font-weight-bold text-dark">Password</label>
+                                            <input v-model="user.clave" type="password" class="form-control" required>
+                                            </div>
+                                      </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold text-dark">Usuario</label>
+                                                <input v-model="user.loggin" type="text" class="form-control" required>
+                                                </div>
+                                        </div>
+                                      <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold text-dark">Pin</label>
+                                            <input v-model="user.pin" id="id" type="number" class="form-control" required>
+                                            <small id="iguales" class="form-text text-danger"></small>
+                                            </div>
+                                        </div>
+                                      <div class="form-group">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold text-dark">Rol</label>
+                                            <input v-model="user.rol" type="text" class="form-control" required>
+                                            <small class="form-text font-weight-bold">El rol debe ser: "Administrador" o "Mesero"</small>
+                                            </div>
+                                        </div>
+                                    <button type="button" class="btn btntable text-white" v-on:click="RegistrarUsuario">Registrar</button>
+                                    <button type="button" class="btn btn-danger" v-on:click="closeModal">Cancelar</button>
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.easing.js"></script>
+        <script src="assets/js/vue.js "></script>
+        <script src="assets/js/axios.min.js "></script>
+        <script src="assets/js/theme.js "></script>
+        <script src="assets/js/Script.js "></script>
+        <!--Aqui va tu codigo de vue js-->
+        <script src="config.js"></script>
+        <script src="users.js"></script>
+</body>
+</html>

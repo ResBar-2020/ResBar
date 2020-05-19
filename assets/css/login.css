@@ -1,0 +1,113 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url(/assets/images/bg1.jpg);
+    background-size: cover;
+}
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 30px;
+    background: rgba(0, 0, 0, .7);
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(255,255, 255, .8);
+    transition: 0.5s;
+}
+.box:hover{
+    box-shadow: 10px 15px 25px rgba(255,255, 255, .5);
+}
+.box i{
+    transform: rotate(-15deg);
+}
+.box h2{
+    margin: 0 0 30px;
+    padding: 0;
+    color: #FFF;
+    text-shadow: 0 8px 10px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    transition: 0.5s;
+}
+.box span{
+    text-shadow: 0 5px 3px rgba(255, 255, 255, 0.6);
+}
+.box .inputBox{
+    position: relative;
+}
+.box .selectBox{
+    position: relative;
+    font-size: 16px;
+}
+.box .selectBox label{
+    color: #fff;
+    transition: .6s;
+    
+}
+.box .selectBox select{
+    background: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #fff;
+    width: 91%;
+    transition: .6s;
+}
+.box .selectBox select:hover{
+    color: #03a9f4;
+    border-bottom: 1px solid #03a9f4;
+}
+.box .selectBox option{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFF;
+    border-radius: 5px;
+}
+.box .inputBox input{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #FFF;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #FFF;
+    outline: none;
+    background: transparent;
+}
+.box .inputBox label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #FFF;
+    letter-spacing: 1px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.box .inputBox input:focus ~ label,.box .inputBox input:valid ~ label{
+    top: -20px;
+    left: 0;
+    color: rgb(3, 169, 244);
+    font-size: 12px;
+}
+.box input[type="button"]{
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    background: transparent;
+    border: 1px solid #fff;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: .5s;
+}
+.box input[type="button"]:hover{
+    color: #fff;
+    background: #000;
+    border-color: #FFF;
+}
