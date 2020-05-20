@@ -25,7 +25,6 @@ new Vue({
         //Ordenar por Mesa
         ordenar: function() {
             //ordena de forma ascendente las ordenes
-            console.log(ApiRestUrl.toString)
             if (this.ascendente == true) {
                 if(this.activos){
                     axios.get(
@@ -66,7 +65,6 @@ new Vue({
         //ordenar por mesero
         ordenarMesero: function() {
             //ordena de forma ascendente las ordenes
-            console.log(ApiRestUrl.toString)
             if (this.ascendente == true) {
                 if(this.activos){
                     axios.get(
@@ -107,7 +105,6 @@ new Vue({
         //ordenar por Cliente
         ordenarCliente: function() {
             //ordena de forma ascendente las ordenes
-            console.log(ApiRestUrl.toString)
             if (this.ascendente == true) {
                 if(this.activos){
                     axios.get(
@@ -199,7 +196,7 @@ new Vue({
         buscar: function(x) {
 
             if (this.textoBusqueda == "")
-                return true;
+                return true; 
             //cuando el toggle esta desactivado    
             if (this.activos) {
                 var cad = this.ordenes[x].id +

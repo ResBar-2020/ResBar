@@ -1,15 +1,20 @@
 new Vue ({
     el: "#appRESBAR",
     data: {
-        users:[],
+        Busqueda: "",
+        users: {},
+        SelectedUser: '',
         uri: 'http://localhost:3000/usuarios',
         user: {
             nombreCompleto:"",
             loggin:"",
             clave:"",
-            pin: Number,
+            pin: 0,
             rol:""
-        }
+        },
+        editar:false,
+        
+        
     },
     methods:{
         Login: function(){
@@ -23,11 +28,18 @@ new Vue ({
            },
         closeModal:function(){
             $('#aggModal').modal('hide');
+            this.user = {
+                        nombreCompleto:"",
+                        loggin:"",
+                        clave:"",
+                        pin: 0,
+                        rol:""
+                    }
            },
         RegistrarUsuario:function(){
             encontrado = []
             if(this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != ""){
-                console.log(this.user) 
+                
                 encontrado = this.CompararPin(this.user.pin)
                 if(encontrado == this.user.pin){
                     document.getElementById("id").classList.add('is-invalid');
@@ -37,7 +49,7 @@ new Vue ({
                     axios.post(this.uri, this.user)
                     .then(res => {
                         console.log(res.data)
-                    }).catch(re => console.log(this.user))
+                    }).catch(re => console.log(re))
                     this.closeModal();
                     window.location = './users.html'
                 }
@@ -50,6 +62,47 @@ new Vue ({
         CompararPin: function(pin){
             res = this.users.filter(pin => pin.pin)
             return res[0].pin
+        },
+        DelUser: function(user){
+            var opcion = confirm('Seguro de eliminar a '+user.loggin+"?")
+            if(opcion){
+                axios.delete(this.uri+"/"+user.id)
+            }
+            
+        },
+        OpenEdit: function(user){
+            this.showAgg()
+            this.user = user
+        },
+        EditUser: function(){
+            axios.put(this.uri+"/"+this.user.id, this.user)
+            this.closeModal()
+            document.getElementById("alerta").classList.add('alerta');
+            document.getElementById("alerta").textContent = this.user.nombreCompleto +" Editado con exito";
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                    window.location.reload()
+                });
+            }, 4000);
+        },
+        buscar: function(x) {
+
+            if (this.Busqueda == "")
+                return true;             
+            var cad = this.users[x].id +
+                this.users[x].nombreCompleto +
+                this.users[x].loggin +
+                this.users[x].clave +
+                this.users[x].pin +
+                this.users[x].rol;
+
+            cad = cad.toUpperCase();
+
+            if (cad.indexOf(this.Busqueda.toUpperCase()) >= 0)
+                return true;
+            else
+                return false;
         }
     },
     mounted(){

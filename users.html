@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +9,56 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <title>AdminUsuarios</title>
 </head>
-<body>
-    <div class="container">
-        <div id="appRESBAR">
-
-            <h1 class="text-dark">Administracion de Usuarios</h1>
-            <input type="Button" class="btn btntable text-white float-right my-2" value="Agregar Usuario" v-on:click="showAgg">
+<body id="page-top">
+    <div id="wrapper">
+    <!-- Inicia navbar lateral -->
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+        <div class="container-fluid d-flex flex-column p-0">
+            <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" href="ordenes.html"><i class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                    <a class="nav-link active" href="productos.html"><i class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                    <a class="nav-link active" href="categorias.html"><i class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                    <a class="nav-link active" href="informes.html"><i class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                    <a class="nav-link active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
+                </li>
+            </ul>
+            <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+        </div>
+    </nav>
+    <!-- Termina navbar lateral -->
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div class="container-fluid" id="appRESBAR">
+            
+            <div class="row my-4">
+                <h1 class="ag text-center col-12">Administracion de Usuarios</h1>
+            </div>
+                
+            <div class="row">
+                    <!-- Filtro buscar -->
+                <div class="col-md-12">
+                    <div class="col-12 col-md-12 col-sm-12 input-group mb-auto">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input type="text" class="col-9 col-md-3" placeholder="Buscar" v-model="Busqueda">
+                    </div>
+                </div>
+            </div>
+                <div class="row my-5">
+                <div class="col-md-12 col-sm-12" style="display: flex; justify-content: center;">
+                    <div>
+                        <button type="Button" class="agg" v-on:click="showAgg(), editar=false">Agregar <i class="fa fa-plus-circle"></i></button>
+                    </div>
+                </div>
+            
+        
+            <div id="alerta" class="alert"></div>
             <table class="table table-borderless">
                 <thead>
                     <tr>
@@ -28,7 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="user in users">
+                    <tr v-for="(user, index) in users" v-show="buscar(index)">
                         <td>{{ user.id.substring(20,24) }}</td>
                         <td>{{ user.nombreCompleto }}</td>
                         <td>{{ user.loggin }}</td>
@@ -36,8 +80,8 @@
                         <td>{{ user.pin }}</td>
                         <td>{{ user.rol }}</td>
                         <td>
-                            <button class="btn btntable btn-sm"><i class="fas text-white fa-edit"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fas text-white fa-trash"></i></button>
+                            <button class="btn btntable btn-sm" v-on:click="OpenEdit(user), editar=true"><i class="fas text-white fa-edit"></i></button>
+                            <button class="btn btn-danger btn-sm" v-if="user.rol != 'admin'" v-on:click="DelUser(user)"><i class="fas text-white fa-trash"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -48,53 +92,58 @@
                     <div class="modal-content">
                         <div class="modal-header bg-gradient-primary">
                             <h4 class="text-center text-white">Registrar Usuario</h4>
-                            <button type="button" class="btn btn-danger btn-circle float-right" v-on:click="closeModal">x</button>
+                            <label class="text-white float-right" style="font-size:20px;" v-on:click="closeModal">x</label>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body bg-gradient-light">
                                 <form>
                                     <label id="errorMsg" class="form-text text-uppercase text-center"></label>
                                     <div class="form-group">
                                       <div class="col-md-12">
                                             <label class="font-weight-bold text-dark">Nombre Completo</label>
-                                            <input v-model="user.nombreCompleto" type="text" class="form-control" required>
+                                            <input id="nombre" v-model="user.nombreCompleto" type="text" class="form-control" required>
                                             </div>
                                       </div>
                                     <div class="form-group">
                                       <div class="col-md-12">
                                             <label class="font-weight-bold text-dark">Password</label>
-                                            <input v-model="user.clave" type="password" class="form-control" required>
+                                            <input id="clave" v-model="user.clave" type="password" class="form-control" required>
                                             </div>
                                       </div>
                                     <div class="form-group">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold text-dark">Usuario</label>
-                                                <input v-model="user.loggin" type="text" class="form-control" required>
+                                                <input id="loggin" v-model="user.loggin" type="text" class="form-control" required>
                                                 </div>
                                         </div>
                                       <div class="form-group">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold text-dark">Pin</label>
-                                            <input v-model="user.pin" id="id" type="number" class="form-control" required>
+                                            <input id="pin" v-model="user.pin" id="id" type="number" class="form-control" required>
                                             <small id="iguales" class="form-text text-danger"></small>
+                                            <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
                                             </div>
                                         </div>
                                       <div class="form-group">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold text-dark">Rol</label>
-                                            <input v-model="user.rol" type="text" class="form-control" required>
-                                            <small class="form-text font-weight-bold">El rol debe ser: "Administrador" o "Mesero"</small>
+                                            <select id="rol" v-model="user.rol" class="form-control">
+                                                <option value="admin">admin</option>
+                                                <option value="mesero">mesero</option>
+                                            </select>
                                             </div>
                                         </div>
-                                    <button type="button" class="btn btntable text-white" v-on:click="RegistrarUsuario">Registrar</button>
+                                    <button type="button" v-if="!editar" class="btn btntable text-white" v-on:click="RegistrarUsuario">Registrar</button>
+                                    <button type="button" v-else class="btn btntable text-white" v-on:click="EditUser(user)">Editar</button>
                                     <button type="button" class="btn btn-danger" v-on:click="closeModal">Cancelar</button>
                                 </form>
                             
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
             
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
