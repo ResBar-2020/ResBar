@@ -47,23 +47,12 @@ body{
     transition: .6s;
     
 }
-.box .selectBox select{
-    background: transparent;
-    color: #fff;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid #fff;
-    width: 91%;
-    transition: .6s;
-}
-.box .selectBox select:hover{
-    color: #03a9f4;
-    border-bottom: 1px solid #03a9f4;
-}
-.box .selectBox option{
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #FFF;
+.box .inputBox small{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
     border-radius: 5px;
+    border-width: 100%;
+    top: -30px;
 }
 .box .inputBox input{
     width: 100%;

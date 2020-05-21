@@ -1,15 +1,65 @@
 new Vue ({
     el: "#appRESBAR",
     data: {
-        us:[],
+        user: {
+            id: "",
+            nombreCompleto:"",
+            loggin:"",
+            clave:"",
+            pin: '',
+            rol:""
+        },
+        users:{},
         uri: 'http://localhost:3000/usuarios'
     },
     methods:{
         Login: function(){
             axios.get(this.uri)
-            .then(response => {
-                this.us = response.data
-            }).catch(er => console.log(er))
+            .then(response =>{
+                this.users = response.data
+                if(this.user.loggin == "" && this.user.clave == "" && this.user.pin != ""){
+                    enc = this.users.find(user => user.pin==this.user.pin)
+                    console.log(enc)
+                    if(enc.pin == this.user.pin){
+                        VueSession.setAll(enc.rol)
+                        window.location = 'http://localhost:5500/ordenes.html'
+                    }
+                }else if(this.user.loggin != "" && this.user.clave != "" && this.user.pin == ""){
+                    encPass = this.users.find(user => user.clave==this.user.clave)
+                    encName = this.users.find(user => user.loggin==this.user.loggin)
+                    if(encPass === encName){
+                        VueSession.setAll(encPass.rol)
+                        window.location = 'http://localhost:5500/ordenes.html'
+                    }else{
+                        document.getElementById("loggin").classList.add('text-danger');
+                        document.getElementById("password").classList.add('text-danger');
+                        document.getElementById("errorMsg").classList.add('text-danger');
+                        document.getElementById("errorMsg").textContent = "La contraseña y el usuario no coinciden";
+                        
+                    }
+                }else{
+                    document.getElementById("errorMsg").classList.add('text-danger');
+                    document.getElementById("errorMsg").textContent = "LLene los campos necesarios para iniciar sesion";
+                    window.setTimeout(function () {
+                        $("#errorMsg").fadeTo(500, 0).slideUp(500, function () {
+                            $(this).remove();
+        
+                        });
+                    }, 4000);
+                }
+              
+            })  
+        }
+    },
+    mounted(){
+        localStorage.removeItem(VueSession.key)
+        this.user = {
+            id: "",
+            nombreCompleto:"",
+            loggin:"",
+            clave:"",
+            pin: '',
+            rol:""
         }
     }
 

@@ -66,7 +66,9 @@ new Vue ({
         DelUser: function(user){
             var opcion = confirm('Seguro de eliminar a '+user.loggin+"?")
             if(opcion){
-                axios.delete(this.uri+"/"+user.id)
+                axios.delete(this.uri+"/"+user.id).then( ()=>{
+                    window.location.reload()
+                })
             }
             
         },
@@ -106,7 +108,16 @@ new Vue ({
         }
     },
     mounted(){
-        this.Login()
+        this.Login()   
+    },
+    created(){
+        if(localStorage.getItem(VueSession.key)=='"admin"'){
+            
+        }else if(localStorage.getItem(VueSession.key)=='"mesero"'){
+            window.location = "http://localhost:5500/ordenes.html"
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        } 
     }
 
 })
