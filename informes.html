@@ -85,14 +85,18 @@
                 <!-- Termina navbar top -->
 
                 <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)---------------------------------------------------------------------->
-                <label class="leyendas" style="margin-top: 20px;">Reportes</label>
+                
                 <div class="container-fluid" id="appRESBAR">
+                    <label class="leyendas" style="margin-top: 20px;">Reportes</label>
+                    <div class="row float-right my-3">
+                        <button type="button" class="btn btn-danger" v-on:click="salir">Salir</button>
+                    </div>
                     <!-- Este es el div que se muestra si el rango de fecha es incorrecto-->
                     <div id="modalError" class="alert alert-danger alert-dismissible fade show" role="alert">
                         El rango de fecha es incorrecto.
                     </div>
                     <!-- Fin del div que se muestra si el rango de fecha es incorrecto-->
-
+                    
                     <div class="div-encapsula-dates">
                         <div class="espacio-divs">
                             Desde:
@@ -469,6 +473,7 @@
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
     <script src="config.js"></script>
+    <script src="assets/js/vue-session.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <!--Aqui va tu codigo de vue js-->

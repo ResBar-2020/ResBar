@@ -31,10 +31,12 @@
                                 class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
                         <a class="nav-link active" href="informes.html"><i
                                 class="fas fa-file-alt"></i><span>INFORMES</span></a>
-                        <a class="nav-link active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
+                        <a class="nav-link active" href="users.html"><i
+                                class="fas fa-users"></i><span>USUARIOS</span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <!-- Termina navbar lateral -->
@@ -68,7 +70,10 @@
 
                     <!-- TITULO -->
                     <div class="row my-4">
-                        <h3 class="text-center col-12">Administrar Categorias</h3>
+                        <div class="col-12 ag">
+                            <button type="button" class="btn btn-danger float-right" v-on:click="salir">Salir</button>
+                            <h1 class="text-center">Administrar Categorias</h1>
+                        </div>
                     </div>
 
                     <div class="row my-5">
@@ -84,7 +89,8 @@
 
                         <!-- Boton Agregar nuevo -->
                         <div class="col-md-4 " style="display: flex; justify-content: center;">
-                            <button class="btn btn-sm agg text-white" type="button" data-toggle="modal" data-target="#formModalNew" v-on:click="addMode">
+                            <button class="btn btn-sm agg text-white" type="button" data-toggle="modal"
+                                data-target="#formModalNew" v-on:click="addMode">
                                 <i class="fa fa-plus-circle mr-2 text-white"></i>Agregar</button>
                         </div>
                     </div>
@@ -92,13 +98,13 @@
                     <!-- Inicia seccion de alertas -->
                     <div class="alert alert-success collapse" role="alert" id="buttonAlert">
                         <span v-if="displayOption==='Modifique la Categoria'">
-                         <strong>Success!</strong> Registro Modificado correctamente.</span>
+                            <strong>Success!</strong> Registro Modificado correctamente.</span>
                         <span v-if="agg==false">
-                          <strong>categoria no puede ir vacio </strong> </span>
+                            <strong>categoria no puede ir vacio </strong> </span>
                         <span v-else-if="agg==true && displayOption==='Agregue una nueva Categoria'">
-                          <strong>Success!</strong> Registro Agregado correctamente.</span>
+                            <strong>Success!</strong> Registro Agregado correctamente.</span>
                         <span v-if="displayOption==='eliminar'">
-                              <strong>Success!</strong> Registro Eliminado correctamente.</span>
+                            <strong>Success!</strong> Registro Eliminado correctamente.</span>
                         <div>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -112,21 +118,25 @@
                         <table class="table table-sm table-bordered table-hover table-striped mb-0">
                             <thead class="bg-primary text-white">
                                 <tr>
-                                    <th style="text-align: center;" scope="col" class="align-items-center"># Categoria</th>
+                                    <th style="text-align: center;" scope="col" class="align-items-center"># Categoria
+                                    </th>
                                     <th style="text-align: center;" scope="col">Nombre</th>
                                     <th style="text-align: center;" scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="active " v-for="(cat,index) in categorias" v-show="filtro(index)">
-                                    <td style="text-align: center;" scope="col">{{String((cat.id).substring(17,24))}}</td>
+                                    <td style="text-align: center;" scope="col">{{String((cat.id).substring(17,24))}}
+                                    </td>
                                     <td style="text-align: center;" scope="col">{{cat.nombre }}</td>
                                     <td>
 
-                                        <button class="btn btn-primary btn-sm" data-toggle="modal" v-on:click="getCategoriaSelected(cat)" data-target="#formModalNew">
+                                        <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                            v-on:click="getCategoriaSelected(cat)" data-target="#formModalNew">
                                             <i class="fa fa-edit mr-2"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm" v-on:click="getCategoriaSelected(cat)" id="modalButton" data-toggle="modal" data-target="#exampleModal"><i
+                                        <button class="btn btn-danger btn-sm" v-on:click="getCategoriaSelected(cat)"
+                                            id="modalButton" data-toggle="modal" data-target="#exampleModal"><i
                                                 class="fa fa-trash-alt mr-2"></i>
                                         </button>
 
@@ -139,28 +149,33 @@
 
 
                     <!-- Modal confirmacion del remove -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-dark">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">Seguro que desea eliminar el registro?</h5>
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Seguro que desea eliminar
+                                        el registro?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                                 <div class="modal-body">
                                     <h2 class="text-dark"> {{categoria.id.substring(17,24)}} {{categoria.nombre}}</h2>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" v-on:click="removeRegistro" onclick="alerta()">Confirmar</button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                                        v-on:click="removeRegistro" onclick="alerta()">Confirmar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Modal insert/update-->
-                    <div class="modal fade" id="formModalNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade" id="formModalNew" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-primary">
@@ -172,13 +187,17 @@
                                 <div class="modal-body">
                                     <!-- form update- agg-->
                                     <form>
-                                        <div class="form-group row my-0" v-if="displayOption==='Modifique la Categoria'">
+                                        <div class="form-group row my-0"
+                                            v-if="displayOption==='Modifique la Categoria'">
                                             <label>ID: {{categoria.id}}</label>
 
                                         </div>
                                         <div class="form-group row my-0">
-                                            <label for="name"><h3>Categoria</h3></label>
-                                            <input v-model="categoria.nombre" type="text" class="form-control" id="name" placeholder="Nombre de la Categoria">
+                                            <label for="name">
+                                                <h3>Categoria</h3>
+                                            </label>
+                                            <input v-model="categoria.nombre" type="text" class="form-control" id="name"
+                                                placeholder="Nombre de la Categoria">
                                         </div>
                                     </form>
 
@@ -186,12 +205,15 @@
 
                                 <!-- seccion de btn se muestran deacuerdo a que actividad se realiza-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" @click="clearData">Cancelar</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                                        @click="clearData">Cancelar</button>
                                     <div v-if="displayOption=='Agregue una nueva Categoria'">
-                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="createRegistro" data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
+                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="createRegistro"
+                                            data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
                                     </div>
                                     <div v-if="this.displayOption=='Modifique la Categoria'">
-                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="edithRegistro" data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
+                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="edithRegistro"
+                                            data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +249,7 @@
     <script src="assets/js/axios.min.js "></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
+    <script src="assets/js/vue-session.min.js "></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="./categorias.js"></script>

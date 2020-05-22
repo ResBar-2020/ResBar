@@ -408,6 +408,7 @@ new Vue({
             var opcion = confirm('Seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
+                logout()
                 window.location = "http://localhost:5500/login.html"
             }
         }

@@ -106,6 +106,14 @@ new Vue({
             if (this.searchDisplay === "") return true;
             let array = (this.categorias[valor].id + this.categorias[valor].nombre).toUpperCase();
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+        },
+        salir: function () {
+            var opcion = confirm('Seguro que quiere salir?')
+            console.log(opcion)
+            if (opcion) {
+                logout()
+                window.location = "http://localhost:5500/login.html"
+            }
         }
     },
     /*

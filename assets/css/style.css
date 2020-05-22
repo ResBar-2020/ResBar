@@ -107,25 +107,15 @@ input:checked+.slider:before {
     border-radius: 8px;
 }
 
-.ag {
-    padding: 14px;
-    border-radius: 15px;
-    color: #fff;
-    border-color: white;
-    background-size: 300% 100%;
-    background-image: linear-gradient(45deg, #3d69e4 0%, #428BCA 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    box-shadow: 0 0 8px #2196f3;
+.ag h1{
+    color: rgb(5, 0, 224);
+    text-shadow: 12px 15px 25px rgba(5, 0, 224);
+    transition: 0.5s ease-in-out;
 }
 
-.ag:hover {
-    background-position: 100% 0;
-    background-image: linear-gradient(45deg, #903cda 0%, #05abe0 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+.ag:hover h1{
+    color: rgb(5, 171, 224);
+    text-shadow: 12px 15px 25px rgba(5, 171, 224);
 }
 
 input {
