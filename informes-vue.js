@@ -127,6 +127,11 @@ var vm = new Vue({
 
     },
     created() {
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        } 
         // Promise.resolve(this.getTotalPorMes()).then(this.fillData(0)).catch(function(reason) { console.log('Filling data to chart, razón (' + reason + ') aquí.'); });
         this.fillData(0);
 

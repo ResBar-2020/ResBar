@@ -144,6 +144,13 @@ var app = new Vue({
                 });
             }, false);
         }
+    },
+    created(){
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        } 
     }
 
 })

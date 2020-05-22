@@ -10,7 +10,6 @@ new Vue({
         alerta: "",
         alertBool: true,
         uri: ApiRestUrl + '/ordenes',
-        admin: false,
         user: {
             pin: ''
         },
@@ -301,7 +300,7 @@ new Vue({
             $('#confirmModal').modal('show')
         },
         modificarOrden() {
-            if (this.admin) {
+            if (admin) {
                 window.location = "./modificarorden.html?id=" + this.ordenSelected.id;
             } else {
                 this.action = "modificarorden"
@@ -344,7 +343,7 @@ new Vue({
 
         },
         cobrarOrden() {
-            if (this.admin) {
+            if (admin) {
                 window.location = "./cobrarorden.html?id=" + this.ordenSelected.id;
             } else {
                 this.action = "cobrarorden"
@@ -361,7 +360,7 @@ new Vue({
         },
         //Muestra el modal Eliminar
         mostrarEliminar: function () {
-            if (this.admin) {
+            if (admin) {
                 $('#modalEliminar').modal('show');
             } else {
                 this.action = 'eliminar'
@@ -410,11 +409,7 @@ new Vue({
         this.mostrarActivos()
         this.alertLauncher()
         this.getUsers()
-        if (localStorage.getItem(VueSession.key) == '"admin"') {
-            this.admin = true
-        } else if (localStorage.getItem(VueSession.key) == '"mesero"') {
-            this.admin = false
-        }
+        
     }
 
 })

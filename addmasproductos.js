@@ -250,6 +250,13 @@ var vm = new Vue({
         cancelar() {
             window.location.href = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20,24)}`
         }
+    },
+    created(){
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        } 
     }
 })
 
