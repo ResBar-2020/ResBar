@@ -1,4 +1,4 @@
-new Vue ({
+new Vue({
     el: "#appRESBAR",
     data: {
         Busqueda: "",
@@ -6,92 +6,89 @@ new Vue ({
         SelectedUser: '',
         uri: 'http://localhost:3000/usuarios',
         user: {
-            nombreCompleto:"",
-            loggin:"",
-            clave:"",
+            nombreCompleto: "",
+            loggin: "",
+            clave: "",
             pin: 0,
-            rol:""
+            rol: ""
         },
-        editar:false,
-        
-        
+        editar: false,
+
+
     },
-    methods:{
-        Login: function(){
+    methods: {
+        //LLena la lista users con los usuarios resgistrados
+        Login: function () {
             axios.get(this.uri)
-            .then(response => {
-                this.users = response.data
-            }).catch(er => console.log(er))
+                .then(response => {
+                    this.users = response.data
+                }).catch(er => console.log(er))
         },
-        showAgg:function(){
+
+        //muestra el modal para agregar usuarios
+        showAgg: function () {
             $('#aggModal').modal('show');
-           },
-        closeModal:function(){
+        },
+
+        //Cierra el modal para agregar usuarios           
+        closeModal: function () {
             $('#aggModal').modal('hide');
             this.user = {
-                        nombreCompleto:"",
-                        loggin:"",
-                        clave:"",
-                        pin: 0,
-                        rol:""
-                    }
-           },
-        RegistrarUsuario:function(){
-            encontrado = []
-            if(this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != ""){
-                
-                encontrado = this.CompararPin(this.user.pin)
-                if(encontrado == this.user.pin){
-                    document.getElementById("id").classList.add('is-invalid');
+                nombreCompleto: "",
+                loggin: "",
+                clave: "",
+                pin: 0,
+                rol: ""
+            }
+        },
+        //Registra un nuevo usuario
+        RegistrarUsuario: function () {
+            if (this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != "") {
+
+                encontrado = this.users.find(user => user.pin == this.user.pin)
+                if (encontrado == this.user.pin) {
+                    document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "Este pin ya esta registrado";
-                }else{
+                } else {
                     this.user.pin = parseInt(this.user.pin, 10)
                     axios.post(this.uri, this.user)
-                    .then(res => {
-                        console.log(res.data)
-                    }).catch(re => console.log(re))
+                        .then(res => {
+                            console.log(res.data)
+                        }).catch(re => console.log(re))
                     this.closeModal();
                     window.location = './users.html'
                 }
-                
-            }else{
+
+            } else {
                 document.getElementById("errorMsg").classList.add('text-danger');
                 document.getElementById("errorMsg").textContent = "Por favor llene todos los campos";
             }
         },
-        CompararPin: function(pin){
-            res = this.users.filter(pin => pin.pin)
-            return res[0].pin
-        },
-        DelUser: function(user){
-            var opcion = confirm('Seguro de eliminar a '+user.loggin+"?")
-            if(opcion){
-                axios.delete(this.uri+"/"+user.id).then( ()=>{
+        //Elimina un usuario de la tabla
+        DelUser: function (user) {
+            var opcion = confirm('Seguro de eliminar a ' + user.loggin + "?")
+            if (opcion) {
+                axios.delete(this.uri + "/" + user.id).then(() => {
                     window.location.reload()
                 })
             }
-            
+
         },
-        OpenEdit: function(user){
+        //Abre el modal para editar y le pasa los datos del usuario seleccionado
+        OpenEdit: function (user) {
             this.showAgg()
             this.user = user
         },
-        EditUser: function(){
-            axios.put(this.uri+"/"+this.user.id, this.user)
+        //Edita un usuario de la tabla
+        EditUser: function () {
+            axios.put(this.uri + "/" + this.user.id, this.user)
             this.closeModal()
-            document.getElementById("alerta").classList.add('alerta');
-            document.getElementById("alerta").textContent = this.user.nombreCompleto +" Editado con exito";
-            window.setTimeout(function() {
-                $(".alert").fadeTo(500, 0).slideUp(500, function() {
-                    $(this).remove();
-                    window.location.reload()
-                });
-            }, 4000);
         },
-        buscar: function(x) {
+        //Busca entre los usuarios de la tabla
+        buscar: function (x) {
 
             if (this.Busqueda == "")
-                return true;             
+                return true;
             var cad = this.users[x].id +
                 this.users[x].nombreCompleto +
                 this.users[x].loggin +
@@ -105,19 +102,21 @@ new Vue ({
                 return true;
             else
                 return false;
-        }
+        },
     },
-    mounted(){
-        this.Login()   
+    mounted() {
+        this.Login()
     },
-    created(){
-        if(localStorage.getItem(VueSession.key)=='"admin"'){
-            
-        }else if(localStorage.getItem(VueSession.key)=='"mesero"'){
-            window.location = "http://localhost:5500/ordenes.html"
-        }else{
+    /*verifica si existe una sesion o no, en el caso de existir verifica el rol del usuario logueado
+      y le da los permisos para el rol que desempeña*/
+    created() {
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "http://localhost:5500/ordenes.html"
+            }
+        } else {
             window.location = "http://localhost:5500/login.html"
-        } 
+        }
     }
 
 })

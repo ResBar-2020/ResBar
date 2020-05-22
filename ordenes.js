@@ -403,6 +403,13 @@ new Vue({
             document.getElementById("lblMotivo").classList.remove('is-invalid');
             document.getElementById("alertaMotivo").textContent = "";
 
+        },
+        salir: function () {
+            var opcion = confirm('Seguro que quiere salir?')
+            console.log(opcion)
+            if (opcion) {
+                window.location = "http://localhost:5500/login.html"
+            }
         }
     },
     mounted() {

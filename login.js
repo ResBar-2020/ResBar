@@ -2,17 +2,16 @@ new Vue ({
     el: "#appRESBAR",
     data: {
         user: {
-            id: "",
-            nombreCompleto:"",
             loggin:"",
             clave:"",
             pin: '',
-            rol:""
         },
         users:{},
         uri: 'http://localhost:3000/usuarios'
     },
     methods:{
+        /*Se encarga de verificar si los usuarios ya estan registrados y proporcionarles acceso 
+        a traves del pin o de su usuario y clave*/
         Login: function(){
             axios.get(this.uri)
             .then(response =>{
@@ -51,7 +50,8 @@ new Vue ({
             })  
         }
     },
-    mounted(){
+    //Cierra la sesion del usuario al navegar a login.html
+    created(){
         localStorage.removeItem(VueSession.key)
         this.user = {
             id: "",

@@ -67,14 +67,18 @@
                 <!-- Termina navbar top -->
 
                 <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
-                <div class="container-fluid" id="appRESBAR">
+                <div class="container-fluid " id="appRESBAR">
 
 
                     <!-- TITULO -->
-                    <div class="row my-4 ag">
-                        <h1 class="text-center col-12">Sistema de Ordenes RESBAR v. 1.0</h1>
-                    </div>
 
+
+                    <div class="row my-4">
+                        <div class="col-12 ag">
+                            <button type="button" class="btn btn-danger float-right" v-on:click="salir">Salir</button>
+                            <h1 class="text-center">Sistema de Ordenes RESBAR v. 1.0</h1>
+                        </div>
+                    </div>
                     <div class="row">
                         <!-- Filtro buscar -->
                         <div class="col-md-12">
@@ -647,21 +651,23 @@
                                 <div class="modal-header modal-title">
                                     <h4 class="text-center">Confirmar Admin</h4>
                                     <label class="float-right" style="font-size:20px;"
-                                    v-on:click="closeConfirm">x</label>
+                                        v-on:click="closeConfirm">x</label>
                                 </div>
                                 <div class="modal-body box2 text-white">
                                     <form>
                                         <label id="errorMsg" class="form-text text-uppercase text-center"></label>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <label class="font-weight-bold">Ingrese el Pin de un administrador</label>
+                                                <label class="font-weight-bold">Ingrese el Pin de un
+                                                    administrador</label>
                                                 <input id="pin" v-model="user.pin" id="id" type="number"
                                                     class="form-control" required>
                                                 <small id="iguales" class="form-text text-danger"></small>
                                                 <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
+                                        <button type="button" class="btn btn-outline-primary text-white"
+                                            v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
                                     </form>
 
                                 </div>
