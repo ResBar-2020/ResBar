@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/googlefonts.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
 
 <body id="page-top">
@@ -637,29 +638,30 @@
                         <!--termina modal detalle-->
                     </div>
                     <!--termina modal-->
+
                     <!--Modal para confirmar si es admin-->
                     <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal"
                         data-backdrop="static" tabindex="-1">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
-                                <div class="modal-header bg-gradient-primary">
-                                    <h4 class="text-center text-white">Confirmar Admin</h4>
-                                    <label class="text-white float-right" style="font-size:20px;"
+                                <div class="modal-header modal-title">
+                                    <h4 class="text-center">Confirmar Admin</h4>
+                                    <label class="float-right" style="font-size:20px;"
                                     v-on:click="closeConfirm">x</label>
                                 </div>
-                                <div class="modal-body bg-gradient-light">
+                                <div class="modal-body box2 text-white">
                                     <form>
                                         <label id="errorMsg" class="form-text text-uppercase text-center"></label>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Ingrese el Pin de un administrador</label>
+                                                <label class="font-weight-bold">Ingrese el Pin de un administrador</label>
                                                 <input id="pin" v-model="user.pin" id="id" type="number"
                                                     class="form-control" required>
                                                 <small id="iguales" class="form-text text-danger"></small>
                                                 <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-outline-primary" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
+                                        <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
                                     </form>
 
                                 </div>

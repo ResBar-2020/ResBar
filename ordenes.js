@@ -312,10 +312,10 @@ new Vue({
             if (this.user.pin != "") {
                 res = this.users.filter(user => pin == user.pin)
                 if (res[0].rol == "admin") {
-                    if(this.action=='eliminar'){
+                    if (this.action == 'eliminar') {
                         this.closeConfirm()
                         $('#modalEliminar').modal('show');
-                    }else{
+                    } else {
                         window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
                     }
                 } else {
@@ -325,7 +325,8 @@ new Vue({
                     this.user.pin = ''
                 }
             } else {
-
+                document.getElementById("errorMsg").classList.add('text-warning');
+                document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
             }
 
         },
@@ -409,7 +410,14 @@ new Vue({
         this.mostrarActivos()
         this.alertLauncher()
         this.getUsers()
-        
+
+    },
+    created() {
+        if (localStorage.vue_session_key) {
+
+        } else {
+            window.location = "http://localhost:5500/login.html"
+        }
     }
 
 })

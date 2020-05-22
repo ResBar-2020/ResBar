@@ -100,3 +100,14 @@ body{
     background: #000;
     border-color: #FFF;
 }
+.box2{
+    padding: 30px;
+    background: rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(255,255, 255, .8);
+    transition: 0.5s;
+}
+.modal-title{
+    background: rgba(81, 81, 241, 0.8);
+    color: #fff;
+}
