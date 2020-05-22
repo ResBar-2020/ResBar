@@ -23,12 +23,22 @@ new Vue({
 
         
 
-        edithRegistro() {
         
-            axios.patch(`${this.urlApi}/${this.categoria.id}`,{
+        edithRegistro() {
+            // Tambien actualiza la tabla producto CASCADA
+            // obtengo el nombre anterior
+            axios.get(this.urlApi + "/" + this.categoria.id).then(
+                response => {
+                    this.nombreold = response.data.nombre
+                }
+            ).catch(ex => { console.log(ex) })
+
+            //Actualizando la categoria
+            axios.patch(`${this.urlApi}/${this.categoria.id}`, {
                 nombre: this.categoria.nombre
             }).then(
                 response => {
+                    this.edithProductosCascada(this.nombreold, this.categoria.nombre);
                     console.log(this.cat);
                     this.getAll();
                     console.log(response.status);
@@ -36,6 +46,23 @@ new Vue({
             ).catch(ex => { console.log(ex) })
 
         },
+        //modifica los productos en CASCADA
+        edithProductosCascada(viejo, nuevo) {
+            //obteniendo los productos a actualizar categoria
+            var filtro = { "where": { "categoria.nombre": `${viejo}` } };
+            axios.get(ApiRestUrl + "/productos?filter=" + JSON.stringify(filtro)).then(
+                response => {
+                    this.productos = response.data
+                    for (elemento in this.productos) {
+                        this.productos[elemento].categoria.nombre = nuevo;
+                        axios.patch(ApiRestUrl + "/productos/" + this.productos[elemento].id,
+                            JSON.stringify(this.productos[elemento]), { headers: { 'content-type': 'application/json', } });
+                    }
+
+                }
+            ).catch(ex => { console.log(ex) })
+        },
+
 
         /*
         creacion de nuevos registros
@@ -115,3 +142,9 @@ new Vue({
         this.getAll();
     },
 });
+
+//funcion para quitar los espacios en blanco
+function AvoidSpace(event) {
+    var k = event ? event.which : window.event.keyCode;
+    if (k == 32) return false;
+}
