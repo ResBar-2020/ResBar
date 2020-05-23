@@ -395,3 +395,13 @@ tr:nth-child(even) {
     -webkit-animation-name: shake;
     animation-name: shake
 }
+.topNavLink {
+    display: block;
+    padding: .5rem 1rem;
+    color: #585858;
+    margin-left: 20px;
+}
+.topNavLink:hover{
+    background-color: tomato;
+    color: #fff;
+}

@@ -12,173 +12,238 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
-        <!-- Inicia navbar lateral -->
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="ordenes.html"><i
-                                class="fas fa-list-ol"></i><span>ORDENES</span></a>
-                        <a class="nav-link active" href="productos.html"><i
-                                class="fas fa-box"></i><span>PRODUCTOS</span></a>
-                        <a class="nav-link active" href="categorias.html"><i
-                                class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-                        <a class="nav-link active" href="informes.html"><i
-                                class="fas fa-file-alt"></i><span>INFORMES</span></a>
-                        <a class="nav-link active" href="users.html"><i
-                                class="fas fa-users"></i><span>USUARIOS</span></a>
-                    </li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle" type="button"></button></div>
-            </div>
-        </nav>
-        <!-- Termina navbar lateral -->
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div class="container-fluid" id="appRESBAR">
-
-                <div class="row my-4">
-                    <div class="col-12 ag">
-                        <button type="button" class="btn btn-danger float-right" v-on:click="salir">Salir</button>
-                        <h1 class="text-center">Administracion de Usuarios</h1>
-                    </div>
+    <div id="appRESBAR">
+        <div id="wrapper">
+            <!-- Inicia navbar lateral -->
+            <nav
+                class="navbar d-none d-md-inline navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                            id="sidebarToggle" type="button"></button></div>
                 </div>
+            </nav>
+            <!-- Termina navbar lateral -->
 
-                <div class="row">
-                    <!-- Filtro buscar -->
-                    <div class="col-md-12">
-                        <div class="col-12 col-md-12 col-sm-12 input-group mb-auto">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
-                            </div>
-                            <input type="text" class="col-9 col-md-3" placeholder="Buscar" v-model="Busqueda">
+            <div class="d-flex flex-column" id="content-wrapper">
+                <nav class="navbar d-md-none navbar-default navbar-transparent navbar-fixed-top"
+                    style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" style="
+                    color: #585858;
+                " href="#">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-glass-martini"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse"
+                            style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                            aria-expanded="false">
+                            <span style="color: #585858;"><i class="fas fa-bars"></i></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="navbar-collapse navbar-ex1-collapse collapse">
+                        <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item" role="presentation">
+                                <a class="topNavLink active" href="ordenes.html"><i
+                                        class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                <a class="topNavLink active" href="productos.html"><i
+                                        class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                                <a class="topNavLink active" href="categorias.html"><i
+                                        class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                                <a class="topNavLink active" href="informes.html"><i
+                                        class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                                <a class="topNavLink active" href="users.html"
+                                    style="background-color: #585858;color: white;"><i
+                                        class="fas fa-users"></i><span>USUARIOS</span></a>
+                                <button type="button" class="btn btn-sm btn-danger float-right"
+                                    v-on:click="salir">Salir</button>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Termina navbar top -->
+                <div class="container-fluid">
+
+                    <div class="row my-4">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-block ag">
+                            <button type="button" class="btn btn-danger d-none d-md-inline float-right"
+                                v-on:click="salir">Salir</button>
+                            <h1 class="text-center d-none">Administracion de Usuarios</h1>
+                            <h1 class="text-center d-12">Admon. de Usuarios</h1>
                         </div>
                     </div>
-                </div>
-                <div class="row my-5">
-                    <div class="col-md-12 col-sm-12" style="display: flex; justify-content: center;">
-                        <div>
-                            <button type="Button" class="agg" v-on:click="showAgg(), editar=false">Agregar <i
-                                    class="fa fa-plus-circle"></i></button>
-                        </div>
-                    </div>
 
-
-                    <div id="alerta" class="alert"></div>
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Clave</th>
-                                <th scope="col">Pin</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(user, index) in users" v-show="buscar(index)">
-                                <td>{{ user.id.substring(20,24) }}</td>
-                                <td>{{ user.nombreCompleto }}</td>
-                                <td>{{ user.loggin }}</td>
-                                <td>{{ user.clave }}</td>
-                                <td>{{ user.pin }}</td>
-                                <td>{{ user.rol }}</td>
-                                <td>
-                                    <button class="btn btntable btn-sm" v-on:click="OpenEdit(user), editar=true"><i
-                                            class="fas text-white fa-edit"></i></button>
-                                    <button class="btn btn-danger btn-sm" v-if="user.rol != 'admin'"
-                                        v-on:click="DelUser(user)"><i class="fas text-white fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="aggModal"
-                        data-backdrop="static" tabindex="-1">
-                        <div class="modal-dialog modal-md">
-                            <div class="modal-content">
-                                <div class="modal-header bg-gradient-primary">
-                                    <h4 class="text-center text-white">Registrar Usuario</h4>
-                                    <label class="text-white float-right" style="font-size:20px;"
-                                        v-on:click="closeModal">x</label>
+                    <div class="row">
+                        <!-- Filtro buscar -->
+                        <div class="col-md-12">
+                            <div class="col-12 col-md-12 col-sm-12 input-group mb-auto">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
                                 </div>
-                                <div class="modal-body bg-gradient-light">
-                                    <form>
-                                        <label id="errorMsg" class="form-text text-uppercase text-center"></label>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Nombre Completo</label>
-                                                <input id="nombre" v-model="user.nombreCompleto" type="text"
-                                                    class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Password</label>
-                                                <input id="clave" v-model="user.clave" type="password"
-                                                    class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Usuario</label>
-                                                <input id="loggin" v-model="user.loggin" type="text"
-                                                    class="form-control" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Pin</label>
-                                                <input id="pin" v-model="user.pin" id="id" type="number"
-                                                    class="form-control" required>
-                                                <small id="iguales" class="form-text text-danger"></small>
-                                                <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold text-dark">Rol</label>
-                                                <select id="rol" v-model="user.rol" class="form-control">
-                                                    <option value="admin">admin</option>
-                                                    <option value="mesero">mesero</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <button type="button" v-if="!editar" class="btn btntable text-white"
-                                            v-on:click="RegistrarUsuario">Registrar</button>
-                                        <button type="button" v-else class="btn btntable text-white"
-                                            v-on:click="EditUser(user)">Editar</button>
-                                        <button type="button" class="btn btn-danger"
-                                            v-on:click="closeModal">Cancelar</button>
-                                    </form>
-
-                                </div>
+                                <input type="text" class="col-9 col-md-3" placeholder="Buscar" v-model="Busqueda">
                             </div>
                         </div>
                     </div>
+                    <div class="row my-5">
+                        <div class="col-md-12 col-sm-12" style="display: flex; justify-content: center;">
+                            <div>
+                                <button type="Button" class="agg" v-on:click="showAgg(), editar=false">Agregar <i
+                                        class="fa fa-plus-circle"></i></button>
+                            </div>
+                        </div>
+                        <div class="container container-sm container-md">
+                            <div class="table-wrapper-scroll-y d-lg-block d-sm-block my-custom-scrollbar">
+                                <div id="alerta" class="alert"></div>
+                                <table class="table table-borderless table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="d-none">Id</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Clave</th>
+                                            <th scope="col">Pin</th>
+                                            <th scope="col">Rol</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(user, index) in users" v-show="buscar(index)">
+                                            <td class="d-none">{{ user.id.substring(20,24) }}</td>
+                                            <td>{{ user.nombreCompleto }}</td>
+                                            <td>{{ user.loggin }}</td>
+                                            <td>{{ user.clave }}</td>
+                                            <td>{{ user.pin }}</td>
+                                            <td>{{ user.rol }}</td>
+                                            <td>
+                                                <button class="btn btntable btn-sm"
+                                                    v-on:click="OpenEdit(user), editar=true"><i
+                                                        class="fas text-white fa-edit"></i></button>
+                                                <button class="btn btn-danger btn-sm" v-if="user.rol != 'admin'"
+                                                    v-on:click="DelUser(user)"><i
+                                                        class="fas text-white fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="aggModal"
+                                data-backdrop="static" tabindex="-1">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-gradient-primary">
+                                            <h4 class="text-center text-white">Registrar Usuario</h4>
+                                            <label class="text-white float-right" style="font-size:20px;"
+                                                v-on:click="closeModal">x</label>
+                                        </div>
+                                        <div class="modal-body bg-gradient-light">
+                                            <form>
+                                                <label id="errorMsg"
+                                                    class="form-text text-uppercase text-center"></label>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Nombre
+                                                            Completo</label>
+                                                        <input id="nombre" v-model="user.nombreCompleto" type="text"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Password</label>
+                                                        <input id="clave" v-model="user.clave" type="password"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Usuario</label>
+                                                        <input id="loggin" v-model="user.loggin" type="text"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Pin</label>
+                                                        <input id="pin" v-model="user.pin" id="id" type="number"
+                                                            class="form-control" required>
+                                                        <small id="iguales" class="form-text text-danger"></small>
+                                                        <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Rol</label>
+                                                        <select id="rol" v-model="user.rol" class="form-control">
+                                                            <option value="admin">admin</option>
+                                                            <option value="mesero">mesero</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <button type="button" v-if="!editar" class="btn btntable text-white"
+                                                    v-on:click="RegistrarUsuario">Registrar</button>
+                                                <button type="button" v-else class="btn btntable text-white"
+                                                    v-on:click="EditUser(user)">Editar</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    v-on:click="closeModal">Cancelar</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
-            </div>
+                <!-- Inicia el pie de pagina -->
+                <footer class="bg-white sticky-footer ">
+                    <div class="container my-auto ">
+                        <div class="text-center my-auto copyright "><span>Copyright © Diseño I 2020</span></div>
+                    </div>
+                </footer>
+                <!-- Termina el pie de pagina -->
+
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
         </div>
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.easing.js"></script>
-        <script src="assets/js/vue.js "></script>
-        <script src="assets/js/axios.min.js "></script>
-        <script src="assets/js/theme.js "></script>
-        <script src="assets/js/Script.js "></script>
-        <script src="assets/js/vue-session.min.js"></script>
-        <!--Aqui va tu codigo de vue js-->
-        <script src="config.js"></script>
-        <script src="users.js"></script>
+    </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/vue.js "></script>
+    <script src="assets/js/axios.min.js "></script>
+    <script src="assets/js/theme.js "></script>
+    <script src="assets/js/Script.js "></script>
+    <script src="assets/js/vue-session.min.js"></script>
+    <!--Aqui va tu codigo de vue js-->
+    <script src="config.js"></script>
+    <script src="users.js"></script>
 </body>
 
 </html>
