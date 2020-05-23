@@ -575,9 +575,12 @@
     <script src="informes-vue.js"></script>
     <script src="informes.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-             $("#loader").hide();
-        });
+        window.onbeforeunload = function () {
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
     </script>
 
 </body>

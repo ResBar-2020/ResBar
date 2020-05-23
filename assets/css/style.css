@@ -415,6 +415,7 @@ tr:nth-child(even) {
     width: 200px;
     height: 200px;
     box-sizing: border-box;
+    z-index: 100;
 }
 .loader .face{
     position: absolute;

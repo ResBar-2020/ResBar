@@ -298,9 +298,12 @@
     <script src="./config.js"></script>
     <script src="./categorias.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#loader").hide();
-        });
+        window.onbeforeunload = function () {
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
     </script>
 
 </body>

@@ -11,7 +11,7 @@
     <title>AdminUsuarios</title>
 </head>
 
-<body id="page-top">
+<body id="page-top" class="onload">
     <div id="loader" class="loader">
         <div class="face face1">
             <div class="circle"></div>
@@ -95,7 +95,7 @@
                 </nav>
 
                 <!-- Termina navbar top -->
-                <div class="container-fluid">
+                <div class="container-fluid onload">
 
                     <div class="row my-4">
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-block ag">
@@ -253,9 +253,13 @@
     <script src="config.js"></script>
     <script src="users.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#loader").hide();
-        });
+        window.onbeforeunload = function () {
+
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
     </script>
 </body>
 
