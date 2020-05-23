@@ -404,4 +404,5 @@ tr:nth-child(even) {
 .topNavLink:hover{
     background-color: tomato;
     color: #fff;
+    text-decoration: none;
 }
