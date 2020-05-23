@@ -12,6 +12,14 @@
 </head>
 
 <body id="page-top">
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div id="appRESBAR">
         <div id="wrapper">
             <!-- Inicia navbar lateral -->
@@ -400,7 +408,11 @@
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="productos.js"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#loader").hide();
+        });
+    </script>
 
 </body>
 
