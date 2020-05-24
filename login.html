@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,16 @@
     <link rel="stylesheet" href="assets/css/login.css">
     <title>Resbar Login</title>
 </head>
+
 <body>
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div class="container-fluid" id="appRESBAR">
         <div class="box col-12 col-lg-12 col-md-12 col-sm-12">
             <h2 class="text-uppercase">Resbar <i class="fas fa-glass-martini"></i></h2>
@@ -28,12 +38,12 @@
                 <input type="button" class="float-right mt-0" value="Enviar" v-on:click="Login()">
             </form>
             <footer class="sticky-footer mt-5">
-                    <div class="text-center text-white copyright"><span>Copyright © Diseño I 2020</span></div>
+                <div class="text-center text-white copyright"><span>Copyright © Diseño I 2020</span></div>
             </footer>
 
         </div>
     </div>
-    
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.easing.js"></script>
@@ -42,9 +52,18 @@
     <script src="assets/js/theme.js "></script>
     <script src="assets/js/Script.js "></script>
     <script src="assets/js/vue-session.min.js"></script>
-        <!--Aqui va tu codigo de vue js-->
+    <!--Aqui va tu codigo de vue js-->
     <script src="config.js"></script>
     <script src="login.js"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
+
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 </body>
 
 </html>

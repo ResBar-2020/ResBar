@@ -30,6 +30,14 @@
 </head>
 
 <body id="page-top">
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div id="wrapper">
         <!-- Inicia navbar lateral -->
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -320,7 +328,15 @@
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="nuevaorden.js"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
 
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 
 </body>
 
