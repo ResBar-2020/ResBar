@@ -23,6 +23,11 @@ new Vue({
     },
     created: function() {
         this.obtenerProductos();
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        }
     },
     methods: {
 
@@ -210,13 +215,6 @@ new Vue({
                 window.location = "http://localhost:5500/login.html"
             }
         }
-    },
-    created(){
-        if(localStorage.vue_session_key){
-        
-        }else{
-            window.location = "http://localhost:5500/login.html"
-        } 
     }
 
 

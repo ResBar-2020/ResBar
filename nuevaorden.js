@@ -24,6 +24,11 @@ var app = new Vue({
         this.getCategorias();
         this.getProductos();
         this.disableFormSubmit();
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "http://localhost:5500/login.html"
+        } 
     },
     watch: {
         //actualiza el array de productos detalle orden
@@ -144,13 +149,6 @@ var app = new Vue({
                 });
             }, false);
         }
-    },
-    created(){
-        if(localStorage.vue_session_key){
-        
-        }else{
-            window.location = "http://localhost:5500/login.html"
-        } 
     }
 
 })
