@@ -10,7 +10,7 @@ new Vue({
             console.log(opcion)
             if (opcion) {
                 logout()
-                window.location = "http://localhost:5500/login.html"
+                window.location = "./login.html"
             }
         }
     },

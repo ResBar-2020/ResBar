@@ -52,9 +52,13 @@ new Vue({
                 } else if (tamanio < 999 || tamanio > 9999) {
                     document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "Este pin debe tener 4 digitos";
-                }else {
+                } else {
                     this.user.pin = parseInt(this.user.pin, 10)
-                    axios.post(this.uri, this.user)
+                    axios.post(this.uri, JSON.stringify(this.user), {
+                            headers: {
+                                'content-type': 'application/json'
+                            }
+                        })
                         .then(res => {
                             console.log(res.data)
                         }).catch(re => console.log(re))
@@ -111,7 +115,7 @@ new Vue({
             console.log(opcion)
             if (opcion) {
                 logout()
-                window.location = "http://localhost:5500/login.html"
+                window.location = "./login.html"
             }
         }
     },
@@ -124,10 +128,10 @@ new Vue({
     created() {
         if (localStorage.vue_session_key) {
             if (localStorage.getItem(VueSession.key) == '"mesero"') {
-                window.location = "http://localhost:5500/ordenes.html"
+                window.location = "./ordenes.html"
             }
         } else {
-            window.location = "http://localhost:5500/login.html"
+            window.location = "./login.html"
         }
     }
 

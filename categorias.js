@@ -136,7 +136,7 @@ edithRegistro() {
             console.log(opcion)
             if (opcion) {
                 logout()
-                window.location = "http://localhost:5500/login.html"
+                window.location = "./login.html"
             }
         }
     },
@@ -150,7 +150,7 @@ edithRegistro() {
         if(localStorage.vue_session_key){
         
         }else{
-            window.location = "http://localhost:5500/login.html"
+            window.location = "./login.html"
         } 
     }
 });
