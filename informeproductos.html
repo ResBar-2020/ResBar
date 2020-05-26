@@ -46,7 +46,7 @@
 
                     <!-- TITULO -->
                     <div class="row my-4">
-                        <h3 class="text-center col-12">RESUMEN DE LAS VENTAS DEL MES ACTUAL</h3>
+                        <h3 class="text-center col-12">DETALLE DE PRODUCTOS VENDIDOS</h3>
                     </div>
                     <div class="div-encapsula-dates row">
                         <div class="espacio-divs col-md-3">
@@ -70,18 +70,20 @@
                     <div class="row my-5">
 
                         <!-- Incia Tabla -->
-                        <div class="table-wrapper-scroll-y table-responsive col-md-6">
+                        <div class="table-wrapper-scroll-y table-responsive col-md-8">
                             <table class="table table-md table-bordered table-hover table-striped">
                                 <thead class="bg-primary text-white">
                                     <tr>
-                                        <th style="text-align: center;" scope="col">FECHA</th>
-                                        <th style="text-align: center;" scope="col">TOTAL</th>
+                                        <th style="text-align: center;" scope="col">N</th>
+                                        <th style="text-align: center;" scope="col">PRODUCTO</th>
+                                        <th style="text-align: center;" scope="col">CANTIDAD</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="elemento in resumen">
-                                        <td>{{ formatFecha(elemento.fecha) }}</td>
-                                        <td>{{ "$ " + elemento.total}}</td>
+                                    <tr v-for="(elemento, n) in resumen">
+                                        <td>{{ n+1 }}</td>
+                                        <td>{{ elemento._id }}</td>
+                                        <td style="text-align: center; font-weight: bold">{{ elemento.Total}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -121,7 +123,7 @@
         <script src="assets/js/Script.js"></script>
         <!--Aqui va tu codigo de vue js-->
         <script src="./config.js"></script>
-        <script src="./informemes.js"></script>
+        <script src="./informeproductos.js"></script>
 
 
 </body>

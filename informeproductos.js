@@ -1,28 +1,14 @@
 new Vue({
     el: "#appRESBAR",
     data: {
-        urlApi: ApiRestUrl + "/resumenDeVentas",
+        urlApi: ApiRestUrl + "/ResumendeVentaProductos",
         resumen: [],
         desde: null,
         hasta: null,
     },
     methods: {
         cargardatos: function() {
-            var filter = {
-                "order": [
-                    "fecha"
-                ],
-                "where": {
-                    "fecha": { "between": [this.desde, this.hasta] }
-                },
-                "fields": {
-                    "id": true,
-                    "fecha": true,
-                    "total": true
-                }
-            };
-
-            axios.get(this.urlApi + "?filter=" + JSON.stringify(filter)).then(
+            axios.get(this.urlApi + "/" + this.desde + "/" + this.hasta).then(
                 response => {
                     this.resumen = response.data
                 }
@@ -39,26 +25,7 @@ new Vue({
         this.hasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
         this.desde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
 
-
-        var filter = {
-            "order": [
-                "fecha"
-            ],
-            "where": {
-                "fecha": { "between": [firstDay, lastDay] }
-            },
-            "fields": {
-                "id": true,
-                "fecha": true,
-                "total": true
-            }
-        };
-
-        axios.get(this.urlApi + "?filter=" + JSON.stringify(filter)).then(
-            response => {
-                this.resumen = response.data
-            }
-        ).catch(ex => { console.log(ex) })
+        this.cargardatos();
 
 
     }
