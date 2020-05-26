@@ -29,6 +29,8 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" href="ordenes.html"><i
                                 class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                        <a class="nav-link active" href="domicilio.html"><i
+                                class="fas fa-truck"></i><span>DOMICILIO</span></a>
                         <a class="nav-link active" href="productos.html"><i
                                 class="fas fa-box"></i><span>PRODUCTOS</span></a>
                         <a class="nav-link active" href="categorias.html"><i
@@ -47,7 +49,8 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <!-- Inicia navbar top -->
-                <nav class="navbar navbar-default navbar-transparent navbar-fixed-top" style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                <nav class="navbar navbar-default navbar-transparent navbar-fixed-top"
+                    style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
                     <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" style="
                     color: #585858;
                 " href="#">
@@ -58,7 +61,9 @@
                     </a>
 
                     <div class="navbar-header page-scroll">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse"
+                            style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
                             aria-expanded="false">
                             <span style="color: #585858;"><i class="fas fa-bars"></i></span>
                         </button>
@@ -74,7 +79,8 @@
                                         class="fas fa-box"></i><span>PRODUCTOS</span></a>
                                 <a class="topNavLink active" href="categorias.html"><i
                                         class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-                                <a class="topNavLink active" href="informes.html" style="background-color: #585858;color: white;"><i
+                                <a class="topNavLink active" href="informes.html"
+                                    style="background-color: #585858;color: white;"><i
                                         class="fas fa-file-alt"></i><span>INFORMES</span></a>
                             </li>
                         </ul>
@@ -112,30 +118,48 @@
                     <!-- Inicio del top informes 4 divs -->
                     <div id="cuatro-divs" class="mobilScreen">
                         <!-- Primer div -->
-                        <div id="primerDiv" style="display: none;" class="border rounded contenedor-trabajos espacio-margen animated bounceIn">
-                            <label class="d-flex justify-content-center text-centro">Ordenes eliminadas</label><i class="fa fa-window-close d-flex justify-content-center" style="width: 100%;font-size: x-large;color: #585858;"></i><label class="d-flex justify-content-center text-centro text-bold">{{ordenesEliminadas}}</label>
-                            <label class="d-flex justify-content-center subtitulo">Ordenes</label><a class="d-flex justify-content-center text-centro" style="text-decoration: underline;" data-toggle="modal" href="#exampleModalCenter" id="productosRef">Ver todos</a>
+                        <div id="primerDiv" style="display: none;"
+                            class="border rounded contenedor-trabajos espacio-margen animated bounceIn">
+                            <label class="d-flex justify-content-center text-centro">Ordenes eliminadas</label><i
+                                class="fa fa-window-close d-flex justify-content-center"
+                                style="width: 100%;font-size: x-large;color: #585858;"></i><label
+                                class="d-flex justify-content-center text-centro text-bold">{{ordenesEliminadas}}</label>
+                            <label class="d-flex justify-content-center subtitulo">Ordenes</label><a
+                                class="d-flex justify-content-center text-centro" style="text-decoration: underline;"
+                                data-toggle="modal" href="#exampleModalCenter" id="productosRef">Ver todos</a>
                         </div>
                         <!-- Fin del primer div -->
                         <!-- Segundo div -->
-                        <div id="segundoDiv" class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay1">
-                            <label class="d-flex justify-content-center text-centro">Ordenes finalizadas</label><i class="fa fa-check-square d-flex justify-content-center iconos"></i><label class="d-flex justify-content-center text-centro text-bold">{{numOrdenesFin}}</label>
+                        <div id="segundoDiv"
+                            class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay1">
+                            <label class="d-flex justify-content-center text-centro">Ordenes finalizadas</label><i
+                                class="fa fa-check-square d-flex justify-content-center iconos"></i><label
+                                class="d-flex justify-content-center text-centro text-bold">{{numOrdenesFin}}</label>
                             <label class="d-flex justify-content-center subtitulo">Ordenes</label>
-                            <a class="d-flex justify-content-center text-centro" href="#ordenesFinalizadas" data-toggle="modal" style="text-decoration: underline;">Ver todos</a>
+                            <a class="d-flex justify-content-center text-centro" href="#ordenesFinalizadas"
+                                data-toggle="modal" style="text-decoration: underline;">Ver todos</a>
                         </div>
                         <!-- Fin del segundo div -->
                         <!-- Tercer div -->
-                        <div id="tercerDiv" class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay2">
-                            <label class="d-flex justify-content-center text-centro">Mas vendido</label><i class="fa fa-coffee d-flex justify-content-center iconos"></i><label class="d-flex justify-content-center text-centro text-bold">{{platoMasVendido}}</label>
+                        <div id="tercerDiv"
+                            class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay2">
+                            <label class="d-flex justify-content-center text-centro">Mas vendido</label><i
+                                class="fa fa-coffee d-flex justify-content-center iconos"></i><label
+                                class="d-flex justify-content-center text-centro text-bold">{{platoMasVendido}}</label>
                             <label class="d-flex justify-content-center subtitulo">{{pmvCantidad}} veces vendida</label>
-                            <a class="d-flex justify-content-center" href="#modalProductos" data-toggle="modal" style="width: 100%;text-decoration: underline;">Ver todos</a>
+                            <a class="d-flex justify-content-center" href="#modalProductos" data-toggle="modal"
+                                style="width: 100%;text-decoration: underline;">Ver todos</a>
                         </div>
                         <!-- Fin del tercer div -->
                         <!-- Cuarto div -->
-                        <div id="cuartoDiv" class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay3">
-                            <label class="d-flex justify-content-center text-centro">Ordenes Activas</label><i class="fa fa-gears d-flex justify-content-center iconos"></i><label class="d-flex justify-content-center text-centro text-bold">{{ordenesActivas}}</label>
+                        <div id="cuartoDiv"
+                            class="border rounded contenedor-trabajos espacio-margen animated bounceIn delay3">
+                            <label class="d-flex justify-content-center text-centro">Ordenes Activas</label><i
+                                class="fa fa-gears d-flex justify-content-center iconos"></i><label
+                                class="d-flex justify-content-center text-centro text-bold">{{ordenesActivas}}</label>
                             <label class="d-flex justify-content-center subtitulo">Ordenes</label>
-                            <a class="d-flex justify-content-center text-centro" href="ordenes.html" style="text-decoration: underline;">Ver todos</a>
+                            <a class="d-flex justify-content-center text-centro" href="ordenes.html"
+                                style="text-decoration: underline;">Ver todos</a>
                         </div>
                         <!-- Fin del cuarto div -->
                     </div>
@@ -152,13 +176,17 @@
                             <div style="width: 100%; text-align: center;">
                                 <nav class="tabs-inf">
                                     <div class="selector-inf"></div>
-                                    <a href="#" id="reference" ref="anioRef" class="active a-inf" @click="selectRange=0;fillData(selectRange)"><i
+                                    <a href="#" id="reference" ref="anioRef" class="active a-inf"
+                                        @click="selectRange=0;fillData(selectRange)"><i
                                             class="fas fa-calendar"></i></i>Mes</a>
-                                    <a href="#" ref="semanaId" class="a-inf" @click="selectRange=1;fillData(selectRange)"><i
+                                    <a href="#" ref="semanaId" class="a-inf"
+                                        @click="selectRange=1;fillData(selectRange)"><i
                                             class="fas fa-calendar-week"></i></i>Semana</a>
-                                    <a href="#" ref="diaId" class="a-inf" @click="selectRange=2;fillData(selectRange)"><i
+                                    <a href="#" ref="diaId" class="a-inf"
+                                        @click="selectRange=2;fillData(selectRange)"><i
                                             class="fas fa-calendar-day"></i>Día</a>
-                                    <a href="#" ref="horaId" class="a-inf" @click="selectRange=3;fillData(selectRange)"><i
+                                    <a href="#" ref="horaId" class="a-inf"
+                                        @click="selectRange=3;fillData(selectRange)"><i
                                             class="fas fa-clock"></i></i>Hora</a>
                                 </nav>
                             </div>
@@ -167,16 +195,23 @@
                             <!-- Selector de fecha con popover mostrando los datos dependiendo del valor requerido -->
                             <div style="text-align: center;">
                                 <div class="datePick selectedDate">
-                                    <input type="text" readonly id="anioDate" class="yearpicker styleInput" :value="anioPicker" />
+                                    <input type="text" readonly id="anioDate" class="yearpicker styleInput"
+                                        :value="anioPicker" />
                                 </div>
                                 <div class="datePick" id="semanal" v-bind:class="{ selectedDate: semanal}">
-                                    <input type="text" readonly id="mesDate" tabindex="0" ref="mesesito" class="styleInput" v-b-popover.click="popoverConfig" :value="mesPicked.mes"></input>
+                                    <input type="text" readonly id="mesDate" tabindex="0" ref="mesesito"
+                                        class="styleInput" v-b-popover.click="popoverConfig"
+                                        :value="mesPicked.mes"></input>
                                 </div>
                                 <div class="datePick" id="diario" v-bind:class="{ selectedDate: diario}">
-                                    <input type="text" readonly id="diaDate" tabindex="0" ref="diaDate" class="styleInput" v-b-popover.click="popiverDia" v-bind:value="semanaNum.nombre"></input>
+                                    <input type="text" readonly id="diaDate" tabindex="0" ref="diaDate"
+                                        class="styleInput" v-b-popover.click="popiverDia"
+                                        v-bind:value="semanaNum.nombre"></input>
                                 </div class="datePick" id="horario">
                                 <div class="datePick" id="diario" v-bind:class="{ selectedDate: hora}">
-                                    <input type="text" readonly id="horaDate" tabindex="0" ref="horaDate" class="styleInput" v-b-popover.click="popoverHora" v-bind:value="horaNombre"></input>
+                                    <input type="text" readonly id="horaDate" tabindex="0" ref="horaDate"
+                                        class="styleInput" v-b-popover.click="popoverHora"
+                                        v-bind:value="horaNombre"></input>
                                 </div class="datePick" id="horario">
                             </div>
 
@@ -212,46 +247,60 @@
                                     <input type="date" id="endEmp" class="date-css" v-model="empHasta"><br>
                                 </div>
                             </div>
-                            <button class="btn-hover color-9" @click="mejoresMeseros()" style="background-image: linear-gradient(to right, #4766c7, #4481eb, #d339ff, #3f86ed);">ACEPTAR</button>
+                            <button class="btn-hover color-9" @click="mejoresMeseros()"
+                                style="background-image: linear-gradient(to right, #4766c7, #4481eb, #d339ff, #3f86ed);">ACEPTAR</button>
                         </div>
 
 
                         <!-- Bloque 1 de best empleados  -->
-                        <div class="border rounded animated bounceIn" style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
+                        <div class="border rounded animated bounceIn"
+                            style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
                             <div style="border-radius: 10px 10px 0px 0px;background-color: #4e73df;">
                                 <label class="d-flex empName">Más ordenes despachadas</label>
                             </div>
                             <div id="despacho" style="padding: 1rem;display: flex;justify-content: space-between;">
                                 <div id="textoEmp" style="text-align: left; display: inline-block; height: inherit;">
-                                    <label class="d-flex reziseText" style="color: rgb(0, 0, 0);">{{meseroOrdenes[0]._id}}</label>
+                                    <label class="d-flex reziseText"
+                                        style="color: rgb(0, 0, 0);">{{meseroOrdenes[0]._id}}</label>
                                 </div>
                                 <div id="descEmp" style="text-align: center; display: inline-block;">
-                                    <label class="d-flex justify-content-center text-centro reziseText" style="color: rgb(0, 0, 0);">
+                                    <label class="d-flex justify-content-center text-centro reziseText"
+                                        style="color: rgb(0, 0, 0);">
                                         Ordenes: {{meseroOrdenes[0].Total}}</label>
                                 </div>
-                                <div class="tresPuntos" style="height: inherit; align-self: center;"><i class="fas fa-ellipsis-v" style="color: rgb(0, 0, 0);height: max-content;"></i></div>
+                                <div class="tresPuntos" style="height: inherit; align-self: center;"><i
+                                        class="fas fa-ellipsis-v" style="color: rgb(0, 0, 0);height: max-content;"></i>
+                                </div>
                             </div>
                         </div>
                         <!-- Fin del Bloque 1 de best empleados  -->
 
                         <!-- Bloque 2 de best empleados  -->
-                        <div class="border rounded animated bounceIn" style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
+                        <div class="border rounded animated bounceIn"
+                            style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
                             <div style="border-radius: 10px 10px 0px 0px;background-color: #4e73df;">
                                 <label class="d-flex empName">Promedio de ordenes</label>
                             </div>
                             <div id="despacho" style="padding: 1rem;display: flex;justify-content: space-between;">
                                 <div id="textoEmp" style="text-align: left; display: inline-block; height: inherit;">
-                                    <label class="d-flex reziseText" style="color: rgb(0, 0, 0);text-align: center;">Prom: ${{ordenesProm[0].Promedio.toFixed(2)}}</label>
+                                    <label class="d-flex reziseText"
+                                        style="color: rgb(0, 0, 0);text-align: center;">Prom:
+                                        ${{ordenesProm[0].Promedio.toFixed(2)}}</label>
                                 </div>
                                 <div id="descEmp" style="text-align: center; display: inline-block;">
-                                    <label class="d-flex justify-content-center text-centro reziseText" style="color: rgb(0, 0, 0);text-align: center;">
+                                    <label class="d-flex justify-content-center text-centro reziseText"
+                                        style="color: rgb(0, 0, 0);text-align: center;">
                                         Ordenes: {{ordenesProm[0].Count}}</label>
                                 </div>
                                 <div id="textoEmp" style="text-align: left; display: inline-block; height: inherit;">
-                                    <label class="d-flex reziseText" style="color: rgb(0, 0, 0);text-align: center;">Min: ${{ordenesProm[0].Minimo.toFixed(2)}}</label>
+                                    <label class="d-flex reziseText"
+                                        style="color: rgb(0, 0, 0);text-align: center;">Min:
+                                        ${{ordenesProm[0].Minimo.toFixed(2)}}</label>
                                 </div>
                                 <div id="textoEmp" style="text-align: left; display: inline-block; height: inherit;">
-                                    <label class="d-flex reziseText" style="color: rgb(0, 0, 0);text-align: center;">Max: ${{ordenesProm[0].Maximo.toFixed(2)}}</label>
+                                    <label class="d-flex reziseText"
+                                        style="color: rgb(0, 0, 0);text-align: center;">Max:
+                                        ${{ordenesProm[0].Maximo.toFixed(2)}}</label>
                                 </div>
                             </div>
                         </div>
@@ -259,16 +308,19 @@
 
                         <!-- Fin del Bloque 2 de best empleados  -->
                         <!-- Bloque 3 de best empleados  -->
-                        <div class="border rounded animated bounceIn delay2" style="background-color: #4e4e4e;margin-top: 10px; display: none;">
+                        <div class="border rounded animated bounceIn delay2"
+                            style="background-color: #4e4e4e;margin-top: 10px; display: none;">
                             <div id="despacho">
-                                <div id="textoEmp" style="margin-left: 2rem; width: 30%; text-align: left; display: inline-block; margin-top: 0.5em;">
+                                <div id="textoEmp"
+                                    style="margin-left: 2rem; width: 30%; text-align: left; display: inline-block; margin-top: 0.5em;">
                                     <label class="d-flex reziseText">{{menosFaltas}}</label>
                                     <label class="d-flex empName">Menos faltas a trabajar</label>
                                 </div>
                                 <div id="descEmp" style="width: 50%; text-align: center; display: inline-block;">
                                     <label class="d-flex justify-content-center text-centro reziseText">Número de
-                    faltas:</label>
-                                    <label class="d-flex justify-content-center text-centro empName">{{numeroFaltas}}</label>
+                                        faltas:</label>
+                                    <label
+                                        class="d-flex justify-content-center text-centro empName">{{numeroFaltas}}</label>
                                 </div>
                                 <div class="tresPuntos">
                                     <i class="fas fa-ellipsis-v empName"></i>
@@ -278,16 +330,19 @@
                         <!-- Fin del Bloque 3 de best empleados  -->
 
                         <!-- Bloque 4 de best empleados  -->
-                        <div class="border rounded animated bounceIn delay3" style="background-color: #4e4e4e;margin-top: 10px; display: none;">
+                        <div class="border rounded animated bounceIn delay3"
+                            style="background-color: #4e4e4e;margin-top: 10px; display: none;">
                             <div id="despacho">
-                                <div id="textoEmp" style="margin-left: 2rem; width: 30%; text-align: left; display: inline-block; margin-top: 0.5em;">
+                                <div id="textoEmp"
+                                    style="margin-left: 2rem; width: 30%; text-align: left; display: inline-block; margin-top: 0.5em;">
                                     <label class="d-flex reziseText">{{masPuntual}}</label>
                                     <label class="d-flex empName">Mas puntual</label>
                                 </div>
                                 <div id="descEmp" style="width: 50%; text-align: center; display: inline-block;">
                                     <label class="d-flex justify-content-center text-centro reziseText">Venidas
-                    tarde:</label>
-                                    <label class="d-flex justify-content-center text-centro empName">{{venidasTarde}}</label>
+                                        tarde:</label>
+                                    <label
+                                        class="d-flex justify-content-center text-centro empName">{{venidasTarde}}</label>
                                 </div>
                                 <div class="tresPuntos">
                                     <i class="fas fa-ellipsis-v empName"></i>
@@ -301,7 +356,8 @@
                     <!-- --------------------Modales----------------- -->
 
                     <!-- ================== Modal: Ordenes eliminadas ================= -->
-                    <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -360,8 +416,10 @@
 
                     <!-- ================== Modal: Ordenes Finalizadas ================= -->
 
-                    <div class="modal fade " id="ordenesFinalizadas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal fade " id="ordenesFinalizadas" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
+                            role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Ordenes Finalizadas</h5>
@@ -381,10 +439,12 @@
                                             </li>
                                             <li class="table-row" v-for="(orden, index) in ordenesCerradas">
                                                 <div class="col col-1" data-label="ID">
-                                                    <a @click="getOrdenSelected(orden.id)" style="text-decoration: underline;font-size: 20px;color: #4e73df;">{{index+1}}</a>
+                                                    <a @click="getOrdenSelected(orden.id)"
+                                                        style="text-decoration: underline;font-size: 20px;color: #4e73df;">{{index+1}}</a>
                                                 </div>
                                                 <div class="col col-2" style="min-width: fit-content;" data-label="Día">
-                                                    <pre style="color: #858796;font-size: 17px;">{{this.moment(orden.fecha).format('DD-MM-YYYY')}}</pre>
+                                                    <pre
+                                                        style="color: #858796;font-size: 17px;">{{this.moment(orden.fecha).format('DD-MM-YYYY')}}</pre>
                                                 </div>
                                                 <div class="col col-3" data-label="Valor">${{orden.total}}</div>
                                             </li>
@@ -403,8 +463,10 @@
 
                     <!-- ================== Modal: Productos ================= -->
 
-                    <div class="modal fade " id="modalProductos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal fade " id="modalProductos" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
+                            role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Productos más vendidos</h5>

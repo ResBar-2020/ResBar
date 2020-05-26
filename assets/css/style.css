@@ -407,3 +407,10 @@ tr:nth-child(even) {
     -webkit-animation-name: shake;
     animation-name: shake
 }
+
+.bg-list-color-transparent{
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+

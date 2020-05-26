@@ -1,0 +1,151 @@
+*{
+margin: 0;
+padding: 0;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+body{
+background: #1D1F20;
+}
+
+.wrap{
+width: 1100px;
+margin: 50px auto;
+display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+-ms-flex-pack: center;
+justify-content: center;
+}
+
+.tarjeta-wrap{
+margin: 10px;
+-webkit-perspective: 800;
+perspective: 800;
+}
+
+.tarjeta{
+width: 300px;
+height: 350px;
+background: #130f40;
+position: relative;
+-webkit-transform-style: preserve-3d;
+transform-style: preserve-3d;
+-webkit-transition: .7s ease;
+transition: .7s ease;
+-webkit-box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+
+}
+
+.adelante, .atras{
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+}
+
+.adelante{
+width: 100%;
+}
+
+.atras{
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+position: relative;
+-webkit-transform-style: preserve-3d;
+transform-style: preserve-3d;
+-webkit-transition: .7s ease;
+transition: .7s ease;
+-webkit-box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+box-shadow: 0px 10px 15px -5px rgba(0,0,0,0.65);
+
+text-align: center;
+color: #fff;
+font-family: "open sans";
+background: #F29720;
+}
+
+.tarjeta-wrap:hover .tarjeta{
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+
+.card1{
+background-size: cover;
+}
+
+
+.myButton {
+	box-shadow: 3px 4px 0px 0px #8a2a21;
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	background-color:#218c74;
+	border-radius:18px;
+	border:1px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:7px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	background-color:#f24437;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
+.example_e {
+	border: none;
+	background: #404040;
+	color: #ffffff !important;
+	font-weight: 100;
+	padding: 20px;
+	text-transform: uppercase;
+	border-radius: 6px;
+	display: inline-block;
+	transition: all 0.3s ease 0s;
+	}
+
+	.example_e:hover {
+		color: #404040 !important;
+		font-weight: 700 !important;
+		letter-spacing: 3px;
+		background: white;
+		-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+		-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+		transition: all 0.3s ease 0s;
+		}
+
+
+
+ol {
+    counter-reset: li; /* Initiate a counter */
+    list-style: none; /* Remove default numbering */
+    *list-style: decimal; /* Keep using default numbering for IE6/7 */
+    font: 15px 'trebuchet MS', 'lucida sans';
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  }
+
+  ol ol {
+    margin: 0 0 0 2em; /* Add some left margin for inner lists */
+  }
+
