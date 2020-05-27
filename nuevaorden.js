@@ -24,6 +24,11 @@ var app = new Vue({
         this.getCategorias();
         this.getProductos();
         this.disableFormSubmit();
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "./login.html"
+        } 
     },
     watch: {
         //actualiza el array de productos detalle orden

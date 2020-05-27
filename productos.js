@@ -23,6 +23,11 @@ new Vue({
     },
     created: function() {
         this.obtenerProductos();
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "./login.html"
+        }
     },
     methods: {
 
@@ -201,8 +206,16 @@ new Vue({
                 return true;
             else
                 return false;
+        },
+        salir: function () {
+            var opcion = confirm('Seguro que quiere salir?')
+            console.log(opcion)
+            if (opcion) {
+                logout()
+                window.location = "./login.html"
+            }
         }
-    },
+    }
 
 
 })

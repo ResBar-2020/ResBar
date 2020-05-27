@@ -12,233 +12,283 @@
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
-        <!-- Inicia navbar lateral -->
-        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-            <div class="container-fluid d-flex flex-column p-0">
-                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
-                    <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
-                </a>
-                <hr class="sidebar-divider my-0">
-                <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="ordenes.html"><i
-                                class="fas fa-list-ol"></i><span>ORDENES</span></a>
-                        <a class="nav-link active" href="domicilio.html"><i
-                                class="fas fa-truck"></i><span>DOMICILIO</span></a>
-
-                        <a class="nav-link active" href="productos.html"><i
-                                class="fas fa-box"></i><span>PRODUCTOS</span></a>
-                        <a class="nav-link active" href="categorias.html"><i
-                                class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-                        <a class="nav-link active" href="informes.html"><i
-                                class="fas fa-file-alt"></i><span>INFORMES</span></a>
-                    </li>
-                </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle" type="button"></button></div>
-            </div>
-        </nav>
-        <!-- Termina navbar lateral -->
-
-        <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content">
-                <!-- Inicia navbar top -->
-                <!--<nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                        </li>
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Informes
-            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Ventas Diarias</a>
-                                <a class="dropdown-item" href="#">Ventas semanales</a>
-                            </div>
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <div id="appRESBAR">
+        <div id="wrapper">
+            <!-- Inicia navbar lateral -->
+            <nav
+                class="navbar d-none d-md-inline navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="domicilio.html"><i
+                                    class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                            <a class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
                         </li>
                     </ul>
-                </nav>-->
-                <!-- Termina navbar top -->
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                            id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <!-- Termina navbar lateral -->
 
-                <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
-                <div class="container-fluid" id="appRESBAR">
-
-                    <!-- TITULO -->
-                    <div class="row my-4">
-                        <h3 class="text-center col-12">Administrar Categorias</h3>
-                    </div>
-
-                    <div class="row my-5">
-                        <!-- Filtro buscar -->
-                        <div class="col-md-4">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
-                                </div>
-                                <input type="text" placeholder="Buscar" v-model="searchDisplay">
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <!-- Inicia navbar top -->
+                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-md-none"
+                        style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                            style="
+                    color: #585858;
+                " href="#">
+                            <div class="sidebar-brand-icon rotate-n-15">
+                                <i class="fas fa-glass-martini"></i>
                             </div>
-                        </div>
+                            <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                        </a>
 
-                        <!-- Boton Agregar nuevo -->
-                        <div class="col-md-4 " style="display: flex; justify-content: center;">
-                            <button class="btn btn-sm agg text-white" type="button" data-toggle="modal"
-                                data-target="#formModalNew" v-on:click="addMode">
-                                <i class="fa fa-plus-circle mr-2 text-white"></i>Agregar</button>
-                        </div>
-                    </div>
-
-                    <!-- Inicia seccion de alertas -->
-                    <div class="alert alert-success collapse" role="alert" id="buttonAlert">
-                        <span v-if="displayOption==='Modifique la Categoria'">
-                            <strong>Success!</strong> Registro Modificado correctamente.</span>
-                        <span v-if="agg==false">
-                            <strong>categoria no puede ir vacio </strong> </span>
-                        <span v-else-if="agg==true && displayOption==='Agregue una nueva Categoria'">
-                            <strong>Success!</strong> Registro Agregado correctamente.</span>
-                        <span v-if="displayOption==='eliminar'">
-                            <strong>Success!</strong> Registro Eliminado correctamente.</span>
-                        <div>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                        <div class="navbar-header page-scroll">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse"
+                                style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                                aria-expanded="false">
+                                <span style="color: #585858;"><i class="fas fa-bars"></i></span>
                             </button>
                         </div>
-                    </div>
-                    <!-- Termina seccion de alertas -->
 
-                    <!-- Incia Tabla -->
-                    <div class=" table-responsive">
-                        <table class="table table-sm table-bordered table-hover table-striped mb-0">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th style="text-align: center;" scope="col" class="align-items-center"># Categoria
-                                    </th>
-                                    <th style="text-align: center;" scope="col">Nombre</th>
-                                    <th style="text-align: center;" scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="active " v-for="(cat,index) in categorias" v-show="filtro(index)">
-                                    <td style="text-align: center;" scope="col">{{String((cat.id).substring(17,24))}}
-                                    </td>
-                                    <td style="text-align: center;" scope="col">{{cat.nombre }}</td>
-                                    <td>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-collapse navbar-ex1-collapse collapse">
+                            <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                                <li class="nav-item" role="presentation">
+                                    <a class="topNavLink active" href="ordenes.html"><i
+                                            class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                    <a class="nav-link active" href="domicilio.html"><i
+                                            class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                                    <a class="topNavLink active" href="productos.html"><i
+                                            class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                                    <a class="topNavLink active" href="categorias.html"
+                                        style="background-color: #585858;color: white;"><i
+                                            class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                                    <a class="topNavLink active" href="informes.html"><i
+                                            class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                                    <a class="topNavLink active" href="users.html"><i
+                                            class="fas fa-users"></i><span>USUARIOS</span></a>
+                                    <button type="button" class="btn btn-sm btn-danger float-right"
+                                        v-on:click="salir">Salir</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
 
-                                        <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                            v-on:click="getCategoriaSelected(cat)" data-target="#formModalNew">
-                                            <i class="fa fa-edit mr-2"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm" v-on:click="getCategoriaSelected(cat)"
-                                            id="modalButton" data-toggle="modal" data-target="#exampleModal"><i
-                                                class="fa fa-trash-alt mr-2"></i>
-                                        </button>
+                    <!-- Termina navbar top -->
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Termina Tabla -->
+                    <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
+                    <div class="container-fluid">
 
+                        <!-- TITULO -->
+                        <div class="row my-4">
+                            <div class="col-12 ag">
+                                <button type="button" class="btn btn-danger d-none d-md-inline float-right"
+                                    v-on:click="salir">Salir</button>
+                                <h1 class="text-center">Administrar Categorias</h1>
+                            </div>
+                        </div>
 
-                    <!-- Modal confirmacion del remove -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-dark">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">Seguro que desea eliminar
-                                        el registro?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                        <div class="row my-5">
+                            <!-- Filtro buscar -->
+                            <div class="col-md-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input type="text" placeholder="Buscar" v-model="searchDisplay">
                                 </div>
-                                <div class="modal-body">
-                                    <h2 class="text-dark"> {{categoria.id.substring(17,24)}} {{categoria.nombre}}</h2>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                        data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
-                                        v-on:click="removeRegistro" onclick="alerta()">Confirmar</button>
+                            </div>
+
+                            <!-- Boton Agregar nuevo -->
+                            <div class="col-md-4 " style="display: flex; justify-content: center;">
+                                <button class="btn btn-sm agg text-white" type="button" data-toggle="modal"
+                                    data-target="#formModalNew" v-on:click="addMode">
+                                    <i class="fa fa-plus-circle mr-2 text-white"></i>Agregar</button>
+                            </div>
+                        </div>
+
+                        <!-- Inicia seccion de alertas -->
+                        <div class="alert alert-success collapse" role="alert" id="buttonAlert">
+                            <span v-if="displayOption==='Modifique la Categoria'">
+                                <strong>Success!</strong> Registro Modificado correctamente.</span>
+                            <span v-if="agg==false">
+                                <strong>categoria no puede ir vacio </strong> </span>
+                            <span v-else-if="agg==true && displayOption==='Agregue una nueva Categoria'">
+                                <strong>Success!</strong> Registro Agregado correctamente.</span>
+                            <span v-if="displayOption==='eliminar'">
+                                <strong>Success!</strong> Registro Eliminado correctamente.</span>
+                            <div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Termina seccion de alertas -->
+
+                        <!-- Incia Tabla -->
+                        <div class=" table-responsive">
+                            <table class="table table-sm table-bordered table-hover table-striped mb-0">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th style="text-align: center;" scope="col" class="align-items-center">#
+                                            Categoria
+                                        </th>
+                                        <th style="text-align: center;" scope="col">Nombre</th>
+                                        <th style="text-align: center;" scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active " v-for="(cat,index) in categorias" v-show="filtro(index)">
+                                        <td style="text-align: center;" scope="col">
+                                            {{String((cat.id).substring(17,24))}}
+                                        </td>
+                                        <td style="text-align: center;" scope="col">{{cat.nombre }}</td>
+                                        <td>
+
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                v-on:click="getCategoriaSelected(cat)" data-target="#formModalNew">
+                                                <i class="fa fa-edit mr-2"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm" v-on:click="getCategoriaSelected(cat)"
+                                                id="modalButton" data-toggle="modal" data-target="#exampleModal"><i
+                                                    class="fa fa-trash-alt mr-2"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Termina Tabla -->
+
+
+                        <!-- Modal confirmacion del remove -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-dark">
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Seguro que desea
+                                            eliminar
+                                            el registro?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h2 class="text-dark"> {{categoria.id.substring(17,24)}} {{categoria.nombre}}
+                                        </h2>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                                            v-on:click="removeRegistro" onclick="alerta()">Confirmar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Modal insert/update-->
-                    <div class="modal fade" id="formModalNew" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <h5 class="modal-title text-white" id="exampleModalLongTitle">{{displayOption}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- form update- agg-->
-                                    <form>
-                                        <div class="form-group row my-0"
-                                            v-if="displayOption==='Modifique la Categoria'">
-                                            <label>ID: {{categoria.id}}</label>
-
-                                        </div>
-                                        <div class="form-group row my-0">
-                                            <label for="name">
-                                                <h3>Categoria</h3>
-                                            </label>
-                                            <input v-model="categoria.nombre" type="text" class="form-control" id="name"
-                                                placeholder="Nombre de la Categoria">
-                                        </div>
-                                    </form>
-
-                                </div>
-
-                                <!-- seccion de btn se muestran deacuerdo a que actividad se realiza-->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"
-                                        @click="clearData">Cancelar</button>
-                                    <div v-if="displayOption=='Agregue una nueva Categoria'">
-                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="createRegistro"
-                                            data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
+                        <!-- Modal insert/update-->
+                        <div class="modal fade" id="formModalNew" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary">
+                                        <h5 class="modal-title text-white" id="exampleModalLongTitle">{{displayOption}}
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div v-if="this.displayOption=='Modifique la Categoria'">
-                                        <button type="button" class="btn btn-primary btn-sm" v-on:click="edithRegistro"
-                                            data-dismiss="modal" onclick="alerta()">Guardar Cambios</button>
+                                    <div class="modal-body">
+                                        <!-- form update- agg-->
+                                        <form>
+                                            <div class="form-group row my-0"
+                                                v-if="displayOption==='Modifique la Categoria'">
+                                                <label>ID: {{categoria.id}}</label>
+
+                                            </div>
+                                            <div class="form-group row my-0">
+                                                <label for="name">
+                                                    <h3>Categoria</h3>
+                                                </label>
+                                                <input v-model="categoria.nombre" type="text" class="form-control"
+                                                    id="name" placeholder="Nombre de la Categoria"
+                                                    onkeypress="return AvoidSpace(event)">
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                    <!-- seccion de btn se muestran deacuerdo a que actividad se realiza-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                                            @click="clearData">Cancelar</button>
+                                        <div v-if="displayOption=='Agregue una nueva Categoria'">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="createRegistro" data-dismiss="modal"
+                                                onclick="alerta()">Guardar Cambios</button>
+                                        </div>
+                                        <div v-if="this.displayOption=='Modifique la Categoria'">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                v-on:click="edithRegistro" data-dismiss="modal"
+                                                onclick="alerta()">Guardar Cambios</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!--termina el modal update/create-->
+                        <!--termina el modal update/create-->
 
-                    <!--Solo para depuracion y desarrollo mostramos el vue.Data-->
-                    <!--Despues borramos esto-
+                        <!--Solo para depuracion y desarrollo mostramos el vue.Data-->
+                        <!--Despues borramos esto-
                     <br>
                     <h5>Solo para mostrar vue.Data mientras se desarrolla</h5>
                     -->
+                    </div>
+                    <!-- Termina el contenedor de la pagina y el dominio de VUE-->
+
                 </div>
-                <!-- Termina el contenedor de la pagina y el dominio de VUE-->
 
-            </div>
+                <!-- Inicia el pie de pagina -->
+                <footer class="bg-white sticky-footer">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto copyright"><span>Copyright © Diseño I 2020</span></div>
+                    </div>
+                </footer>
+                <!-- Termina el pie de pagina -->
 
-            <!-- Inicia el pie de pagina -->
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Diseño I 2020</span></div>
-                </div>
-            </footer>
-            <!-- Termina el pie de pagina -->
-
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -247,10 +297,18 @@
     <script src="assets/js/axios.min.js "></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
+    <script src="assets/js/vue-session.min.js "></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="./categorias.js"></script>
-
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 
 </body>
 

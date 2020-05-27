@@ -32,6 +32,7 @@
             <a class="nav-link active" href="productos.html"><i class="fas fa-box"></i><span>PRODUCTOS</span></a>
             <a class="nav-link active" href="categorias.html"><i class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
             <a class="nav-link active" href="informes.html"><i class="fas fa-file-alt"></i><span>INFORMES</span></a>
+            <a class="nav-link active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
           </li>
         </ul>
         <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle"
@@ -71,9 +72,12 @@
 
           <!-- TITULO -->
           <div class="row my-4">
-            <h3 class="text-center col-12">Pedidos a Domicilio</h3>
-          </div>
-
+            <div class="col-12 ag">
+                <button type="button" class="btn btn-danger d-none d-md-inline float-right"
+                    v-on:click="salir">Salir</button>
+                <h1 class="text-center">Pedidos a Domicilio</h1>
+            </div>
+        </div>
 
 
 

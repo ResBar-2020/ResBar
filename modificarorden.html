@@ -12,6 +12,14 @@
 </head>
 
 <body id="page-top">
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div id="wrapper">
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -167,7 +175,15 @@
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="./modificarorden.js"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
 
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 
 
 </body>

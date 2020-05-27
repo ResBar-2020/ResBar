@@ -105,6 +105,13 @@ new Vue({
         }
 
     },
+    created(){
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "./login.html"
+        } 
+    }
 
 })
 

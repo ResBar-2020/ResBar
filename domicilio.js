@@ -62,6 +62,14 @@ new Vue({
             let array = (this.ordenes[valor].id + this.ordenes[valor].cliente).toUpperCase();
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
         },
+        salir: function () {
+            var opcion = confirm('Seguro que quiere salir?')
+            console.log(opcion)
+            if (opcion) {
+                logout()
+                window.location = "./login.html"
+            }
+        }
 
     },
     mounted() {

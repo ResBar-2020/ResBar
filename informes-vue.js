@@ -127,6 +127,11 @@ var vm = new Vue({
 
     },
     created() {
+        if(localStorage.vue_session_key){
+        
+        }else{
+            window.location = "./login.html"
+        } 
         // Promise.resolve(this.getTotalPorMes()).then(this.fillData(0)).catch(function(reason) { console.log('Filling data to chart, razón (' + reason + ') aquí.'); });
         this.fillData(0);
 
@@ -591,6 +596,14 @@ var vm = new Vue({
         clickHora() {
             this.$refs.horaId.click();
         },
+        salir: function () {
+            var opcion = confirm('Seguro que quiere salir?')
+            console.log(opcion)
+            if (opcion) {
+                logout()
+                window.location = "./login.html"
+            }
+        }
     },
     watch: {
         anioPicker: function(value) {

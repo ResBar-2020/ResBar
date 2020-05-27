@@ -4,3 +4,14 @@
 //Direccion URL de la api rest que se va a consumir por la aplicacion
 const ApiRestUrl = "http://localhost:3000"
 
+//Verifica el rol del usuario logueado 
+if (localStorage.getItem(VueSession.key) == '"admin"') {
+    this.admin = true
+} else if (localStorage.getItem(VueSession.key) == '"mesero"') {
+    this.admin = false
+}
+
+//metodo para salir
+function logout() {
+    localStorage.removeItem(VueSession.key)
+}
