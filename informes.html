@@ -92,6 +92,8 @@
                 <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)---------------------------------------------------------------------->
                 <label class="leyendas" style="margin-top: 20px;">Reportes</label>
                 <div class="container-fluid" id="appRESBAR">
+                    <label class="my-1 mx-1 text-success d-none d-md-inline"><i class="fas fa-user-alt"></i>
+                        {{ logName }}</label><br>
                     <!-- Este es el div que se muestra si el rango de fecha es incorrecto-->
                     <div id="modalError" class="alert alert-danger alert-dismissible fade show" role="alert">
                         El rango de fecha es incorrecto.
@@ -305,16 +307,21 @@
                             </div>
                         </div>
 
-                        <div class="border rounded animated bounceIn" style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
+                        <div class="border rounded animated bounceIn"
+                            style="background-color: #ffffff;box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.53); margin-top: 1rem;">
                             <div style="border-radius: 10px 10px 0px 0px;background-color: #4e73df;">
                                 <label class="d-flex empName">Informes detallados:</label>
                             </div>
                             <div id="enlace" style="padding: 1rem;display: flex;justify-content: space-between;">
                                 <br><br>
-                                <button class="d-flex reziseText btn-outline-primary" style="color: rgb(0, 0, 0);text-align: left;" onclick="window.location.href='informemes.html';">
+                                <button class="d-flex reziseText btn-outline-primary"
+                                    style="color: rgb(0, 0, 0);text-align: left;"
+                                    onclick="window.location.href='informemes.html';">
                                     Detalle de ventas del mes.
                                 </button>
-                                <button class="d-flex reziseText btn-outline-primary" style="color: rgb(0, 0, 0);text-align: left;" onclick="window.location.href='informeproductos.html';">
+                                <button class="d-flex reziseText btn-outline-primary"
+                                    style="color: rgb(0, 0, 0);text-align: left;"
+                                    onclick="window.location.href='informeproductos.html';">
                                     Detalle de productos del mes.
                                 </button>
                             </div>
@@ -544,6 +551,7 @@
     <script src="assets/js/axios.min.js "></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
+    <script src="assets/js/vue-session.min.js"></script>
     <script src="config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 

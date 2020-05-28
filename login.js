@@ -21,7 +21,7 @@ new Vue ({
                     enc = this.users.find(user => user.pin==this.user.pin)
                     console.log(enc)
                     if(enc.pin == this.user.pin){
-                        VueSession.setAll(enc.rol)
+                        VueSession.setAll(enc.rol, enc.nombreCompleto)
                         window.location = './ordenes.html'
                     }
                 //Metodo para iniciar sesion con loggin y clave

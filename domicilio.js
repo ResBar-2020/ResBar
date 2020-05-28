@@ -5,7 +5,8 @@ new Vue({
         urlApi: `${ApiRestUrl}/ordenes`,
         ordenes: {},
         searchDisplay: "",
-        active: true
+        active: true,
+        logName: logName
     },
     methods: {
         /*

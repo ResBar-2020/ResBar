@@ -89,6 +89,8 @@
                                 <a class="topNavLink active" href="users.html"
                                     style="background-color: #585858;color: white;"><i
                                         class="fas fa-users"></i><span>USUARIOS</span></a>
+                                <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
+                                    {{ logName }}</span>
                                 <button type="button" class="btn btn-sm btn-danger float-right"
                                     v-on:click="salir">Salir</button>
                             </li>
@@ -97,12 +99,14 @@
                 </nav>
 
                 <!-- Termina navbar top -->
-                <div class="container-fluid onload">
+                <div class="container-fluid">
 
                     <div class="row my-4">
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-block ag">
                             <button type="button" class="btn btn-danger d-none d-md-inline float-right"
                                 v-on:click="salir">Salir</button>
+                            <label class="my-1 mx-1 text-success d-none d-md-inline"><i class="fas fa-user-alt"></i>
+                                {{ logName }}</label><br>
                             <h1 class="text-center d-none d-lg-block">Administracion de Usuarios</h1>
                             <h1 class="text-center d-12 d-lg-none">Admon. de Usuarios</h1>
                         </div>

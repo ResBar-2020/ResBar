@@ -3,7 +3,8 @@ new Vue({
     data: {
         // Aqui inician las propiedades que vamos a necesitar
         //para almacenar nuestros objetos de trabajo
-        categorias: [],
+        logName: logName
+        ,categorias: [],
         productoSelected: {
             id: "0",
             nombre: "",

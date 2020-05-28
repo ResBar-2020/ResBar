@@ -14,7 +14,8 @@ new Vue({
             pin: ''
         },
         users: {},
-        action: ''
+        action: '',
+        logName: logName
     },
     methods: {
         //Obtiene todas las ordenes 

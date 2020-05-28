@@ -13,7 +13,7 @@ new Vue({
             rol: ""
         },
         editar: false,
-
+        logName : logName
 
     },
     methods: {

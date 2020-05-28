@@ -68,6 +68,7 @@ Vue.component('reactive', {
 var vm = new Vue({
     el: '#appRESBAR',
     data: {
+        logName: logName,
         datacollection: null,
         ordenesEliminadas: 0,
         numOrdenesFin: 127,

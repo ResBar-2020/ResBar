@@ -13,7 +13,8 @@ new Vue({
         displayOption: "",
         agg: true,
         searchDisplay: "",
-        urlApi: `${ApiRestUrl}/categorias`
+        urlApi: `${ApiRestUrl}/categorias`,
+        logName : logName
     },
     methods: {
 
