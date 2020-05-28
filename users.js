@@ -13,7 +13,7 @@ new Vue({
             rol: ""
         },
         editar: false,
-        logName : logName
+        logName: logName
 
     },
     methods: {
@@ -53,11 +53,11 @@ new Vue({
                 if (encontrado == this.user.pin) {
                     document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "Este pin ya esta registrado";
-                  //Verifica el numero de digitos
+                    //Verifica el numero de digitos
                 } else if (tamanio < 9999 || tamanio > 99999) {
                     document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
-                  //Si todo esta correcto
+                    //Si todo esta correcto
                 } else {
                     this.user.pin = parseInt(this.user.pin, 10)
                     axios.post(this.uri, JSON.stringify(this.user), {
@@ -94,8 +94,15 @@ new Vue({
         },
         //Edita un usuario de la tabla
         EditUser: function () {
-            axios.put(this.uri + "/" + this.user.id, this.user)
-            this.closeModal()
+            this.user.pin = parseInt(this.user.pin, 10)
+            axios.put(this.uri + "/" + this.user.id, JSON.stringify(this.user), {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(() => {
+                    window.location.reload()
+                })
+                
         },
         //Busca entre los usuarios de la tabla
         buscar: function (x) {
@@ -125,7 +132,7 @@ new Vue({
             }
         }
     },
-    mounted() {	
+    mounted() {
         this.Login()
     },
     /*verifica si existe una sesion o no, en el caso de existir verifica el rol del usuario logueado
