@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         nuevaOrden: {
             fecha: null,
-            mesero: null,
+            mesero: logName,
             mesa: null,
             cliente: "",
             estado: "A",
