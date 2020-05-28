@@ -20,14 +20,16 @@ new Vue({
         /*
         Modifica el registro seleccionado
         */
-edithRegistro() {
+        edithRegistro() {
             // Tambien actualiza la tabla producto CASCADA
             // obtengo el nombre anterior
             axios.get(this.urlApi + "/" + this.categoria.id).then(
                 response => {
                     this.nombreold = response.data.nombre
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
 
             //Actualizando la categoria
             axios.patch(`${this.urlApi}/${this.categoria.id}`, {
@@ -39,27 +41,39 @@ edithRegistro() {
                     this.getAll();
                     console.log(response.status);
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
 
         },
         //modifica los productos en CASCADA
         edithProductosCascada(viejo, nuevo) {
             //obteniendo los productos a actualizar categoria
-            var filtro = { "where": { "categoria.nombre": `${viejo}` } };
+            var filtro = {
+                "where": {
+                    "categoria.nombre": `${viejo}`
+                }
+            };
             axios.get(ApiRestUrl + "/productos?filter=" + JSON.stringify(filtro)).then(
                 response => {
                     this.productos = response.data
                     for (elemento in this.productos) {
                         this.productos[elemento].categoria.nombre = nuevo;
                         axios.patch(ApiRestUrl + "/productos/" + this.productos[elemento].id,
-                            JSON.stringify(this.productos[elemento]), { headers: { 'content-type': 'application/json', } });
+                            JSON.stringify(this.productos[elemento]), {
+                                headers: {
+                                    'content-type': 'application/json',
+                                }
+                            });
                     }
 
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
         },
-        
-        
+
+
 
         /*
         creacion de nuevos registros
@@ -93,7 +107,9 @@ edithRegistro() {
                     this.getAll();
                     console.log(response.status)
                 }
-            ).catch(ex => { console.log(ex) });
+            ).catch(ex => {
+                console.log(ex)
+            });
 
         },
 
@@ -105,7 +121,9 @@ edithRegistro() {
                 response => {
                     this.categorias = response.data
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
         },
 
         /*
@@ -146,12 +164,14 @@ edithRegistro() {
     mounted() {
         this.getAll();
     },
-    created(){
-        if(localStorage.vue_session_key){
-        
-        }else{
+    created() {
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "./ordenes.html"
+            }
+        } else {
             window.location = "./login.html"
-        } 
+        }
     }
 });
 
