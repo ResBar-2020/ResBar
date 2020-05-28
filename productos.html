@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body id="page-top" class="onload">
-    <div id="loader" class="loader">
+<body id="page-top">
+    <div class="loader">
         <div class="face face1">
             <div class="circle"></div>
         </div>
@@ -418,10 +418,10 @@
     <script src="productos.js"></script>
     <script type="text/javascript">
         window.onbeforeunload = function () {
-            $("#loader").show()
+            $(".loader").show()
         }
         window.onload = function () {
-            $("#loader").hide()
+            $(".loader").hide()
         }
     </script>
 
