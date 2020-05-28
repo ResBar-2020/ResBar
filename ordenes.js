@@ -406,7 +406,7 @@ new Vue({
 
         },
         salir: function () {
-            var opcion = confirm('Seguro que quiere salir?')
+            var opcion = confirm('¿Está seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
                 logout()

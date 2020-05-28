@@ -18,4 +18,5 @@ if (localStorage.getItem(VueSession.key) == '"admin"') {
 //metodo para salir
 function logout() {
     localStorage.removeItem(VueSession.key)
+    localStorage.removeItem(VueSession.name)
 }

@@ -54,6 +54,7 @@ new Vue ({
     //Cierra la sesion del usuario al navegar a login.html
     created(){
         localStorage.removeItem(VueSession.key)
+        localStorage.removeItem(VueSession.name)
         this.user = {
             id: "",
             nombreCompleto:"",

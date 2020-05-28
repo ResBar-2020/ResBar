@@ -64,7 +64,7 @@ new Vue({
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
         },
         salir: function () {
-            var opcion = confirm('Seguro que quiere salir?')
+            var opcion = confirm('¿Está seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
                 logout()
