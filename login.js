@@ -29,7 +29,7 @@ new Vue ({
                     encPass = this.users.find(user => user.clave==this.user.clave)
                     encName = this.users.find(user => user.loggin==this.user.loggin)
                     if(encPass === encName){
-                        VueSession.setAll(encPass.rol)
+                        VueSession.setAll(encPass.rol, encPass.nombreCompleto)
                         window.location = './ordenes.html'
                     }else{
                         document.getElementById("loggin").classList.add('text-danger');

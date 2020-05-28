@@ -90,10 +90,14 @@
                 <!-- Termina navbar top -->
 
                 <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)---------------------------------------------------------------------->
-                <label class="leyendas" style="margin-top: 20px;">Reportes</label>
+
                 <div class="container-fluid" id="appRESBAR">
-                    <label class="my-1 mx-1 text-success d-none d-md-inline"><i class="fas fa-user-alt"></i>
-                        {{ logName }}</label><br>
+                    <label class="leyendas" style="margin-top: 20px;">Reportes</label>
+                    <button type="button" class="btn btn-danger my-3 d-none d-md-inline float-right"
+                        v-on:click="salir">Salir</button>
+                    <label class="my-1 mx-1 float-right text-success my-4 d-none d-md-inline"><i
+                            class="fas fa-user-alt"></i>
+                        {{ logName }}</label>
                     <!-- Este es el div que se muestra si el rango de fecha es incorrecto-->
                     <div id="modalError" class="alert alert-danger alert-dismissible fade show" role="alert">
                         El rango de fecha es incorrecto.
