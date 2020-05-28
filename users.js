@@ -43,15 +43,21 @@ new Vue({
         },
         //Registra un nuevo usuario
         RegistrarUsuario: function () {
+            /*Revisa si el usuario ha llenado todos los campos y procede a ver si el pin
+            no esta registrado en la BD
+            */
             if (this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != "") {
                 tamanio = parseInt(this.user.pin, 10)
                 encontrado = this.users.find(user => user.pin == this.user.pin)
+                //Si ya existe el pin
                 if (encontrado == this.user.pin) {
                     document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "Este pin ya esta registrado";
-                } else if (tamanio < 999 || tamanio > 9999) {
+                  //Verifica el numero de digitos
+                } else if (tamanio < 9999 || tamanio > 99999) {
                     document.getElementById("pin").classList.add('is-invalid');
-                    document.getElementById("iguales").textContent = "Este pin debe tener 4 digitos";
+                    document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
+                  //Si todo esta correcto
                 } else {
                     this.user.pin = parseInt(this.user.pin, 10)
                     axios.post(this.uri, JSON.stringify(this.user), {
@@ -119,9 +125,8 @@ new Vue({
             }
         }
     },
-    mounted() {
+    mounted() {	
         this.Login()
-
     },
     /*verifica si existe una sesion o no, en el caso de existir verifica el rol del usuario logueado
       y le da los permisos para el rol que desempeña*/

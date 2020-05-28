@@ -61,6 +61,15 @@ new Vue({
         ).catch(ex => { console.log(ex) })
 
 
+    },
+    created(){
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "./ordenes.html"
+            }
+        } else {
+            window.location = "./login.html"
+        }
     }
 });
 

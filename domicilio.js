@@ -74,5 +74,10 @@ new Vue({
     },
     mounted() {
         this.getDomicilios();
+    },
+    created(){
+        if (!localStorage.vue_session_key) {
+            window.location = "./login.html"
+        }
     }
 });
