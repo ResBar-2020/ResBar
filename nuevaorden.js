@@ -3,7 +3,9 @@ var app = new Vue({
     data: {
         nuevaOrden: {
             fecha: null,
-            mesero: logName,
+            mesero: null,
+            domicilio: false,
+            domicilioEtapa: 0,
             mesa: null,
             cliente: "",
             estado: "A",
@@ -16,8 +18,9 @@ var app = new Vue({
         productos: [],
         //API info
         mensajeApi: null,
-        url: ApiRestUrl
-
+        url: ApiRestUrl,
+        domicilioAux: 0
+        
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -102,6 +105,24 @@ var app = new Vue({
 
 
         },
+        cambiarADomicilio() {
+            check = document.getElementById("domic");
+                if (check.checked) {
+                    //Comer En el local
+                    this.domicilioAux=0;
+                    $("#divMesa").show();
+                    $("#divMesero").show();
+                }
+                else {
+                    //A domicilio
+                    this.domicilioAux=1;
+                    $('#divMesa').hide();
+                    $('#divMesero').hide();
+                    this.nuevaOrden.mesa="null";
+                    this.nuevaOrden.mesero="";
+                }
+        },
+
         saveOrden() {
             this.mensajeApi = "Guardando Orden...";
             axios
