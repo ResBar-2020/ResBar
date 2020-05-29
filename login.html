@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="loader" class="loader">
+    <div id="loader">
         <div class="face face1">
             <div class="circle"></div>
         </div>
@@ -33,7 +33,8 @@
                 </div>
                 <div class="inputBox">
                     <small class="form-text text-center">Ingresa de forma rapida usando tu pin</small>
-                    <input type="number" v-model="user.pin" required><label>Pin</label>
+                    <input id=pin type="number" v-model="user.pin" required><label>Pin</label>
+                    <small id="pinMsg" class="form-text text-center"></small>
                 </div>
                 <input type="button" class="float-right mt-0" value="Enviar" v-on:click="Login()">
             </form>

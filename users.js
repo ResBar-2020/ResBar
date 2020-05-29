@@ -4,7 +4,7 @@ new Vue({
         Busqueda: "",
         users: {},
         SelectedUser: '',
-        uri: 'http://localhost:3000/usuarios',
+        uri: ApiRestUrl+'/usuarios',
         user: {
             nombreCompleto: "",
             loggin: "",

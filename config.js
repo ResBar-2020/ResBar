@@ -2,11 +2,13 @@
 //archivo html, todo el codigo comun va aqui
 
 //Direccion URL de la api rest que se va a consumir por la aplicacion
-const ApiRestUrl = "http://localhost:3000"
+const ApiRestUrl = "http://192.168.42.69:3000"
 
 //Nombre del usuario logueado
-const name = localStorage.getItem(VueSession.name).toString().split('"')
-var logName = name[1]
+if (localStorage.vue_session_key) {
+    const name = localStorage.getItem(VueSession.name).toString().split('"')
+    var logName = name[1]
+}
 
 //Verifica el rol del usuario logueado 
 if (localStorage.getItem(VueSession.key) == '"admin"') {
