@@ -19,7 +19,7 @@ var app = new Vue({
         //API info
         mensajeApi: null,
         url: ApiRestUrl,
-        domicilioAux: 0
+        domicilioAux: false
         
     },
     created() {
@@ -109,17 +109,15 @@ var app = new Vue({
             check = document.getElementById("domic");
                 if (check.checked) {
                     //Comer En el local
-                    this.domicilioAux=0;
+                    this.domicilioAux=false;
                     $("#divMesa").show();
                     $("#divMesero").show();
                 }
                 else {
                     //A domicilio
-                    this.domicilioAux=1;
+                    this.domicilioAux=true;
                     $('#divMesa').hide();
                     $('#divMesero').hide();
-                    this.nuevaOrden.mesa="null";
-                    this.nuevaOrden.mesero="";
                 }
         },
 
@@ -142,6 +140,10 @@ var app = new Vue({
         },
         //Event methods
         validateForm() {
+            if(this.domicilioAux==true){
+                this.nuevaOrden.mesa="0";
+                this.nuevaOrden.mesero="";
+            }
             let form = $('.needs-validation')[0];
 
             if (form.checkValidity() && this.nuevaOrden.detalleOrden.length != 0)

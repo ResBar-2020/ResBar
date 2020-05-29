@@ -10,7 +10,8 @@ new Vue({
         activos: true,
         lactivos: null,
         textoBusqueda: "",
-        totalAux: ''
+        totalAux: '',
+        domicilioAux: false
     },
 
     mounted: function() {
@@ -47,7 +48,7 @@ new Vue({
                 window.location = `./ordenes.html` //redireciona a ordenes si no se encuentra el id 
             } else {
                 return decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
+            }  
         },
 
         //Recalcula el sub-total al sumar producto ademas de recalcular el total de la orden
@@ -62,15 +63,20 @@ new Vue({
 
         // modificar la orden 
         modificarOrden() {
-            //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
+            if(this.domicilioAux==true){
+                this.ordenSelected.mesa="0";
+                this.ordenSelected.mesero="";
+            }
+             //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
             if (this.ordenSelected.detalleOrden.length > 0) {
+                //A Domicilio
                 axios.put(this.uri + '/' + this.ordenSelected.id, this.ordenSelected)
-                    .then(response => {
-                        this.redireccionarAOrdenes();
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    });
+                .then(response => {
+                    this.redireccionarAOrdenes();
+                })
+                .catch(error => {
+                    console.log(error)
+                });        
             } else {
                 this.eliminarOrden();
             }
@@ -98,8 +104,23 @@ new Vue({
             if (this.ordenSelected === undefined || this.ordenSelected === {}) {
                 window.location = `./ordenes.html`
             }
-
+            if(this.ordenSelected.domicilio==true){
+                this.domicilioAux=true;
+            }    
         },
+
+        cambiarADomicilio() {
+            check = document.getElementById("domic");
+                if (check.checked) {
+                    //Comer En el local
+                    this.domicilioAux=false;
+                }
+                else {
+                    //A domicilio
+                     this.domicilioAux=true;
+                }
+        },
+
         redireccionarAOrdenes() {
             window.location = `./ordenes.html?alert=se modifico la orden ${this.ordenSelected.id} Satisfactoriamente`
         }

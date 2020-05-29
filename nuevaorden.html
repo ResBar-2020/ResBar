@@ -213,7 +213,7 @@
                                         <label for="txtMesero">Mesero: </label>
                                     </div>
                                     <div class="col">
-                                        <input v-if="this.domicilioAux==0" v-model.lazy.number="nuevaOrden.mesero" pattern="[A-Za-z]+[A-Za-z .]{2,}"
+                                        <input v-if="this.domicilioAux==false" v-model.lazy.number="nuevaOrden.mesero" pattern="[A-Za-z]+[A-Za-z .]{2,}"
                                             type="text" class="form-control" id="txtMesero" placeholder="Enter name"
                                             required>
                                             <input v-else v-model="nuevaOrden.mesero" type="text" class="form-control" 
@@ -239,7 +239,7 @@
                                         <label for="txtMesa">Mesa: </label>
                                     </div>
                                     <div class="col-md-3 col-2 px-0 py-1">
-                                        <input v-if="this.domicilioAux==0" v-model="nuevaOrden.mesa" type="number" min="1" pattern="^[0-9]+"
+                                        <input v-if="this.domicilioAux==false" v-model="nuevaOrden.mesa" type="number" min="1" pattern="^[0-9]+"
                                             class="form-control" id="txtMesa" placeholder="#" required>
                                         <input v-else v-model="nuevaOrden.mesa" type="number" min="0" pattern="^[0-9]+"
                                             class="form-control" id="txtMesa">
