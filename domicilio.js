@@ -26,7 +26,7 @@ new Vue({
          * 
          * @param {od} valor 
          */
-        domicilioEtapa(orden) {
+        domicilioEtapa(valor) {
             axios.patch(`${this.urlApi}/${valor.id}`, {
                 domicilioEtapa: valor.domicilioEtapa + 1
             }).then(

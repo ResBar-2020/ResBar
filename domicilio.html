@@ -17,55 +17,84 @@
 <body>
 
   <div id="wrapper">
-    <!-- Inicia navbar lateral -->
-    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
-      <div class="container-fluid d-flex flex-column p-0">
-        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-          <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
-          <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
-        </a>
-        <hr class="sidebar-divider my-0">
-        <ul class="nav navbar-nav text-light" id="accordionSidebar">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" href="ordenes.html"><i class="fas fa-list-ol"></i><span>ORDENES</span></a>
-            <a class="nav-link active" href="domicilio.html"><i class="fas fa-truck"></i><span>DOMICILIO</span></a>
-            <a class="nav-link active" href="productos.html"><i class="fas fa-box"></i><span>PRODUCTOS</span></a>
-            <a class="nav-link active" href="categorias.html"><i class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-            <a class="nav-link active" href="informes.html"><i class="fas fa-file-alt"></i><span>INFORMES</span></a>
-            <a class="nav-link active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
-          </li>
-        </ul>
-        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle"
-            type="button"></button></div>
-      </div>
-    </nav>
-    <!-- Termina navbar lateral -->
+    <nav
+                class="navbar d-none d-lg-flex navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="domicilio.html"><i
+                                    class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                            <a class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                            id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <!-- Termina navbar lateral -->
 
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
         <!-- Inicia navbar top -->
-        <!--
-                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                        </li>
+        <!-- Inicia navbar top -->
+        <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-lg-none"
+        style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+            style="color: #585858;" href="#">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-glass-martini"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+        </a>
 
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target=".navbar-ex1-collapse"
+                style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                aria-expanded="false">
+                <span style="color: #585858;"><i class="fas fa-bars"></i></span>
+            </button>
+        </div>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Informes
-            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Ventas Diarias</a>
-                                <a class="dropdown-item" href="#">Ventas semanales</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
-                -->
-        <!-- Termina navbar top -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="navbar-collapse navbar-ex1-collapse collapse">
+            <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item" role="presentation">
+                    <a class="topNavLink active" href="ordenes.html"
+                        style="background-color: #585858;color: white;"><i
+                            class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                    <a class="topNavLink active" href="productos.html"><i
+                            class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                    <a class="topNavLink active" href="categorias.html"><i
+                            class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                    <a class="topNavLink active" href="informes.html"><i
+                            class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                    <a class="topNavLink active" href="users.html"><i
+                            class="fas fa-users"></i><span>USUARIOS</span></a>
+                    <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
+                        {{ logName }}</span>
+                    <button type="button" class="btn btn-sm btn-danger float-right"
+                        v-on:click="salir">Salir</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Termina navbar top -->
 
         <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
         <div class="container-fluid" id="appRESBAR">
