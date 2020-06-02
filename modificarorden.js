@@ -48,7 +48,7 @@ new Vue({
                 window.location = `./ordenes.html` //redireciona a ordenes si no se encuentra el id 
             } else {
                 return decodeURIComponent(results[1].replace(/\+/g, " "));
-            }  
+            }
         },
 
         //Recalcula el sub-total al sumar producto ademas de recalcular el total de la orden
@@ -63,20 +63,22 @@ new Vue({
 
         // modificar la orden 
         modificarOrden() {
-            if(this.domicilioAux==true){
-                this.ordenSelected.mesa="0";
-                this.ordenSelected.mesero="";
+            if (this.domicilioAux == true) {
+                this.ordenSelected.mesa = "0";
+                this.ordenSelected.mesero = "";
             }
-             //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
+            //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
             if (this.ordenSelected.detalleOrden.length > 0) {
                 //A Domicilio
                 axios.put(this.uri + '/' + this.ordenSelected.id, this.ordenSelected)
-                .then(response => {
-                    this.redireccionarAOrdenes();
-                })
-                .catch(error => {
-                    console.log(error)
-                });        
+                    .then(response => {
+                        localStorage.setItem('idOrdenImprimir', this.ordenSelected.id);
+                        localStorage.setItem("estado", "editar");
+                        this.redireccionarAOrdenes();
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
             } else {
                 this.eliminarOrden();
             }
@@ -104,21 +106,20 @@ new Vue({
             if (this.ordenSelected === undefined || this.ordenSelected === {}) {
                 window.location = `./ordenes.html`
             }
-            if(this.ordenSelected.domicilio==true){
-                this.domicilioAux=true;
-            }    
+            if (this.ordenSelected.domicilio == true) {
+                this.domicilioAux = true;
+            }
         },
 
         cambiarADomicilio() {
             check = document.getElementById("domic");
-                if (check.checked) {
-                    //Comer En el local
-                    this.domicilioAux=false;
-                }
-                else {
-                    //A domicilio
-                     this.domicilioAux=true;
-                }
+            if (check.checked) {
+                //Comer En el local
+                this.domicilioAux = false;
+            } else {
+                //A domicilio
+                this.domicilioAux = true;
+            }
         },
 
         redireccionarAOrdenes() {
@@ -126,12 +127,12 @@ new Vue({
         }
 
     },
-    created(){
-        if(localStorage.vue_session_key){
-        
-        }else{
+    created() {
+        if (localStorage.vue_session_key) {
+
+        } else {
             window.location = "./login.html"
-        } 
+        }
     }
 
 })

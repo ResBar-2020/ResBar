@@ -20,18 +20,18 @@ var app = new Vue({
         mensajeApi: null,
         url: ApiRestUrl,
         domicilioAux: false
-        
+
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
         this.getCategorias();
         this.getProductos();
         this.disableFormSubmit();
-        if(localStorage.vue_session_key){
-        
-        }else{
+        if (localStorage.vue_session_key) {
+
+        } else {
             window.location = "./login.html"
-        } 
+        }
     },
     watch: {
         //actualiza el array de productos detalle orden
@@ -93,7 +93,7 @@ var app = new Vue({
                 .get(this.url + '/productos')
                 .then(response => {
                     //se agregan dos atributos, cantidad y subtotal
-                    this.productos = response.data.map(function (obj) {
+                    this.productos = response.data.map(function(obj) {
                         let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0 };
                         return rObj;
                     });
@@ -107,18 +107,17 @@ var app = new Vue({
         },
         cambiarADomicilio() {
             check = document.getElementById("domic");
-                if (check.checked) {
-                    //Comer En el local
-                    this.domicilioAux=false;
-                    $("#divMesa").show();
-                    $("#divMesero").show();
-                }
-                else {
-                    //A domicilio
-                    this.domicilioAux=true;
-                    $('#divMesa').hide();
-                    $('#divMesero').hide();
-                }
+            if (check.checked) {
+                //Comer En el local
+                this.domicilioAux = false;
+                $("#divMesa").show();
+                $("#divMesero").show();
+            } else {
+                //A domicilio
+                this.domicilioAux = true;
+                $('#divMesa').hide();
+                $('#divMesero').hide();
+            }
         },
 
         saveOrden() {
@@ -126,6 +125,8 @@ var app = new Vue({
             axios
                 .post(this.url + '/ordenes', this.nuevaOrden)
                 .then(response => {
+                    localStorage.setItem("idOrdenImprimir", response.data.id);
+                    localStorage.setItem("estado", "nuevo");
                     //response.data;
                     this.redireccionarAOrdenes();
                     this.mensajeApi = null;
@@ -140,9 +141,9 @@ var app = new Vue({
         },
         //Event methods
         validateForm() {
-            if(this.domicilioAux==true){
-                this.nuevaOrden.mesa="0";
-                this.nuevaOrden.mesero="";
+            if (this.domicilioAux == true) {
+                this.nuevaOrden.mesa = "0";
+                this.nuevaOrden.mesero = "";
             }
             let form = $('.needs-validation')[0];
 
@@ -157,12 +158,12 @@ var app = new Vue({
             form.classList.add('was-validated');
         },
         disableFormSubmit() {
-            window.addEventListener('load', function () {
+            window.addEventListener('load', function() {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();

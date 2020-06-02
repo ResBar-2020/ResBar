@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/imprimirTicket.css">
 </head>
 
 <body id="page-top">
@@ -25,8 +26,7 @@
     <div id="appRESBAR">
         <div id="wrapper">
             <!-- Inicia navbar lateral -->
-            <nav
-                class="navbar d-none d-lg-flex navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <nav class="navbar d-none d-lg-flex navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
                 <div class="container-fluid d-flex flex-column p-0">
                     <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                         <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
@@ -49,8 +49,7 @@
                                     class="fas fa-users"></i><span>USUARIOS</span></a>
                         </li>
                     </ul>
-                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                            id="sidebarToggle" type="button"></button></div>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
                 </div>
             </nav>
             <!-- Termina navbar lateral -->
@@ -58,10 +57,8 @@
             <div class="d-flex flex-column" id="content-wrapper">
                 <div id="content">
                     <!-- Inicia navbar top -->
-                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-lg-none"
-                        style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
-                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-                            style="color: #585858;" href="#">
+                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-lg-none" style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" style="color: #585858;" href="#">
                             <div class="sidebar-brand-icon rotate-n-15">
                                 <i class="fas fa-glass-martini"></i>
                             </div>
@@ -69,9 +66,7 @@
                         </a>
 
                         <div class="navbar-header page-scroll">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target=".navbar-ex1-collapse"
-                                style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
                                 aria-expanded="false">
                                 <span style="color: #585858;"><i class="fas fa-bars"></i></span>
                             </button>
@@ -81,10 +76,9 @@
                         <div class="navbar-collapse navbar-ex1-collapse collapse">
                             <ul class="nav navbar-nav text-light" id="accordionSidebar">
                                 <li class="nav-item" role="presentation">
-                                    <a class="topNavLink active" href="ordenes.html"
-                                        style="background-color: #585858;color: white;"><i
+                                    <a class="topNavLink active" href="ordenes.html" style="background-color: #585858;color: white;"><i
                                             class="fas fa-list-ol"></i><span>ORDENES</span></a>
-                                            <a class="topNavLink active" href="domicilio.html"><i
+                                    <a class="topNavLink active" href="domicilio.html"><i
                                                 class="fas fa-truck"></i><span>DOMICILIO</span></a>
                                     <a class="topNavLink active" href="productos.html"><i
                                             class="fas fa-box"></i><span>PRODUCTOS</span></a>
@@ -96,8 +90,7 @@
                                             class="fas fa-users"></i><span>USUARIOS</span></a>
                                     <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
                                         {{ logName }}</span>
-                                    <button type="button" class="btn btn-sm btn-danger float-right"
-                                        v-on:click="salir">Salir</button>
+                                    <button type="button" class="btn btn-sm btn-danger float-right" v-on:click="salir">Salir</button>
                                 </li>
                             </ul>
                         </div>
@@ -114,8 +107,7 @@
 
                         <div class="row my-4">
                             <div class="col-12 ag">
-                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right"
-                                    v-on:click="salir">Salir</button>
+                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right" v-on:click="salir">Salir</button>
                                 <label class="my-1 mx-1 text-success d-none d-lg-inline"><i
                                         class="fas fa-user-alt"></i>
                                         {{ logName }}</label><br>
@@ -129,8 +121,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
                                     </div>
-                                    <input type="text" class="col-9 col-md-3" placeholder="Buscar"
-                                        v-model="textoBusqueda">
+                                    <input type="text" class="col-9 col-md-3" placeholder="Buscar" v-model="textoBusqueda">
                                 </div>
                             </div>
                         </div>
@@ -177,22 +168,17 @@
                                 <table v-if="activos" class="table table-sm mb-0">
                                     <thead class="bg-primary text-white">
                                         <tr>
-                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i
-                                                    class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i class="far fa-arrow-alt-circle-down"></i></th>
+                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarCliente" v-if="ascendente">Cliente<i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenar" v-if="ascendente">Mesa <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarMesero" v-if="ascendente">Mesero <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col">Observaciones</th>
                                             <th scope="col">Total</th>
                                             <th scope="col">Acciones</th>
@@ -215,40 +201,32 @@
                                                     @click="ordenSelected=orden; agregarProductos();">
                                                     <i class="fas text-white fa-plus-circle"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm"
-                                                    title="Modificar Orden"
-                                                    @click="ordenSelected=orden; modificarOrden();">
+                                                <button type="button" class="btn btntable btn-sm" title="Modificar Orden" @click="ordenSelected=orden; modificarOrden();">
                                                     <i class="fas text-white fa-edit"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm" title="Cobrar Orden"
-                                                    @click="ordenSelected=orden; cobrarOrden();">
+                                                <button type="button" class="btn btntable btn-sm" title="Cobrar Orden" @click="ordenSelected=orden; cobrarOrden();">
                                                     <i class="fas text-white fa-money-bill"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm" title="Eliminar Orden"
-                                                    @click="ordenSelected=orden; mostrarEliminar()">
+                                                <button type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="ordenSelected=orden; mostrarEliminar()">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
-                                            </td>
-                                            <td v-else>
-                                                <button type="button" class="btn btntable btn-sm disabled"
-                                                    title="Agregar Mas Productos">
+                                                </td>
+                                                <td v-else>
+                                                    <button type="button" class="btn btntable btn-sm disabled" title="Agregar Mas Productos">
                                                     <i class="fas text-white fa-plus-circle"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm disabled"
-                                                    title="Modificar Orden">
+                                                    <button type="button" class="btn btntable btn-sm disabled" title="Modificar Orden">
                                                     <i class="fas text-white fa-edit"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm disabled"
-                                                    title="Cobrar Orden">
+                                                    <button type="button" class="btn btntable btn-sm disabled" title="Cobrar Orden">
                                                     <i class="fas text-white fa-money-bill"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm disabled"
-                                                    title="Eliminar Orden">
+                                                    <button type="button" class="btn btntable btn-sm disabled" title="Eliminar Orden">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
-                                            </td>
+                                                </td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                 </table>
 
                                 <!--Fin Tabla para desktop-->
@@ -257,22 +235,17 @@
                                 <table v-else class="table table-sm mb-0">
                                     <thead class="bg-primary text-white ">
                                         <tr>
-                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i
-                                                    class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i class="far fa-arrow-alt-circle-down"></i></th>
+                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarCliente" v-if="ascendente">Cliente<i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenar" v-if="ascendente">Mesa <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarMesero" v-if="ascendente">Mesero <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col ">Observaciones</th>
                                             <th scope="col ">Total</th>
                                             <th scope="col ">Acciones</th>
@@ -294,22 +267,18 @@
                                                     @click="ordenSelected=orden; agregarProductos();">
                                                     <i class="fas text-white fa-plus-circle"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm"
-                                                    title="Modificar Orden"
-                                                    @click="ordenSelected=orden; modificarOrden();">
+                                                <button type="button" class="btn btntable btn-sm" title="Modificar Orden" @click="ordenSelected=orden; modificarOrden();">
                                                     <i class="fas text-white fa-edit"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm" title="Cobrar Orden"
-                                                    @click="ordenSelected=orden; cobrarOrden();">
+                                                <button type="button" class="btn btntable btn-sm" title="Cobrar Orden" @click="ordenSelected=orden; cobrarOrden();">
                                                     <i class="fas text-white fa-money-bill"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm" title="Eliminar Orden"
-                                                    @click="ordenSelected=orden; mostrarEliminar()">
+                                                <button type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="ordenSelected=orden; mostrarEliminar()">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
-                                            </td>
+                                                </td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                 </table>
                             </div>
                             <!--Fin Tabla filtrada para desktop-->
@@ -321,18 +290,14 @@
                                 <table v-if="activos" class="table table-sm mb-0">
                                     <thead class="bg-primary text-white">
                                         <tr>
-                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i
-                                                    class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i class="far fa-arrow-alt-circle-down"></i></th>
+                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarCliente" v-if="ascendente">Cliente<i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenar" v-if="ascendente">Mesa <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -359,41 +324,37 @@
                                                         class="fas text-white fa-trash"
                                                         style="color: rgb(254, 254, 255);" title="Eliminar Orden"
                                                         @click="ordenSelected=orden; mostrarEliminar()"></i></button>
-                                            </td>
-                                            <td v-else>
-                                                <button type="button" class="btn btntable btn-sm disabled"><i
+                                                </td>
+                                                <td v-else>
+                                                    <button type="button" class="btn btntable btn-sm disabled"><i
                                                         class="fas fa-plus-circle" style="color: rgb(233, 235, 240);"
                                                         title="Agregar mas productos"></i></button>
-                                                <button type="button" class="btn btntable btn-sm disabled"><i
+                                                    <button type="button" class="btn btntable btn-sm disabled"><i
                                                         class="fas fa-edit" style="color: rgb(249, 250, 252);"
                                                         title="Modificar Orden"></i></button>
-                                                <button type="button" class="btn btntable btn-sm disabled"><i
+                                                    <button type="button" class="btn btntable btn-sm disabled"><i
                                                         class="fas fa-money-bill" style="color: rgb(254, 254, 255);"
                                                         title="Cobrar Orden"></i></button>
-                                                <button type="button" class="btn btntable btn-sm disabled"><i
+                                                    <button type="button" class="btn btntable btn-sm disabled"><i
                                                         class="fas text-white fa-trash"
                                                         style="color: rgb(254, 254, 255);"
                                                         title="Eliminar Orden"></i></button>
-                                            </td>
+                                                </td>
                                         </tr>
-                                    </tbody>
+                                        </tbody>
                                 </table>
 
                                 <table v-else class="table table-sm mb-0 ">
                                     <thead class="bg-primary text-white ">
                                         <tr>
-                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i
-                                                    class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarID" v-if="ascendente">ID<i class="far fa-arrow-alt-circle-down"></i></th>
+                                            <th scope="col" v-on:click="ordenarID" v-else>ID <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenarCliente" v-if="ascendente">Cliente<i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenarCliente" v-else>Cliente <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col" v-on:click="ordenar" v-if="ascendente">Mesa <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
-                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i
-                                                    class="far fa-arrow-alt-circle-up"></th>
+                                            <th scope="col" v-on:click="ordenar" v-else>Mesa <i class="far fa-arrow-alt-circle-up"></th>
                                             <th scope="col ">Acciones</th>
                                         </tr>
                                     </thead>
@@ -420,11 +381,11 @@
                                                         class="fas text-white fa-trash"
                                                         style="color: rgb(254, 254, 255);" title="Eliminar Orden"
                                                         @click="ordenSelected=orden; mostrarEliminar()"></i></button>
-                                            </td>
+                                                </td>
                                         </tr>
 
 
-                                    </tbody>
+                                        </tbody>
                                 </table>
 
                             </div>
@@ -433,8 +394,7 @@
 
 
                         <!--Inicia el modal Detalle-->
-                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="modalDetalle"
-                            data-backdrop="static" tabindex="-1">
+                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="modalDetalle" data-backdrop="static" tabindex="-1">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <!--Head modal-->
@@ -442,81 +402,65 @@
                                         <h4 class="text-center text-white">Detalle de Orden</h4>
 
                                         <!--muestra estado de la orden-->
-                                        <div class="ml-auto" v-for="orden in ordenes"
-                                            v-show="orden.id==ordenSelected.id" style="margin: 0px;">
+                                        <div class="ml-auto" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id" style="margin: 0px;">
                                             <h5 class="modal-title text-white" v-show="orden.estado==&quot;C&quot;">
-                                                Orden
-                                                Cobrada</h5>
+                                                Orden Cobrada
+                                            </h5>
                                             <h5 class="modal-title text-white" v-show="orden.estado==&quot;A&quot;">
-                                                Orden
-                                                Activa</h5>
+                                                Orden Activa
+                                            </h5>
                                         </div>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close"><span class="text-white-50"
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="text-white-50"
                                                 aria-hidden="true">×</span></button>
                                     </div>
                                     <!--Body modal-->
                                     <div class="modal-body">
                                         <div class="row">
                                             <!--Datos de la orden-->
-                                            <div class="col-md-12 col-lg-5 text-left font-weight-bold"
-                                                v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                                            <div class="col-md-12 col-lg-5 text-left font-weight-bold" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
 
                                                 <div class="form-group row">
-                                                    <label for="id"
-                                                        class="col-3 col-form-label text-center text-white total">Id
+                                                    <label for="id" class="col-3 col-form-label text-center text-white total">Id
                                                         orden:</label>
                                                     <div class="col-9">
-                                                        <label id="id" style="color: #000000; left: -5px;"
-                                                            class="form-control-plaintext">{{orden.id}} </label>
+                                                        <label id="id" style="color: #000000; left: -5px;" class="form-control-plaintext">{{orden.id}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="cliente"
-                                                        class="col-3 text-center col-form-label text-white total">Cliente:</label>
+                                                    <label for="cliente" class="col-3 text-center col-form-label text-white total">Cliente:</label>
                                                     <div class="col-9">
-                                                        <label id="cliente" style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.cliente}} </label>
+                                                        <label id="cliente" style="color: #000000;" class="form-control-plaintext">{{orden.cliente}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 text-center col-form-label text-white total">Mesa:</label>
+                                                    <label for="staticClient" class="col-3 text-center col-form-label text-white total">Mesa:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.mesa}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.mesa}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-center text-white total">Mesero:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-center text-white total">Mesero:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.mesero}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.mesero}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-white text-center total">Fecha:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-white text-center total">Fecha:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.fecha.substring(0,10)}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.fecha.substring(0,10)}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-white text-center total">Observacion:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-white text-center total">Observacion:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.observacion}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.observacion}} </label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!--Tabla con el detalle de la orden-->
                                             <div class="col-md-12 col-lg-7 ">
-                                                <div class="table-wrapper-scroll-y "
-                                                    style="height:230px ;overflow: auto;">
+                                                <div class="table-wrapper-scroll-y " style="height:230px ;overflow: auto;">
                                                     <table class="table  table-striped table-sm ">
                                                         <thead>
                                                             <tr>
@@ -536,8 +480,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="row" v-for="orden in ordenes"
-                                                    v-show="orden.id==ordenSelected.id">
+                                                <div class="row" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                     <div class="col-md-4"><strong><label class="mTotal"
                                                                 style="padding: 5px; color: #ffffff;">TOTAL : $
                                                                 {{ orden.total.toFixed(2) }}</label></strong></div>
@@ -547,8 +490,7 @@
                                     </div>
                                     <!--Footer modal-->
                                     <div class="modal-footer bg-gradient-primary">
-                                        <button class="btn btntable btn-sm text-white" type="button"
-                                            data-dismiss="modal">Cerrar</button>
+                                        <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal">Cerrar</button>
                                     </div>
 
                                 </div>
@@ -559,8 +501,7 @@
                         <!--termina modal-->
 
                         <!--Inicia el modal Eliminar Orden-->
-                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="modalEliminar"
-                            data-backdrop="static" tabindex="-1">
+                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="modalEliminar" data-backdrop="static" tabindex="-1">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <!--Head modal-->
@@ -568,81 +509,65 @@
                                         <h4 class="text-center text-white">Eliminar Orden</h4>
 
                                         <!--muestra estado de la orden-->
-                                        <div class="ml-auto" v-for="orden in ordenes"
-                                            v-show="orden.id==ordenSelected.id" style="margin: 0px;">
+                                        <div class="ml-auto" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id" style="margin: 0px;">
                                             <h5 class="modal-title text-white" v-show="orden.estado==&quot;C&quot;">
-                                                Orden
-                                                Cobrada</h5>
+                                                Orden Cobrada
+                                            </h5>
                                             <h5 class="modal-title text-white" v-show="orden.estado==&quot;A&quot;">
-                                                Orden
-                                                Activa</h5>
+                                                Orden Activa
+                                            </h5>
                                         </div>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close"><span class="text-white-50"
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="text-white-50"
                                                 aria-hidden="true">×</span></button>
                                     </div>
                                     <!--Body modal-->
                                     <div class="modal-body">
                                         <div class="row">
                                             <!--Datos de la orden-->
-                                            <div class="col-md-12 col-lg-5 text-left font-weight-bold"
-                                                v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                                            <div class="col-md-12 col-lg-5 text-left font-weight-bold" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
 
                                                 <div class="form-group row">
-                                                    <label for="id"
-                                                        class="col-3 col-form-label text-center text-white total">Id
+                                                    <label for="id" class="col-3 col-form-label text-center text-white total">Id
                                                         orden:</label>
                                                     <div class="col-9">
-                                                        <label id="id" style="color: #000000; left: -5px;"
-                                                            class="form-control-plaintext">{{orden.id}} </label>
+                                                        <label id="id" style="color: #000000; left: -5px;" class="form-control-plaintext">{{orden.id}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="cliente"
-                                                        class="col-3 text-center col-form-label text-white total">Cliente:</label>
+                                                    <label for="cliente" class="col-3 text-center col-form-label text-white total">Cliente:</label>
                                                     <div class="col-9">
-                                                        <label id="cliente" style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.cliente}} </label>
+                                                        <label id="cliente" style="color: #000000;" class="form-control-plaintext">{{orden.cliente}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 text-center col-form-label text-white total">Mesa:</label>
+                                                    <label for="staticClient" class="col-3 text-center col-form-label text-white total">Mesa:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.mesa}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.mesa}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-center text-white total">Mesero:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-center text-white total">Mesero:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.mesero}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.mesero}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-white text-center total">Fecha:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-white text-center total">Fecha:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.fecha.substring(0,10)}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.fecha.substring(0,10)}} </label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="staticClient"
-                                                        class="col-3 col-form-label text-white text-center total">Observacion:</label>
+                                                    <label for="staticClient" class="col-3 col-form-label text-white text-center total">Observacion:</label>
                                                     <div class="col-9">
-                                                        <label style="color: #000000;"
-                                                            class="form-control-plaintext">{{orden.observacion}} </label>
+                                                        <label style="color: #000000;" class="form-control-plaintext">{{orden.observacion}} </label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!--Tabla con el detalle de la orden-->
                                             <div class="col-md-12 col-lg-7 ">
-                                                <div class="table-wrapper-scroll-y "
-                                                    style="height:230px ;overflow: auto;">
+                                                <div class="table-wrapper-scroll-y " style="height:230px ;overflow: auto;">
                                                     <table class="table  table-striped table-sm ">
                                                         <thead>
                                                             <tr>
@@ -662,33 +587,26 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="row" v-for="orden in ordenes"
-                                                    v-show="orden.id==ordenSelected.id">
+                                                <div class="row" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                     <div class="col-md-4"><strong><label class="mTotal"
                                                                 style="padding: 5px; color: #ffffff;">TOTAL : $
                                                                 {{ orden.total.toFixed(2) }}</label></strong></div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="lblMotivo"
-                                                        class="col-3 col-form-label text-center text-white total">Motivo:
+                                                    <label for="lblMotivo" class="col-3 col-form-label text-center text-white total">Motivo:
                                                     </label>
                                                     <div class="col-sm-3 mr-md-5 col-lg-3">
-                                                        <input type="text" class="form-control" id="lblMotivo"
-                                                            required />
+                                                        <input type="text" class="form-control" id="lblMotivo" required />
                                                     </div>
-                                                    <label id="alertaMotivo" class="col-form-label"
-                                                        style="color: red;"></label>
+                                                    <label id="alertaMotivo" class="col-form-label" style="color: red;"></label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!--Footer modal-->
                                     <div class="modal-footer bg-gradient-primary">
-                                        <button class="btn btntable btn-sm text-white" type="button"
-                                            data-dismiss="modal" @click="limpiarMotivo()">Cerrar</button>
-                                        <button class="btn btn-sm text-white"
-                                            style="background-color: #FF082D; border-color: white;" type="button"
-                                            @click="eliminarOrden()">ELIMINAR</button>
+                                        <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal" @click="limpiarMotivo()">Cerrar</button>
+                                        <button class="btn btn-sm text-white" style="background-color: #FF082D; border-color: white;" type="button" @click="eliminarOrden()">ELIMINAR</button>
 
                                     </div>
 
@@ -700,14 +618,12 @@
                         <!--termina modal-->
 
                         <!--Modal para confirmar si es admin-->
-                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal"
-                            data-backdrop="static" tabindex="-1">
+                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal" data-backdrop="static" tabindex="-1">
                             <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <div class="modal-header modal-title">
                                         <h4 class="text-center">Confirmar Admin</h4>
-                                        <label class="float-right" style="font-size:20px;"
-                                            v-on:click="closeConfirm">x</label>
+                                        <label class="float-right" style="font-size:20px;" v-on:click="closeConfirm">x</label>
                                     </div>
                                     <div class="modal-body box2 text-white">
                                         <form>
@@ -716,14 +632,12 @@
                                                 <div class="col-md-12">
                                                     <label class="font-weight-bold">Ingrese el Pin de un
                                                         administrador</label>
-                                                    <input id="pin" v-model="user.pin" id="id" type="number"
-                                                        class="form-control" required>
+                                                    <input id="pin" v-model="user.pin" id="id" type="number" class="form-control" required>
                                                     <small id="iguales" class="form-text text-danger"></small>
                                                     <small id="tamanio" class="form-text ">Ejemplo: 4564</small>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-outline-primary text-white"
-                                                v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
+                                            <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
                                         </form>
 
                                     </div>
@@ -734,6 +648,48 @@
 
                     <!-- Termina el contenedor de la pagina y el dominio de VUE-->
 
+
+                    <!-- Comienza ticket -->
+                    <div id="ticket" class="mostrar-impresion">
+                        <div class="ticket" style="border: 1px solid black;">
+                            <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="editarOrdenImp">
+                                <p style="margin: 0;padding: 0;">Orden Modificada</p>
+                            </div>
+                            <h1 class="centrado">COCINA</h1>
+                            <div style="padding: 1rem;">
+                                <div style="display: flex;justify-content: space-between;">
+                                    <div style="display: inline;">Cliente: {{imprimirProd.cliente}}</div>
+                                    <div style="display: inline;">
+                                        <p id="horaImpProd"></p>
+                                    </div>
+                                </div>
+                                N. de orden: {{imprimirProd.id}}<br>
+                                <div style="display: flex;justify-content: space-between;">
+                                    <div style="display: inline;font-weight: 800;">Mesa: {{imprimirProd.mesa}}</div>
+                                    <div style="display: inline;">Mesero: {{imprimirProd.mesero}}</div>
+                                </div>
+                            </div>
+                            <table style="margin: 0.1rem;">
+                                <thead style="border-bottom: 1px solid black;">
+                                    <tr>
+                                        <th class="producto">PRODUCTO</th>
+                                        <th class="cantidad">CANT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(prod, index) in imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad>0)">
+                                        <td class="producto">{{prod.nombre}}</td>
+                                        <td class="cantidad">{{prod.cantidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="centrado" style="margin: 0;padding: 0.5rem;">OBSERVACIONES
+                                <br>{{imprimirProd.observacion}}</p>
+
+                            <button class="oculto-impresion" onclick="imprimir()">Imprimir</button>
+                        </div>
+                    </div>
+                    <!-- fin ticket -->
 
                     <!-- Inicia el pie de pagina -->
                     <footer class="bg-white sticky-footer ">
@@ -758,13 +714,18 @@
     <script src="assets/js/vue-session.min.js "></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="config.js"></script>
+    <script src="ticket.js"></script>
     <script src="ordenes.js"></script>
     <script type="text/javascript">
-        window.onbeforeunload = function () {
+        window.onbeforeunload = function() {
             $(".loader").show()
         }
-        window.onload = function () {
+        window.onload = function() {
             $(".loader").hide()
+        }
+        window.onafterprint = function() {
+            localStorage.removeItem('estado');
+            localStorage.removeItem('idOrdenImprimir');
         }
     </script>
 

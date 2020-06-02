@@ -15,11 +15,22 @@ new Vue({
         },
         users: {},
         action: '',
-        logName: logName
+        logName: logName,
+        imprimirProd: {
+            "id": "",
+            "fecha": "",
+            "mesero": "",
+            "mesa": "",
+            "cliente": "",
+            "estado": "",
+            "observacion": "",
+            "detalleOrden": []
+        },
+        editarOrdenImp: false,
     },
     methods: {
         //Obtiene todas las ordenes 
-        obtenerOrdenes: function () {
+        obtenerOrdenes: function() {
             axios.get(this.uri)
                 .then(response => {
                     this.ordenes = response.data
@@ -36,7 +47,7 @@ new Vue({
         },
         //METODOS PARA ORDENAR
         //Ordenar por Mesa
-        ordenar: function () {
+        ordenar: function() {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -84,7 +95,7 @@ new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por mesero
-        ordenarMesero: function () {
+        ordenarMesero: function() {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -132,7 +143,7 @@ new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por Cliente
-        ordenarCliente: function () {
+        ordenarCliente: function() {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -180,7 +191,7 @@ new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por ID
-        ordenarID: function () {
+        ordenarID: function() {
             //ordena de forma ascendente las ordenes
             console.log(ApiRestUrl.toString)
             if (this.ascendente == true) {
@@ -229,7 +240,7 @@ new Vue({
             this.ascendente = !this.ascendente
         },
         //Obtiene todas las ordenes con estado activo
-        mostrarActivos: function () {
+        mostrarActivos: function() {
             axios.get(
                     this.uri + '?filter=%7B%0A%20%20%22where%22%3A%20%7B%0A%20%20%20%20%22estado%22%3A%20%22A%22%0A%20%20%7D%0A%7D')
                 .then(response => {
@@ -240,7 +251,7 @@ new Vue({
             this.activos = !this.activos
         },
         //Filtra las ordenes que contengan el texto a ingresado
-        buscar: function (x) {
+        buscar: function(x) {
 
             if (this.textoBusqueda == "")
                 return true;
@@ -280,7 +291,7 @@ new Vue({
         },
         /*Busca el mensaje pasado como parametro en la uri 
         para mostrarlo como alert*/
-        alertLauncher: function () {
+        alertLauncher: function() {
             let uri = window.location.href.split('?')
             if (uri.length == 2) {
 
@@ -309,7 +320,7 @@ new Vue({
             }
 
         },
-        confirmUser: function (pin) {
+        confirmUser: function(pin) {
             if (this.user.pin != "") {
                 res = this.users.filter(user => pin == user.pin)
                 if (res[0].rol == "admin") {
@@ -331,13 +342,13 @@ new Vue({
             }
 
         },
-        closeConfirm: function () {
+        closeConfirm: function() {
             $('#confirmModal').modal('hide')
         },
         //Hace desaparecer el alert
-        timer: function () {
-            window.setTimeout(function () {
-                $(".alert").fadeTo(500, 0).slideUp(500, function () {
+        timer: function() {
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
                     $(this).remove();
 
                 });
@@ -357,11 +368,11 @@ new Vue({
             window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
         //Muestra el modal Detalle
-        mostrarDetalle: function () {
+        mostrarDetalle: function() {
             $('#modalDetalle').modal('show');
         },
         //Muestra el modal Eliminar
-        mostrarEliminar: function () {
+        mostrarEliminar: function() {
             if (admin) {
                 $('#modalEliminar').modal('show');
             } else {
@@ -370,7 +381,7 @@ new Vue({
             }
         },
         //Metodo eliminar Orden
-        eliminarOrden: function () {
+        eliminarOrden: function() {
 
             let texto = document.getElementById("lblMotivo").value;
             if (texto == "") {
@@ -382,7 +393,7 @@ new Vue({
                 document.getElementById("alertaMotivo").textContent = "";
                 //Elimina la orden
                 axios.delete(this.uri + '/' + this.ordenSelected.id)
-                    .then(function (res) {
+                    .then(function(res) {
                         console.log("DELETE ORDEN");
                         window.location = `./ordenes.html?alert=se elimino la orden satisfactoriamente`
                     }).catch(e => {
@@ -399,19 +410,31 @@ new Vue({
 
         },
         //Limpiar el Motivo por el cual se elimino la orden
-        limpiarMotivo: function () {
+        limpiarMotivo: function() {
             $("#modalEliminar").find("input").val("");
             document.getElementById("lblMotivo").classList.remove('is-invalid');
             document.getElementById("alertaMotivo").textContent = "";
 
         },
-        salir: function () {
+        salir: function() {
             var opcion = confirm('¿Está seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
                 logout()
                 window.location = "./login.html"
             }
+        },
+        setProdImprimir: function() {
+            getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
+                this.imprimirProd = response;
+                document.getElementById("horaImpProd").innerHTML = "Hora: " + new Date(response.fecha).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0) {
+                    window.print()
+                } else {
+                    localStorage.removeItem('estado');
+                    localStorage.removeItem('idOrdenImprimir');
+                }
+            });
         }
     },
     mounted() {
@@ -419,7 +442,13 @@ new Vue({
         this.mostrarActivos()
         this.alertLauncher()
         this.getUsers()
-
+        if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
+            this.editarOrdenImp = false;
+            this.setProdImprimir();
+        } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir) {
+            this.editarOrdenImp = true;
+            this.setProdImprimir();
+        }
     },
     created() {
         if (localStorage.vue_session_key) {
