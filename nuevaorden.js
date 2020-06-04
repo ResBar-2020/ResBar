@@ -21,6 +21,14 @@ var app = new Vue({
         url: ApiRestUrl,
         domicilioAux: false
 
+        ,bitacora: {
+            fecha: "",
+            accion: "",
+            nombreCompleto: "",
+            loggin: "",
+            descripcion: ""
+        },
+        logName: logName
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -93,7 +101,7 @@ var app = new Vue({
                 .get(this.url + '/productos')
                 .then(response => {
                     //se agregan dos atributos, cantidad y subtotal
-                    this.productos = response.data.map(function(obj) {
+                        this.productos = response.data.map(function (obj) {
                         let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0 };
                         return rObj;
                     });
@@ -127,7 +135,8 @@ var app = new Vue({
                 .then(response => {
                     localStorage.setItem("idOrdenImprimir", response.data.id);
                     localStorage.setItem("estado", "nuevo");
-                    //response.data;
+                    //response.data;    
+                    this.registrarBitacora();
                     this.redireccionarAOrdenes();
                     this.mensajeApi = null;
                 })
@@ -158,12 +167,12 @@ var app = new Vue({
             form.classList.add('was-validated');
         },
         disableFormSubmit() {
-            window.addEventListener('load', function() {
+            window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -172,6 +181,34 @@ var app = new Vue({
                     }, false);
                 });
             }, false);
+        }
+
+        /*
+        registra en bitacoras cuando un usuario (admin o mesero) registra una nueva orden
+        */
+        , registrarBitacora() {
+            this.bitacora.fecha = new Date().toISOString();
+            this.bitacora.accion = "Crear nueva orden";
+            this.bitacora.nombreCompleto = logName;
+
+            const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"')//ver si el usuario es adm o mesero
+            var logTipoUsuario = tipoUsuario[1]
+
+            this.bitacora.loggin = logTipoUsuario;
+            this.bitacora.descripcion = this.nuevaOrden.mesero+" agregó una nueva orden con un total de $ " + this.nuevaOrden.total;
+            
+            axios
+                .post(this.url + '/bitacoras', JSON.stringify(this.bitacora), {
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    //response.data;
+                })
+                .catch(error => {
+                    
+                });
         }
     }
 
