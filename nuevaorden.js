@@ -21,7 +21,8 @@ var app = new Vue({
         url: ApiRestUrl,
         domicilioAux: false
 
-        ,bitacora: {
+        ,
+        bitacora: {
             fecha: "",
             accion: "",
             nombreCompleto: "",
@@ -101,8 +102,8 @@ var app = new Vue({
                 .get(this.url + '/productos')
                 .then(response => {
                     //se agregan dos atributos, cantidad y subtotal
-                        this.productos = response.data.map(function (obj) {
-                        let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0 };
+                    this.productos = response.data.map(function(obj) {
+                        let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0, preparado: obj.preparado };
                         return rObj;
                     });
                     this.mensajeApi = null;
@@ -167,12 +168,12 @@ var app = new Vue({
             form.classList.add('was-validated');
         },
         disableFormSubmit() {
-            window.addEventListener('load', function () {
+            window.addEventListener('load', function() {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -186,17 +187,18 @@ var app = new Vue({
         /*
         registra en bitacoras cuando un usuario (admin o mesero) registra una nueva orden
         */
-        , registrarBitacora() {
+        ,
+        registrarBitacora() {
             this.bitacora.fecha = new Date().toISOString();
             this.bitacora.accion = "Crear nueva orden";
             this.bitacora.nombreCompleto = logName;
 
-            const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"')//ver si el usuario es adm o mesero
+            const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"') //ver si el usuario es adm o mesero
             var logTipoUsuario = tipoUsuario[1]
 
             this.bitacora.loggin = logTipoUsuario;
-            this.bitacora.descripcion = this.nuevaOrden.mesero+" agregó una nueva orden con un total de $ " + this.nuevaOrden.total;
-            
+            this.bitacora.descripcion = this.nuevaOrden.mesero + " agregó una nueva orden con un total de $ " + this.nuevaOrden.total;
+
             axios
                 .post(this.url + '/bitacoras', JSON.stringify(this.bitacora), {
                     headers: {
@@ -207,7 +209,7 @@ var app = new Vue({
                     //response.data;
                 })
                 .catch(error => {
-                    
+
                 });
         }
     }
