@@ -435,6 +435,12 @@ new Vue({
                     localStorage.removeItem('idOrdenImprimir');
                 }
             });
+        },
+
+        // 
+        // Metodo que imprime el borrador de la orden
+        printTicket: function () {
+            printJS('borrador', 'html')
         }
     },
     mounted() {

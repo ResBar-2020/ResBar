@@ -3,11 +3,11 @@
     font-family: 'Times New Roman';
 }
 
-table {
+/* table {
     border-top: 1px solid black;
-}
+} */
 
-td.producto,
+/* td.producto,
 th.producto {
     width: 7cm;
     max-width: 7cm;
@@ -18,7 +18,7 @@ th.cantidad {
     width: 1cm;
     max-width: 1cm;
     word-break: break-all;
-}
+} */
 
 .centrado {
     text-align: center;
@@ -62,9 +62,9 @@ th.cantidad {
     body * {
         visibility: hidden;
     }
-    table,
+    /* table,
     th,
     td {
         border: 1px solid black;
-    }
+    } */
 }
