@@ -13,8 +13,17 @@ new Vue({
         uri: ApiRestUrl + '/ordenes/',
         uriVentas: ApiRestUrl + '/resumenDeVentas',
         resumenDeVenta: [],
+
+        bitacora: {
+            fecha: "",
+            accion: "",
+            nombreCompleto: "",
+            loggin: "",
+            descripcion: ""
+        },
+        logName: logName,
     },
-    mounted: function() {
+    mounted: function () {
         this.obtenerSelected();
     },
     methods: {
@@ -53,6 +62,7 @@ new Vue({
             this.ordenSelected.estado = "C";
             axios.put(uriId, this.ordenSelected)
                 .then(response => {
+                    this.registrarBitacora();
                     console.log(response);
                 })
                 .catch(e => { console.log(e) });
@@ -205,7 +215,7 @@ new Vue({
         },
 
         //Aqui esta la funcionalidad al dar click en cobrar
-        cobrar: function() {
+        cobrar: function () {
             this.checkEstado();
             let efectivo = document.getElementById("lblEfectivo").value;
             if (efectivo < this.ordenSelected.total) {
@@ -214,20 +224,47 @@ new Vue({
             } else {
                 document.getElementById("lblEfectivo").classList.remove('is-invalid');
                 document.getElementById("lblEfectivo").classList.add('is-valid');
+                printJS('ticket', 'html');//Esta linea se encarga de imprimir el ticket despues de cobrar
                 document.getElementById("alerta").textContent = "";
                 this.updateEstado();
-                this.getResumenVentas();
-                console.log(this.resumenDeVenta);
+                // this.getResumenVentas();
+                // console.log(this.resumenDeVenta);
             }
         },
 
+        // Metodo ultilizado para volver a la pantalla ordenes despues de imprimir ticket
+        volver: function () {
+            this.getResumenVentas();
+        },  
+
+        registrarBitacora() {
+            this.bitacora.fecha = new Date().toISOString();
+            this.bitacora.accion = "Cobrar orden";
+            this.bitacora.nombreCompleto = logName;
+
+            const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"') //ver si el usuario es adm o mesero
+            var logTipoUsuario = tipoUsuario[1]
+            this.bitacora.loggin = logTipoUsuario;
+
+            this.bitacora.descripcion = "Se cobro una orden de ID=" + this.getParameterByName("id").substring(20, 24)
+                    + " con un total de $ " + this.ordenSelected.total;
+            
+            axios.post(ApiRestUrl + '/bitacoras', JSON.stringify(this.bitacora), {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(response => {
+                //response.data;
+            }).catch(error => { });
+        }
+
     },
-    created(){
-        if(localStorage.vue_session_key){
-        
-        }else{
+    created() {
+        if (localStorage.vue_session_key) {
+
+        } else {
             window.location = "./login.html"
-        } 
+        }
     }
 
 })

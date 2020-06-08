@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/googlefonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>RESBAR</title>
+</head>
+
+<body id="page-top" class="onload">
+    <!--Inicio: Contenedor General-->
+    <div id="appRESBAR">
+        <div id="wrapper">
+
+            <!--Inicio: Navbar Lateral-->
+            <nav
+                class="navbar d-none d-md-inline navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="domicilio.html"><i
+                                    class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                            <a class="nav-link active" href="clientes.html"><i
+                                    class="fas fa-users"></i><span>CLIENTES</span></a>
+                            <a class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                            id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <!--Fin: Navbar Lateral-->
+
+            <div class="d-flex flex-column" id="content-wrapper">
+
+                <!--Inicio: Navbar Movil-->
+                <nav class="navbar d-md-none navbar-default navbar-transparent navbar-fixed-top"
+                    style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                        style="color: #585858;" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-glass-martini"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target=".navbar-ex1-collapse"
+                            style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                            aria-expanded="false">
+                            <span style="color: #585858;"><i class="fas fa-bars"></i></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse navbar-ex1-collapse collapse">
+                        <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item" role="presentation">
+                                <a class="topNavLink active" href="ordenes.html"><i
+                                        class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                <a class="topNavLink active" href="domicilio.html"><i
+                                            class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                                <a class="topNavLink active" href="clientes.html" style="background-color: #585858;color: white;"><i
+                                        class="fas fa-users"></i><span>CLIENTES</span></a>
+                                <a class="topNavLink active" href="productos.html"><i
+                                        class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                                <a class="topNavLink active" href="categorias.html"><i
+                                        class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                                <a class="topNavLink active" href="informes.html"><i
+                                        class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                                <a class="topNavLink active" href="users.html"><i
+                                        class="fas fa-users"></i><span>USUARIOS</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--Fin: Navbar Movil-->
+
+                <!--Inicio: Contenedor 2-->
+                <div class="container-fluid onload">
+
+                    <!--Inicio: Titulo Pagina-->
+                    <div class="row my-4">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-block ag">
+                            <h1 class="text-center d-none d-lg-block">Administración de Clientes</h1>
+                            <h1 class="text-center d-12 d-lg-none">Admin de Clientes</h1>
+                        </div>
+                    </div>
+                    <!--Fin: Titulo Pagina-->
+
+                    <!--Inicio: Buscador-->
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-sm-12 input-group mb-auto">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input type="text" class="col-9 col-md-3" placeholder="Buscar" v-model="textoBusqueda">
+                        </div>
+                    </div>
+                    <!--Fin: Buscador-->
+
+                    <div class="row my-5">
+                        
+                        <!--Inicio: Boton Agregar-->
+                        <div class="col-md-12 col-sm-12"
+                            style="display: flex; justify-content: center;padding-bottom: 1%;">
+                            <button type="Button" class="agg" data-dismiss="modal" title="Agregar Cliente"
+                                v-on:click.prevent="accionb = 'agregar';" onClick="$('#modalAddCliente').modal('show')"
+                                style="outline: none;">
+                                <i class="fa fa-plus-circle"></i>Agregar
+                            </button>
+                        </div>
+                        <!--Fin: Boton Agregar-->
+
+                        <!--Inicio: Alertas-->
+                        <div class="alert alert-success collapse" role="alert" id="buttonAlert" v-bind:class="{ 'alert-danger' : accion==='agregarN' }">
+                            <span v-if="accion==='agregarE'"><strong>Exito!</strong> Registro Agregado
+                                Correctamente</span>
+                            <span v-if="accion==='editarE'"><strong>Exito!</strong> Registro Editado
+                                Correctamente</span>
+                            <span v-if="accion==='eliminarE'"><strong>Exito!</strong> Registro Eliminado
+                                Correctamente</span>
+                            <span v-if="accion==='agregarN'"><strong>Error!</strong> Debe Llenar Los Campos 
+                                Marcados Con *</span>
+                        </div>
+                        <!--Fin: Alertas-->
+
+
+                        <div class="container container-sm container-md">
+                            <!--Inicio: Tabla-->
+                            <div class="table-wrapper-scroll-y d-lg-block d-sm-block my-custom-scrollbar">
+                                <table class="table table-sm table-bordered mb-0 " style="width: 100%;">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Nombre</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Celular</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">WhatsApp</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Direccion</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Departamento</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Municipio</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(client, index) in clientes" v-show="buscarClientes(index)"
+                                            v-on:click.prevent="cliente = client;" v-on:dblClick="mostrarDetalle">
+                                            <td>{{client.nombreCompleto}}</td>
+                                            <td>{{client.celular}}</td>
+                                            <td>{{client.whatsapp}}</td>
+                                            <td>{{client.direccion.substring(0,30)}}</td>
+                                            <td>{{client.departamento}}</td>
+                                            <td>{{client.municipio}}</td>
+                                            <td>
+                                                <button class="btn btntable btn-sm" type="Button" class="agg"
+                                                    data-dismiss="modal" title="Editar Cliente"
+                                                    v-on:click.prevent="accionb = 'editar';"
+                                                    onClick="$('#modalAddCliente').modal('show')"><i
+                                                        class="fas text-white fa-edit"></i></button>
+                                                <button class="btn btn-danger btn-sm" title="Eliminar Cliente"
+                                                    v-on:click.prevent="accionb = 'eliminar';"
+                                                    onClick="$('#modalDetalle').modal('show')"><i
+                                                        class="fas text-white fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="container" v-if="clientes.length===0">
+                                    <span>No se ha registrado ningun cliente. Haz click en "Agregar" para poder
+                                        registrar un cliente</span>
+                                </div>
+                            </div>
+                            <!--Fin: Tabla-->
+
+                            <!--Inicio: Modal Registro,Editar Cliente-->
+                            <div class="modal fade" style="border-radius: 8px;" id="modalAddCliente"
+                                data-backdrop="static" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                                    <div class="modal-content">
+
+                                        <!--Inicio:Cabecera Modal-->
+                                        <div class="modal-header bg-gradient-primary">
+                                            <div class="sidebar-brand-text mx-3">
+                                                <h5 class="text-center text-white" v-if="accionb==='agregar'">AGREGAR
+                                                    CLIENTE</h5>
+                                                <h5 class="text-center text-white" v-if="accionb==='editar'">EDITAR
+                                                    CLIENTE</h5>
+                                            </div>
+                                        </div>
+                                        <!--Fin:Cabecera Modal-->
+
+                                        <!--Inicio: Cuerpo Modal-->
+                                        <div class="modal-body bd-example-modal-xl">
+                                            <form>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Nombre Completo
+                                                            *</label>
+                                                        <input id="nombreCompleto" v-model="cliente.nombreCompleto"
+                                                            type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Telefono Casa
+                                                            *</label>
+                                                        <input id="telefonoCasa" v-model="cliente.telefonoCasa"
+                                                            type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Celular *</label>
+                                                        <input id="celular" v-model="cliente.celular" type="tel"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">WhatsApp</label>
+                                                        <input id="whatsapp" v-model="cliente.whatsapp" type="tel"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Dirección *</label>
+                                                        <input id="direccion" v-model="cliente.direccion" type="text"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Departamento *</label>
+                                                        <input id="departamento" v-model="cliente.departamento"
+                                                            type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Municipio *</label>
+                                                        <input id="municipio" v-model="cliente.municipio" type="text"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Punto
+                                                            Referencia</label>
+                                                        <input id="puntoDeReferencia"
+                                                            v-model="cliente.puntoDeReferencia" type="text"
+                                                            class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Observaciones</label>
+                                                        <input id="observaciones" v-model="cliente.observaciones"
+                                                            type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label class="font-weight-bold text-dark">Ubicación:</label>
+                                                        <button class="btn btntable btn-sm"
+                                                            onClick="$('#modalUbicacion').modal('show')">
+                                                            <i class="fas text-white">...</i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!--Fin:Cuerpo Modal-->
+
+                                        <!--Inicio:Botones Modal-->
+                                        <div class="modal-footer bg-gradient-primary">
+                                            
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                data-dismiss="modal" @Click="btnCancelar();">Cancelar</button>
+
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                onclick="alerta()" @Click="agregarCliente();" v-if="accionb==='agregar'"
+                                                data-dismiss="modal">
+                                                Guardar</button>
+
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                onclick="alerta()" @Click="editarCliente();" v-if="accionb==='editar'"
+                                                data-dismiss="modal">Editar</button>
+
+                                        </div>
+                                        <!--Fin:Botones Modal-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin:Modal Registro,Editar Cliente-->
+
+                            <!--Inicio: Modal Detalle,Eliminar Cliente-->
+                            <div class="modal fade" style="border-radius: 8px;" id="modalDetalle" data-backdrop="static"
+                                tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                                    <div class="modal-content">
+
+                                        <!--Inicio:Cabecera Modal-->
+                                        <div class="modal-header bg-gradient-primary">
+                                            <div class="sidebar-brand-text mx-3">
+                                                <h5 class="text-center text-white" v-if="accionb==='detalle'">DETALLES
+                                                    DE CLIENTE</h5>
+                                                <h5 class="text-center text-white" v-if="accionb==='eliminar'">ELIMINAR
+                                                    CLIENTE</h5>
+                                            </div>
+                                        </div>
+                                        <!--Fin:Cabecera Modal-->
+
+                                        <!--Inicio: Cuerpo Modal-->
+                                        <div class="modal-body bd-example-modal-xl">
+                                            <div class="form-group row">
+                                                <label for="id" class="col-3 col-form-label text-center text-black-50">
+                                                    Id Cliente:</label>
+                                                <div class="col-9">
+                                                    <label id="id" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.id}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="nombre"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Cliente:</label>
+                                                <div class="col-9">
+                                                    <label id="nombre" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.nombreCompleto}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="celular"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Celular:</label>
+                                                <div class="col-9">
+                                                    <label id="celular" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.celular}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="whatsapp"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    WhatsApp:</label>
+                                                <div class="col-9">
+                                                    <label id="whatsapp" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.whatsapp}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="fecha"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Fecha Registro:</label>
+                                                <div class="col-9">
+                                                    <label id="fecha" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.fechaRegistro.substring(0,10)}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="direccion"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Dirección:</label>
+                                                <div class="col-9">
+                                                    <label id="direccion" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.direccion}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="departamento"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Departamento:</label>
+                                                <div class="col-9">
+                                                    <label id="departamento" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.departamento}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="municipio"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Municipio:</label>
+                                                <div class="col-9">
+                                                    <label id="municipio" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.municipio}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="puntoref"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Punto Referencia:</label>
+                                                <div class="col-9">
+                                                    <label id="puntoref" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.puntodeReferencia}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="observaciones"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Observaciones:</label>
+                                                <div class="col-9">
+                                                    <label id="observaciones" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.observaciones}} </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="ubicacion"
+                                                    class="col-3 col-form-label text-center text-black-50">
+                                                    Ubicación:</label>
+                                                <div class="col-9">
+                                                    <label id="ubicacion" style="color: #000000; left: -5px;"
+                                                        class="form-control-plaintext">{{cliente.ubicacion}} </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Fin:Cuerpo Modal-->
+
+                                        <!--Inicio:Botones Modal-->
+                                        <div class="modal-footer bg-gradient-primary">
+                                            
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                @Click="btnCancelar();" data-dismiss="modal"
+                                                v-if="accionb==='detalle'">Cerrar</button>
+
+                                            <button type="button" class="btn btntable btn-sm text-white" @Click="btnCancelar();"
+                                                data-dismiss="modal" v-if="accionb==='eliminar'">Cancelar</button>
+
+                                            <button type="button" class="btn btn-sm text-white"
+                                                style="background-color: #FF082D; border-color: white;"
+                                                onclick="alerta()" @Click="eliminarCliente(cliente);"
+                                                v-if="accionb==='eliminar'" data-dismiss="modal">Eliminar</button>
+
+                                        </div>
+                                        <!--Fin:Botones Modal-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin:Modal Detalle,Eliminar Cliente-->
+
+
+
+                            <!--Inicio: Modal Ubicacion-->
+                            <div class="modal fade" style="border-radius: 8px;" id="modalUbicacion"
+                                data-backdrop="static" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                    <div class="modal-content">
+
+                                        <!--Inicio:Cabecera Modal-->
+                                        <div class="modal-header bg-gradient-primary">
+                                            <div class="sidebar-brand-text mx-3">
+                                                <h5 class="text-center text-white" v-if="">AGREGAR UBICACION</h5>
+                                            </div>
+                                        </div>
+                                        <!--Fin:Cabecera Modal-->
+                                        
+                                        <!--Inicio: Cuerpo Modal-->
+                                        <div class="modal-body bd-example-modal-xl">
+                                            <h1>AQUI DEBE ESTAR EL MAPA</h1>
+                                        </div>
+                                        <!--Fin:Cuerpo Modal-->
+
+                                        <!--Inicio:Botones Modal-->
+                                        <div class="modal-footer bg-gradient-primary">
+                                            
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                data-dismiss="modal" @Click="">Cancelar</button>
+
+                                            <button type="button" class="btn btntable btn-sm text-white" @Click=""
+                                                v-if="">Guardar</button>
+
+                                        </div>
+                                        <!--Fin:Botones Modal-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fin:Modal Registro,Editar Cliente-->
+
+                        </div>
+                    </div>
+                </div>
+                <!--Fin: Contenedor 2-->
+
+                <!--Inicio: Pie Pagina-->
+                <footer class="bg-white sticky-footer ">
+                    <div class="container my-auto ">
+                        <div class="text-center my-auto copyright "><span>Copyright © Diseño I 2020</span></div>
+                    </div>
+                </footer>
+                <!--Fin: Pie Pagina-->
+
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
+    </div>
+    <!--Fin: Contenedor General-->
+
+    <!--Inicio: Scripts-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/vue.js "></script>
+    <script src="assets/js/axios.min.js "></script>
+    <script src="assets/js/theme.js "></script>
+    <script src="assets/js/Script.js "></script>
+    <script src="assets/js/vue-session.min.js"></script>
+    <!--Fin: Scripts-->
+
+    <!--Inicio: Codigo Vuejs-->
+    <script src="./config.js"></script>
+    <script src="./clientes.js"></script>
+    <!--Fin: Codigo Vuejs-->
+</body>
+
+</html>

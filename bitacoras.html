@@ -35,11 +35,6 @@
             line-height: 30px;
             box-shadow: 5px 5px 25px -2px rgba(31, 115, 255, 0.46);
         }
-
-        .btnF {
-            height: 1px important !;
-            width: 1px important !;
-        }
     </style>
 </head>
 
@@ -57,6 +52,8 @@
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" href="ordenes.html"><i
                                 class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                        <a class="nav-link active" href="clientes.html"><i
+                                class="fas fa-users"></i><span>CLIENTES</span></a>
                         <a class="nav-link active" href="productos.html"><i
                                 class="fas fa-box"></i><span>PRODUCTOS</span></a>
                         <a class="nav-link active" href="categorias.html"><i
@@ -109,6 +106,8 @@
                                     <a class="topNavLink active" href="ordenes.html"
                                         style="background-color: #585858;color: white;"><i
                                             class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                    <a class="topNavLink active" href="clientes.html"><i
+                                            class="fas fa-users"></i><span>CLIENTES</span></a>
                                     <a class="topNavLink active" href="productos.html"><i
                                             class="fas fa-box"></i><span>PRODUCTOS</span></a>
                                     <a class="topNavLink active" href="categorias.html"><i
@@ -127,96 +126,171 @@
                     </nav>
                     <!-- Termina navbar top -->
 
+                    <!-- Comienza contenedor -->
                     <div class="container-fluid">
 
-                        <!-- TITULO -->
-                    <div class="row my-4">
-                        <div class="col-12 ag">
-                            <button type="button" class="btn btn-danger d-none d-md-inline float-right"
-                                v-on:click="salir">Salir</button>
-                            <h1 class="text-center">BITACORAS</h1>
+                        <!-- inicio de titulo -->
+                        <div class="row my-4">
+                            <div class="col-12 ag">
+                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right"
+                                    v-on:click="salir">Salir</button>
+                                <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
+                                    {{ logName }}</label><br>
+                                <h1 class="text-center">Bitacoras RESBAR</h1>
+                            </div>
                         </div>
-                    </div>
+                        <!-- fin de titulo -->
 
-                    <!--div del buscador, rango de fechas y boton-->
-                    <div class="div-encapsula-dates">
+                        <!--inicio de div del buscador, rango de fechas y boton-->
+                        <div class="div-encapsula-dates" v-if="admin === true">
 
-                        <!--buscador-->
-                        <div class="espacio-divs">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                            <!--buscador-->
+                            <div class="espacio-divs">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                                    </div>
+                                    <input type="text" placeholder="Buscar" v-model="txtBuscar">
                                 </div>
-                                <input type="text" placeholder="Buscar" v-model="txtBuscar">
+                            </div>
+
+                            <!--fecha de inicio-->
+                            <div class="espacio-divs">
+                                Desde:
+                                <div class="div-date-1 animated bounceIn">
+                                    <input type="date" id="inicio" class="date-css-1" v-model="inicio"><br>
+                                </div>
+                            </div>
+                            <!--fecha de final-->
+                            <div class="espacio-divs">
+                                Hasta:
+                                <div class="div-date-1 animated bounceIn delay1">
+                                    <input type="date" id="hasta" class="date-css-1" v-model="hasta"><br>
+                                </div>
+                            </div>
+                            <!--boton final-->
+                            <button id="buscarFechas" class="btn btn-sm agg text-white" @click="getBuscarPorFechas()"
+                                onclick="alerta()">Buscar por fechas</button>
+                            <button id="borrarFiltros" class="btn btn-sm agg text-white" @click="borrarFiltros()">Borrar
+                                Filtros</button>
+                        </div>
+                        <!--termina de div del buscador, rango de fechas y boton-->
+
+                        <!--Inicio: Alertas-->
+                        <div class="alert alert-info collapse" role="alert" id="buttonAlert"
+                            v-bind:class="{ 'alert-success' : accion==='exito' }">
+                            <span v-if="accion==='danger1'"><strong>Error!</strong> Error ingrese las fechas:
+                                <strong>DESDE</strong> y <strong>HASTA.</strong></span>
+                            <span v-if="accion==='danger2'"><strong>Error!</strong> Error ingrese <strong>la fecha
+                                    HASTA.</strong></span>
+                            <span v-if="accion==='danger3'"><strong>Error!</strong> Error ingrese <strong>la fecha
+                                    DESDE.</strong></span>
+                            <span v-if="accion==='danger4'"><strong>Error!</strong> La fecha <strong>HASTA</strong> debe
+                                ser mayor a la
+                                fecha <strong>DESDE</strong>.</span>
+                            <span v-if="accion==='exito'"><strong>Exito!</strong> Buscando DATOS</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!--Fin: Alertas-->
+
+                        <!-- Incia Tabla -->
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-hover table-striped mb-0">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th style="text-align: center;" scope="col" class="align-items-center">ID</th>
+                                        <th style="text-align: center;" scope="col">Fecha</th>
+                                        <th style="text-align: center;" scope="col">Acción</th>
+                                        <th style="text-align: center;" scope="col">Nombre Completo</th>
+                                        <th style="text-align: center;" scope="col">Usuario</th>
+                                        <th style="text-align: center;" scope="col">Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active " v-for="(item, index ) in bitacoras" v-show="buscador(index)">
+                                        <td style="text-align: center;" scope="col">
+                                            {{ String((item.id).substring(17,24))}}
+                                        </td>
+                                        <td style="text-align: center;" scope="col">{{ item.fecha.substring(0,10) }}
+                                        </td>
+                                        <td style="text-align: center;" scope="col">{{ item.accion }}</td>
+                                        <td style="text-align: center;" scope="col">{{ item.nombreCompleto }}</td>
+                                        <td style="text-align: center;" scope="col">{{ item.loggin }}</td>
+                                        <td style="text-align: center;" scope="col">{{ item.descripcion }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <ul class="pagination justify-content-center">
+                                <button @click="anteriorPage" :disabled="irPagAnterior"
+                                    class="btn btn-sm agg text-white" style="margin: 8px; ">Anterior</button>
+                                <button @click="siguientePage" :disabled="irPagSiguiente"
+                                    class="btn btn-sm agg text-white" style="margin: 8px;">Siguiente</button>
+
+                            </ul>
+
+                        </div>
+                        <!-- Termina Tabla -->
+
+                        <!-- Modal de eliminar por rango -->
+                        <button type="button" class="btn btn-sm agg text-white" data-toggle="modal"
+                            v-if="admin === true" data-target=".bd-example-modal-lg">Eliminar Registro</button>
+
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-gradient-primary">
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">ELIMINAR
+                                                BITACORAS POR RANGO DE FECHAS
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <!--inicio del div del rango de fechas -->
+                                            <div class="div-encapsula-dates">
+                                                <!--fecha de inicio delete-->
+                                                <div class="espacio-divs">
+                                                    Desde:
+                                                    <div class="div-date-1 animated bounceIn">
+                                                        <input type="date" id="inicioDelete" class="date-css-1"
+                                                            v-model="inicioDelete"><br>
+                                                    </div>
+                                                </div>
+                                                <!--fecha de final delete-->
+                                                <div class="espacio-divs">
+                                                    Hasta:
+                                                    <div class="div-date-1 animated bounceIn delay1">
+                                                        <input type="date" id="hastaDelete" class="date-css-1"
+                                                            v-model="hastaDelete"><br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--fin del div del rango de fechas -->
+
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <!--boton eliminar cancelar-->
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancelar</button>
+                                            <!--boton eliminar rango-->
+                                            <button id="deletePorFechas" class="btn btn-primary" data-dismiss="modal"
+                                                @click="deletePorFechas()">Eliminar Rango</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <!--fecha de inicio-->
-                        <div class="espacio-divs">
-                            Desde:
-                            <div class="div-date-1 animated bounceIn">
-                                <input type="date" id="inicio" class="date-css-1" v-model="inicio"><br>
-                            </div>
-                        </div>
-                        <!--fecha de final-->
-                        <div class="espacio-divs">
-                            Hasta:
-                            <div class="div-date-1 animated bounceIn delay1">
-                                <input type="date" id="hasta" class="date-css-1" v-model="hasta"><br>
-                            </div>
-                        </div>
-                        <!--boton final-->
-                        <button id="buscarFechas" class="btn btn-sm agg text-white" @click="getBuscarPorFechas()"
-                            >Buscar por fechas</button>
-                        <button id="borrarFiltros" class="btn btn-sm agg text-white" @click="borrarFiltros()">Borrar
-                            Filtros</button>
+                        <!-- Termina Modal de eliminar por rango -->
                     </div>
-
-                    <!-- Incia Tabla -->
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-hover table-striped mb-0">
-                            <thead class="bg-primary text-white">
-                                <tr>
-                                    <th style="text-align: center;" scope="col" class="align-items-center">ID</th>
-                                    <th style="text-align: center;" scope="col">Fecha</th>
-                                    <th style="text-align: center;" scope="col">Acción</th>
-                                    <th style="text-align: center;" scope="col">Nombre Completo</th>
-                                    <th style="text-align: center;" scope="col">Loggin</th>
-                                    <th style="text-align: center;" scope="col">Descripción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="active " v-for="(item, index ) in bitacoras" v-show="buscador(index)">
-                                    <td style="text-align: center;" scope="col">
-                                        {{ String((item.id).substring(17,24))}}
-                                    </td>
-                                    <td style="text-align: center;" scope="col">{{ item.fecha.substring(0,10) }}
-                                    </td>
-                                    <td style="text-align: center;" scope="col">{{ item.accion }}</td>
-                                    <td style="text-align: center;" scope="col">{{ item.nombreCompleto }}</td>
-                                    <td style="text-align: center;" scope="col">{{ item.loggin }}</td>
-                                    <td style="text-align: center;" scope="col">{{ item.descripcion }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <ul class="pagination justify-content-center">
-                            <button @click="anteriorPage" :disabled="irPagAnterior" class="btn btn-sm agg text-white"
-                                style="margin: 8px; ">Anterior</button>
-                            <button @click="siguientePage" :disabled="irPagSiguiente" class="btn btn-sm agg text-white"
-                                style="margin: 8px;">Siguiente</button>
-
-                        </ul>
-
-                    </div>
-                    <!-- Termina Tabla -->
-
-
-                    </div>
-
-                    
-
-
+                    <!-- Termina contenedor -->
 
                 </div>
                 <!-- Termina el contenedor de la pagina y el dominio de VUE-->

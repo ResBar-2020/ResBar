@@ -1,0 +1,37 @@
+.borrador {
+  /* width: 100%; */
+  border-collapse: collapse;
+  font-size: 12px;
+  width: 944px;
+  max-width: 944px;
+}
+
+.centrar {
+  text-align: center;
+}
+
+.ticket {
+  /* width: 100%; */
+  border-collapse: collapse;
+  font-size: 12px;
+  width: 944px;
+  max-width: 944px;
+}
+
+.borrador table {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ticket table {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-size: 20px;
+}
+
+.titulo2 {
+  font-size: 20px;
+}
