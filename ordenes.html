@@ -188,7 +188,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(orden, index) in ordenes" v-show="buscar(index)"
-                                            v-on:click="ordenSelected=orden" v-on:dblclick="mostrarDetalle"
+                                            v-on:click="ordenSelected=orden; imprimirProd=orden" v-on:dblclick="mostrarDetalle"
                                             v-bind:class="{ 'font-weight-bold' : ordenSelected==orden, 'text-dark': ordenSelected==orden }">
                                             <td>{{orden.id.substring(20,24)}}</td>
                                             <td>{{orden.cliente}}</td>
@@ -212,6 +212,9 @@
                                                 <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                     <i @click="ordenSelected=orden;" class="fas text-white fa-print"></i></a>
                                                 </button>
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
+                                                    <i class="fas text-white fa-motorcycle"></i></a>
+                                                </button>
                                                 </td>
                                                 <td v-else>
                                                     <button type="button" class="btn btntable btn-sm disabled" title="Agregar Mas Productos">
@@ -226,7 +229,7 @@
                                                     <button type="button" class="btn btntable btn-sm disabled" title="Eliminar Orden">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
-                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
                                                     <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
                                                 </td>
@@ -258,7 +261,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(orden, index) in lactivos " v-show="buscar(index) "
-                                            v-on:click="ordenSelected=orden " v-on:dblClick="mostrarDetalle"
+                                            v-on:click="ordenSelected=orden; imprimirProd=orden" v-on:dblClick="mostrarDetalle"
                                             v-bind:class="{ 'font-weight-bold' : ordenSelected==orden, 'text-dark': ordenSelected==orden } ">
                                             <td>{{orden.id.substring(20,24)}}</td>
                                             <td>{{orden.cliente}}</td>
@@ -281,7 +284,7 @@
                                                 <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                     <i @click="ordenSelected=orden;" class="fas text-white fa-print"></i>
                                                 </button>
-                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
                                                     <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
                                                 </td>
@@ -311,7 +314,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-if="activos" v-for="(orden, index) in ordenes" v-show="buscar(index)"
-                                            v-on:click="ordenSelected=orden" v-on:dblClick="mostrarDetalle"
+                                            v-on:click="ordenSelected=orden; imprimirProd=orden" v-on:dblClick="mostrarDetalle"
                                             v-bind:class="{ 'font-weight-bold' : ordenSelected==orden, 'text-dark': ordenSelected==orden }">
                                             <td>{{orden.id.substring(20,24)}}</td>
                                             <td>{{orden.cliente}}</td>
@@ -331,6 +334,9 @@
                                                 <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                             <i class="fas text-white fa-print" style="color: rgb(254, 254, 255);"></i>
                                                         </button>
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
+                                                            <i class="fas text-white fa-motorcycle"></i></a>
+                                                        </button>
                                                 </td>
                                                 <td v-else>
                                                     <button type="button" class="btn btntable btn-sm disabled"><i
@@ -347,7 +353,7 @@
                                                         style="color: rgb(254, 254, 255);"
                                                         title="Eliminar Orden"></i></button>
                                                     </button>
-                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
                                                     <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
                                                 </td>
@@ -393,11 +399,11 @@
                                                         style="color: rgb(254, 254, 255);" title="Eliminar Orden"
                                                         @click="ordenSelected=orden; mostrarEliminar()"></i></button>
                                                 </button>
-                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
-                                                    <i class="fas text-white fa-motorcycle"></i></a>
-                                                </button>
                                                 <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                             <i class="fas text-white fa-print" style="color: rgb(254, 254, 255);"></i>
+                                                        </button>
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="imprimirProd=orden; reimprimir()">
+                                                            <i class="fas text-white fa-motorcycle"></i></a>
                                                         </button>
                                                 </td>
                                         </tr>
@@ -661,7 +667,7 @@
                                     <div style="display: inline;">Mesero: {{imprimirProd.mesero}}</div>
                                 </div>
                             </div>
-                            <table class="table-ticket" style="margin: 0.1rem;">
+                            <table class="table-ticket" style="margin: 3mm;">
                                 <thead style="border-bottom: 1px solid black;">
                                     <tr>
                                         <th class="th-producto">PRODUCTO</th>
@@ -671,7 +677,7 @@
                                 <tbody>
                                     <tr v-for="(prod, index) in imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad>0)">
                                         <td class="td-producto">{{prod.nombre}}</td>
-                                        <td class="td-cantidad">{{prod.cantidad}}</td>
+                                        <td class="td-cantidad centrado">{{prod.cantidad}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -687,6 +693,9 @@
                             <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="editarOrdenImp">
                                 <p style="margin: 0;padding: 0;">Orden Modificada</p>
                             </div>
+                            <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="reimpresion">
+                                <p style="margin: 0;padding: 0;">Reimpresion</p>
+                            </div>
                             <h1 class="centrado">Restaurante X</h1>
                             <div style="padding: 1rem;">
                                 <div style="display: flex;">
@@ -698,7 +707,7 @@
                                 N. de orden: {{imprimirProd.id}}<br> Fecha: {{fecha}}
                             </div>
                             <div class="centrado"><strong>Entrega a domicilio</strong></div>
-                            <table class="table-ticket" style="margin: 0.1rem;">
+                            <table class="table-ticket" style="margin: 2mm;">
                                 <thead style="border-bottom: 1px solid black;">
                                     <tr>
                                         <th class="th-cantidad">CANT</th>
@@ -709,20 +718,20 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(prod, index) in imprimirProd.detalleOrden">
-                                        <td class="td-cantidad">{{prod.cantidad}}</td>
+                                        <td class="td-cantidad centrado">{{prod.cantidad}}</td>
                                         <td class="td-producto">{{prod.nombre}}</td>
                                         <td class="td-precio centrado">$ {{prod.precio}}</td>
                                         <td class="td-total"> $ {{(prod.precio*prod.cantidad).toFixed(2)}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="text-align: right;  font-weight: bold;">Sub-Total </td>
+                                        <td colspan="3" style="text-align: right;  font-weight: bold; border: solid 1px black;">Sub-Total </td>
                                         <td style="text-align: center;">${{(imprimirProd.total*1).toFixed(2)}}</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="3" style="text-align: right;">Costo de envio </td>
+                                    <tr style="border: solid 1px black;">
+                                        <td colspan="3" style="text-align: right; border: solid 1px black;">Costo de envio </td>
                                         <td style="text-align: center;">${{parametros[10].valor}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr style="border: solid 1px black; border: solid 1px black;">
                                         <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
                                             <p style="margin: 1mm 5mm;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}</p>
                                         </td>

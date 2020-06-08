@@ -5,18 +5,22 @@
 
 .table-ticket {
     border-top: 1px solid black;
+    width: 75mm;
+    max-width: 75m;
 }
 
 .td-producto,
 .th-producto {
     width: 4cm;
     max-width: 4cm;
+    border: solid 1px black;
 }
 
 .td-cantidad,
 .th-cantidad {
     width: 1cm;
     max-width: 1cm;
+    border: solid 1px black;
     word-break: break-all;
 }
 
@@ -24,6 +28,7 @@
 .th-precio {
     width: 17mm;
     max-width: 17mm;
+    border: solid 1px black;
     word-break: break-all;
 }
 
@@ -32,6 +37,7 @@
     width: 23mm;
     max-width: 23mm;
     text-align: center;
+    border: solid 1px black;
     word-break: break-all;
 }
 

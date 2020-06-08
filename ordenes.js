@@ -29,6 +29,7 @@ new Vue({
             "detalleOrden": []
         },
         editarOrdenImp: false,
+        reimpresion: false
     },
     methods: {
         //Obtiene todas las ordenes 
@@ -451,8 +452,27 @@ new Vue({
 
         // 
         // Metodo que imprime el borrador de la orden
-        printTicket: function () {
+        printTicket: function() {
             printJS('borrador', 'html')
+        },
+
+        reimprimir() {
+            this.reimpresion = true;
+            getProductsFromOrder(this.imprimirProd.id).then(response => {
+                this.imprimirProd = response;
+                this.fecha = new Date(response.fecha);
+                this.fecha = moment(this.fecha);
+                this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
+                // document.getElementById("horaImpProd").innerHTML = "Hora: " + new Date(response.fecha).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0 || this.imprimirProd.domicilio === true) {
+                    window.print()
+                } else {
+                    localStorage.removeItem('estado');
+                    localStorage.removeItem('idOrdenImprimir');
+                }
+            });
+            this.reimpresion = false;
+
         }
     },
     mounted() {
