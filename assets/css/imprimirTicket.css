@@ -3,20 +3,35 @@
     font-family: 'Times New Roman';
 }
 
-table {
+.table-ticket {
     border-top: 1px solid black;
 }
 
-td.producto,
-th.producto {
-    width: 7cm;
-    max-width: 7cm;
+.td-producto,
+.th-producto {
+    width: 4cm;
+    max-width: 4cm;
 }
 
-td.cantidad,
-th.cantidad {
+.td-cantidad,
+.th-cantidad {
     width: 1cm;
     max-width: 1cm;
+    word-break: break-all;
+}
+
+.td-precio,
+.th-precio {
+    width: 17mm;
+    max-width: 17mm;
+    word-break: break-all;
+}
+
+.td-total,
+.th-total {
+    width: 23mm;
+    max-width: 23mm;
+    text-align: center;
     word-break: break-all;
 }
 

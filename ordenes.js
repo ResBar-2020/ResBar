@@ -10,6 +10,8 @@ new Vue({
         alerta: "",
         alertBool: true,
         uri: ApiRestUrl + '/ordenes',
+        fecha: "",
+        parametros: [],
         user: {
             pin: ''
         },
@@ -43,6 +45,12 @@ new Vue({
             axios.get('http://localhost:3000/usuarios')
                 .then(res => {
                     this.users = res.data
+                }).catch(er => console.error(er))
+        },
+        getParametros() {
+            axios.get(ApiRestUrl + '/parametros')
+                .then(res => {
+                    this.parametros = res.data
                 }).catch(er => console.error(er))
         },
         //METODOS PARA ORDENAR
@@ -424,11 +432,15 @@ new Vue({
                 window.location = "./login.html"
             }
         },
+
         setProdImprimir: function() {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
+                this.fecha = new Date(response.fecha);
+                this.fecha = moment(this.fecha);
+                this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
                 document.getElementById("horaImpProd").innerHTML = "Hora: " + new Date(response.fecha).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0) {
+                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0 || this.imprimirProd.domicilio === true) {
                     window.print()
                 } else {
                     localStorage.removeItem('estado');
@@ -441,6 +453,7 @@ new Vue({
         this.ordenar()
         this.mostrarActivos()
         this.alertLauncher()
+        this.getParametros()
         this.getUsers()
         if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
             this.editarOrdenImp = false;

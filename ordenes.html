@@ -224,6 +224,9 @@
                                                     <button type="button" class="btn btntable btn-sm disabled" title="Eliminar Orden">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
+                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <i class="fas text-white fa-motorcycle"></i></a>
+                                                </button>
                                                 </td>
                                         </tr>
                                         </tbody>
@@ -275,6 +278,9 @@
                                                 </button>
                                                 <button type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="ordenSelected=orden; mostrarEliminar()">
                                                     <i class="fas text-white fa-trash"></i></a>
+                                                </button>
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
                                                 </td>
                                         </tr>
@@ -339,6 +345,10 @@
                                                         class="fas text-white fa-trash"
                                                         style="color: rgb(254, 254, 255);"
                                                         title="Eliminar Orden"></i></button>
+                                                    </button>
+                                                    <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <i class="fas text-white fa-motorcycle"></i></a>
+                                                </button>
                                                 </td>
                                         </tr>
                                         </tbody>
@@ -381,6 +391,10 @@
                                                         class="fas text-white fa-trash"
                                                         style="color: rgb(254, 254, 255);" title="Eliminar Orden"
                                                         @click="ordenSelected=orden; mostrarEliminar()"></i></button>
+                                                </button>
+                                                <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="">
+                                                    <i class="fas text-white fa-motorcycle"></i></a>
+                                                </button>
                                                 </td>
                                         </tr>
 
@@ -650,7 +664,7 @@
 
 
                     <!-- Comienza ticket -->
-                    <div id="ticket" class="mostrar-impresion">
+                    <div id="ticket" class="mostrar-impresion" v-if="!imprimirProd.domicilio">
                         <div class="ticket" style="border: 1px solid black;">
                             <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="editarOrdenImp">
                                 <p style="margin: 0;padding: 0;">Orden Modificada</p>
@@ -669,24 +683,90 @@
                                     <div style="display: inline;">Mesero: {{imprimirProd.mesero}}</div>
                                 </div>
                             </div>
-                            <table style="margin: 0.1rem;">
+                            <table class="table-ticket" style="margin: 0.1rem;">
                                 <thead style="border-bottom: 1px solid black;">
                                     <tr>
-                                        <th class="producto">PRODUCTO</th>
-                                        <th class="cantidad">CANT</th>
+                                        <th class="th-producto">PRODUCTO</th>
+                                        <th class="th-cantidad">CANT</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="(prod, index) in imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad>0)">
-                                        <td class="producto">{{prod.nombre}}</td>
-                                        <td class="cantidad">{{prod.cantidad}}</td>
+                                        <td class="td-producto">{{prod.nombre}}</td>
+                                        <td class="td-cantidad">{{prod.cantidad}}</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <p class="centrado" style="margin: 0;padding: 0.5rem;">OBSERVACIONES
                                 <br>{{imprimirProd.observacion}}</p>
 
-                            <button class="oculto-impresion" onclick="imprimir()">Imprimir</button>
+                        </div>
+                    </div>
+                    <!-- fin ticket -->
+                    <!-- Comienza ticket a domicilio-->
+                    <div id="ticket" class="mostrar-impresion" v-if="imprimirProd.domicilio">
+                        <div class="ticket" style="border: 1px solid black;">
+                            <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="editarOrdenImp">
+                                <p style="margin: 0;padding: 0;">Orden Modificada</p>
+                            </div>
+                            <h1 class="centrado">Restaurante X</h1>
+                            <div style="padding: 1rem;">
+                                <div style="display: flex;">
+                                    <!-- <div style="display: inline;">Cliente: {{imprimirProd.cliente}}</div> -->
+                                    <div style="display: inline;">
+                                        <p id="horayfecha"></p>
+                                    </div>
+                                </div>
+                                N. de orden: {{imprimirProd.id}}<br> Fecha: {{fecha}}
+                            </div>
+                            <div class="centrado"><strong>Entrega a domicilio</strong></div>
+                            <table class="table-ticket" style="margin: 0.1rem;">
+                                <thead style="border-bottom: 1px solid black;">
+                                    <tr>
+                                        <th class="th-cantidad">CANT</th>
+                                        <th class="th-producto">PRODUCTO</th>
+                                        <th class="th-precio centrado">P/U</th>
+                                        <th class="th-total">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(prod, index) in imprimirProd.detalleOrden">
+                                        <td class="td-cantidad">{{prod.cantidad}}</td>
+                                        <td class="td-producto">{{prod.nombre}}</td>
+                                        <td class="td-precio centrado">$ {{prod.precio}}</td>
+                                        <td class="td-total"> $ {{(prod.precio*prod.cantidad).toFixed(2)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align: right;  font-weight: bold;">Sub-Total </td>
+                                        <td style="text-align: center;">${{(imprimirProd.total*1).toFixed(2)}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align: right;">Costo de envio </td>
+                                        <td style="text-align: center;">${{parametros[10].valor}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
+                                            <p style="margin: 1mm 5mm;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p style=" border-bottom: 1px solid black; width: 7cm; margin-left: 4mm;">Observaciones: {{imprimirProd.observacion}}</p>
+                            <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
+                                Cliente: {{imprimirProd.cliente}}<br> Direccion: <br> Ref. <br> Telefonos:
+                                <br>
+                            </div>
+                            <div style="border: 1px solid black; margin-left: 4mm; margin-right: 4mm; margin-top: 3mm; margin-bottom: 3mm;">
+                                <div style="text-align: center;">
+                                    <p>DESPRENDIBLE ORDEN ENTREGADA <br> Se entregó la orden:</p>
+                                </div>
+                                <div style="margin: 2mm; ">
+                                    <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total: ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}}<br>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="font-weight: bold;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- fin ticket -->
@@ -699,29 +779,30 @@
                     </footer>
                     <!-- Termina el pie de pagina -->
 
-                </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i
-                        class="fas fa-angle-up"></i></a>
+                </div><a class="border rounded d-inline scroll-to-top " href="#page-top "><i
+                        class="fas fa-angle-up "></i></a>
             </div>
         </div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.easing.js"></script>
+    <script src="assets/js/jquery.min.js "></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js "></script>
+    <script src="assets/js/jquery.easing.js "></script>
     <script src="assets/js/vue.js "></script>
     <script src="assets/js/axios.min.js "></script>
     <script src="assets/js/theme.js "></script>
     <script src="assets/js/Script.js "></script>
     <script src="assets/js/vue-session.min.js "></script>
     <!--Aqui va tu codigo de vue js-->
-    <script src="config.js"></script>
-    <script src="ticket.js"></script>
-    <script src="ordenes.js"></script>
-    <script type="text/javascript">
+    <script src="assets/js/moment.js "></script>
+    <script src="config.js "></script>
+    <script src="ticket.js "></script>
+    <script src="ordenes.js "></script>
+    <script type="text/javascript ">
         window.onbeforeunload = function() {
-            $(".loader").show()
+            $(".loader ").show()
         }
         window.onload = function() {
-            $(".loader").hide()
+            $(".loader ").hide()
         }
         window.onafterprint = function() {
             localStorage.removeItem('estado');
