@@ -112,6 +112,20 @@
         </div>
 
 
+        <div class="row my-5">
+          <!-- Boton Agregar nueva orden  -->
+          <!--Se va al archivo nuevaorden.html -->
+          <div class="col-md-12 col-sm-12" style="display: flex; justify-content: center;">
+              <div>
+                  <a class="text-white " href="nuevaorden.html" style="text-decoration: none;">
+                      <button class="agg" type="button" title="Nueva orden" style="outline: none;"><i
+                              class="fa fa-plus-circle mr-2"></i>
+                          Nueva Orden
+                      </button></a>
+              </div>
+          </div>
+      </div>
+
 
           <div class="card">
             <div class="card-body text-white " style="background-color: #130f40;">
@@ -148,10 +162,6 @@
                     </li>
                   </ul>
 
-
-
-
-
                 </div>
 
 
@@ -167,17 +177,12 @@
                   </div>
                 </div>
 
-
-
-
-
-
               </div>
             </div>
           </div>
 
           <!--termina el filtro-->
-          <br><br>
+        
           <!--comienza el contenido-->
           <div class="container">
 
@@ -190,7 +195,7 @@
                   <div class="wrap text-white mb-3 col-sm" style="max-width: 18rem;">
                     <div class="tarjeta-wrap">
                       <div class="tarjeta">
-                        <!-- parte delatera del card-->
+                        <!-- parte delantera del card-->
                         <div class="adelante card1">
                           <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-danger ">
                             <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
