@@ -283,7 +283,7 @@ var vm = new Vue({
                 }
             }).then(response => {
                     //response.data;
-                }).catch(error => {alert("Hola Error");});
+                }).catch(error => {});
         }
 
     },
