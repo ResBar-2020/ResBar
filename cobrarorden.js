@@ -224,12 +224,18 @@ new Vue({
             } else {
                 document.getElementById("lblEfectivo").classList.remove('is-invalid');
                 document.getElementById("lblEfectivo").classList.add('is-valid');
+                printJS('ticket', 'html');//Esta linea se encarga de imprimir el ticket despues de cobrar
                 document.getElementById("alerta").textContent = "";
                 this.updateEstado();
-                this.getResumenVentas();
-                console.log(this.resumenDeVenta);
+                // this.getResumenVentas();
+                // console.log(this.resumenDeVenta);
             }
         },
+
+        // Metodo ultilizado para volver a la pantalla ordenes despues de imprimir ticket
+        volver: function () {
+            this.getResumenVentas();
+        },  
 
         registrarBitacora() {
             this.bitacora.fecha = new Date().toISOString();

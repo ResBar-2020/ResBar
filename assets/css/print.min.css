@@ -39,6 +39,10 @@
   table-layout: fixed;
   width: 210px;
 }
+.tablaTicket{
+  table-layout: fixed;
+  width: 210px;
+}
 
 /* .borrador td.prod {
   width: 100px;
