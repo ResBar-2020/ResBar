@@ -228,9 +228,8 @@ new Vue({
                 this.updateEstado();
                 this.getResumenVentas();
                 console.log(this.resumenDeVenta);
-                // printJS('ticket', 'html'); //Esta linea ejecuta imprimir el ticket
+                printJS('ticket', 'html');
             }
-            printJS('ticket', 'html');
         },
 
         registrarBitacora() {
