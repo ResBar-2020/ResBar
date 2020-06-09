@@ -37,12 +37,19 @@
 
 .tablaBorrador{
   table-layout: fixed;
-  width: 210px;
+  width: 230px;
 }
 .tablaTicket{
   table-layout: fixed;
-  width: 210px;
+  width: 230px;
 }
+.tablaTicket span{
+margin-right: 5px;
+}
+/* .lim{
+  width: 120px;
+  word-wrap: break-word;
+} */
 
 /* .borrador td.prod {
   width: 100px;

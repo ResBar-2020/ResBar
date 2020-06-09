@@ -614,11 +614,6 @@
                                     <div class="modal-header bg-gradient-primary">
                                         <h4 class="text-center text-white">Imprimir Orden</h4>
 
-                                        <!--muestra estado de la orden-->
-                                        <!-- <div class="ml-auto" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id" style="margin: 0px;">
-                                        <h5 class="modal-title text-white" v-show="orden.estado==&quot;C&quot;">Orden Cobrada</h5>
-                                        <h5 class="modal-title text-white" v-show="orden.estado==&quot;A&quot;">Orden Activa</h5>
-                                    </div> -->
                                         <button type="button" class="close" data-dismiss="modal"
                                             aria-label="Close"><span class="text-white-50"
                                                 aria-hidden="true">×</span></button>
@@ -626,16 +621,6 @@
                                     <!--Body modal-->
                                     <div class="modal-body" id="ordenPrint">
                                         <div class="borrador" id="borrador">
-                                            <!-- <div class="centrado">
-            <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
-            <strong><span>PRE-ORDEN</span></strong> <br /> <br>
-              Orden: {{orden.id}}  <br />
-              Fecha: {{orden.fecha.substring(0,10)}} <br />
-              Mesa: {{orden.mesa}}<br />
-              mesero {{orden.mesero}} <br />
-              Cliente: {{orden.cliente}} <br />
-            </p>
-        </div> -->
 
                                             <div class="centrar">
                                                 <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
@@ -648,7 +633,7 @@
 
                                             <div class="">
 
-                                                <table class="tablaBorrador">
+                                                <table class="tablaBorrador centrar">
                                                     <thead>
                                                         <tr>
                                                             <th class="producto prod">Producto</th>

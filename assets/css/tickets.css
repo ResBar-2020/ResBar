@@ -9,6 +9,10 @@
 .centrar {
   text-align: center;
 }
+.lim{
+  table-layout: fixed;
+  width: 210px;
+}
 
 .ticket {
   /* width: 100%; */

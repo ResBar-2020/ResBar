@@ -183,30 +183,42 @@
                                 <!--Body modal-->
                                 <div class="modal-body" id="ordenPrint">
     <div class="ticket" id="ticket">
-                        
-                   <div class="centrar">
-                    <p>
-                        <span>
-                            <strong><span class="titulo2">Pupusería Alexis</span></strong> <br />
-                            Final Avenida Fray Felipe de Jesus Moraga Sur <br />
-                            N25 Santa Ana, El Salvador <br />
-                            TEL: 2452-2414 <br />
-                            NIT: 0210-020105-102 <br />
-                            GIRO: Restaurante <br />
-                           </span>
-                           <p>
-                            Orden: {{ordenSelected.id}}  <br />
-                            Mesa: {{ordenSelected.mesa}}<br />
-                            mesero {{ordenSelected.mesero}} <br />
-                            Cliente: {{ordenSelected.cliente}} <br />
-                            Fecha: {{ordenSelected.fecha.substring(0,10)}} <br />
-                          </p>
-                       </p>
-                   </div>
-                  
       <div class="cuerpo">
-        
-        <table class="print tablaTicket">
+        <table class="tablaTicket centrar">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong><span v-for="param in parametros" v-if="param.id==1" class="titulo2">{{param.valor}}</span></strong><br />
+                        <span v-for="param in parametros" v-if="param.id==6">{{param.valor}}</span> <br />
+                        <span v-for="param in parametros" v-if="param.id==3">TEL: {{param.valor}}</span> <br />
+                        <span v-for="param in parametros" v-if="param.id==4">NIT: {{param.valor}}</span> <br />
+                        <span v-for="param in parametros" v-if="param.id==5">GIRO: {{param.valor}}</span></td>
+                </tr>
+            </tbody>
+        </table>
+          <table class="tablaTicket">
+              <thead>
+                  <tr>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><strong>Cuenta No.</strong> {{ordenSelected.id}}  <br />
+                        <strong>Fecha:</strong> {{ordenSelected.fecha.substring(0,10)}} <br />
+                        <span><strong>Mesa:</strong> {{ordenSelected.mesa}}</span>
+                        <span><strong>Mesero</strong> {{ordenSelected.mesero}} 
+                        </span>
+                        <span><strong>Cliente:</strong> {{ordenSelected.cliente}}</span>
+                        </td>
+                  </tr>
+              </tbody>
+          </table>        
+        <table class="print tablaTicket centrar">
           <thead>
             <tr>
               <th class="producto">Cant.</th>
@@ -225,8 +237,8 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td colspan="">Subtotal:</td>
-                <td>${{(ordenSelected.total).toFixed(2)}}</td>
+                <td colspan=""><strong>Total:</strong></td>
+                <td><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
             </tr>
             <tr>
                 <td></td>
@@ -243,17 +255,9 @@
         
           </tbody>
         </table>
-        <!-- <p>
-            Subtotal: {{(ordenSelected.total).toFixed(2)}} <br />
-            Propina: (10%): {{(ordenSelected.total*0.1).toFixed(2)}} <br />
-            <strong>Total:</strong> {{(ordenSelected.total+(ordenSelected.total*0.1)).toFixed(2)}} <br />
-          </p> -->
-
           <div class="centrar">
-                <p>¡Gracias por visitar nuestro restaurante!</p>
+            <span v-for="param in parametros" v-if="param.id==2">{{param.valor}}</span>
           </div>
-
-
       </div>
     </div>                
                                 </div>
