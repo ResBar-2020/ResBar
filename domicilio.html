@@ -76,9 +76,11 @@
             <div class="navbar-collapse navbar-ex1-collapse collapse">
               <ul class="nav navbar-nav text-light" id="accordionSidebar">
                 <li class="nav-item" role="presentation">
-                  <a class="topNavLink active" href="ordenes.html" style="background-color: #585858;color: white;"><i
+                  <a class="topNavLink active" href="ordenes.html"><i
                       class="fas fa-list-ol"></i><span>ORDENES</span></a>
-                  <a class="topNavLink active" href="clientes.html"><i
+                  <a class="topNavLink active" href="domicilio.html" style="background-color: #585858;color: white;"><i
+                      class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                  <a v-if="admin" class="topNavLink active" href="clientes.html"><i
                       class="fas fa-users"></i><span>CLIENTES</span></a>
                   <a v-if="admin" class="topNavLink active" href="productos.html"><i
                       class="fas fa-box"></i><span>PRODUCTOS</span></a>
