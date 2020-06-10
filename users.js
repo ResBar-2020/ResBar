@@ -49,8 +49,9 @@ new Vue({
             if (this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != "") {
                 tamanio = parseInt(this.user.pin, 10)
                 encontrado = this.users.find(user => user.pin == this.user.pin)
+                
                 //Si ya existe el pin
-                if (encontrado == this.user.pin) {
+                if (encontrado.pin == this.user.pin) {
                     document.getElementById("pin").classList.add('is-invalid');
                     document.getElementById("iguales").textContent = "Este pin ya esta registrado";
                     //Verifica el numero de digitos

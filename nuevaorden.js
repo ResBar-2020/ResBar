@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         nuevaOrden: {
             fecha: null,
-            mesero: null,
+            mesero: logName,
             domicilio: false,
             domicilioEtapa: 0,
             mesa: null,
@@ -29,7 +29,7 @@ var app = new Vue({
             loggin: "",
             descripcion: ""
         },
-        logName: logName
+        admin:admin
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();

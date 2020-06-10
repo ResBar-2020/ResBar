@@ -221,9 +221,9 @@
                                         <label for="txtMesero">Mesero: </label>
                                     </div>
                                     <div class="col">
-                                        <input v-if="this.domicilioAux==false" v-model.lazy.number="nuevaOrden.mesero" pattern="[A-Za-z]+[A-Za-z .]{2,}"
+                                        <input v-if="this.domicilioAux==false && !admin" v-model.lazy.number="nuevaOrden.mesero" pattern="[A-Za-z]+[A-Za-z .]{2,}"
                                             type="text" class="form-control" id="txtMesero" placeholder="Enter name"
-                                            required>
+                                            required readonly>
                                             <input v-else v-model="nuevaOrden.mesero" type="text" class="form-control" 
                                             id="txtMesero" placeholder="Enter name">
                                         <div class="invalid-feedback">
