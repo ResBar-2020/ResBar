@@ -74,11 +74,16 @@ font-family: "open sans";
 background: #F29720;
 }
 
+.tarjeta-flip{
+	-webkit-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	}
+/*
 .tarjeta-wrap:hover .tarjeta{
 -webkit-transform: rotateY(180deg);
 transform: rotateY(180deg);
 }
-
+*/
 .card1{
 background-size: cover;
 }
@@ -149,3 +154,40 @@ ol {
     margin: 0 0 0 2em; /* Add some left margin for inner lists */
   }
 
+  .float{
+	position:fixed;
+	width:65px;
+	height:65px;
+	bottom:40px;
+	right:30px;
+	background-color:#F33;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+	text-decoration: white;
+	z-index: 100;
+}
+
+.my-float{
+	margin-top:22px;
+}
+
+a.button1{
+display:inline-block;
+padding:0.35em 1.2em;
+border:0.1em solid #FFFFFF;
+margin:0 0.3em 0.3em 0;
+border-radius:0.12em;
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+color:#FFFFFF;
+text-align:center;
+transition: all 0.2s;
+}
+a.button1:hover{
+color:#000000;
+background-color:#FFFFFF;
+}
