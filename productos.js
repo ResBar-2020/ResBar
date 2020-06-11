@@ -11,14 +11,16 @@ new Vue({
             precio: 0.00,
             categoria: {
                 nombre: ""
-            }
+            },
+            preparado: ""
         },
         productos: [],
         producto: {
             id: "0",
             nombre: "",
             precio: "0.00",
-            categoria: ""
+            categoria: "",
+            preparado: false
         },
 
         displayOption: "",
@@ -29,7 +31,8 @@ new Vue({
             precio: 0.00,
             categoria: {
                 nombre: ""
-            }
+            },
+            preparado: ""
         },
 
 
