@@ -3,8 +3,8 @@ new Vue({
     data: {
         // Aqui inician las propiedades que vamos a necesitar
         //para almacenar nuestros objetos de trabajo
-        logName: logName
-        ,categorias: [],
+        logName: logName,
+        categorias: [],
         productoSelected: {
             id: "0",
             nombre: "",
@@ -36,7 +36,7 @@ new Vue({
 
 
     },
-    created: function () {
+    created: function() {
         this.obtenerProductos();
         if (localStorage.vue_session_key) {
             if (localStorage.getItem(VueSession.key) == '"mesero"') {
@@ -224,7 +224,7 @@ new Vue({
             this.producto = productoSelected;
             console.log(producto);
         },
-        buscar: function (x) {
+        buscar: function(x) {
 
             if (this.txtBuscar == "")
                 return true;
@@ -241,7 +241,7 @@ new Vue({
             else
                 return false;
         },
-        salir: function () {
+        salir: function() {
             var opcion = confirm('¿Está seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
