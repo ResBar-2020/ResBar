@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         nuevaOrden: {
             fecha: null,
-            mesero: null,
+            mesero: logName,
             domicilio: false,
             domicilioEtapa: 0,
             mesa: null,
@@ -29,7 +29,7 @@ var app = new Vue({
             loggin: "",
             descripcion: ""
         },
-        logName: logName
+        admin:admin
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -102,7 +102,7 @@ var app = new Vue({
                 .get(this.url + '/productos')
                 .then(response => {
                     //se agregan dos atributos, cantidad y subtotal
-                    this.productos = response.data.map(function(obj) {
+                    this.productos = response.data.map(function (obj) {
                         let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0, preparado: obj.preparado };
                         return rObj;
                     });
@@ -168,12 +168,12 @@ var app = new Vue({
             form.classList.add('was-validated');
         },
         disableFormSubmit() {
-            window.addEventListener('load', function() {
+            window.addEventListener('load', function () {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -197,7 +197,11 @@ var app = new Vue({
             var logTipoUsuario = tipoUsuario[1]
 
             this.bitacora.loggin = logTipoUsuario;
-            this.bitacora.descripcion = this.nuevaOrden.mesero + " agregó una nueva orden con un total de $ " + this.nuevaOrden.total;
+            if (this.nuevaOrden.mesero === "") {
+                this.bitacora.descripcion = "Se agregó una nueva orden a domicilio con un total de $ " + this.nuevaOrden.total + ". ID-Orden=" + localStorage.getItem("idOrdenImprimir");
+            } else {
+                this.bitacora.descripcion = this.nuevaOrden.mesero + " agregó una nueva orden con un total de $ " + this.nuevaOrden.total + ". ID-Orden=" + localStorage.getItem("idOrdenImprimir");
+            }
 
             axios
                 .post(this.url + '/bitacoras', JSON.stringify(this.bitacora), {

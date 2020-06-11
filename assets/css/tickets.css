@@ -1,5 +1,4 @@
 .borrador {
-  /* width: 100%; */
   border-collapse: collapse;
   font-size: 12px;
   width: 944px;
@@ -11,7 +10,6 @@
 }
 
 .ticket {
-  /* width: 100%; */
   border-collapse: collapse;
   font-size: 12px;
   width: 944px;
@@ -29,9 +27,9 @@
 }
 
 .titulo {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .titulo2 {
-  font-size: 25px;
+  font-size: 15px;
 }

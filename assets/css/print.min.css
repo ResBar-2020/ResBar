@@ -35,17 +35,16 @@
   cursor: pointer;
 }
 
-.tablaBorrador{
+.tablaBorrador {
   table-layout: fixed;
-  width: 210px;
+  width: 230px;
 }
 
-/* .borrador td.prod {
-  width: 100px;
-  word-wrap: break-word;
-} */
+.tablaTicket {
+  table-layout: fixed;
+  width: 230px;
+}
 
-/* .ticket table .name {
-  width: 120px;
-  word-wrap: break-word;
-} */
+.tablaTicket span {
+  margin-right: 5px;
+}

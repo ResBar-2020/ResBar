@@ -29,7 +29,8 @@ new Vue({
             "detalleOrden": []
         },
         editarOrdenImp: false,
-        reimpresion: false
+        reimpresion: false,
+        admin:admin
     },
     methods: {
         //Obtiene todas las ordenes 

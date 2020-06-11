@@ -36,7 +36,7 @@
                     <input id=pin type="number" v-model="user.pin" required><label>Pin</label>
                     <small id="pinMsg" class="form-text text-center"></small>
                 </div>
-                <input type="button" class="float-right mt-0" value="Enviar" v-on:click="Login()">
+                <input type="submit" class="float-right mt-0" value="Enviar" v-on:click="Login()" v-on:keyup.13="Login()">
             </form>
             <footer class="sticky-footer mt-5">
                 <div class="text-center text-white copyright"><span>Copyright © Diseño I 2020</span></div>
@@ -64,6 +64,7 @@
         window.onload = function () {
             $("#loader").hide()
         }
+        
     </script>
 </body>
 
