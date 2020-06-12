@@ -8,7 +8,8 @@ new Vue({
         active: true,
         logName: logName,
         detalle: false,
-        etapa: ''
+        etapa: '',
+        ordenSelected: '',
     },
     methods: {
         /*
@@ -25,11 +26,10 @@ new Vue({
 
         },
         /**
+         * Aumentar el valor de la etapa de la orden a domicilio
          * 
-         * @param {od} valor 
          */
         domicilioEtapa(valor) {
-            this.etapa='completada'
             axios.patch(`${this.urlApi}/${valor.id}`, {
                 domicilioEtapa: valor.domicilioEtapa + 1
             }).then(
@@ -73,14 +73,39 @@ new Vue({
                 logout()
                 window.location = "./login.html"
             }
-        }
-        
+        },
+        agregarProductos() {
+            window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
+        },
+        cobrarOrden() {
+            if (admin) {
+                window.location = "./cobrarorden.html?id=" + this.ordenSelected.id;
+            } else {
+                this.action = "cobrarorden"
+                this.showConfirm();
+            }
 
+        },
+        modificarOrden() {
+        if (admin) {
+            window.location = "./modificarorden.html?id=" + this.ordenSelected.id;
+        } else {
+               this.action = "modificarorden"
+                this.showConfirm()
+        } 
+    },
+    printTicket: function() {
+        printJS('borrador', 'html')
+    }
+      
+
+
+       
     },
     mounted() {
         this.getDomicilios();
     },
-    created(){
+    created() {
         if (!localStorage.vue_session_key) {
             window.location = "./login.html"
         }

@@ -18,7 +18,7 @@ new Vue({
     inicioDelete: null,
     hastaDelete: null,
     bitacorasDelete: [],
-    admin: admin,
+  
   },
 
   created: function () {
