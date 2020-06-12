@@ -700,7 +700,10 @@
                             <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="reimpresion">
                                 <p style="margin: 0;padding: 0;">Reimpresion</p>
                             </div>
-                            <h1 class="centrado">Restaurante X</h1>
+                            <h4 class="centrado mt-3">{{parametros[0].valor}}</h4>
+                            <div class="mx-2 centrado">
+                                {{parametros[5].valor}} <br> Tel.: {{parametros[2].valor}} <br> NIT: {{parametros[3].valor}} Giro:{{parametros[4].valor}}
+                            </div>
                             <div style="padding: 1rem;">
                                 <div style="display: flex;">
                                     <!-- <div style="display: inline;">Cliente: {{imprimirProd.cliente}}</div> -->
@@ -730,15 +733,15 @@
                                     <tr>
                                         <td colspan="3" style="text-align: right;  font-weight: bold; border: solid 1px black;">
                                             Sub-Total </td>
-                                        <td style="text-align: center;">${{(imprimirProd.total*1).toFixed(2)}}</td>
+                                        <td style="text-align: center; border: solid 1px black;">${{(imprimirProd.total*1).toFixed(2)}}</td>
                                     </tr>
                                     <tr style="border: solid 1px black;">
                                         <td colspan="3" style="text-align: right; border: solid 1px black;">Costo de envio </td>
                                         <td style="text-align: center;">${{parametros[10].valor}}</td>
                                     </tr>
-                                    <tr style="border: solid 1px black; border: solid 1px black;">
+                                    <tr style="border: solid 1px black;">
                                         <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
-                                            <p style="margin: 1mm 5mm;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}
+                                            <p style="margin: 1mm 5mm;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1).toFixed(2))}}
                                             </p>
                                         </td>
                                     </tr>
@@ -761,6 +764,10 @@
                                     <p style="font-weight: bold;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}
                                     </p>
                                 </div>
+
+                            </div>
+                            <div class="mx-2 my-3 centrado">
+                                {{parametros[1].valor}}
                             </div>
                         </div>
                     </div>
