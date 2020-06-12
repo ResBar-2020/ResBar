@@ -188,9 +188,10 @@
                                             <th scope="col" v-on:click="ordenarMesero" v-if="ascendente">Mesero <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
                                             <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i class="far fa-arrow-alt-circle-up"></th>
-                                            <th scope="col">Observaciones</th>
+                                            
                                             <th scope="col">Total</th>
                                             <th scope="col">Acciones</th>
+                                            <th scope="col">Tiempo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -202,7 +203,7 @@
                                             <td>{{orden.cliente}}</td>
                                             <td>{{orden.mesa}}</td>
                                             <td>{{orden.mesero}}</td>
-                                            <td>{{orden.observacion}}</td>
+                                           
                                             <td>${{orden.total.toFixed(2)}}</td>
 
                                             <td v-if="orden.estado == 'A'">
@@ -241,7 +242,14 @@
                                                     <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Reimprimir ticket" @click="imprimirProd=orden; reimprimir()">
                                                     <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
-                                                </td>
+                                            </td>
+                                            <td>
+                                                <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maxim="parametros[7].valor"></semaforo>
+
+
+                                                </div>
+
+                                            </td>
                                         </tr>
                                         </tbody>
                                 </table>
@@ -263,9 +271,10 @@
                                             <th scope="col" v-on:click="ordenarMesero" v-if="ascendente">Mesero <i
                                                     class="far fa-arrow-alt-circle-down"></i></th>
                                             <th scope="col" v-on:click="ordenarMesero" v-else>Mesero <i class="far fa-arrow-alt-circle-up"></th>
-                                            <th scope="col ">Observaciones</th>
+                                            
                                             <th scope="col ">Total</th>
                                             <th scope="col ">Acciones</th>
+                                            <th scope="col ">Tiempo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -277,7 +286,7 @@
                                             <td>{{orden.cliente}}</td>
                                             <td>{{orden.mesa}}</td>
                                             <td>{{orden.mesero}}</td>
-                                            <td>{{orden.observacion}}</td>
+                                            
                                             <td>${{orden.total.toFixed(2)}}</td>
                                             <td>
                                                 <button type="button" class="btn btntable btn-sm"
@@ -298,7 +307,16 @@
                                                 <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Reimprimir ticket" @click="imprimirProd=orden; reimprimir()">
                                                     <i class="fas text-white fa-motorcycle"></i></a>
                                                 </button>
-                                                </td>
+                                            </td>
+                                            <td>
+                                                <input type="hidden" v-bind:value="orden.tiempoPreparacion" v-bind:id="'hidden-'+orden.id">
+                                                <div v-bind:id="orden.id" class="semaforo">
+        
+                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maxim="parametros[7].valor"></semaforo>
+
+                                                </div>
+
+                                            </td>
                                         </tr>
                                         </tbody>
                                 </table>

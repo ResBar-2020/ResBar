@@ -63,9 +63,10 @@ new Vue({
 
         // modificar la orden 
         modificarOrden() {
+            this.ordenSelected.tiempoPreparacion=new Date(Date.now()).toISOString();
             if (this.domicilioAux == true) {
                 this.ordenSelected.mesa = "0";
-                this.ordenSelected.mesero = "";
+                this.ordenSelected.mesero = "";                
             }
             //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
             if (this.ordenSelected.detalleOrden.length > 0) {

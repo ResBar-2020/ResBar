@@ -161,6 +161,7 @@ var vm = new Vue({
           ordenSelecte sean actualizados*/
         agregarProductosOrden() {
             this.addOrdenSelected();
+            this.ordenSelected.tiempoPreparacion=new Date(Date.now()).toISOString();
             axios.put(ApiRestUrl + '/ordenes/' + this.ordenSelected.id, this.ordenSelected)
                 .then(response => {
                     if (this.detallesDeNuevaOrden.length == 0) {
