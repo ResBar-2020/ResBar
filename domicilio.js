@@ -6,7 +6,9 @@ new Vue({
         ordenes: {},
         searchDisplay: "",
         active: true,
-        logName: logName
+        logName: logName,
+        detalle: false,
+        etapa: ''
     },
     methods: {
         /*
@@ -27,6 +29,7 @@ new Vue({
          * @param {od} valor 
          */
         domicilioEtapa(valor) {
+            this.etapa='completada'
             axios.patch(`${this.urlApi}/${valor.id}`, {
                 domicilioEtapa: valor.domicilioEtapa + 1
             }).then(
@@ -45,7 +48,7 @@ new Vue({
             axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
                 response => {
                     this.ordenes = response.data
-                    console.log(tresponse.data);
+                    console.log(response.data);
 
                 }
             ).catch(ex => { console.log(ex) })
@@ -71,6 +74,7 @@ new Vue({
                 window.location = "./login.html"
             }
         }
+        
 
     },
     mounted() {

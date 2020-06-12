@@ -29,18 +29,13 @@
             <li class="nav-item" role="presentation">
               <a class="nav-link active" href="ordenes.html"><i class="fas fa-list-ol"></i><span>ORDENES</span></a>
               <a class="nav-link active" href="domicilio.html"><i class="fas fa-truck"></i><span>DOMICILIO</span></a>
-              <a v-if="admin" class="nav-link active" href="clientes.html"><i
-                  class="fas fa-users"></i><span>CLIENTES</span></a>
-              <a v-if="admin" class="nav-link active" href="productos.html"><i
-                  class="fas fa-box"></i><span>PRODUCTOS</span></a>
-              <a v-if="admin" class="nav-link active" href="categorias.html"><i
+              <a class="nav-link active" href="clientes.html"><i class="fas fa-users"></i><span>CLIENTES</span></a>
+              <a class="nav-link active" href="productos.html"><i class="fas fa-box"></i><span>PRODUCTOS</span></a>
+              <a class="nav-link active" href="categorias.html"><i
                   class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-              <a v-if="admin" class="nav-link active" href="informes.html"><i
-                  class="fas fa-file-alt"></i><span>INFORMES</span></a>
-              <a v-if="admin" class="nav-link active" href="users.html"><i
-                  class="fas fa-users"></i><span>USUARIOS</span></a>
-              <a v-if="admin" class="nav-link active" href="bitacoras.html"><i
-                  class="fas fa-archive"></i><span>BITACORAS</span></a>
+              <a class="nav-link active" href="informes.html"><i class="fas fa-file-alt"></i><span>INFORMES</span></a>
+              <a class="nav-link active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
+              <a class="nav-link active" href="bitacoras.html"><i class="fas fa-archive"></i><span>BITACORAS</span></a>
             </li>
           </ul>
           <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle"
@@ -80,17 +75,16 @@
                       class="fas fa-list-ol"></i><span>ORDENES</span></a>
                   <a class="topNavLink active" href="domicilio.html" style="background-color: #585858;color: white;"><i
                       class="fas fa-truck"></i><span>DOMICILIO</span></a>
-                  <a v-if="admin" class="topNavLink active" href="clientes.html"><i
+                  <a class="topNavLink active" href="clientes.html"><i
                       class="fas fa-users"></i><span>CLIENTES</span></a>
-                  <a v-if="admin" class="topNavLink active" href="productos.html"><i
+                  <a class="topNavLink active" href="productos.html"><i
                       class="fas fa-box"></i><span>PRODUCTOS</span></a>
-                  <a v-if="admin" class="topNavLink active" href="categorias.html"><i
+                  <a class="topNavLink active" href="categorias.html"><i
                       class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
-                  <a v-if="admin" class="topNavLink active" href="informes.html"><i
+                  <a class="topNavLink active" href="informes.html"><i
                       class="fas fa-file-alt"></i><span>INFORMES</span></a>
-                  <a v-if="admin" class="topNavLink active" href="users.html"><i
-                      class="fas fa-users"></i><span>USUARIOS</span></a>
-                  <a v-if="admin" class="topNavLink active" href="bitacoras.html"><i
+                  <a class="topNavLink active" href="users.html"><i class="fas fa-users"></i><span>USUARIOS</span></a>
+                  <a class="topNavLink active" href="bitacoras.html"><i
                       class="fas fa-archive"></i><span>BITACORAS</span></a>
                   <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
                     {{ logName }}</span>
@@ -188,18 +182,25 @@
 
             <!--termina el filtro-->
 
+
+            <!--aca iran las alertas-->
+
+
             <!--comienza el contenido-->
             <div class="container">
 
               <!--cards para ordenes-->
-
+              <a v-on:click="detalle=!detalle" class="float">
+                <i v-if="detalle===true" class="fa fa-share my-float text-white">orden</i>
+                <i v-if="detalle===false" class="fa fa-share my-float text-white">detalle</i>
+              </a>
 
               <div class="card-group">
                 <ul v-for="(orden,index) in ordenes" class="list-group">
                   <li class="list-group-item bg-list-color-transparent" v-show="filtro(index)">
                     <div class="wrap text-white mb-3 col-sm" style="max-width: 18rem;">
                       <div class="tarjeta-wrap">
-                        <div class="tarjeta">
+                        <div class="tarjeta" :class="{ 'tarjeta-flip' : detalle}">
                           <!-- parte delantera del card-->
                           <div class="adelante card1">
                             <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-danger ">
@@ -220,12 +221,15 @@
 
                               <h4 class="card-text">CLIENTE: {{orden.cliente}}</h4>
                               <h4 class="card-text">FECHA: {{orden.fecha.substring(0,10)}}</h4>
-                              <h4 class="card-text">OBSERVACION: {{orden.observacion}}</h4>
+
+                              <!-- se mostraran las acciones-->
+                              <a class="button1">Acciones</a>
+                              <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
+                                class="button1">completar</a>
 
 
 
                             </div>
-
 
                           </div>
 
@@ -244,12 +248,6 @@
                               <br>
                               <!--a v-if="orden.domicilioEtapa!=2" class="myButton">Etapa completa !</a -->
 
-                              <div v-if="orden.domicilioEtapa!=2" class="button_cont">
-
-                                <a class="example_e" v-on:click="domicilioEtapa(orden)" target="_blank"
-                                  rel="nofollow noopener">
-                                  Etapa completa !</a>
-                              </div>
                             </div>
 
                             <!--a href="#" class="myButton">red</a -->
@@ -296,17 +294,20 @@
 
 
     </div>
+  </div>
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.easing.js"></script>
-    <script src="assets/js/vue.js "></script>
-    <script src="assets/js/axios.min.js "></script>
-    <script src="assets/js/theme.js"></script>
-    <script src="assets/js/Script.js"></script>
-    <script src="assets/js/vue-session.min.js"></script>
-    <script src="config.js"></script>
-    <script src="domicilio.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery.easing.js"></script>
+  <script src="assets/js/vue.js "></script>
+  <script src="assets/js/axios.min.js "></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/Script.js"></script>
+  <script src="assets/js/vue-session.min.js"></script>
+  <script src="config.js"></script>
+  <script src="domicilio.js"></script>
+
+
 </body>
 
 </html>
