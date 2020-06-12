@@ -15,6 +15,7 @@ new Vue({
             preparado: ""
         },
         productos: [],
+        categoriaSelected: "",
         producto: {
             id: "0",
             nombre: "",
@@ -34,12 +35,10 @@ new Vue({
             },
             preparado: ""
         },
-
-
-
-
+        todos: false,
     },
     created: function() {
+        this.obtenerCategorias();
         this.obtenerProductos();
         if (localStorage.vue_session_key) {
             if (localStorage.getItem(VueSession.key) == '"mesero"') {

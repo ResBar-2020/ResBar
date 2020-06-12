@@ -142,39 +142,55 @@
                         </div>
                         <!-- Termina seccion de alertas -->
 
+                        <!-- tab por cada categoria-->
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <!-- Se evalua  si la categoria es la primera en la lista, si es asi el tab se marca como activo-->
+                            <li v-for="categoria in categorias" class="nav-item">
+                                <a class="nav-link" :class="{ active:categorias.indexOf(categoria) === 0}" data-toggle="tab" v-bind:id="categoria.nombre+'-tab'" v-bind:href="'#'+categoriaSelected" role="tab" @click.prevent="categoriaSelected=categoria.nombre">
+                                                                        {{categoria.nombre}}
+                                                                    </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ active:categoriaSelected === true }" data-toggle="tab" v-bind:id="todos+'-tab'" v-bind:href="'#'+todos" role="tab" @click.prevent="categoriaSelected=true">
+                                 Todos</a>
+                            </li>
+                        </ul>
                         <!-- Incia Tabla -->
-                        <div>
-                            <table class="table table-sm table-bordered table-responsive-sm table-hover table-striped mb-0">
-                                <thead class="bg-primary text-white">
-                                    <tr>
-                                        <th scope="col" style="text-align: center;">Id Producto</th>
-                                        <th style="text-align: center;" scope="col">Nombre</th>
-                                        <th style="text-align: center;" scope="col">Precio</th>
-                                        <th style="text-align: center;" scope="col">Categoria</th>
-                                        <th style="text-align: center;" scope="col">Acciones</th>
+                        <!-- Incia div.tab-content de productos a agregar-->
+                        <div class="tab-content" id="myTabContent">
+                            <!-- crea un div de con clases active,show si la categoria es la primera, la referencia del div activo es por id-->
+                            <div :class="[ categorias.indexOf(categoria) === 0? ['active','show']:'','tab-pane','fade']" v-bind:id="categoria.nombre" v-for="categoria in categorias" role="tabpanel">
+                                <table class="table table-sm table-bordered table-responsive-sm table-hover table-striped mb-0">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th scope="col" style="text-align: center;">Id Producto</th>
+                                            <th style="text-align: center;" scope="col">Nombre</th>
+                                            <th style="text-align: center;" scope="col">Precio</th>
+                                            <th style="text-align: center;" scope="col">Categoria</th>
+                                            <th style="text-align: center;" scope="col">Acciones</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(producto, index) in productos " v-show="buscar(index)" v-on:click="productoSelected=producto" v-bind:class="{ 'font-weight-bold' : productoSelected==producto, 'text-dark': productoSelected==producto }">
-                                        <td style="text-align: center;">
-                                            {{producto.id.substring(producto.id.length - 4, producto.id.length)}}</td>
-                                        <td style="text-align: center;">{{producto.nombre}}</td>
-                                        <td style="text-align: center;">$ {{producto.precio}}</td>
-                                        <td style="text-align: center;">{{producto.categoria.nombre}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Modificar Orden" data-target="#frmmodificar" @click="productoSelected=producto; modalmodificarProducto()">
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(producto, index) in productos " v-if='producto.categoria.nombre == categoria.nombre || categoriaSelected === true' v-show="buscar(index)" v-on:click="productoSelected=producto" v-bind:class="{ 'font-weight-bold' : productoSelected==producto, 'text-dark': productoSelected==producto }">
+                                            <td style="text-align: center;">
+                                                {{producto.id.substring(producto.id.length - 4, producto.id.length)}}</td>
+                                            <td style="text-align: center;">{{producto.nombre}}</td>
+                                            <td style="text-align: center;">$ {{producto.precio}}</td>
+                                            <td style="text-align: center;">{{producto.categoria.nombre}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" title="Modificar Orden" data-target="#frmmodificar" @click="productoSelected=producto; modalmodificarProducto()">
                                                 <i class="fa fa-edit mr-2"></i>
                                             </button>
 
-                                            <button class="btn btn-danger btn-sm" id="btnborrar" data-toggle="modal" data-target="#frmeliminar" title="Eliminar Orden"><i
+                                                <button class="btn btn-danger btn-sm" id="btnborrar" data-toggle="modal" data-target="#frmeliminar" title="Eliminar Orden"><i
                                                     class="fa fa-trash-alt mr-2"></i>
                                             </button>
 
-                                    </tr>
-                                </tbody>
-                            </table>
-
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- Termina Tabla -->
 
