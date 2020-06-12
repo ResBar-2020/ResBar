@@ -51,9 +51,19 @@ new Vue({
                     } else {
                         this.getAllDomicilios();
                     }
+
+                    if(valor.domicilioEtapa==0){
+                        swal("Completado!", "Orden en Proceso", "success");
+                    } else if(valor.domicilioEtapa==1){
+                    swal("Completado!", "Orden Entregada!", "success");
+                    }
                     console.log(response.status);
                 }
             ).catch(ex => { console.log(ex) })
+
+           
+
+
         },
         getAllDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
