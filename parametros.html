@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>RESBAR</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/googlefonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/imprimirTicket.css">
+    <!-- Estilo de borrador de orden -->
+    <link rel="stylesheet" href="assets/css/print.min.css">
+</head>
+
+<body id="page-top">
+    <div class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
+
+    <div id="appRESBAR">
+        <div id="wrapper">
+            <!-- Inicia navbar lateral -->
+            <nav class="navbar d-none d-lg-flex navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="domicilio.html"><i
+                                    class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                            <a v-if="admin" class="nav-link active" href="clientes.html"><i
+                                    class="fas fa-users"></i><span>CLIENTES</span></a>
+                            <a v-if="admin" class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a v-if="admin" class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a v-if="admin" class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a v-if="admin" class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
+                            <a v-if="admin" class="nav-link active" href="bitacoras.html"><i
+                                    class="fas fa-archive"></i><span>BITACORAS</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <!-- Termina navbar lateral -->
+
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <!-- Inicia navbar top -->
+                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-lg-none" style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" style="color: #585858;" href="#">
+                            <div class="sidebar-brand-icon rotate-n-15">
+                                <i class="fas fa-glass-martini"></i>
+                            </div>
+                            <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                        </a>
+
+                        <div class="navbar-header page-scroll">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                                aria-expanded="false">
+                                <span style="color: #585858;"><i class="fas fa-bars"></i></span>
+                            </button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-collapse navbar-ex1-collapse collapse">
+                            <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                                <li class="nav-item" role="presentation">
+                                    <a class="topNavLink active" href="ordenes.html" style="background-color: #585858;color: white;"><i
+                                            class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                    <a class="topNavLink active" href="domicilio.html"><i
+                                            class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="clientes.html"><i
+                                            class="fas fa-users"></i><span>CLIENTES</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="productos.html"><i
+                                            class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="categorias.html"><i
+                                            class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="informes.html"><i
+                                            class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="users.html"><i
+                                            class="fas fa-users"></i><span>USUARIOS</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="bitacoras.html"><i
+                                            class="fas fa-archive"></i><span>BITACORAS</span></a>
+                                    <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
+                                        {{ logName }}</span>
+                                    <button type="button" class="btn btn-sm btn-danger float-right" v-on:click="salir">Salir</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Termina navbar top -->
+
+                    <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
+                    <div class="container-fluid">
+
+
+                        <!-- TITULO -->
+
+
+                        <div class="row my-4">
+                            <div class="col-12 ag">
+                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right" v-on:click="salir">Salir</button>
+                                <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
+                                    {{ logName }}</label><br>
+                                <h1 class="text-center">Sistema de Ordenes RESBAR</h1>
+                            </div>
+                        </div>
+
+                        <!-- Inicia seccion de alertas -->
+                        <div v-if="alertBool" class="alert alerta" role="alert">
+                            {{alerta}}
+                        </div>
+                        <!-- Termina seccion de alertas -->
+
+                        <!--Modal para confirmar si es admin-->
+                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal" data-backdrop="static" tabindex="-1">
+                            <div class="modal-dialog modal-md">
+                                <div class="modal-content">
+                                    <div class="modal-header modal-title">
+                                        <h4 class="text-center">Confirmar Admin</h4>
+                                        <label class="float-right" style="font-size:20px;" v-on:click="closeConfirm">x</label>
+                                    </div>
+                                    <div class="modal-body box2 text-white">
+                                        <form>
+                                            <label id="errorMsg" class="form-text text-uppercase text-center"></label>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <label class="font-weight-bold">Ingrese el Pin de un
+                                                        administrador</label>
+                                                    <input id="pin" v-model="user.pin" id="id" type="number" class="form-control" required>
+                                                    <small id="iguales" class="form-text text-danger"></small>
+                                                    <small id="tamanio" class="form-text ">Ejemplo: 45641</small>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Termina el contenedor de la pagina y el dominio de VUE-->
+
+                    <!-- Inicia el pie de pagina -->
+                    <footer class="bg-white sticky-footer ">
+                        <div class="container my-auto ">
+                            <div class="text-center my-auto copyright "><span>Copyright © Diseño I 2020</span></div>
+                        </div>
+                    </footer>
+                    <!-- Termina el pie de pagina -->
+
+                </div><a class="border rounded d-inline scroll-to-top " href="#page-top "><i
+                        class="fas fa-angle-up "></i></a>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js "></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js "></script>
+    <script src="assets/js/jquery.easing.js "></script>
+    <script src="assets/js/vue.js "></script>
+    <script src="assets/js/axios.min.js "></script>
+    <script src="assets/js/theme.js "></script>
+    <script src="assets/js/Script.js "></script>
+    <script src="assets/js/vue-session.min.js "></script>
+    <!--Aqui va tu codigo de vue js-->
+    <script src="assets/js/moment.js "></script>
+    <script src="config.js "></script>
+    <script src="parametros.js "></script>
+
+</body>
+
+</html>
