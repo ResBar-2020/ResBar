@@ -230,7 +230,11 @@
                               <a class="button1 bouncy" data-toggle="modal" href="#modal-acciones">Acciones</a>
                               <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
                                 class="button1 bouncy" style="animation-delay:0.07s">completar</a>
+                                <div v-bind:id="orden.id" class="semaforo">
+        
+                                  <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maximo="parametros[7].valor" :par10="parametros[9].valor"></semaforo>
 
+                              </div>
                             </div>
 
                           </div>

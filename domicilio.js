@@ -1,4 +1,68 @@
-new Vue({
+Vue.component('semaforo', {
+    props: ['idorden','fechainicio','maximo',"par10"],
+    data: function () {
+        var maxim=this.maximo+this.par10;
+        var t=new Date();
+        var tiempoinicio= Date.parse(this.fechainicio);
+        this.segundos = (t - tiempoinicio) / 1000;
+        this.color="red";
+        const self=this;
+        this.interval1=
+        setInterval(
+            function(){
+            var t=new Date();
+            var tiempoinicio= Date.parse(self.fechainicio);
+            var segundos = (t - tiempoinicio) / 1000;
+              
+            var element=document.querySelector('#timer-'+self.idorden);
+             
+            element.innerHTML=self.secondsToHMS(segundos);
+            
+            var porcentaje = ((segundos/60)/self.maxim)*100;
+            
+            if(porcentaje<60){
+                element.style.backgroundColor="#40FF00";
+                
+            }else if(porcentaje>60 && porcentaje<100){
+                
+                element.style.backgroundColor="#F7FE2E";
+            }else{
+                element.style.backgroundColor="#FF4000";
+                
+
+            }
+            },
+            1000
+        );
+        
+  
+    
+      return {
+        
+      }
+    },
+    methods: {
+         secondsToHMS: function(secs) {
+               function z(n){
+                   return (n<10?'0':'') + n;
+                }
+                  var sign = secs < 0? '-':'';
+                 secs = Math.abs(secs);
+                    return sign + z(secs/3600 |0) + ':' + z((secs%3600) / 60 |0) + ':' + parseInt(z(secs%60)); 
+                }
+
+
+    },
+    template: `<div>
+    <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
+    </div>
+    <button v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
+     
+     </div>`
+  })
+
+
+var vmm= new Vue({
 
     el: "#appRESBAR",
     data: {
@@ -10,6 +74,7 @@ new Vue({
         detalle: false,
         etapa: '',
         fecha: "",
+        parametros:"",
         ordenSelected: '',
         imprimirProd: {
             "id": "",
@@ -25,6 +90,33 @@ new Vue({
         reimpresion: false
     },
     methods: {
+
+        modificartiempo(idorden) {
+            
+            axios.get(
+                this.uri + "/"+idorden)
+                .then(res => {
+                    var orden = res.data
+                    orden.tiempoPreparacion=null;
+                    console.log(orden)
+
+                    axios.put(this.uri + '/' +idorden, orden)
+                    .then(response => {
+                        console.log(response)
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        location.reload();
+                    });
+
+
+                }).catch(er => console.error(er))
+
+        
+
+
+        },
         /*
         switch para mostrar todas las ordenes a domicilio
         */
@@ -61,6 +153,9 @@ new Vue({
                 }
             ).catch(ex => { console.log(ex) })
 
+           
+
+
         },
         getAllDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
@@ -90,9 +185,7 @@ new Vue({
                 logout()
                 window.location = "./login.html"
             }
-        }
-        // 
-        ,
+        },
         agregarProductos() {
             window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
@@ -209,6 +302,8 @@ new Vue({
                     this.parametros = res.data
                 }).catch(er => console.error(er))
         }
+
+
 
 
     },

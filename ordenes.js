@@ -16,16 +16,17 @@ Vue.component('semaforo', {
             var element=document.querySelector('#timer-'+self.idorden);
              
             element.innerHTML=self.secondsToHMS(segundos);
+            
             var porcentaje = ((segundos/60)/self.maxim)*100;
             
             if(porcentaje<60){
-                element.style.backgroundColor="green";
+                element.style.backgroundColor="#40FF00";
                 
             }else if(porcentaje>60 && porcentaje<100){
                 
-                element.style.backgroundColor="yellow";
+                element.style.backgroundColor="#F7FE2E";
             }else{
-                element.style.backgroundColor="red";
+                element.style.backgroundColor="#FF4000";
                 
 
             }
@@ -100,7 +101,7 @@ var vm= new Vue({
                 this.uri + "/"+idorden)
                 .then(res => {
                     var orden = res.data
-                    orden.tiempoPreparacion="null";
+                    orden.tiempoPreparacion=null;
                     console.log(orden)
 
                     axios.put(this.uri + '/' +idorden, orden)
