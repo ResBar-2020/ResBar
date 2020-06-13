@@ -61,9 +61,6 @@ new Vue({
                 }
             ).catch(ex => { console.log(ex) })
 
-           
-
-
         },
         getAllDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
@@ -93,7 +90,9 @@ new Vue({
                 logout()
                 window.location = "./login.html"
             }
-        },
+        }
+        // 
+        ,
         agregarProductos() {
             window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
@@ -210,8 +209,6 @@ new Vue({
                     this.parametros = res.data
                 }).catch(er => console.error(er))
         }
-
-
 
 
     },

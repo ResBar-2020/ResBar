@@ -242,6 +242,7 @@
 
                             <div class="card-body">
                               <h5 class="card-header text-white" style="background-color: #130f40;">Detalle: </h5>
+                              <p class="card-header text-white" style="background-color: #130f40;">{{String((orden.id).substring(17,24))}}  {{orden.cliente}} </p>
                               <ol class="rounded-list" v-for="item in orden.detalleOrden">
                                 <li class="align-items-center list-group-item-action list-group-item-primary">
                                   <a> {{item.nombre}} cantidad: {{item.cantidad}} </a>
@@ -360,10 +361,12 @@
               <!--FINALIZAN CARDS-->
 
 
+
+
+
+
+
               <!--COMIENZA EL COPY-PASTE DE ORDENES-->
-
-
-
                   <!-- Comienza ticket a domicilio-->
                   <div id="ticket" class="mostrar-impresion" v-if="imprimirProd.domicilio">
                       <div class="ticket" style="border: 1px solid black;">
