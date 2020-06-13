@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/cards.css">
 
+  <link rel="stylesheet" href="assets/css/imprimirTicket.css">
+  <!-- Estilo de borrador de orden -->
+  <link rel="stylesheet" href="assets/css/print.min.css">
+
 
 </head>
 
@@ -204,17 +208,46 @@
                           <!-- parte delantera del card-->
                           <div class="adelante card1">
                             <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-danger ">
-                              <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
-                              <h2 class="card-title"> $ {{orden.total}} </h2>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
+                                  <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
+                                    class="button1 bouncy" style="animation-delay:0.07s">completar</a>
+                                </div>
+                                <div class="col-md-6">
+                                  <h2 class="card-title"> $ {{orden.total}} </h2>
+
+                                </div>
+                              </div>
+
                             </div>
                             <div v-if="orden.domicilioEtapa==1" class="card-header text-white bg-primary">
-                              <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
-                              <h2 class="card-title"> $ {{orden.total}} </h2>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
+                                  <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
+                                    class="button1 bouncy" style="animation-delay:0.07s">completar</a>
+                                </div>
+                                <div class="col-md-6">
+                                  <h2 class="card-title"> $ {{orden.total}} </h2>
+
+                                </div>
+                              </div>
                             </div>
                             <div v-if="orden.domicilioEtapa==2" class="card-header text-white bg-success">
-                              <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
-                              <h2 class="card-title"> $ {{orden.total}} </h2>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
+                                  <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
+                                    class="button1 bouncy" style="animation-delay:0.07s">completar</a>
+                                </div>
+                                <div class="col-md-6">
+                                  <h2 class="card-title"> $ {{orden.total}} </h2>
+
+                                </div>
+                              </div>
                             </div>
+
 
                             <div class="card-body"
                               style="font: italic normal 400 16px/22px Arial, Verdana, Sans-serif;">
@@ -223,10 +256,40 @@
                               <h4 class="card-text">FECHA: {{orden.fecha.substring(0,10)}}</h4>
 
                               <!-- se mostraran las acciones-->
-                              <a class="button1 bouncy" data-toggle="modal" href="#modal-acciones">Acciones</a>
-                              <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
-                                class="button1 bouncy" style="animation-delay:0.07s">completar</a>
+                              <button v-if="orden.domicilioEtapa!=2" type="button" class="btn btntable btn-sm" @click="agregarProductos(orden)" title="Agregar Mas Productos">
+                                <i class="fas text-white fa-plus-circle"></i></a>
+                              </button>
+                              <button v-else type="button" class="btn btntable btn-sm disabled" title="Agregar Mas Productos">
+                                <i class="fas text-white fa-plus-circle"></i></a>
+                              </button>
 
+                              <button v-if="orden.domicilioEtapa!=2" type="button" @click="modificarOrden(orden)" class="btn btntable btn-sm" title="Modificar Orden">
+                                <i class="fas text-white fa-edit"></i></a>
+                              </button>
+                              <button v-else type="button" class="btn btntable btn-sm disabled" title="Modificar Orden">
+                                <i class="fas text-white fa-edit"></i></a>
+                              </button>
+                              <button type="button" class="btn btntable btn-sm" @click="cobrarOrden(orden)" title="Cobrar Orden">
+                                <i class="fas text-white fa-money-bill"></i></a>
+                              </button>
+                              <button type="button" class="btn btntable btn-sm" title="Eliminar Orden">
+                                <i class="fas text-white fa-trash"></i></a>
+                              </button>
+                              <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                                <i @click="ordenSelected=orden;"
+                                    class="fas text-white fa-print"></i>
+                            </button>
+                              <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm"
+                                title="Reimprimir ticket" @click="imprimirProd=orden; reimprimir()">
+                                <i class="fas text-white fa-motorcycle"></i></a>
+                              </button>
+
+                              <div v-bind:id="orden.id" class="semaforo">
+
+                                <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion"
+                                  :maximo="parametros[7].valor" :par10="parametros[9].valor"></semaforo>
+
+                              </div>
                             </div>
 
                           </div>
@@ -238,6 +301,8 @@
 
                             <div class="card-body">
                               <h5 class="card-header text-white" style="background-color: #130f40;">Detalle: </h5>
+                              <p class="card-header text-white" style="background-color: #130f40;">
+                                {{String((orden.id).substring(17,24))}} {{orden.cliente}} </p>
                               <ol class="rounded-list" v-for="item in orden.detalleOrden">
                                 <li class="align-items-center list-group-item-action list-group-item-primary">
                                   <a> {{item.nombre}} cantidad: {{item.cantidad}} </a>
@@ -256,109 +321,198 @@
                       </div>
                     </div>
 
+
                   </li>
 
-                  <!--INICIA MODAL DE ACCIONES-->
 
-                  <!-- Modal -->
-
-                  <!-- Large modal -->
-
-                  <div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-acciones" role="dialog"
-                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-
-                      <button type="button" class="close" style="width: 30px; height: 30px; background-color: red;"
-                        data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <div class="modal-content bg">
-
-                        <!--cards para reenvio a otas opciones-->
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, blue);">
-                              <div class="card-body">
-                                <h5 class="card-title">Más Productos</h5>
-                                <p class="card-text">Aumente la orden actual agregando más productos </p>
-                                <a @click="ordenSelected=orden; agregarProductos();"
-                                  class="button4 bouncy text-white">MAS PRODUCTOS</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, blue);">
-                              <div class="card-body">
-                                <h5 class="card-title">Modificar Orden</h5>
-                                <p class="card-text">Aumente o disminuya la cantidad de productos de dicha orden</p>
-                                <a @click="ordenSelected=orden; modificarOrden();"
-                                  class="button4 bouncy text-white">MODIFICAR</a>
-                              </div>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, green);">
-                              <div class="card-body">
-                                <h5 class="card-title">Cobrar Orden</h5>
-                                <p class="card-text ">Agregue total de la cantidad de productos ordenados </p>
-                                <a @click="ordenSelected=orden; cobrarOrden();"
-                                  class="button4 bouncy text-white">COBRAR</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, green);">
-                              <div class="card-body">
-                                <h5 class="card-title">Imprimir Orden</h5>
-                                <p class="card-text">Imprimir detalle de productos adquiridos por el cliente</p>
-                                <a @click="ordenSelected=orden;"
-                                  class="button4 bouncy text-white">IMPRIMIR</a>
-                              </div>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, yellow);">
-                              <div class="card-body">
-                                <h5 class="card-title">Imprimir Ticket</h5>
-                                <p class="card-text">Obtener el ticket con los productos adquiridos por el cliente</p>
-                                <a @click="ordenSelected=orden;"
-                                  class="button4 bouncy text-white">TICKET</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="card text-white" style="background: linear-gradient(70deg, black, yellow);">
-                              <div class="card-body">
-                                <h5 class="card-title">Eliminar Orden</h5>
-                                <p class="card-text">Anular o cancelar la orden actual de productos adquiridos por el
-                                  cliente</p>
-                                <a @click="ordenSelected=orden;"
-                                  class="button4 bouncy text-white">ELIMINAR</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!--fin de cards para reenvio a otas opciones-->
-
-
-
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-                  <!--FINALIZA MODAL DE ACCIONES-->
 
                 </ul>
               </div>
               <!--FINALIZAN CARDS-->
 
 
+
+
+
+
+
+              <!--COMIENZA EL COPY-PASTE DE ORDENES-->
+              <!-- Comienza ticket a domicilio-->
+              <div id="ticket" class="mostrar-impresion" v-if="imprimirProd.domicilio">
+                <div class="ticket" style="border: 1px solid black;">
+                  <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;"
+                    v-show="editarOrdenImp">
+                    <p style="margin: 0;padding: 0;">Orden Modificada</p>
+                  </div>
+                  <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;"
+                    v-show="reimpresion">
+                    <p style="margin: 0;padding: 0;">Reimpresion</p>
+                  </div>
+                  <h4 class="centrado mt-3">{{parametros[0].valor}}</h4>
+                  <div class="mx-2 centrado">
+                    {{parametros[5].valor}} <br> Tel.: {{parametros[2].valor}} <br> NIT: {{parametros[3].valor}}
+                    Giro:{{parametros[4].valor}}
+                  </div>
+                  <div style="padding: 1rem;">
+                    <div style="display: flex;">
+                      <!-- <div style="display: inline;">Cliente: {{imprimirProd.cliente}}</div> -->
+                      <div style="display: inline;">
+                        <p id="horayfecha"></p>
+                      </div>
+                    </div>
+                    N. de orden: {{imprimirProd.id}}<br> Fecha: {{fecha}}
+                  </div>
+                  <div class="centrado"><strong>Entrega a domicilio</strong></div>
+                  <table class="table-ticket" style="margin: 2mm;">
+                    <thead style="border-bottom: 1px solid black;">
+                      <tr>
+                        <th class="th-cantidad">CANT</th>
+                        <th class="th-producto">PRODUCTO</th>
+                        <th class="th-precio centrado">P/U</th>
+                        <th class="th-total">TOTAL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(prod, index) in imprimirProd.detalleOrden">
+                        <td class="td-cantidad centrado">{{prod.cantidad}}</td>
+                        <td class="td-producto">{{prod.nombre}}</td>
+                        <td class="td-precio centrado">$ {{prod.precio}}</td>
+                        <td class="td-total"> $ {{(prod.precio*prod.cantidad).toFixed(2)}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" style="text-align: right;  font-weight: bold; border: solid 1px black;">
+                          Sub-Total </td>
+                        <td style="text-align: center; border: solid 1px black;">${{(imprimirProd.total*1).toFixed(2)}}
+                        </td>
+                      </tr>
+                      <tr style="border: solid 1px black;">
+                        <td colspan="3" style="text-align: right; border: solid 1px black;">Costo de envio </td>
+                        <td style="text-align: center;">${{parametros[10].valor}}</td>
+                      </tr>
+                      <tr style="border: solid 1px black;">
+                        <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
+                          <p style="margin: 1mm 5mm;">TOTAL:
+                            ${{((imprimirProd.total*1)+(parametros[10].valor*1).toFixed(2))}}
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p style=" border-bottom: 1px solid black; width: 7cm; margin-left: 4mm;">Observaciones:
+                    {{imprimirProd.observacion}}
+                  </p>
+                  <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
+                    Cliente: {{imprimirProd.cliente}}<br> Direccion: <br> Ref. <br> Telefonos:
+                    <br>
+                  </div>
+                  <div
+                    style="border: 1px solid black; margin-left: 4mm; margin-right: 4mm; margin-top: 3mm; margin-bottom: 3mm;">
+                    <div style="text-align: center;">
+                      <p>DESPRENDIBLE ORDEN ENTREGADA <br> Se entregó la orden:</p>
+                    </div>
+                    <div style="margin: 2mm; ">
+                      <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total:
+                      ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}}<br>
+                    </div>
+                    <div style="text-align: center;">
+                      <p style="font-weight: bold;">TOTAL:
+                        ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}
+                      </p>
+                    </div>
+
+                  </div>
+                  <div class="mx-2 my-3 centrado">
+                    {{parametros[1].valor}}
+                  </div>
+                </div>
+              </div>
+              <!-- fin ticket -->
+
+
+
+              <!--Inicia el modal Imprimir Orden-->
+              <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="" data-backdrop="static"
+                tabindex="-1">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <!--Head modal-->
+                    <div class="modal-header bg-gradient-primary">
+                      <h4 class="text-center text-white">Imprimir Orden</h4>
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                          class="text-white-50" aria-hidden="true">×</span></button>
+                    </div>
+                    <!--Body modal-->
+                    <div class="modal-body" id="ordenPrint">
+                      <div class="borrador" id="borrador">
+
+                        <div class="centrar">
+                          <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
+                          <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                            Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}
+                            <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente}}
+                            <br />
+                          </p>
+                        </div>
+
+                        <div class="">
+
+                          <table class="tablaBorrador">
+                            <thead>
+                              <tr>
+                                <th class="producto prod">Producto</th>
+                                <th class="cantidad">Cant.</th>
+                                <th class="precio">P/U</th>
+                                <th>Total</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="detalle in ordenSelected.detalleOrden">
+                                <td class="prod">{{detalle.nombre}}</td>
+                                <td>{{detalle.cantidad}}</td>
+                                <td>${{detalle.precio.toFixed(2)}}</td>
+                                <td>${{detalle.subtotal.toFixed(2)}}</td>
+                              </tr>
+                              <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                                <td></td>
+                                <td></td>
+                                <td>Subtotal</td>
+                                <td>${{orden.total.toFixed(2)}}</td>
+                              </tr>
+                              <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                                <td></td>
+                                <td></td>
+                                <td>Propina (10%)</td>
+                                <td>${{(orden.total*0.1).toFixed(2)}}</td>
+                              </tr>
+                              <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
+                                <td></td>
+                                <td></td>
+                                <td><strong><span>TOTAL</span></strong></td>
+                                <td class="titulo">
+                                  <strong>${{(orden.total+(orden.total*0.1)).toFixed(2)}}</strong>
+                                </td>
+
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Footer modal-->
+                    <div class="modal-footer bg-gradient-primary">
+                      <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal"
+                        @click="limpiarMotivo()">Cerrar</button>
+                      <button class="btn btn-sm text-white" style="background-color: #FF082D; border-color: white;"
+                        type="button" @click="eliminarOrden()">ELIMINAR</button>
+
+                    </div>
+
+                  </div>
+
+                </div>
+                <!--termina modal detalle-->
+              </div>
 
             </div>
 
@@ -402,8 +556,28 @@
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/Script.js"></script>
   <script src="assets/js/vue-session.min.js"></script>
+  <script src="assets/js/sweetalert.min.js"></script>
   <script src="config.js"></script>
+  <script src="ticket.js "></script>
   <script src="domicilio.js"></script>
+
+  <!--only yisus sabe que es esto xd-->
+  <script src="assets/js/moment.js "></script>
+
+  <script type="text/javascript ">
+    window.onbeforeunload = function() {
+        $(".loader ").show()
+    }
+    window.onload = function() {
+        $(".loader ").hide()
+    }
+    window.onafterprint = function() {
+        localStorage.removeItem('estado');
+        localStorage.removeItem('idOrdenImprimir');
+    }
+</script>
+  <!-- JS para borrador de orden -->
+  <script src="assets/js/print.min.js"></script>
 
 
 </body>
