@@ -1,66 +1,66 @@
 Vue.component('semaforo', {
-    props: ['idorden','fechainicio','maxim'],
+    props: ['idorden', 'fechainicio', 'maxim'],
     data: function () {
-        var t=new Date();
-        var tiempoinicio= Date.parse(this.fechainicio);
+        var t = new Date();
+        var tiempoinicio = Date.parse(this.fechainicio);
         this.segundos = (t - tiempoinicio) / 1000;
-        this.color="red";
-        const self=this;
-        this.interval1=
-        setInterval(
-            function(){
-            var t=new Date();
-            var tiempoinicio= Date.parse(self.fechainicio);
-            var segundos = (t - tiempoinicio) / 1000;
-              
-            var element=document.querySelector('#timer-'+self.idorden);
-             
-            element.innerHTML=self.secondsToHMS(segundos);
-            
-            var porcentaje = ((segundos/60)/self.maxim)*100;
-            
-            if(porcentaje<60){
-                element.style.backgroundColor="#40FF00";
-                
-            }else if(porcentaje>60 && porcentaje<100){
-                
-                element.style.backgroundColor="#F7FE2E";
-            }else{
-                element.style.backgroundColor="#FF4000";
-                
+        this.color = "red";
+        const self = this;
+        this.interval1 =
+            setInterval(
+                function () {
+                    var t = new Date();
+                    var tiempoinicio = Date.parse(self.fechainicio);
+                    var segundos = (t - tiempoinicio) / 1000;
 
-            }
-            },
-            1000
-        );
-        
-  
-    
-      return {
-        
-      }
+                    var element = document.querySelector('#timer-' + self.idorden);
+
+                    element.innerHTML = self.secondsToHMS(segundos);
+
+                    var porcentaje = ((segundos / 60) / self.maxim) * 100;
+
+                    if (porcentaje < 60) {
+                        element.style.backgroundColor = "#40FF00";
+
+                    } else if (porcentaje > 60 && porcentaje < 100) {
+
+                        element.style.backgroundColor = "#F7FE2E";
+                    } else {
+                        element.style.backgroundColor = "#FF4000";
+
+
+                    }
+                },
+                1000
+            );
+
+
+
+        return {
+
+        }
     },
     methods: {
-         secondsToHMS: function(secs) {
-               function z(n){
-                   return (n<10?'0':'') + n;
-                }
-                  var sign = secs < 0? '-':'';
-                 secs = Math.abs(secs);
-                    return sign + z(secs/3600 |0) + ':' + z((secs%3600) / 60 |0) + ':' + parseInt(z(secs%60)); 
-                }
+        secondsToHMS: function (secs) {
+            function z(n) {
+                return (n < 10 ? '0' : '') + n;
+            }
+            var sign = secs < 0 ? '-' : '';
+            secs = Math.abs(secs);
+            return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
+        }
 
 
     },
     template: `<div>
-    <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
+    <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'" class="semaforo">
     </div>
-    <button v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
+    <button class="btn btn-sm semaforoBtn mt-1 btn-danger" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
      
      </div>`
-  })
+})
 
-var vm= new Vue({
+var vm = new Vue({
     el: "#appRESBAR",
     data: {
         ordenSelected: '',
@@ -92,37 +92,37 @@ var vm= new Vue({
         },
         editarOrdenImp: false,
         reimpresion: false,
-        admin:admin
+        admin: admin
     },
     methods: {
         modificartiempo(idorden) {
-            
+
             axios.get(
-                this.uri + "/"+idorden)
+                    this.uri + "/" + idorden)
                 .then(res => {
                     var orden = res.data
-                    orden.tiempoPreparacion=null;
+                    orden.tiempoPreparacion = null;
                     console.log(orden)
 
-                    axios.put(this.uri + '/' +idorden, orden)
-                    .then(response => {
-                        console.log(response)
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        location.reload();
-                    });
+                    axios.put(this.uri + '/' + idorden, orden)
+                        .then(response => {
+                            console.log(response)
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            location.reload();
+                        });
 
 
                 }).catch(er => console.error(er))
 
-        
+
 
 
         },
         //Obtiene todas las ordenes 
-        obtenerOrdenes: function() {
+        obtenerOrdenes: function () {
             axios.get(this.uri)
                 .then(response => {
                     this.ordenes = response.data
@@ -145,7 +145,7 @@ var vm= new Vue({
         },
         //METODOS PARA ORDENAR
         //Ordenar por Mesa
-        ordenar: function() {
+        ordenar: function () {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -193,7 +193,7 @@ var vm= new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por mesero
-        ordenarMesero: function() {
+        ordenarMesero: function () {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -241,7 +241,7 @@ var vm= new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por Cliente
-        ordenarCliente: function() {
+        ordenarCliente: function () {
             //ordena de forma ascendente las ordenes
             if (this.ascendente == true) {
                 if (this.activos) {
@@ -289,7 +289,7 @@ var vm= new Vue({
             this.ascendente = !this.ascendente
         },
         //ordenar por ID
-        ordenarID: function() {
+        ordenarID: function () {
             //ordena de forma ascendente las ordenes
             console.log(ApiRestUrl.toString)
             if (this.ascendente == true) {
@@ -338,7 +338,7 @@ var vm= new Vue({
             this.ascendente = !this.ascendente
         },
         //Obtiene todas las ordenes con estado activo
-        mostrarActivos: function() {
+        mostrarActivos: function () {
             axios.get(
                     this.uri + '?filter=%7B%0A%20%20%22where%22%3A%20%7B%0A%20%20%20%20%22estado%22%3A%20%22A%22%0A%20%20%7D%0A%7D')
                 .then(response => {
@@ -349,7 +349,7 @@ var vm= new Vue({
             this.activos = !this.activos
         },
         //Filtra las ordenes que contengan el texto a ingresado
-        buscar: function(x) {
+        buscar: function (x) {
 
             if (this.textoBusqueda == "")
                 return true;
@@ -389,7 +389,7 @@ var vm= new Vue({
         },
         /*Busca el mensaje pasado como parametro en la uri 
         para mostrarlo como alert*/
-        alertLauncher: function() {
+        alertLauncher: function () {
             let uri = window.location.href.split('?')
             if (uri.length == 2) {
 
@@ -418,7 +418,7 @@ var vm= new Vue({
             }
 
         },
-        confirmUser: function(pin) {
+        confirmUser: function (pin) {
             if (this.user.pin != "") {
                 res = this.users.filter(user => pin == user.pin)
                 if (res[0].rol == "admin") {
@@ -440,13 +440,13 @@ var vm= new Vue({
             }
 
         },
-        closeConfirm: function() {
+        closeConfirm: function () {
             $('#confirmModal').modal('hide')
         },
         //Hace desaparecer el alert
-        timer: function() {
-            window.setTimeout(function() {
-                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+        timer: function () {
+            window.setTimeout(function () {
+                $(".alert").fadeTo(500, 0).slideUp(500, function () {
                     $(this).remove();
 
                 });
@@ -466,11 +466,11 @@ var vm= new Vue({
             window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
         //Muestra el modal Detalle
-        mostrarDetalle: function() {
+        mostrarDetalle: function () {
             $('#modalDetalle').modal('show');
         },
         //Muestra el modal Eliminar
-        mostrarEliminar: function() {
+        mostrarEliminar: function () {
             if (admin) {
                 $('#modalEliminar').modal('show');
             } else {
@@ -479,7 +479,7 @@ var vm= new Vue({
             }
         },
         //Metodo eliminar Orden
-        eliminarOrden: function() {
+        eliminarOrden: function () {
 
             let texto = document.getElementById("lblMotivo").value;
             if (texto == "") {
@@ -491,7 +491,7 @@ var vm= new Vue({
                 document.getElementById("alertaMotivo").textContent = "";
                 //Elimina la orden
                 axios.delete(this.uri + '/' + this.ordenSelected.id)
-                    .then(function(res) {
+                    .then(function (res) {
                         console.log("DELETE ORDEN");
                         window.location = `./ordenes.html?alert=se elimino la orden satisfactoriamente`
                     }).catch(e => {
@@ -508,13 +508,13 @@ var vm= new Vue({
 
         },
         //Limpiar el Motivo por el cual se elimino la orden
-        limpiarMotivo: function() {
+        limpiarMotivo: function () {
             $("#modalEliminar").find("input").val("");
             document.getElementById("lblMotivo").classList.remove('is-invalid');
             document.getElementById("alertaMotivo").textContent = "";
 
         },
-        salir: function() {
+        salir: function () {
             var opcion = confirm('¿Está seguro que quiere salir?')
             console.log(opcion)
             if (opcion) {
@@ -523,7 +523,7 @@ var vm= new Vue({
             }
         },
 
-        setProdImprimir: function() {
+        setProdImprimir: function () {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
                 this.fecha = new Date(response.fecha);
@@ -541,7 +541,7 @@ var vm= new Vue({
 
         // 
         // Metodo que imprime el borrador de la orden
-        printTicket: function() {
+        printTicket: function () {
             printJS('borrador', 'html')
         },
 
