@@ -62,7 +62,7 @@ Vue.component('semaforo', {
   })
 
 
-var vmm= new Vue({
+new Vue({
 
     el: "#appRESBAR",
     data: {
@@ -75,7 +75,7 @@ var vmm= new Vue({
         etapa: '',
         fecha: "",
         parametros:"",
-        ordenSelected: '',
+        ordenSelected: {},
         imprimirProd: {
             "id": "",
             "fecha": "",
@@ -186,20 +186,22 @@ var vmm= new Vue({
                 window.location = "./login.html"
             }
         },
-        agregarProductos() {
-            window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
+        agregarProductos: function(ordenvalue) {
+            console.log("******************************************");
+            console.log(ordenvalue.nombre);
+            window.location = "./addmasproductos.html?id=" +ordenvalue.id;
         },
-        cobrarOrden() {
+        cobrarOrden(ordenvalue) {
             if (admin) {
-                window.location = "./cobrarorden.html?id=" + this.ordenSelected.id;
+                window.location = "./cobrarorden.html?id=" + ordenvalue.id;
             } else {
                 this.action = "cobrarorden"
                 this.showConfirm();
             }
         },
-        modificarOrden() {
+        modificarOrden(ordenvalue) {
             if (admin) {
-                window.location = "./modificarorden.html?id=" + this.ordenSelected.id;
+                window.location = "./modificarorden.html?id=" + ordenvalue.id;
             } else {
                 this.action = "modificarorden"
                 this.showConfirm()
