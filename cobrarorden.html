@@ -52,7 +52,8 @@
                     -->
 
                     <!--cobrar orden -->
-                    <div class="" id="mdlCobrarOrden" tabindex="-1" role="dialog" aria-labelledby="titleCobrar" aria-hidden="true">
+                    <div class="" id="mdlCobrarOrden" tabindex="-1" role="dialog" aria-labelledby="titleCobrar"
+                        aria-hidden="true">
                         <div class="border border-info" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -60,11 +61,20 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;"><h5 class="modal-title" id="mesero">Mesa: {{ordenSelected.mesa}}</h5></span>
-                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;"><h5 class="modal-title" id="mesero">Mesero: {{ordenSelected.mesero}}</h5></span>
-                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;"><h5 class="modal-title" id="cliente">Cliente: {{ordenSelected.cliente}}</h5></span>
-                                        
-                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;" ><h5 class="modal-title" id="fecha">Fecha: {{ordenSelected.fecha.substring(0,10)}}</h5></span>
+                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;">
+                                            <h5 class="modal-title" id="mesero">Mesa: {{ordenSelected.mesa}}</h5>
+                                        </span>
+                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;">
+                                            <h5 class="modal-title" id="mesero">Mesero: {{ordenSelected.mesero}}</h5>
+                                        </span>
+                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;">
+                                            <h5 class="modal-title" id="cliente">Cliente: {{ordenSelected.cliente}}</h5>
+                                        </span>
+
+                                        <span class="badge badge-pill badge-primary " style=" margin: 5px;">
+                                            <h5 class="modal-title" id="fecha">Fecha:
+                                                {{ordenSelected.fecha.substring(0,10)}}</h5>
+                                        </span>
                                         </br>
 
                                         <!--tabla para desktop-->
@@ -116,33 +126,55 @@
                                             </table>
                                         </div>
                                         <!--fin de la tabla-->
-                                        
+
                                         <div class="container mt-2">
 
                                             <div class="row">
-                                              <div class="col-sm-2">
-                                                <label for="lblEfectivo" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;"><strong>Ingrese el efectivo:</strong> </label>
-                                              </div>
-                                              <div class="col-sm-2">
-                                                <input type="number" class="form-control" id="lblEfectivo" required v-show="ordenSelected.estado==&quot;A&quot;"/>
-                                              </div>
-                                              <div class="col-sm-2">
-                                                <span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;"><h3 class="font-weight-bold" style="color: black;" id="total">Total: {{ordenSelected.total.toFixed(2)}}</h3></span>
-                                              </div>
+                                                <div class="col-sm-2">
+                                                    <label for="lblEfectivo" class="col-form-label"
+                                                        style="color: black;"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Ingrese el
+                                                            efectivo:</strong> </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="lblEfectivo" required
+                                                        v-show="ordenSelected.estado==&quot;A&quot;" />
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <span class="badge" style="background-color: #5CB32B;"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;">
+                                                        <h3 class="font-weight-bold" style="color: black;" id="total">
+                                                            Total: {{ordenSelected.total.toFixed(2)}}</h3>
+                                                    </span>
+                                                </div>
                                             </div>
-                                          </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="propina" id="lblPropina" class="col-form-label"
+                                                        style="color: black;"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Propina:
+                                                        </strong> </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="propina"
+                                                        v-model="propina"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;"
+                                                        style="background: rgba(100, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
+                                                </div>
+                                            </div>
+                                        </div>
 
 
-                                            <!-- <label for="lblEfectivo" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;">Ingrese el efectivo: </label> -->
-                                        
-                                            <!-- <div class="col-sm-6 mr-md-5">
+                                        <!-- <label for="lblEfectivo" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;">Ingrese el efectivo: </label> -->
+
+                                        <!-- <div class="col-sm-6 mr-md-5">
                                             <div class="col-sm-4">
                                                 <input type="number" class="form-control" id="lblEfectivo" required v-show="ordenSelected.estado==&quot;A&quot;"/>
                                             </div>
                                             
 
                                         </div> -->
-                            
+
                                         <label id="alerta" class="col-form-label" style="color: red;"></label>
                                         <!-- <div class="">
                                             <span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;"><h3 class="font-weight-bold" style="color: black;" id="total">Total: {{ordenSelected.total}}</h3></span>
@@ -152,10 +184,14 @@
 
                                     </div>
                                 </div>
-                                <div class="modal-footer col-md-12" style="display: flex; justify-content: center; align-items: center;">
+                                <div class="modal-footer col-md-12"
+                                    style="display: flex; justify-content: center; align-items: center;">
                                     <!-- <div ><span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;"><h3 class="font-weight-bold" style="color: black;" id="total"></h3></span></div> -->
-                                    <button type="button " class="btn btn-secondary btn-xs" @click="redireccionarAOrdenes();" v-show="ordenSelected.estado==&quot;A&quot;">Cancelar</button>
-                                    <button type="button " class="btn btn-primary btn-xs" @click="cobrar()" v-show="ordenSelected.estado==&quot;A&quot;">Cobrar</button>
+                                    <button type="button " class="btn btn-secondary btn-xs"
+                                        @click="redireccionarAOrdenes();"
+                                        v-show="ordenSelected.estado==&quot;A&quot;">Cancelar</button>
+                                    <button type="button " class="btn btn-primary btn-xs" @click="cobrar()"
+                                        v-show="ordenSelected.estado==&quot;A&quot;">Cobrar</button>
                                     <!-- <button type="button" class="btn btn-primary btn-lg" @click="volver()" v-show="ordenSelected.estado==&quot;C&quot;">Volver a Ordenes</button> -->
 
                                 </div>
@@ -171,99 +207,112 @@
                     <!-- Termina cobrar orden -->
 
                     <!--Inicia el modal Imprimir Orden-->
-                    <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="" data-backdrop="static" tabindex="-1">
+                    <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="" data-backdrop="static"
+                        tabindex="-1">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <!--Head modal-->
                                 <div class="modal-header bg-gradient-primary">
                                     <h4 class="text-center text-white"></h4>
 
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="text-white-50" aria-hidden="true">×</span></button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            class="text-white-50" aria-hidden="true">×</span></button>
                                 </div>
                                 <!--Body modal-->
                                 <div class="modal-body" id="ordenPrint">
-    <div class="ticket" id="ticket">
-      <div class="cuerpo">
-        <table class="tablaTicket centrar">
-            <thead>
-                <tr>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong><span v-for="param in parametros" v-if="param.id==1" class="titulo2">{{param.valor}}</span></strong><br />
-                        <span v-for="param in parametros" v-if="param.id==6">{{param.valor}}</span> <br />
-                        <span v-for="param in parametros" v-if="param.id==3">TEL: {{param.valor}}</span> <br />
-                        <span v-for="param in parametros" v-if="param.id==4">NIT: {{param.valor}}</span> <br />
-                        <span v-for="param in parametros" v-if="param.id==5">GIRO: {{param.valor}}</span></td>
-                </tr>
-            </tbody>
-        </table>
-          <table class="tablaTicket">
-              <thead>
-                  <tr>
-                      <th></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td><strong>Cuenta No.</strong> {{ordenSelected.id}}  <br />
-                        <strong>Fecha:</strong> {{ordenSelected.fecha.substring(0,10)}} <br />
-                        <span><strong>Mesa:</strong> {{ordenSelected.mesa}}</span>
-                        <span><strong>Mesero</strong> {{ordenSelected.mesero}} 
-                        </span>
-                        <span><strong>Cliente:</strong> {{ordenSelected.cliente}}</span>
-                        </td>
-                  </tr>
-              </tbody>
-          </table>        
-        <table class="print tablaTicket centrar">
-          <thead>
-            <tr>
-              <th class="producto">Cant.</th>
-              <th class="cantidad">Producto</th>
-              <th class="precio">P/U</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="detalleOrdenAux in ordenSelected.detalleOrden">
-                <td class="text-center">{{detalleOrdenAux.cantidad}}</td>
-                <td class="name">{{detalleOrdenAux.nombre}}</td>
-                <td>${{detalleOrdenAux.precio.toFixed(2)}}</td>
-                <td>${{detalleOrdenAux.subtotal.toFixed(2)}}</td>
-            </tr> 
-            <tr>
-                <td></td>
-                <td></td>
-                <td colspan=""><strong>Total:</strong></td>
-                <td><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td colspan="">Propina (10%):</td>
-                <td>${{(ordenSelected.total*0.1).toFixed(2)}}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td class="titulo"><strong>TOTAL:</strong></td>
-                <td class="titulo"><strong>${{(ordenSelected.total+(ordenSelected.total*0.1)).toFixed(2)}}</strong></td>
-            </tr>
-        
-          </tbody>
-        </table>
-          <div class="centrar">
-            <span v-for="param in parametros" v-if="param.id==2">{{param.valor}}</span>
-          </div>
-      </div>
-    </div>                
+                                    <div class="ticket" id="ticket">
+                                        <div class="cuerpo">
+                                            <table class="tablaTicket centrar">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong><span v-for="param in parametros" v-if="param.id==1"
+                                                                    class="titulo2">{{param.valor}}</span></strong><br />
+                                                            <span v-for="param in parametros"
+                                                                v-if="param.id==6">{{param.valor}}</span> <br />
+                                                            <span v-for="param in parametros" v-if="param.id==3">TEL:
+                                                                {{param.valor}}</span> <br />
+                                                            <span v-for="param in parametros" v-if="param.id==4">NIT:
+                                                                {{param.valor}}</span> <br />
+                                                            <span v-for="param in parametros" v-if="param.id==5">GIRO:
+                                                                {{param.valor}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="tablaTicket">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Cuenta No.</strong> {{ordenSelected.id}}  <br />
+                                                            <strong>Fecha:</strong>
+                                                            {{ordenSelected.fecha.substring(0,10)}} <br />
+                                                            <span><strong>Mesa:</strong> {{ordenSelected.mesa}}</span>
+                                                            <span><strong>Mesero</strong> {{ordenSelected.mesero}}
+                                                            </span>
+                                                            <span><strong>Cliente:</strong>
+                                                                {{ordenSelected.cliente}}</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="print tablaTicket centrar">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="producto">Cant.</th>
+                                                        <th class="cantidad">Producto</th>
+                                                        <th class="precio">P/U</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="detalleOrdenAux in ordenSelected.detalleOrden">
+                                                        <td class="text-center">{{detalleOrdenAux.cantidad}}</td>
+                                                        <td class="name">{{detalleOrdenAux.nombre}}</td>
+                                                        <td>${{detalleOrdenAux.precio.toFixed(2)}}</td>
+                                                        <td>${{detalleOrdenAux.subtotal.toFixed(2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td colspan=""><strong>Total:</strong></td>
+                                                        <td><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td colspan="">Propina (10%):</td>
+                                                        <td>${{(ordenSelected.total*0.1).toFixed(2)}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td class="titulo"><strong>TOTAL:</strong></td>
+                                                        <td class="titulo">
+                                                            <strong>${{(ordenSelected.total+(ordenSelected.total*0.1)).toFixed(2)}}</strong>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <div class="centrar">
+                                                <span v-for="param in parametros"
+                                                    v-if="param.id==2">{{param.valor}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--Footer modal-->
                                 <div class="modal-footer bg-gradient-primary">
-                                    <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal" @click="limpiarMotivo()">Cerrar</button>
+                                    <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal"
+                                        @click="limpiarMotivo()">Cerrar</button>
                                 </div>
 
                             </div>

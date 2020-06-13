@@ -31,6 +31,7 @@ new Vue({
       descripcion: "",
     },
     logName: logName,
+    propina:null
   },
   mounted: function () {
     this.getParam();
@@ -56,6 +57,7 @@ new Vue({
         .get(this.urlApi)
         .then((response) => {
           this.parametros = response.data;
+          this.propina = parseFloat(this.parametros[8].valor)/100
         })
         .catch((ex) => {
           console.log(ex);
@@ -68,6 +70,8 @@ new Vue({
         .get(this.uri + this.getParameterByName("id"))
         .then((response) => {
           this.ordenSelected = response.data;
+          this.propina = this.ordenSelected.total*this.propina
+          this.propina = this.propina.toFixed(2)
           this.productosOrden = this.ordenSelected.detalleOrden;
           let fecha = this.convertDate(this.ordenSelected.fecha);
           document.getElementById("fecha").textContent = "Fecha: " + fecha;
@@ -284,8 +288,11 @@ new Vue({
     cobrar: function () {
       this.checkEstado();
       let efectivo = document.getElementById("lblEfectivo").value;
-      if (efectivo < this.ordenSelected.total) {
+      let propina = document.getElementById("propina").value;
+      totalEfectivo = this.ordenSelected.total + parseFloat(propina)
+      if (efectivo < totalEfectivo) {
         document.getElementById("lblEfectivo").classList.add("is-invalid");
+        document.getElementById("propina").classList.add("is-invalid");
         document.getElementById("alerta").textContent =
           "Ingrese suficiente efectivo";
       } else {
