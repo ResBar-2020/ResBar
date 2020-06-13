@@ -37,7 +37,7 @@ new Vue({
         },
         todos: false,
     },
-    created: function() {
+    created: function () {
         this.obtenerCategorias();
         this.obtenerProductos();
         if (localStorage.vue_session_key) {
@@ -226,7 +226,7 @@ new Vue({
             this.producto = productoSelected;
             console.log(producto);
         },
-        buscar: function(x) {
+        buscar: function (x) {
 
             if (this.txtBuscar == "")
                 return true;
@@ -243,13 +243,18 @@ new Vue({
             else
                 return false;
         },
-        salir: function() {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+        salir: function () {
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     }
 

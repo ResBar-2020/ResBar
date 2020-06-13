@@ -94,11 +94,11 @@ new Vue({
         DelUser: function (user) {
             swal({
                 tilte: "Hecho!",
-                text: "¿Seguro de eliminar a "+user.nombreCompleto+"?",
+                text: "¿Seguro de eliminar a " + user.nombreCompleto + "?",
                 icon: 'warning',
                 buttons: true,
                 dangerMode: true,
-            }).then(confirmar =>{
+            }).then(confirmar => {
                 if (confirmar) {
                     axios.delete(this.uri + "/" + user.id).then(() => {
                         swal({
@@ -112,9 +112,7 @@ new Vue({
                             window.location.reload()
                         })
                     })
-                    
-                } else {
-                    
+
                 }
             })
 
@@ -167,12 +165,17 @@ new Vue({
                 return false;
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     },
     mounted() {

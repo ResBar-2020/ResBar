@@ -6,18 +6,23 @@ new Vue({
         uri: ApiRestUrl + "/parametros/",
         parametros: []
     },
-    mounted: function() {
+    mounted: function () {
         this.getParametros();
     },
     methods: {
 
-        salir: function() {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+        salir: function () {
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         },
 
         getParametros() {
@@ -57,7 +62,11 @@ new Vue({
         },
 
         update(id, valor) {
-            let obj = { id: this.parametros[id - 1].id, nombre: this.parametros[id - 1].nombre, valor: valor };
+            let obj = {
+                id: this.parametros[id - 1].id,
+                nombre: this.parametros[id - 1].nombre,
+                valor: valor
+            };
             axios
                 .put(this.uri + id, obj)
                 .then((response) => {

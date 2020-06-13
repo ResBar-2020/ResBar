@@ -14,7 +14,7 @@ new Vue({
         agg: true,
         searchDisplay: "",
         urlApi: `${ApiRestUrl}/categorias`,
-        logName : logName
+        logName: logName
     },
     methods: {
 
@@ -151,12 +151,17 @@ new Vue({
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     },
     /*

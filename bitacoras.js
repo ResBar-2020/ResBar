@@ -18,7 +18,7 @@ new Vue({
     inicioDelete: null,
     hastaDelete: null,
     bitacorasDelete: [],
-  
+    admin: admin
   },
 
   created: function () {
@@ -205,31 +205,36 @@ new Vue({
     salir e ir al login
     */
     salir: function () {
-      var opcion = confirm('Seguro que quiere salir?')
-      console.log(opcion)
-      if (opcion) {
-        logout()
-        window.location = "./login.html"
-      }
+      swal({
+        title: "¿Seguro que desea cerrar sesión?",
+        icon: 'info',
+        buttons: true,
+        dangerMode: true,
+      }).then(opcion => {
+        if (opcion) {
+          logout()
+          window.location = "./login.html"
+        }
+      })
+    },
+
+    computed: {
+      /*
+      validacion del boton (lo pone en disable) anterior por si quiere ir a un lugar donde no hay datos
+      */
+      irPagAnterior() {
+        return this.actualPage === 0;
+      },
+      /*
+      validacion del boton (lo pone en disable) siguiente por si quiere ir a un lugar donde no hay datos
+      */
+      irPagSiguiente() {
+        //console.log("actual page" + this.actualPage);
+        //console.log("datos: " + this.bitacoras.length);
+        return this.actualPage > this.bitacoras.length;
+      },
+
     }
-
-  },
-
-  computed: {
-    /*
-    validacion del boton (lo pone en disable) anterior por si quiere ir a un lugar donde no hay datos
-    */
-    irPagAnterior() {
-      return this.actualPage === 0;
-    },
-    /*
-    validacion del boton (lo pone en disable) siguiente por si quiere ir a un lugar donde no hay datos
-    */
-    irPagSiguiente() {
-      //console.log("actual page" + this.actualPage);
-      //console.log("datos: " + this.bitacoras.length);
-      return this.actualPage > this.bitacoras.length;
-    },
-
   }
-});
+
+})

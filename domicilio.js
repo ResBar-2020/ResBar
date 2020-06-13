@@ -1,55 +1,55 @@
 Vue.component('semaforo', {
-    props: ['idorden','fechainicio','maximo',"par10"],
+    props: ['idorden', 'fechainicio', 'maximo', "par10"],
     data: function () {
-        var maxim=this.maximo+this.par10;
-        var t=new Date();
-        var tiempoinicio= Date.parse(this.fechainicio);
+        var maxim = this.maximo + this.par10;
+        var t = new Date();
+        var tiempoinicio = Date.parse(this.fechainicio);
         this.segundos = (t - tiempoinicio) / 1000;
-        this.color="red";
-        const self=this;
-        this.interval1=
-        setInterval(
-            function(){
-            var t=new Date();
-            var tiempoinicio= Date.parse(self.fechainicio);
-            var segundos = (t - tiempoinicio) / 1000;
-              
-            var element=document.querySelector('#timer-'+self.idorden);
-             
-            element.innerHTML=self.secondsToHMS(segundos);
-            
-            var porcentaje = ((segundos/60)/self.maxim)*100;
-            
-            if(porcentaje<60){
-                element.style.backgroundColor="#40FF00";
-                
-            }else if(porcentaje>60 && porcentaje<100){
-                
-                element.style.backgroundColor="#F7FE2E";
-            }else{
-                element.style.backgroundColor="#FF4000";
-                
+        this.color = "red";
+        const self = this;
+        this.interval1 =
+            setInterval(
+                function () {
+                    var t = new Date();
+                    var tiempoinicio = Date.parse(self.fechainicio);
+                    var segundos = (t - tiempoinicio) / 1000;
 
-            }
-            },
-            1000
-        );
-        
-  
-    
-      return {
-        
-      }
+                    var element = document.querySelector('#timer-' + self.idorden);
+
+                    element.innerHTML = self.secondsToHMS(segundos);
+
+                    var porcentaje = ((segundos / 60) / self.maxim) * 100;
+
+                    if (porcentaje < 60) {
+                        element.style.backgroundColor = "#40FF00";
+
+                    } else if (porcentaje > 60 && porcentaje < 100) {
+
+                        element.style.backgroundColor = "#F7FE2E";
+                    } else {
+                        element.style.backgroundColor = "#FF4000";
+
+
+                    }
+                },
+                1000
+            );
+
+
+
+        return {
+
+        }
     },
     methods: {
-         secondsToHMS: function(secs) {
-               function z(n){
-                   return (n<10?'0':'') + n;
-                }
-                  var sign = secs < 0? '-':'';
-                 secs = Math.abs(secs);
-                    return sign + z(secs/3600 |0) + ':' + z((secs%3600) / 60 |0) + ':' + parseInt(z(secs%60)); 
-                }
+        secondsToHMS: function (secs) {
+            function z(n) {
+                return (n < 10 ? '0' : '') + n;
+            }
+            var sign = secs < 0 ? '-' : '';
+            secs = Math.abs(secs);
+            return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
+        }
 
 
     },
@@ -59,7 +59,7 @@ Vue.component('semaforo', {
     <button class="btn btn-sm btn-danger semaforoBtn" v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
      
      </div>`
-  })
+})
 
 
 new Vue({
@@ -74,7 +74,7 @@ new Vue({
         detalle: false,
         etapa: '',
         fecha: "",
-        parametros:[],
+        parametros: [],
         user: {
             pin: ''
         },
@@ -91,33 +91,33 @@ new Vue({
         },
         editarOrdenImp: false,
         reimpresion: false,
-        admin:admin
+        admin: admin
     },
     methods: {
 
         modificartiempo(idorden) {
-            
+
             axios.get(
-                this.uri + "/"+idorden)
+                    this.uri + "/" + idorden)
                 .then(res => {
                     var orden = res.data
-                    orden.tiempoPreparacion=null;
+                    orden.tiempoPreparacion = null;
                     console.log(orden)
 
-                    axios.put(this.uri + '/' +idorden, orden)
-                    .then(response => {
-                        console.log(response)
-                        location.reload();
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        location.reload();
-                    });
+                    axios.put(this.uri + '/' + idorden, orden)
+                        .then(response => {
+                            console.log(response)
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            location.reload();
+                        });
 
 
                 }).catch(er => console.error(er))
 
-        
+
 
 
         },
@@ -148,16 +148,18 @@ new Vue({
                         this.getAllDomicilios();
                     }
 
-                    if(valor.domicilioEtapa==0){
+                    if (valor.domicilioEtapa == 0) {
                         swal("Completado!", "Orden en Proceso", "success");
-                    } else if(valor.domicilioEtapa==1){
-                    swal("Completado!", "Orden Entregada!", "success");
+                    } else if (valor.domicilioEtapa == 1) {
+                        swal("Completado!", "Orden Entregada!", "success");
                     }
                     console.log(response.status);
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
 
-           
+
 
 
         },
@@ -167,7 +169,9 @@ new Vue({
                     this.ordenes = response.data
                     console.log(response.data);
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
         },
         getDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa][neq]=2")
@@ -175,7 +179,9 @@ new Vue({
                     response => {
                         this.ordenes = response.data
                     }
-                ).catch(ex => { console.log(ex) })
+                ).catch(ex => {
+                    console.log(ex)
+                })
         },
         filtro(valor) {
             if (this.searchDisplay === "") return true;
@@ -183,14 +189,19 @@ new Vue({
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         },
-        agregarProductos: function() {            
+        agregarProductos: function () {
             window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
         cobrarOrden() {
@@ -204,7 +215,7 @@ new Vue({
         showConfirm() {
             $('#confirmModal').modal('show')
         },
-        closeConfirm: function() {
+        closeConfirm: function () {
             $('#confirmModal').modal('hide')
         },
         modificarOrden() {
@@ -231,7 +242,7 @@ new Vue({
                 this.showConfirm()
             }
         },
-        setProdImprimir: function() {
+        setProdImprimir: function () {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
                 this.fecha = new Date(response.fecha);

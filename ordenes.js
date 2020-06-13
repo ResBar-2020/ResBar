@@ -515,12 +515,17 @@ var vm = new Vue({
 
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion =>{
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         },
 
         setProdImprimir: function () {
