@@ -190,14 +190,12 @@ new Vue({
                 window.location = "./login.html"
             }
         },
-        agregarProductos: function(ordenvalue) {
-            console.log("******************************************");
-            console.log(ordenvalue.nombre);
-            window.location = "./addmasproductos.html?id=" +ordenvalue.id;
+        agregarProductos: function() {            
+            window.location = "./addmasproductos.html?id=" + this.ordenSelected.id;
         },
-        cobrarOrden(ordenvalue) {
+        cobrarOrden() {
             if (admin) {
-                window.location = "./cobrarorden.html?id=" + ordenvalue.id;
+                window.location = "./cobrarorden.html?id=" + this.ordenSelected.id;
             } else {
                 this.action = "cobrarorden"
                 this.showConfirm();
@@ -209,9 +207,9 @@ new Vue({
         closeConfirm: function() {
             $('#confirmModal').modal('hide')
         },
-        modificarOrden(ordenvalue) {
+        modificarOrden() {
             if (admin) {
-                window.location = "./modificarorden.html?id=" + ordenvalue.id;
+                window.location = "./modificarorden.html?id=" + this.ordenSelected.id;
             } else {
                 this.action = "modificarorden"
                 this.showConfirm()
@@ -247,6 +245,28 @@ new Vue({
                     localStorage.removeItem('idOrdenImprimir');
                 }
             });
+        },
+        confirmUser: function (pin) {
+            if (this.user.pin != "") {
+                res = this.users.filter(user => pin == user.pin)
+                if (res[0].rol == "admin") {
+                    if (this.action == 'eliminar') {
+                        this.closeConfirm()
+                        $('#modalEliminar').modal('show');
+                    } else {
+                        window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
+                    }
+                } else {
+                    document.getElementById("errorMsg").classList.add('text-danger');
+                    document.getElementById("errorMsg").textContent = "El pin debe ser de un administrador";
+                    document.getElementById("pin").classList.add('is-invalid');
+                    this.user.pin = ''
+                }
+            } else {
+                document.getElementById("errorMsg").classList.add('text-warning');
+                document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
+            }
+
         },
         //Metodo eliminar Orden
         eliminarOrden: function () {
