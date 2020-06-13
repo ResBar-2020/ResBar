@@ -61,15 +61,15 @@ new Vue({
                                     'content-type': 'application/json'
                                 }
                             })
-                            .then(res => {
+                            .then(() => {
                                 swal({
                                     tilte: "Hecho!",
                                     text: "Usuario creado con éxito!",
                                     icon: "success",
-                                    button:{
+                                    button: {
                                         text: "Ok"
                                     }
-                                }).then( function () {
+                                }).then(function () {
                                     window.location.reload()
                                 })
 
@@ -92,12 +92,32 @@ new Vue({
         },
         //Elimina un usuario de la tabla
         DelUser: function (user) {
-            var opcion = confirm('Seguro de eliminar a ' + user.loggin + "?")
-            if (opcion) {
-                axios.delete(this.uri + "/" + user.id).then(() => {
-                    window.location.reload()
-                })
-            }
+            swal({
+                tilte: "Hecho!",
+                text: "¿Seguro de eliminar a "+user.nombreCompleto+"?",
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+            }).then(confirmar =>{
+                if (confirmar) {
+                    axios.delete(this.uri + "/" + user.id).then(() => {
+                        swal({
+                            tilte: "Hecho!",
+                            text: "Usuario Eliminado con éxito!",
+                            icon: "success",
+                            button: {
+                                text: "Ok"
+                            }
+                        }).then(function () {
+                            window.location.reload()
+                        })
+                    })
+                    
+                } else {
+                    
+                }
+            })
+
 
         },
         //Abre el modal para editar y le pasa los datos del usuario seleccionado
@@ -113,7 +133,17 @@ new Vue({
                     'content-type': 'application/json'
                 }
             }).then(() => {
-                window.location.reload()
+                this.closeModal()
+                swal({
+                    tilte: "Hecho!",
+                    text: "Usuario editado con éxito!",
+                    icon: "success",
+                    button: {
+                        text: "Ok"
+                    }
+                }).then(function () {
+                    window.location.reload()
+                })
             })
 
         },
