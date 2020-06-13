@@ -504,3 +504,19 @@ tr:nth-child(even) {
     }
 }
 
+.semaforo{
+    border-radius: 20px;
+    padding: 2px 15px;
+    text-align: center;
+    color: white;
+    text-shadow: 0 5px 10px rgba(100, 0, 0, 0.3);
+    transition: 0.5s;
+}
+.semaforo:hover{
+    transform: scale(1.1);
+}
+.semaforoBtn{
+    border-radius: 20px;
+    width: 100%;
+    padding: 2px;
+}

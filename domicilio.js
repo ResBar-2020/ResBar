@@ -54,9 +54,9 @@ Vue.component('semaforo', {
 
     },
     template: `<div>
-    <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
+    <div class="semaforo mt-2" v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
     </div>
-    <button v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
+    <button class="btn btn-sm btn-danger semaforoBtn" v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
      
      </div>`
   })
