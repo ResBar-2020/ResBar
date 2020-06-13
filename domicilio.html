@@ -256,30 +256,30 @@
                               <h4 class="card-text">FECHA: {{orden.fecha.substring(0,10)}}</h4>
 
                               <!-- se mostraran las acciones-->
-                              <button v-if="orden.domicilioEtapa!=2" type="button" class="btn btntable btn-sm" @click="agregarProductos(orden)" title="Agregar Mas Productos">
+                              <button v-if="orden.domicilioEtapa!=2" type="button" class="btn btn-sm button4 bouncy" @click="agregarProductos(orden)" title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
-                              <button v-else type="button" class="btn btntable btn-sm disabled" title="Agregar Mas Productos">
+                              <button v-else type="button" class="btn btn btn-sm button4 disabled" title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
 
-                              <button v-if="orden.domicilioEtapa!=2" type="button" @click="modificarOrden(orden)" class="btn btntable btn-sm" title="Modificar Orden">
+                              <button v-if="orden.domicilioEtapa!=2" style="animation-delay:0.07s" type="button" @click="modificarOrden(orden)" class="btn btn-sm button4 bouncy" title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
                               </button>
-                              <button v-else type="button" class="btn btntable btn-sm disabled" title="Modificar Orden">
+                              <button v-else type="button" class="btn btn-sm button4 disabled" title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
                               </button>
-                              <button type="button" class="btn btntable btn-sm" @click="cobrarOrden(orden)" title="Cobrar Orden">
+                              <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.14s" @click="cobrarOrden(orden)" title="Cobrar Orden">
                                 <i class="fas text-white fa-money-bill"></i></a>
                               </button>
-                              <button type="button" class="btn btntable btn-sm" title="Eliminar Orden">
+                              <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.21s" title="Eliminar Orden">
                                 <i class="fas text-white fa-trash"></i></a>
                               </button>
-                              <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                              <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.28s" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                 <i @click="ordenSelected=orden;"
                                     class="fas text-white fa-print"></i>
                             </button>
-                              <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm"
+                              <button v-if="orden.domicilio" type="button" style="animation-delay:0.35s" class="btn btn-sm button4 bouncy"
                                 title="Reimprimir ticket" @click="imprimirProd=orden; reimprimir()">
                                 <i class="fas text-white fa-motorcycle"></i></a>
                               </button>
@@ -428,6 +428,39 @@
               </div>
               <!-- fin ticket -->
 
+
+
+
+
+                        <!--Modal para confirmar si es admin-->
+                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal" data-backdrop="static" tabindex="-1">
+                          <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                  <div class="modal-header modal-title">
+                                      <h4 class="text-center">Confirmar Admin</h4>
+                                      <label class="float-right" style="font-size:20px;" v-on:click="closeConfirm">x</label>
+                                  </div>
+                                  <div class="modal-body box2 text-white">
+                                      <form>
+                                          <label id="errorMsg" class="form-text text-uppercase text-center"></label>
+                                          <div class="form-group">
+                                              <div class="col-md-12">
+                                                  <label class="font-weight-bold">Ingrese el Pin de un
+                                                      administrador</label>
+                                                  <input id="pin" v-model="user.pin" id="id" type="number" class="form-control" required>
+                                                  <small id="iguales" class="form-text text-danger"></small>
+                                                  <small id="tamanio" class="form-text ">Ejemplo: 45641</small>
+                                              </div>
+                                          </div>
+                                          <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
+                                      </form>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+  <!-- FIN Modal para confirmar si es admin-->
 
 
               <!--Inicia el modal Imprimir Orden-->

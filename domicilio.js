@@ -74,7 +74,10 @@ new Vue({
         detalle: false,
         etapa: '',
         fecha: "",
-        parametros:"",
+        parametros:[],
+        user: {
+            pin: ''
+        },
         ordenSelected: {},
         imprimirProd: {
             "id": "",
@@ -87,7 +90,8 @@ new Vue({
             "detalleOrden": []
         },
         editarOrdenImp: false,
-        reimpresion: false
+        reimpresion: false,
+        admin:admin
     },
     methods: {
 
@@ -198,6 +202,12 @@ new Vue({
                 this.action = "cobrarorden"
                 this.showConfirm();
             }
+        },
+        showConfirm() {
+            $('#confirmModal').modal('show')
+        },
+        closeConfirm: function() {
+            $('#confirmModal').modal('hide')
         },
         modificarOrden(ordenvalue) {
             if (admin) {
