@@ -120,43 +120,77 @@
                                 <button type="button" class="btn d-none d-lg-inline btn-danger float-right" v-on:click="salir">Salir</button>
                                 <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
                                     {{ logName }}</label><br>
-                                <h1 class="text-center">Sistema de Ordenes RESBAR</h1>
+                                <h1 class="text-center">Parametros RESBAR</h1>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Inicia seccion de alertas -->
-                        <div v-if="alertBool" class="alert alerta" role="alert">
-                            {{alerta}}
-                        </div>
-                        <!-- Termina seccion de alertas -->
-
-                        <!--Modal para confirmar si es admin-->
-                        <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="confirmModal" data-backdrop="static" tabindex="-1">
-                            <div class="modal-dialog modal-md">
-                                <div class="modal-content">
-                                    <div class="modal-header modal-title">
-                                        <h4 class="text-center">Confirmar Admin</h4>
-                                        <label class="float-right" style="font-size:20px;" v-on:click="closeConfirm">x</label>
-                                    </div>
-                                    <div class="modal-body box2 text-white">
-                                        <form>
-                                            <label id="errorMsg" class="form-text text-uppercase text-center"></label>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label class="font-weight-bold">Ingrese el Pin de un
-                                                        administrador</label>
-                                                    <input id="pin" v-model="user.pin" id="id" type="number" class="form-control" required>
-                                                    <small id="iguales" class="form-text text-danger"></small>
-                                                    <small id="tamanio" class="form-text ">Ejemplo: 45641</small>
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-outline-primary text-white" v-on:click="confirmUser(user.pin, 'modificarorden')">Confirmar</button>
-                                        </form>
-
-                                    </div>
+                    <div class="container">
+                        <form>
+                            <div class="form-group">
+                                <label for="nombreNegocio">Nombre del negocio</label>
+                                <input type="text" class="form-control border border-primary" id="nombreNegocio">
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripcion final(pie de ticket)</label>
+                                <textarea class="form-control border border-primary" id="descripcion" rows="3"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="telefono">Telefono</label>
+                                    <input type="text" class="form-control border border-primary" id="telefono" name="field-name" data-mask="0000-0000">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="nit">NIT</label>
+                                    <input type="text" class="form-control border border-primary" id="nit" data-mask="000-000000-000-0">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="giro">Giro</label>
+                                    <input type="text" class="form-control border border-primary" id="giro">
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label for="direccion">Direccion</label>
+                                <textarea class="form-control border border-primary" id="direccion" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="imprimirTicket">Imprimir ticket de productos preparados</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="imprimirTicketSi" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="imprimirTicketSi">Si</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="imprimirTicketNo" name="customRadio" class="custom-control-input">
+                                    <label class="custom-control-label" for="imprimirTicketNo">No</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    </br>
+                                    <label for="propina">Propina(%)</label>
+                                    </label>
+                                    <input type="text" class="form-control border border-primary" id="propina" data-mask="000%">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="tiempoPreparacion">Tiempo máximo de preparación de orden (minutos)</label>
+                                    <input type="text" class="form-control border border-primary" id="tiempoPreparacion">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="tiempoDomicilio">Tiempo máximo de entrega domicilio (minutos)</label>
+                                    <input type="text" class="form-control border border-primary" id="tiempoDomicilio">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    </br>
+                                    <label for="costoDomicilio">Costo de envío a domicilio</label>
+                                    <input type="text" class="form-control border border-primary" id="costoDomicilio">
+                                    </br>
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-lg" @click="actualizar();">Actualizar</button>
+                            </div>
+                        </form>
                     </div>
 
                     <!-- Termina el contenedor de la pagina y el dominio de VUE-->
@@ -186,6 +220,16 @@
     <script src="assets/js/moment.js "></script>
     <script src="config.js "></script>
     <script src="parametros.js "></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function() {
+            $(".loader").show()
+        }
+        window.onload = function() {
+            $(".loader").hide()
+        }
+    </script>
+    <script src="assets/js/jquery.mask.min.js"></script>
+
 
 </body>
 
