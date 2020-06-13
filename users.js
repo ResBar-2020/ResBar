@@ -4,12 +4,12 @@ new Vue({
         Busqueda: "",
         users: {},
         SelectedUser: '',
-        uri: ApiRestUrl+'/usuarios',
+        uri: ApiRestUrl + '/usuarios',
         user: {
             nombreCompleto: "",
             loggin: "",
             clave: "",
-            pin: 0,
+            pin: null,
             rol: ""
         },
         editar: false,
@@ -49,28 +49,40 @@ new Vue({
             if (this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != "") {
                 tamanio = parseInt(this.user.pin, 10)
                 encontrado = this.users.find(user => user.pin == this.user.pin)
-                
-                //Si ya existe el pin
-                if (encontrado.pin == this.user.pin) {
-                    document.getElementById("pin").classList.add('is-invalid');
-                    document.getElementById("iguales").textContent = "Este pin ya esta registrado";
-                    //Verifica el numero de digitos
-                } else if (tamanio < 9999 || tamanio > 99999) {
-                    document.getElementById("pin").classList.add('is-invalid');
-                    document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
-                    //Si todo esta correcto
+                if (encontrado == undefined) {
+                    if (tamanio < 9999 || tamanio > 99999) {
+                        document.getElementById("pin").classList.add('is-invalid');
+                        document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
+                        //Si todo esta correcto
+                    } else {
+                        this.user.pin = parseInt(this.user.pin, 10)
+                        axios.post(this.uri, JSON.stringify(this.user), {
+                                headers: {
+                                    'content-type': 'application/json'
+                                }
+                            })
+                            .then(res => {
+                                swal({
+                                    tilte: "Hecho!",
+                                    text: "Usuario creado con éxito!",
+                                    icon: "success",
+                                    button:{
+                                        text: "Ok"
+                                    }
+                                }).then( function () {
+                                    window.location.reload()
+                                })
+
+                            }).catch(re => console.log(re))
+                        this.closeModal();
+                    }
                 } else {
-                    this.user.pin = parseInt(this.user.pin, 10)
-                    axios.post(this.uri, JSON.stringify(this.user), {
-                            headers: {
-                                'content-type': 'application/json'
-                            }
-                        })
-                        .then(res => {
-                            console.log(res.data)
-                        }).catch(re => console.log(re))
-                    this.closeModal();
-                    window.location = './users.html'
+                    //Si ya existe el pin
+                    if (encontrado.pin == this.user.pin) {
+                        document.getElementById("pin").classList.add('is-invalid');
+                        document.getElementById("iguales").textContent = "Este pin ya esta registrado";
+                        //Verifica el numero de digitos
+                    }
                 }
 
             } else {
@@ -97,13 +109,13 @@ new Vue({
         EditUser: function () {
             this.user.pin = parseInt(this.user.pin, 10)
             axios.put(this.uri + "/" + this.user.id, JSON.stringify(this.user), {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(() => {
-                    window.location.reload()
-                })
-                
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(() => {
+                window.location.reload()
+            })
+
         },
         //Busca entre los usuarios de la tabla
         buscar: function (x) {
