@@ -218,23 +218,24 @@ new Vue({
       })
     },
 
-    computed: {
-      /*
-      validacion del boton (lo pone en disable) anterior por si quiere ir a un lugar donde no hay datos
-      */
-      irPagAnterior() {
-        return this.actualPage === 0;
-      },
-      /*
-      validacion del boton (lo pone en disable) siguiente por si quiere ir a un lugar donde no hay datos
-      */
-      irPagSiguiente() {
-        //console.log("actual page" + this.actualPage);
-        //console.log("datos: " + this.bitacoras.length);
-        return this.actualPage > this.bitacoras.length;
-      },
 
-    }
+  },
+
+  computed: {
+    /*
+    validacion del boton (lo pone en disable) anterior por si quiere ir a un lugar donde no hay datos
+    */
+    irPagAnterior() {
+      return this.actualPage === 0;
+    },
+    /*
+    validacion del boton (lo pone en disable) siguiente por si quiere ir a un lugar donde no hay datos
+    */
+    irPagSiguiente() {
+      //console.log("actual page" + this.actualPage);
+      //console.log("datos: " + this.bitacoras.length);
+      return this.actualPage > this.bitacoras.length;
+    },
+
   }
-
-})
+});
