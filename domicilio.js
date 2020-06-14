@@ -62,7 +62,7 @@ Vue.component('semaforo', {
 })
 
 
-new Vue({
+var vmm=new Vue({
 
     el: "#appRESBAR",
     data: {
@@ -291,7 +291,7 @@ new Vue({
                 document.getElementById("lblMotivo").classList.add('is-valid');
                 document.getElementById("alertaMotivo").textContent = "";
                 //Elimina la orden
-                axios.delete(this.uri + '/' + this.ordenSelected.id)
+                axios.delete(this.urlApi + '/' + this.ordenSelected.id)
                     .then(function (res) {
                         console.log("DELETE ORDEN");
                         window.location = `./ordenes.html?alert=se elimino la orden satisfactoriamente`
@@ -302,12 +302,13 @@ new Vue({
                 //cierra el modal Eliminar
                 $('#modalEliminar').modal('hide');
                 //Actualiza la tabla Ordenes
-                this.ordenar();
+                //this.ordenar();
                 //Limpia el lblMotivo
                 this.limpiarMotivo();
             }
 
         },
+   
         //Limpiar el Motivo por el cual se elimino la orden
         limpiarMotivo: function () {
             $("#modalEliminar").find("input").val("");
@@ -344,16 +345,16 @@ new Vue({
                 .then(res => {
                     this.parametros = res.data
                 }).catch(er => console.error(er))
-        }
+        },
 
-
+    
 
 
     },
     mounted() {
         this.getDomicilios();
-        this.getParametros()
-        this.getUsers()
+        this.getParametros();
+        this.getUsers();
         if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
             this.editarOrdenImp = false;
             this.setProdImprimir();
