@@ -20,13 +20,13 @@ Vue.component('semaforo', {
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
                     if (porcentaje < 60) {
-                        element.style.backgroundColor = "#40FF00";
+                        element.style.backgroundColor = "#10752D";
 
                     } else if (porcentaje > 60 && porcentaje < 100) {
 
-                        element.style.backgroundColor = "#F7FE2E";
+                        element.style.backgroundColor = "#C2B314";
                     } else {
-                        element.style.backgroundColor = "#FF4000";
+                        element.style.backgroundColor = "#751C1D";
 
 
                     }
@@ -55,7 +55,7 @@ Vue.component('semaforo', {
     template: `<div>
     <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'" class="semaforo">
     </div>
-    <button class="btn btn-sm semaforoBtn mt-1 btn-danger" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
+    <button class="btn btn-sm semaforoBtn mt-1" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
      
      </div>`
 })
@@ -70,8 +70,7 @@ var vm = new Vue({
         lactivos: {},
         textoBusqueda: "",
         alerta: "",
-        alertBool: true,
-        uri: ApiRestUrl + '/ordenes',
+        uri: `${ApiRestUrl}/ordenes`,
         fecha: "",
         parametros: [],
         user: {
@@ -132,7 +131,7 @@ var vm = new Vue({
                 })
         },
         getUsers() {
-            axios.get('http://localhost:3000/usuarios')
+            axios.get(`${ApiRestUrl}/usuarios`)
                 .then(res => {
                     this.users = res.data
                 }).catch(er => console.error(er))
@@ -397,12 +396,15 @@ var vm = new Vue({
                 if (vars[0].toUpperCase() == 'ALERT') {
 
                     this.alerta = vars[1].replace(/%20/g, " ")
-                    console.log(this.alerta)
-                    this.timer()
+                    swal({
+                        title: "Hecho!",
+                        text: this.alerta,
+                        icon: 'success',
+                        buttons: false,
+                        timer: 4000
+                    })
                 }
 
-            } else {
-                this.alertBool = false
             }
 
         },
@@ -442,16 +444,6 @@ var vm = new Vue({
         },
         closeConfirm: function () {
             $('#confirmModal').modal('hide')
-        },
-        //Hace desaparecer el alert
-        timer: function () {
-            window.setTimeout(function () {
-                $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                    $(this).remove();
-
-                });
-            }, 4000);
-
         },
         cobrarOrden() {
             if (admin) {
@@ -520,7 +512,7 @@ var vm = new Vue({
                 icon: 'info',
                 buttons: true,
                 dangerMode: true,
-            }).then(opcion =>{
+            }).then(opcion => {
                 if (opcion) {
                     logout()
                     window.location = "./login.html"

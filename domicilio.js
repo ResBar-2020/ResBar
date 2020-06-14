@@ -21,13 +21,13 @@ Vue.component('semaforo', {
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
                     if (porcentaje < 60) {
-                        element.style.backgroundColor = "#40FF00";
+                        element.style.backgroundColor = "#10752D";
 
                     } else if (porcentaje > 60 && porcentaje < 100) {
 
-                        element.style.backgroundColor = "#F7FE2E";
+                        element.style.backgroundColor = "#C2B314";
                     } else {
-                        element.style.backgroundColor = "#FF4000";
+                        element.style.backgroundColor = "#751C1D";
 
 
                     }
