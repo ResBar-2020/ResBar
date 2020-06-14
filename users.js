@@ -63,12 +63,11 @@ new Vue({
                             })
                             .then(() => {
                                 swal({
-                                    tilte: "Hecho!",
+                                    title: "Hecho!",
                                     text: "Usuario creado con éxito!",
                                     icon: "success",
-                                    button: {
-                                        text: "Ok"
-                                    }
+                                    buttons: false,
+                                    timer: 3000
                                 }).then(function () {
                                     window.location.reload()
                                 })
@@ -93,7 +92,7 @@ new Vue({
         //Elimina un usuario de la tabla
         DelUser: function (user) {
             swal({
-                tilte: "Hecho!",
+                title: "Hecho!",
                 text: "¿Seguro de eliminar a " + user.nombreCompleto + "?",
                 icon: 'warning',
                 buttons: true,
@@ -102,12 +101,12 @@ new Vue({
                 if (confirmar) {
                     axios.delete(this.uri + "/" + user.id).then(() => {
                         swal({
-                            tilte: "Hecho!",
+                            title: "Hecho!",
                             text: "Usuario Eliminado con éxito!",
                             icon: "success",
-                            button: {
-                                text: "Ok"
-                            }
+                            buttons: false,
+                            timer: 3000
+
                         }).then(function () {
                             window.location.reload()
                         })
@@ -133,12 +132,11 @@ new Vue({
             }).then(() => {
                 this.closeModal()
                 swal({
-                    tilte: "Hecho!",
+                    title: "Hecho!",
                     text: "Usuario editado con éxito!",
                     icon: "success",
-                    button: {
-                        text: "Ok"
-                    }
+                    buttons: false,
+                    timer: 3000
                 }).then(function () {
                     window.location.reload()
                 })
