@@ -562,10 +562,10 @@ var vm = new Vue({
         }
     },
     mounted() {
+        this.getParametros()
         this.ordenar()
         this.mostrarActivos()
         this.alertLauncher()
-        this.getParametros()
         this.getUsers()
         if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
             this.editarOrdenImp = false;

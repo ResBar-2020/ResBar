@@ -96,15 +96,14 @@ var vmm=new Vue({
     methods: {
 
         modificartiempo(idorden) {
-
             axios.get(
-                    this.uri + "/" + idorden)
+                    this.urlApi + "/" + idorden)
                 .then(res => {
                     var orden = res.data
                     orden.tiempoPreparacion = null;
                     console.log(orden)
-
-                    axios.put(this.uri + '/' + idorden, orden)
+                    debugger;
+                    axios.put(this.urlApi + '/' + idorden, orden)
                         .then(response => {
                             console.log(response)
                             location.reload();
@@ -352,8 +351,8 @@ var vmm=new Vue({
 
     },
     mounted() {
-        this.getDomicilios();
         this.getParametros();
+        this.getDomicilios();
         this.getUsers();
         if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
             this.editarOrdenImp = false;
