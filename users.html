@@ -265,6 +265,13 @@
     <script src="config.js"></script>
     <script src="users.js"></script>
     <script type="text/javascript">
+        $("#pin").mask('00000', {
+            'translation': {
+                0: {
+                    pattern: /[0-9]/
+                }
+            }
+        })
         window.onbeforeunload = function () {
 
             $("#loader").show()

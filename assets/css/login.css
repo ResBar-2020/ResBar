@@ -81,7 +81,7 @@ body{
     transition: .5s;
 }
 
-.box .inputBox input:focus ~ label,.box .inputBox input:valid ~ label{
+.box .inputBox input:focus ~ label{
     top: -20px;
     left: 0;
     color: rgb(3, 169, 244);
