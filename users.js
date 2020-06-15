@@ -4,12 +4,12 @@ new Vue({
         Busqueda: "",
         users: {},
         SelectedUser: '',
-        uri: ApiRestUrl+'/usuarios',
+        uri: ApiRestUrl + '/usuarios',
         user: {
             nombreCompleto: "",
             loggin: "",
             clave: "",
-            pin: 0,
+            pin: null,
             rol: ""
         },
         editar: false,
@@ -49,27 +49,39 @@ new Vue({
             if (this.user.nombreCompleto != "" && this.user.loggin != "" && this.user.clave != "" && this.user.pin != 0 && this.user.rol != "") {
                 tamanio = parseInt(this.user.pin, 10)
                 encontrado = this.users.find(user => user.pin == this.user.pin)
-                //Si ya existe el pin
-                if (encontrado == this.user.pin) {
-                    document.getElementById("pin").classList.add('is-invalid');
-                    document.getElementById("iguales").textContent = "Este pin ya esta registrado";
-                    //Verifica el numero de digitos
-                } else if (tamanio < 9999 || tamanio > 99999) {
-                    document.getElementById("pin").classList.add('is-invalid');
-                    document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
-                    //Si todo esta correcto
+                if (encontrado == undefined) {
+                    if (tamanio < 9999 || tamanio > 99999) {
+                        document.getElementById("pin").classList.add('is-invalid');
+                        document.getElementById("iguales").textContent = "El pin debe tener 5 digitos";
+                        //Si todo esta correcto
+                    } else {
+                        this.user.pin = parseInt(this.user.pin, 10)
+                        axios.post(this.uri, JSON.stringify(this.user), {
+                                headers: {
+                                    'content-type': 'application/json'
+                                }
+                            })
+                            .then(() => {
+                                swal({
+                                    title: "Hecho!",
+                                    text: "Usuario creado con éxito!",
+                                    icon: "success",
+                                    buttons: false,
+                                    timer: 3000
+                                }).then(function () {
+                                    window.location.reload()
+                                })
+
+                            }).catch(re => console.log(re))
+                        this.closeModal();
+                    }
                 } else {
-                    this.user.pin = parseInt(this.user.pin, 10)
-                    axios.post(this.uri, JSON.stringify(this.user), {
-                            headers: {
-                                'content-type': 'application/json'
-                            }
-                        })
-                        .then(res => {
-                            console.log(res.data)
-                        }).catch(re => console.log(re))
-                    this.closeModal();
-                    window.location = './users.html'
+                    //Si ya existe el pin
+                    if (encontrado.pin == this.user.pin) {
+                        document.getElementById("pin").classList.add('is-invalid');
+                        document.getElementById("iguales").textContent = "Este pin ya esta registrado";
+                        //Verifica el numero de digitos
+                    }
                 }
 
             } else {
@@ -79,12 +91,30 @@ new Vue({
         },
         //Elimina un usuario de la tabla
         DelUser: function (user) {
-            var opcion = confirm('Seguro de eliminar a ' + user.loggin + "?")
-            if (opcion) {
-                axios.delete(this.uri + "/" + user.id).then(() => {
-                    window.location.reload()
-                })
-            }
+            swal({
+                title: "Hecho!",
+                text: "¿Seguro de eliminar a " + user.nombreCompleto + "?",
+                icon: 'warning',
+                buttons: true,
+                dangerMode: true,
+            }).then(confirmar => {
+                if (confirmar) {
+                    axios.delete(this.uri + "/" + user.id).then(() => {
+                        swal({
+                            title: "Hecho!",
+                            text: "Usuario Eliminado con éxito!",
+                            icon: "success",
+                            buttons: false,
+                            timer: 3000
+
+                        }).then(function () {
+                            window.location.reload()
+                        })
+                    })
+
+                }
+            })
+
 
         },
         //Abre el modal para editar y le pasa los datos del usuario seleccionado
@@ -96,13 +126,22 @@ new Vue({
         EditUser: function () {
             this.user.pin = parseInt(this.user.pin, 10)
             axios.put(this.uri + "/" + this.user.id, JSON.stringify(this.user), {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(() => {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(() => {
+                this.closeModal()
+                swal({
+                    title: "Hecho!",
+                    text: "Usuario editado con éxito!",
+                    icon: "success",
+                    buttons: false,
+                    timer: 3000
+                }).then(function () {
                     window.location.reload()
                 })
-                
+            })
+
         },
         //Busca entre los usuarios de la tabla
         buscar: function (x) {
@@ -124,12 +163,17 @@ new Vue({
                 return false;
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     },
     mounted() {

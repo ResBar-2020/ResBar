@@ -13,9 +13,9 @@ if (localStorage.vue_session_key) {
 
 //Verifica el rol del usuario logueado 
 if (localStorage.getItem(VueSession.key) == '"admin"') {
-    admin = true
+    var admin = true
 } else if (localStorage.getItem(VueSession.key) == '"mesero"') {
-    admin = false
+    var admin = false
 }
 
 //metodo para salir

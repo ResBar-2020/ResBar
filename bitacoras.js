@@ -18,13 +18,16 @@ new Vue({
     inicioDelete: null,
     hastaDelete: null,
     bitacorasDelete: [],
-    admin: admin,
+    admin: admin
   },
 
   created: function () {
     this.getAllBitacoras();
-
-    if (!localStorage.vue_session_key) {
+    if (localStorage.vue_session_key) {
+      if (localStorage.getItem(VueSession.key) == '"mesero"') {
+        window.location = "./ordenes.html"
+      }
+    } else {
       window.location = "./login.html"
     }
 
@@ -41,7 +44,9 @@ new Vue({
           this.bitacoras = response.data;
           //console.log(response.data);
         }
-      ).catch(ex => { console.log(ex) })
+      ).catch(ex => {
+        console.log(ex)
+      })
     },
 
     /*
@@ -50,7 +55,7 @@ new Vue({
     getBuscarPorFechas: function () {
       let vm = this
       let inicioformat = vm.inicio; //le da formato a la fecha de input
-      let hastaformat = vm.hasta;   //le da formato a la fecha de input
+      let hastaformat = vm.hasta; //le da formato a la fecha de input
 
       //console.log("fecha inicio: " + inicioformat); //ver si la fecha tiene el formato correcto
       //console.log("fecha final: " + hastaformat);   //ver si la fecha tiene el formato correcto
@@ -72,14 +77,15 @@ new Vue({
         this.accion = 'danger4';
       }
 
-      if (hastaformat > inicioformat) {  // fecha ingresada correctamente
+      if (hastaformat > inicioformat) { // fecha ingresada correctamente
 
         axios.get(this.urlApi + `?filter[where][fecha][between][0]=` + inicioformat + `&filter[where][fecha][between][1]=` + hastaformat + `&filter[limit]=${this.limitePage}&filter[skip]=${this.actualPage}`)
           .then(response => {
             this.bitacoras = response.data;
             //console.log(response.data);
-          }
-          ).catch(ex => { console.log(ex) })
+          }).catch(ex => {
+            console.log(ex)
+          })
       }
     },
 
@@ -90,7 +96,7 @@ new Vue({
 
       let vm = this
       let inicioDeleteFormat = vm.inicioDelete; //le da formato a la fecha de input
-      let hastaDeleteFormat = vm.hastaDelete;   //le da formato a la fecha de input
+      let hastaDeleteFormat = vm.hastaDelete; //le da formato a la fecha de input
 
       //console.log("fecha delete inicio: " + inicioDeleteFormat); //ver si la fecha tiene el formato correcto
       //console.log("fecha delete final: " + hastaDeleteFormat);   //ver si la fecha tiene el formato correcto
@@ -111,7 +117,7 @@ new Vue({
         alert("ERROR! La fecha HASTA debe ser mayor a la fecha INICIO.\nNo se puede eliminar datos.");
       }
 
-      if (hastaDeleteFormat > inicioDeleteFormat) {  // fecha ingresada correctamente
+      if (hastaDeleteFormat > inicioDeleteFormat) { // fecha ingresada correctamente
 
         axios.get(this.urlApi + `?filter[where][fecha][between][0]=` + inicioDeleteFormat + `&filter[where][fecha][between][1]=` + hastaDeleteFormat)
           .then(response => {
@@ -127,12 +133,16 @@ new Vue({
                 axios.delete(this.urlApi + '/' + this.bitacorasDelete[i].id)
                   .then(function (res) {
                     alert("Exito! Se han borrado un total de datos " + totalDelete);
-                  }).catch(e => { console.log(e) })
+                  }).catch(e => {
+                    console.log(e)
+                  })
               }
 
             }
 
-          }).catch(ex => { console.log(ex) })
+          }).catch(ex => {
+            console.log(ex)
+          })
 
         this.getAllBitacoras();
       }
@@ -195,13 +205,19 @@ new Vue({
     salir e ir al login
     */
     salir: function () {
-      var opcion = confirm('Seguro que quiere salir?')
-      console.log(opcion)
-      if (opcion) {
-        logout()
-        window.location = "./login.html"
-      }
-    }
+      swal({
+        title: "¿Seguro que desea cerrar sesión?",
+        icon: 'info',
+        buttons: true,
+        dangerMode: true,
+      }).then(opcion => {
+        if (opcion) {
+          logout()
+          window.location = "./login.html"
+        }
+      })
+    },
+
 
   },
 

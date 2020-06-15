@@ -107,13 +107,13 @@ input:checked+.slider:before {
     border-radius: 8px;
 }
 
-.ag h1{
+.ag h1 {
     color: rgb(5, 125, 224);
     text-shadow: 12px 15px 25px rgba(5, 125, 224);
     transition: 0.5s ease-in-out;
 }
 
-.ag:hover h1{
+.ag:hover h1 {
     color: rgb(5, 171, 224);
     text-shadow: 12px 15px 25px rgba(5, 171, 224);
 }
@@ -180,6 +180,7 @@ tr:nth-child(even) {
 /* ==================== animaciones ==================== */
 
 @-webkit-keyframes bounceIn {
+
     from,
     20%,
     40%,
@@ -189,28 +190,34 @@ tr:nth-child(even) {
         -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
     }
+
     0% {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
         transform: scale3d(0.3, 0.3, 0.3)
     }
+
     20% {
         -webkit-transform: scale3d(1.1, 1.1, 1.1);
         transform: scale3d(1.1, 1.1, 1.1)
     }
+
     40% {
         -webkit-transform: scale3d(0.9, 0.9, 0.9);
         transform: scale3d(0.9, 0.9, 0.9)
     }
+
     60% {
         opacity: 1;
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
         transform: scale3d(1.03, 1.03, 1.03)
     }
+
     80% {
         -webkit-transform: scale3d(0.97, 0.97, 0.97);
         transform: scale3d(0.97, 0.97, 0.97)
     }
+
     to {
         opacity: 1;
         -webkit-transform: scale3d(1, 1, 1);
@@ -219,6 +226,7 @@ tr:nth-child(even) {
 }
 
 @keyframes bounceIn {
+
     from,
     20%,
     40%,
@@ -228,28 +236,34 @@ tr:nth-child(even) {
         -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
     }
+
     0% {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
         transform: scale3d(0.3, 0.3, 0.3)
     }
+
     20% {
         -webkit-transform: scale3d(1.1, 1.1, 1.1);
         transform: scale3d(1.1, 1.1, 1.1)
     }
+
     40% {
         -webkit-transform: scale3d(0.9, 0.9, 0.9);
         transform: scale3d(0.9, 0.9, 0.9)
     }
+
     60% {
         opacity: 1;
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
         transform: scale3d(1.03, 1.03, 1.03)
     }
+
     80% {
         -webkit-transform: scale3d(0.97, 0.97, 0.97);
         transform: scale3d(0.97, 0.97, 0.97)
     }
+
     to {
         opacity: 1;
         -webkit-transform: scale3d(1, 1, 1);
@@ -346,11 +360,13 @@ tr:nth-child(even) {
 }
 
 @-webkit-keyframes shake {
+
     from,
     to {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0)
     }
+
     10%,
     30%,
     50%,
@@ -359,6 +375,7 @@ tr:nth-child(even) {
         -webkit-transform: translate3d(-10px, 0, 0);
         transform: translate3d(-10px, 0, 0)
     }
+
     20%,
     40%,
     60%,
@@ -369,11 +386,13 @@ tr:nth-child(even) {
 }
 
 @keyframes shake {
+
     from,
     to {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0)
     }
+
     10%,
     30%,
     50%,
@@ -382,6 +401,7 @@ tr:nth-child(even) {
         -webkit-transform: translate3d(-10px, 0, 0);
         transform: translate3d(-10px, 0, 0)
     }
+
     20%,
     40%,
     60%,
@@ -395,7 +415,8 @@ tr:nth-child(even) {
     -webkit-animation-name: shake;
     animation-name: shake
 }
-.bg-list-color-transparent{
+
+.bg-list-color-transparent {
     background-color: transparent;
     background: transparent;
     border-color: transparent;
@@ -407,13 +428,15 @@ tr:nth-child(even) {
     color: #585858;
     margin-left: 20px;
 }
-.topNavLink:hover{
+
+.topNavLink:hover {
     background-color: tomato;
     color: #fff;
     text-decoration: none;
 }
+
 /* Animacion de loader*/
-.loader{
+.loader {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -423,11 +446,13 @@ tr:nth-child(even) {
     box-sizing: border-box;
     z-index: 100;
 }
-.loader .face{
+
+.loader .face {
     position: absolute;
     border: 2px solid #121212;
 }
-.loader .face.face1{
+
+.loader .face.face1 {
     top: 0;
     left: 0;
     right: 0;
@@ -439,7 +464,8 @@ tr:nth-child(even) {
     border-top: 2px solid #ffff00;
     animation: animate 3s linear infinite;
 }
-.loader .face.face2{
+
+.loader .face.face2 {
     top: 30px;
     left: 30px;
     right: 30px;
@@ -451,21 +477,25 @@ tr:nth-child(even) {
     border-bottom: 2px solid #03a9f4;
     animation: animate 3s linear reverse infinite;
 }
-.loader .face .circle{
+
+.loader .face .circle {
     position: absolute;
     top: calc(50% - 1px);
     left: 50%;
     width: 50%;
     height: 2px;
-    transform-origin: left ;
+    transform-origin: left;
 }
-.loader .face.face1 .circle{
+
+.loader .face.face1 .circle {
     transform: rotate(-45deg);
 }
-.loader .face.face2 .circle{
+
+.loader .face.face2 .circle {
     transform: rotate(-45deg);
 }
-.loader .face .circle::before{
+
+.loader .face .circle::before {
     content: '';
     position: absolute;
     width: 10px;
@@ -475,32 +505,54 @@ tr:nth-child(even) {
     top: -4px;
     right: -6px;
 }
-.loader .face.face2 .circle::before{
+
+.loader .face.face2 .circle::before {
     background: #03a9f4;
     box-shadow: 0 0 20px #03a9f4,
-                0 0 40px #03a9f4,
-                0 0 60px #03a9f4,
-                0 0 80px #03a9f4,
-                0 0 100px #03a9f4,
-                0 0 0 5px rgba(255, 255, 0, .1);
+        0 0 40px #03a9f4,
+        0 0 60px #03a9f4,
+        0 0 80px #03a9f4,
+        0 0 100px #03a9f4,
+        0 0 0 5px rgba(255, 255, 0, .1);
 }
-.loader .face.face1 .circle::before{
+
+.loader .face.face1 .circle::before {
     background: #ffff00;
     box-shadow: 0 0 20px #ff0,
-                0 0 40px #ff0,
-                0 0 60px #ff0,
-                0 0 80px #ff0,
-                0 0 100px #ff0,
-                0 0 0 5px rgba(3, 169, 244, .1);
+        0 0 40px #ff0,
+        0 0 60px #ff0,
+        0 0 80px #ff0,
+        0 0 100px #ff0,
+        0 0 0 5px rgba(3, 169, 244, .1);
 }
-@keyframes animate{
-    0%
-    {
-      transform: rotate(0deg);  
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
     }
-    100%
-    {
-      transform: rotate(360deg);  
+
+    100% {
+        transform: rotate(360deg);
     }
 }
 
+.semaforo {
+    border-radius: 20px;
+    padding: 2px 15px;
+    text-align: center;
+    color: white;
+    text-shadow: 0 5px 10px rgba(100, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+.semaforo:hover {
+    transform: scale(1.1);
+}
+
+.semaforoBtn {
+    border-radius: 20px;
+    width: 100%;
+    padding: 2px;
+    background: #C21C00;
+    color: #fff;
+}

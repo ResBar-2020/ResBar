@@ -29,10 +29,10 @@ new Vue({
 
                     }).catch(err => console.log(err))
 
-            //Metodo para iniciar sesion con loggin y clave
+                //Metodo para iniciar sesion con loggin y clave
             } else if (this.user.loggin != "" && this.user.clave != "" && this.user.pin == "") {
                 axios.get(this.uri + '?filter[where][clave]=' + this.user.clave +
-                    '&[where][loggin]=' + this.user.loggin).then(res => {
+                    '&filter[where][loggin]=' + this.user.loggin).then(res => {
                     if (res.data[0] != undefined) {
                         VueSession.setAll(res.data[0].rol, res.data[0].nombreCompleto)
                         window.location = './ordenes.html'

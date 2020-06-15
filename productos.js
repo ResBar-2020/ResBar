@@ -3,22 +3,25 @@ new Vue({
     data: {
         // Aqui inician las propiedades que vamos a necesitar
         //para almacenar nuestros objetos de trabajo
-        logName: logName
-        ,categorias: [],
+        logName: logName,
+        categorias: [],
         productoSelected: {
             id: "0",
             nombre: "",
             precio: 0.00,
             categoria: {
                 nombre: ""
-            }
+            },
+            preparado: ""
         },
         productos: [],
+        categoriaSelected: "",
         producto: {
             id: "0",
             nombre: "",
             precio: "0.00",
-            categoria: ""
+            categoria: "",
+            preparado: false
         },
 
         displayOption: "",
@@ -29,14 +32,13 @@ new Vue({
             precio: 0.00,
             categoria: {
                 nombre: ""
-            }
+            },
+            preparado: ""
         },
-
-
-
-
+        todos: false,
     },
     created: function () {
+        this.obtenerCategorias();
         this.obtenerProductos();
         if (localStorage.vue_session_key) {
             if (localStorage.getItem(VueSession.key) == '"mesero"') {
@@ -242,12 +244,17 @@ new Vue({
                 return false;
         },
         salir: function () {
-            var opcion = confirm('¿Está seguro que quiere salir?')
-            console.log(opcion)
-            if (opcion) {
-                logout()
-                window.location = "./login.html"
-            }
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     }
 

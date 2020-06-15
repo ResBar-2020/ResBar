@@ -81,13 +81,14 @@ body{
     transition: .5s;
 }
 
-.box .inputBox input:focus ~ label,.box .inputBox input:valid ~ label{
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label{
     top: -20px;
     left: 0;
     color: rgb(3, 169, 244);
     font-size: 12px;
 }
-.box input[type="button"]{
+.box input[type="submit"]{
     cursor: pointer;
     border: none;
     color: #fff;
@@ -98,7 +99,7 @@ body{
     border-radius: 5px;
     transition: .5s;
 }
-.box input[type="button"]:hover{
+.box input[type="submit"]:hover{
     color: #fff;
     background: #000;
     border-color: #FFF;
