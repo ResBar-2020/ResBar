@@ -2,6 +2,7 @@
 //archivo html, todo el codigo comun va aqui
 
 //Direccion URL de la api rest que se va a consumir por la aplicacion
+//recuerda que va sin pleca al final, ojo sin pleca al final
 const ApiRestUrl = "http://localhost:3000"
 
 //Nombre del usuario logueado
