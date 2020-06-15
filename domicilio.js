@@ -22,12 +22,15 @@ Vue.component('semaforo', {
 
                     if (porcentaje < 60) {
                         element.style.backgroundColor = "#10752D";
+                        this.color = "#10752D";
 
                     } else if (porcentaje > 60 && porcentaje < 100) {
 
                         element.style.backgroundColor = "#C2B314";
+                        this.color = "#C2B314";
                     } else {
                         element.style.backgroundColor = "#751C1D";
+                        this.color = "#751C1D";
 
 
                     }
@@ -101,8 +104,7 @@ var vmm=new Vue({
                 .then(res => {
                     var orden = res.data
                     orden.tiempoPreparacion = null;
-                    console.log(orden)
-                    debugger;
+                    console.log(orden)                    
                     axios.put(this.urlApi + '/' + idorden, orden)
                         .then(response => {
                             console.log(response)
@@ -173,7 +175,27 @@ var vmm=new Vue({
             })
         },
         getDomicilios: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa][neq]=2")
+            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=0")
+                .then(
+                    response => {
+                        this.ordenes = response.data
+                    }
+                ).catch(ex => {
+                    console.log(ex)
+                })
+        },
+        getDomiciliosdespachado: function () {
+            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=1")
+                .then(
+                    response => {
+                        this.ordenes = response.data
+                    }
+                ).catch(ex => {
+                    console.log(ex)
+                })
+        },
+        getDomiciliosentregados: function () {
+            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=2")
                 .then(
                     response => {
                         this.ordenes = response.data

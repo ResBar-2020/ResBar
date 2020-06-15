@@ -14,7 +14,7 @@ Vue.component('semaforo', {
                     var segundos = (t - tiempoinicio) / 1000;
 
                     var element = document.querySelector('#timer-' + self.idorden);
-
+                                      
                     element.innerHTML = self.secondsToHMS(segundos);
 
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
@@ -52,7 +52,10 @@ Vue.component('semaforo', {
 
 
     },
-    template: `<div>
+    template:
+    
+    
+    `<div>
     <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'" class="semaforo">
     </div>
     <button class="btn btn-sm semaforoBtn mt-1" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</button>

@@ -153,16 +153,16 @@
                     <!--secccion de estados de ordenes-->
                     <ul class="nav nav-tabs">
                       <li>
-                        <a class="btn btn-danger" data-toggle="tab" href="#">
-                          PENDIENTE</a>
+                        <a class="btn btn-info btn-sm" data-toggle="tab" href="#" v-on:click="getDomicilios">
+                          PREPARANDO</a>
                       </li>
                       <li>
-                        <a class="btn btn-primary" data-toggle="tab" href="#">
-                          EN PROCESO</a>
+                        <a class="btn btn-primary btn-sm" data-toggle="tab" href="#" v-on:click="getDomiciliosdespachado">
+                          DESPACHADAS</a>
                       </li>
                       <li>
-                        <a class="btn btn-success" disabled="true" data-toggle="tab" href="#">
-                          ENTREGADA</a>
+                        <a class="btn btn-success btn-sm" disabled="true" data-toggle="tab" href="#" v-on:click="getDomiciliosentregados">
+                          ENTREGADAS</a>
                       </li>
                     </ul>
 
@@ -208,7 +208,7 @@
                         <div class="tarjeta" :class="{ 'tarjeta-flip' : detalle}">
                           <!-- parte delantera del card-->
                           <div class="adelante card1">
-                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-danger ">
+                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-info ">
                               <div class="row">
                                 <div class="col-md-6">
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
