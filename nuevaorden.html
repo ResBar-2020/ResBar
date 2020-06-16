@@ -125,7 +125,13 @@
                         <h3 class="text-center col-12">Crear Nueva Orden</h3>
                     </div>
 
-
+                    <!--Inicio: Alertas-->
+                    <div class="alert alert-success collapse" role="alert" id="buttonAlert" v-bind:class="{ 'alert-danger' : agrega==='no' }">
+                        <span v-if="agrega==='si'"><strong>Exito!</strong> Cliente Agregado
+                            Correctamente</span>
+                        <span v-if="agrega==='no'"><strong>Error!</strong> Debe Ingresar El Nombre del Cliente</span>
+                    </div>
+                    <!--Fin: Alertas-->
                     <!-- Inicia seccion de alertas -->
                     <div v-if="mensajeApi != null" class="alert alert-info" role="alert" id="buttonAlert">
                         {{mensajeApi}}
@@ -197,10 +203,18 @@
                                         <label for="txtCliente">Cliente: </label>
                                     </div>
                                     <div class="col">
-                                        <input v-model="nuevaOrden.cliente" pattern="[A-Za-z]+[A-Za-z .]{2,}" type="text" class="form-control" id="txtCliente" placeholder="Enter name">
+                                        <input v-model="cliente.nombreCompleto" pattern="[A-Za-z]+[A-Za-z .]{2,}" type="text" class="form-control" id="txtCliente" placeholder="Enter name">
                                         <div class="invalid-feedback">
                                             Ingrese un nombre valido mayor a 3 caracteres
                                         </div>
+                                    </div>
+                                    <div>
+                                        <button v-if="cliente.nombreCompleto ===''" type="button" class="btn btntable" 
+                                            @click="showModalAddCliente();" title="Agregar Cliente"
+                                            >+</button>
+                                        <button v-if="cliente.nombreCompleto !=''" type="button" class="btn btntable" 
+                                            onClick="$('#modalDetCliente').modal('show')" title="Detalles Cliente"
+                                            >...</button>
                                     </div>
                                 </div>
                                 <div class="form-group row" id="divMesero">
@@ -339,6 +353,337 @@
                         </div>
                     </div>
                     <!-- Fin modal Resumen-->
+
+                    <!--Inicio:Modal Add Cliente-->
+                    <div class="modal fade" style="border-radius: 8px;" id="modalAddCliente"
+                    data-backdrop="static" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                        <div class="modal-content">
+
+                            <!--Inicio:Cabecera Modal-->
+                            <div class="modal-header bg-gradient-primary">
+                                <div class="sidebar-brand-text mx-3">
+                                    <h5 class="text-center text-white" v-if="">AGREGAR CLIENTE A LA ORDEN</h5>
+                                </div>
+                            </div>
+                            <!--Fin:Cabecera Modal-->
+                            
+                            <!--Inicio: Cuerpo Modal-->
+                            <div class="modal-body bd-example-modal-xl">
+                                
+                                <!--Inicio: Buscador-->
+                                <div class="row" style="margin-bottom: 25px;">
+                                    <div class="col-12 col-md-12 col-sm-12 input-group mb-auto">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
+                                        </div>
+                                        <input type="text" class="col-9 col-md-3" placeholder="Buscar"
+                                            v-model="textoBusqueda">
+                                    </div>
+                                </div>
+                                <!--Fin: Buscador-->
+                                <!--Inicio: Tabla-->
+                            <div class="table-wrapper-scroll-y d-lg-block d-sm-block my-custom-scrollbar" style="height: 270px;">
+                                <table class="table table-sm table-bordered mb-0 " style="width: 100%;">
+                                    <thead class="bg-primary text-white">
+                                        <tr>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Nombre</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Celular</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">WhatsApp</th>
+                                            <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
+                                                scope="col">Direccion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(client, index) in clientes" v-show="buscarClientes(index)"
+                                            v-on:click.prevent="cliente = client;" v-on:dblClick=""
+                                            v-bind:class="{ 'font-weight-bold' :  cliente===client}">
+                                            <td>{{client.nombreCompleto}}</td>
+                                            <td>{{client.celular}}</td>
+                                            <td>{{client.whatsapp}}</td>
+                                            <td>{{client.direccion.substring(0,30)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="sidebar-brand-text mx-3" style="margin-top:20px;">
+                                    <span style="font-weight: bold;">Nota:Si no se encontraron coincidencias click Aqui
+                                        <button class="btn btntable btn-sm" style="border-radius: 50px;" @click="newCliente();">
+                                            +</button> para agregar un nuevo cliente a la orden  </span>
+                                </div>
+                            </div>
+                            <!--Fin: Tabla-->
+
+
+
+                            </div>
+                            <!--Fin:Cuerpo Modal-->
+
+                            <!--Inicio:Botones Modal-->
+                            <div class="modal-footer bg-gradient-primary">
+                                
+                                <button type="button" class="btn btntable btn-sm text-white" data-dismiss="modal" 
+                                v-on:click="btnClienteCls();">
+                                    Cancelar</button>
+
+                                <button type="button" class="btn btntable btn-sm text-white" @Click="addCliente();"
+                                >Agregar</button>
+
+                            </div>
+                            <!--Fin:Botones Modal-->
+                        </div>
+                    </div>
+                </div>
+                <!--Fin:Modal Add Cliente-->
+
+                <!--Inicio: Modal Detalle Cliente-->
+                <div class="modal fade" style="border-radius: 8px;" id="modalDetCliente" data-backdrop="static"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                    <div class="modal-content">
+
+                        <!--Inicio:Cabecera Modal-->
+                        <div class="modal-header bg-gradient-primary">
+                            <div class="sidebar-brand-text mx-3">
+                                <h5 class="text-center text-white" >DETALLES
+                                    DE CLIENTE</h5>
+                            </div>
+                        </div>
+                        <!--Fin:Cabecera Modal-->
+
+                        <!--Inicio: Cuerpo Modal-->
+                        <div class="modal-body bd-example-modal-xl">
+                            <div class="form-group row">
+                                <label for="id" class="col-3 col-form-label text-center text-black-50">
+                                    Id Cliente:</label>
+                                <div class="col-9">
+                                    <label id="id" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.id}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="nombre"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Cliente:</label>
+                                <div class="col-9">
+                                    <label id="nombre" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.nombreCompleto}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="celular"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Celular:</label>
+                                <div class="col-9">
+                                    <label id="celular" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.celular}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="whatsapp"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    WhatsApp:</label>
+                                <div class="col-9">
+                                    <label id="whatsapp" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.whatsapp}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="fecha"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Fecha Registro:</label>
+                                <div class="col-9">
+                                    <label id="fecha" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.fechaRegistro.substring(0,10)}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="direccion"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Dirección:</label>
+                                <div class="col-9">
+                                    <label id="direccion" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.direccion}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="departamento"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Departamento:</label>
+                                <div class="col-9">
+                                    <label id="departamento" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.departamento}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="municipio"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Municipio:</label>
+                                <div class="col-9">
+                                    <label id="municipio" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.municipio}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="puntoref"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Punto Referencia:</label>
+                                <div class="col-9">
+                                    <label id="puntoref" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.puntodeReferencia}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="observaciones"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Observaciones:</label>
+                                <div class="col-9">
+                                    <label id="observaciones" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.observaciones}} </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="ubicacion"
+                                    class="col-3 col-form-label text-center text-black-50">
+                                    Ubicación:</label>
+                                <div class="col-9">
+                                    <label id="ubicacion" style="color: #000000; left: -5px;"
+                                        class="form-control-plaintext">{{cliente.ubicacion}} </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fin:Cuerpo Modal-->
+
+                        <!--Inicio:Botones Modal-->
+                        <div class="modal-footer bg-gradient-primary">
+                            <button type="button" class="btn btntable btn-sm text-white" data-dismiss="modal" >Cerrar</button>
+                        </div>
+                        <!--Fin:Botones Modal-->
+
+                    </div>
+                </div>
+            </div>
+            <!--Fin:Modal Detalle Cliente-->
+
+            <!--Inicio: Modal Agregar Nuevo Cliente-->
+            <div class="modal fade" style="border-radius: 8px;" id="addNuevoCliente"
+            data-backdrop="static" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
+                <div class="modal-content">
+
+                    <!--Inicio:Cabecera Modal-->
+                    <div class="modal-header bg-gradient-primary">
+                        <div class="sidebar-brand-text mx-3">
+                            <h5 class="text-center text-white">AGREGAR
+                                CLIENTE</h5>
+                        </div>
+                    </div>
+                    <!--Fin:Cabecera Modal-->
+
+                    <!--Inicio: Cuerpo Modal-->
+                    <div class="modal-body bd-example-modal-xl">
+                        <form>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Nombre Completo
+                                        *</label>
+                                    <input id="nombreCompleto" v-model="cliente.nombreCompleto"
+                                        type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Telefono Casa
+                                        </label>
+                                    <input id="telefonoCasa" v-model="cliente.telefonoCasa"
+                                        type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Celular </label>
+                                    <input id="celular" v-model="cliente.celular" type="tel"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">WhatsApp</label>
+                                    <input id="whatsapp" v-model="cliente.whatsapp" type="tel"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Dirección </label>
+                                    <input id="direccion" v-model="cliente.direccion" type="text"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Departamento </label>
+                                    <input id="departamento" v-model="cliente.departamento"
+                                        type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Municipio </label>
+                                    <input id="municipio" v-model="cliente.municipio" type="text"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Punto
+                                        Referencia</label>
+                                    <input id="puntoDeReferencia"
+                                        v-model="cliente.puntoDeReferencia" type="text"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Observaciones</label>
+                                    <input id="observaciones" v-model="cliente.observaciones"
+                                        type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="font-weight-bold text-dark">Ubicación:</label>
+                                    <button class="btn btntable btn-sm"
+                                        onClick="">
+                                        <i class="fas text-white">...</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--Fin:Cuerpo Modal-->
+
+                    <!--Inicio:Botones Modal-->
+                    <div class="modal-footer bg-gradient-primary">
+                        
+                        <button type="button" class="btn btntable btn-sm text-white"
+                            data-dismiss="modal" @Click="btnClienteCls();">Cancelar</button>
+
+                        <button type="button" class="btn btntable btn-sm text-white"
+                            onclick="alerta()" @Click="agregarCliente();"
+                            data-dismiss="modal">
+                            Guardar</button>
+                    </div>
+                    <!--Fin:Botones Modal-->
+
+                </div>
+            </div>
+        </div>
+        <!--Fin:Modal Agregar Nuevo Cliente-->
+
+
+
 
                 </div>
                 <!-- Termina el contenedor de la pagina y el dominio de VUE-->

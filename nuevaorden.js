@@ -29,7 +29,24 @@ var app = new Vue({
             loggin: "",
             descripcion: ""
         },
-        admin:admin
+        admin:admin,
+
+        textoBusqueda: '',
+        clientes:{},
+        cliente: {
+            nombreCompleto: "",
+            telefonoCasa: "",
+            celular: "",
+            whatsapp: "",
+            direccion: "",
+            municipio: "",
+            departamento: "",
+            puntoDeReferencia: "",
+            observaciones: "",
+            fechaRegistro: "",
+            coordenadas: ""
+        },
+        agrega:'',
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -114,6 +131,93 @@ var app = new Vue({
 
 
         },
+
+        /* Obtiene todos los clientes que estan registrados en la base de datos y son almacenados en el array clientes */
+        obtenerClientes() {
+            axios.get(this.url + '/clientes').then((result) => {
+                this.clientes = result.data
+            }).catch((err) => {
+                console.log(err)
+            });
+        },
+
+        newCliente(){
+            $('#modalAddCliente').modal('toggle');
+            $('#addNuevoCliente').modal('show')
+        },
+
+        agregarCliente() {
+            if (this.cliente.nombreCompleto != "" ) {
+                this.cliente.fechaRegistro = new Date().toISOString();
+                axios.post(this.url+'/clientes', JSON.stringify(this.cliente), {
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    }).then(response => {
+                        this.agrega='si';
+                        this.textoBusqueda='';
+                    })
+                    .catch(err => {
+                        console.log("Error:", err);
+                        this.agrega='err';
+                        this.textoBusqueda='';
+                    });
+            } else {
+                $('#addNuevoCliente').modal('toggle');
+                this.agrega='no';
+                this.textoBusqueda='';
+            }
+        },
+
+        /* Realiza una busqueda en el array clientes utilizando el parametro X que es la palabra clave para ver un registro */
+        buscarClientes(x) {
+            if (this.textoBusqueda == ""){
+                return true;
+            }
+            var cad = this.clientes[x].nombreCompleto +
+                this.clientes[x].celular +
+                this.clientes[x].whatsapp +
+                this.clientes[x].direccion;
+            cad = cad.toUpperCase();
+
+            if (cad.indexOf(this.textoBusqueda.toUpperCase()) >= 0){
+                return true;
+            }else{
+                return false;
+            }
+        
+        },
+
+        /* */
+        showModalAddCliente(){
+            this.obtenerClientes();
+            $('#modalAddCliente').modal('show')
+        },
+        
+        /* */
+        addCliente(){
+            this.nuevaOrden.cliente = this.cliente.nombreCompleto;
+            $('#modalAddCliente').modal('toggle');
+        },
+
+        btnClienteCls(){
+            this.textoBusqueda='';
+            this.cliente={
+                nombreCompleto: "",
+                telefonoCasa: "",
+                celular: "",
+                whatsapp: "",
+                direccion: "",
+                municipio: "",
+                departamento: "",
+                puntoDeReferencia: "",
+                observaciones: "",
+                fechaRegistro: "",
+                coordenadas: ""
+            };
+            window.location.reload();
+        },
+        
         cambiarADomicilio() {
             check = document.getElementById("domic");
             if (check.checked) {
@@ -131,6 +235,7 @@ var app = new Vue({
 
         saveOrden() {
             this.mensajeApi = "Guardando Orden...";
+            this.nuevaOrden.cliente = this.cliente.nombreCompleto;
             axios
                 .post(this.url + '/ordenes', this.nuevaOrden)
                 .then(response => {
@@ -219,3 +324,16 @@ var app = new Vue({
     }
 
 })
+
+document.getElementById("telefonoCasa").addEventListener("input", (e) => {
+    let value = e.target.value;
+    e.target.value = value.replace(/[^\d-]/g, "");
+});
+document.getElementById("celular").addEventListener("input", (e) => {
+    let value = e.target.value;
+    e.target.value = value.replace(/[^\d-]/g, "");
+});
+document.getElementById("whatsapp").addEventListener("input", (e) => {
+    let value = e.target.value;
+    e.target.value = value.replace(/[^\d-]/g, "");
+});
