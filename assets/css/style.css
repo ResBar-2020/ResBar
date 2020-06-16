@@ -165,9 +165,12 @@ th {
 tr {
     color: #000000;
     background-color: #fff;
+    transition: 0.3s;
 }
 
-tr:hover {
+tr:hover,
+tr:nth-child(even):hover {
+    transform: scale(1.01);
     background-color: #9ebffde0;
     color: #000000;
 }
@@ -558,18 +561,20 @@ tr:nth-child(even) {
     color: #fff;
 }
 
-.nav-link{
+.nav-link {
     transition: 0.3s;
 }
 
-.nav-item .nav-link:hover{
+.nav-item .nav-link:hover {
     transform: scale(1.1);
     background: black;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
 }
-.sidebar-brand-icon{
+
+.sidebar-brand-icon {
     transition: 0.5s;
 }
-.sidebar-brand-icon:hover{
+
+.sidebar-brand-icon:hover {
     transform: rotateZ(35deg);
 }
