@@ -144,7 +144,7 @@
 
 
             <div class="card">
-              <div class="card-body text-white " style="background-color: #130f40;">
+              <div class="card-body text-white " style="background-color: #747d8c">
                 <div class="row">
 
                   <div class="col-sm">
@@ -165,18 +165,18 @@
                     <!--secccion de estados de ordenes-->
                     <ul class="nav nav-tabs">
                       <li>
-                        <a class="btn btn-info btn-sm" data-toggle="tab" href="#" v-on:click="getDomicilios">
-                          PREPARANDO</a>
+                        <button class="btn btn-dark btn-sm" data-toggle="tab" style="background-color: #1289A7;">
+                          ORDENADAS</button>
                       </li>
                       <li>
-                        <a class="btn btn-primary btn-sm" data-toggle="tab" href="#"
-                          v-on:click="getDomiciliosdespachado">
-                          DESPACHADAS</a>
+                        <button class="btn btn-dark btn-sm" data-toggle="tab" style="background-color: #0652DD;">
+                          PREPARADAS</button>
+                          
                       </li>
                       <li>
-                        <a class="btn btn-success btn-sm" disabled="true" data-toggle="tab" href="#"
-                          v-on:click="getDomiciliosentregados">
-                          ENTREGADAS</a>
+                        <button class="btn btn-dark btn-sm" data-toggle="tab" style="background-color:#1B1464;">
+                          ENTREGADAS</button>
+                         
                       </li>
                     </ul>
 
@@ -219,26 +219,29 @@
                   <li class="list-group-item bg-list-color-transparent" v-show="filtro(index)">
                     <div class="wrap text-white mb-3 col-sm" style="max-width: 18rem;">
                       <div class="tarjeta-wrap">
-                        <div class="tarjeta" :class="{ 'tarjeta-flip' : detalle}">
+                        <div class="tarjeta" :class="{ 'tarjeta-flip' : detalle }">
                           <!-- parte delantera del card-->
                           <div class="adelante card1">
-                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white bg-info ">
+                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white " style="background-color:#1289A7;">
                               <div class="row">
                                 <div class="col-md-6">
+                                  <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
+                                  <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
                                   <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
                                     class="button1 bouncy" style="animation-delay:0.07s">Preparar</a>
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>
-
                                 </div>
                               </div>
 
                             </div>
-                            <div v-if="orden.domicilioEtapa==1" class="card-header text-white bg-primary">
-                              <div class="row">
+                            <div v-if="orden.domicilioEtapa==1" class="card-header text-white" style="background-color: #0652DD;">
+                              <div class="row" >
                                 <div class="col-md-6">
+                                  <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
+                                  <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
                                   <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
                                     class="button1 bouncy" style="animation-delay:0.07s">Entregar</a>
@@ -249,9 +252,11 @@
                                 </div>
                               </div>
                             </div>
-                            <div v-if="orden.domicilioEtapa==2" class="card-header text-white bg-success">
+                            <div v-if="orden.domicilioEtapa==2" class="card-header text-white"  style="background-color:#1B1464 ;">
                               <div class="row">
                                 <div class="col-md-6">
+                                  <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
+                                  <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
                                   <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
                                     class="button1 bouncy" style="animation-delay:0.07s">completar</a>

@@ -88,6 +88,15 @@ transform: rotateY(180deg);
 background-size: cover;
 }
 
+.bgcobrado{
+	color: yellow;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-decoration:line-through;
+  }
+  .bgpendiente{
+	color: yellow;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
 
 .myButton {
 	box-shadow: 3px 4px 0px 0px #8a2a21;
@@ -117,25 +126,25 @@ background-size: cover;
 
 
 .example_e {
-	border: none;
-	background: #404040;
-	color: #ffffff !important;
-	font-weight: 100;
-	padding: 20px;
-	text-transform: uppercase;
-	border-radius: 6px;
-	display: inline-block;
-	transition: all 0.3s ease 0s;
-	}
+border: none;
+background: #404040;
+color: #ffffff !important;
+font-weight: 100;
+padding: 20px;
+text-transform: uppercase;
+border-radius: 6px;
+display: inline-block;
+transition: all 0.3s ease 0s;
+}
 
-	.example_e:hover {
-		color: #404040 !important;
-		font-weight: 700 !important;
-		letter-spacing: 3px;
-		background: white;
-		-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-		-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-		transition: all 0.3s ease 0s;
+.example_e:hover {
+color: #404040 !important;
+font-weight: 700 !important;
+letter-spacing: 3px;
+background: white;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.3s ease 0s;
 		}
 
 
