@@ -142,6 +142,19 @@ var app = new Vue({
         },
 
         newCliente(){
+            this.cliente={
+                nombreCompleto: "",
+                telefonoCasa: "",
+                celular: "",
+                whatsapp: "",
+                direccion: "",
+                municipio: "",
+                departamento: "",
+                puntoDeReferencia: "",
+                observaciones: "",
+                fechaRegistro: "",
+                coordenadas: ""
+            };
             $('#modalAddCliente').modal('toggle');
             $('#addNuevoCliente').modal('show')
         },
@@ -215,7 +228,6 @@ var app = new Vue({
                 fechaRegistro: "",
                 coordenadas: ""
             };
-            window.location.reload();
         },
         
         cambiarADomicilio() {
