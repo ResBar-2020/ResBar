@@ -148,25 +148,29 @@ th {
     border-color: white;
     background-size: 300% 100%;
     background-image: linear-gradient(45deg, #3d69e4 0%, #428BCA 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -o-transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
 }
 
 .btntable:hover {
+    transform: scale(1.1);
     background-position: 100% 0;
     background-image: linear-gradient(45deg, #903cda 0%, #05abe0 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -o-transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
 }
 
 tr {
     color: #000000;
     background-color: #fff;
+    transition: 0.3s;
 }
 
-tr:hover {
+tr:hover,
+tr:nth-child(even):hover {
+    transform: scale(1.01);
     background-color: #9ebffde0;
     color: #000000;
 }
@@ -555,4 +559,22 @@ tr:nth-child(even) {
     padding: 2px;
     background: #C21C00;
     color: #fff;
+}
+
+.nav-link {
+    transition: 0.3s;
+}
+
+.nav-item .nav-link:hover {
+    transform: scale(1.1);
+    background: black;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+}
+
+.sidebar-brand-icon {
+    transition: 0.5s;
+}
+
+.sidebar-brand-icon:hover {
+    transform: rotateZ(35deg);
 }

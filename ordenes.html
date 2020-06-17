@@ -38,8 +38,8 @@
                     <hr class="sidebar-divider my-0">
                     <ul class="nav navbar-nav text-light" id="accordionSidebar">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" href="ordenes.html"><i
-                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="ordenes.html"
+                                style="background: #10752C;"><i class="fas fa-list-ol"></i><span>ORDENES</span></a>
                             <a class="nav-link active" href="domicilio.html"><i
                                     class="fas fa-truck"></i><span>DOMICILIO</span></a>
                             <a v-if="admin" class="nav-link active" href="clientes.html"><i
@@ -54,6 +54,8 @@
                                     class="fas fa-users"></i><span>USUARIOS</span></a>
                             <a v-if="admin" class="nav-link active" href="bitacoras.html"><i
                                     class="fas fa-archive"></i><span>BITACORAS</span></a>
+                            <a v-if="admin" class="nav-link active" href="parametros.html"><i
+                                    class="fas fa-tools"></i><span>PARAMETROS</span></a>
                         </li>
                     </ul>
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
@@ -105,6 +107,8 @@
                                             class="fas fa-users"></i><span>USUARIOS</span></a>
                                     <a v-if="admin" class="topNavLink active" href="bitacoras.html"><i
                                             class="fas fa-archive"></i><span>BITACORAS</span></a>
+                                    <a v-if="admin" class="topNavLink active" href="parametros.html"><i
+                                            class="fas fa-tools"></i><span>PARAMETROS</span></a>
                                     <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
                                         {{ logName }}</span>
                                     <button type="button" class="btn btn-sm btn-danger float-right"

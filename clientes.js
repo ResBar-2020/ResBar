@@ -39,8 +39,7 @@ new Vue({
 
         /* Verifica los valores del formulario del cliente y agrega los datos en un nuevo registro en la base de datos */
         agregarCliente() {
-            if (this.cliente.nombreCompleto != "" && this.cliente.telefonoCasa != "" && this.cliente.celular != "" &&
-                this.cliente.direccion != "" && this.cliente.municipio != "" && this.cliente.departamento != "") {
+            if (this.cliente.nombreCompleto != "" ) {
                 this.cliente.fechaRegistro = new Date().toISOString();
                 axios.post(this.uri, JSON.stringify(this.cliente), {
                         headers: {
@@ -62,8 +61,7 @@ new Vue({
 
         /* Verifica los valores del formulario del cliente y edita los datos del registro seleccionado en la base de datos */
         editarCliente() {
-            if (this.cliente.nombreCompleto != "" && this.cliente.telefonoCasa != "" && this.cliente.celular != "" &&
-                this.cliente.direccion != "" && this.cliente.municipio != "" && this.cliente.departamento != "") {
+            if (this.cliente.nombreCompleto != "" ) {
                 axios.put(this.uri + '/' + this.cliente.id, this.cliente).
                 then(response => {
                         this.obtenerClientes();

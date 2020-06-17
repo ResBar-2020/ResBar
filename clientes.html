@@ -31,7 +31,7 @@
                                     class="fas fa-list-ol"></i><span>ORDENES</span></a>
                             <a class="nav-link active" href="domicilio.html"><i
                                     class="fas fa-truck"></i><span>DOMICILIO</span></a>
-                            <a class="nav-link active" href="clientes.html"><i
+                            <a class="nav-link active" href="clientes.html" style="background: #10752C;"><i
                                     class="fas fa-users"></i><span>CLIENTES</span></a>
                             <a class="nav-link active" href="productos.html"><i
                                     class="fas fa-box"></i><span>PRODUCTOS</span></a>
@@ -43,6 +43,8 @@
                                     class="fas fa-users"></i><span>USUARIOS</span></a>
                             <a class="nav-link active" href="bitacoras.html"><i
                                     class="fas fa-archive"></i><span>BITACORAS</span></a>
+                            <a class="nav-link active" href="parametros.html"><i
+                                    class="fas fa-tools"></i><span>PARAMETROS</span></a>
                         </li>
                     </ul>
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
@@ -80,8 +82,9 @@
                                 <a class="topNavLink active" href="ordenes.html"><i
                                         class="fas fa-list-ol"></i><span>ORDENES</span></a>
                                 <a class="topNavLink active" href="domicilio.html"><i
-                                            class="fas fa-truck"></i><span>DOMICILIO</span></a>
-                                <a class="topNavLink active" href="clientes.html" style="background-color: #585858;color: white;"><i
+                                        class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                                <a class="topNavLink active" href="clientes.html"
+                                    style="background-color: #585858;color: white;"><i
                                         class="fas fa-users"></i><span>CLIENTES</span></a>
                                 <a class="topNavLink active" href="productos.html"><i
                                         class="fas fa-box"></i><span>PRODUCTOS</span></a>
@@ -93,6 +96,8 @@
                                         class="fas fa-users"></i><span>USUARIOS</span></a>
                                 <a class="topNavLink active" href="bitacoras.html"><i
                                         class="fas fa-archive"></i><span>BITACORAS</span></a>
+                                <a class="topNavLink active" href="parametros.html"><i
+                                        class="fas fa-tools"></i><span>PARAMETROS</span></a>
                             </li>
                         </ul>
                     </div>
@@ -123,7 +128,7 @@
                     <!--Fin: Buscador-->
 
                     <div class="row my-5">
-                        
+
                         <!--Inicio: Boton Agregar-->
                         <div class="col-md-12 col-sm-12"
                             style="display: flex; justify-content: center;padding-bottom: 1%;">
@@ -136,23 +141,23 @@
                         <!--Fin: Boton Agregar-->
 
                         <!--Inicio: Alertas-->
-                        <div class="alert alert-success collapse" role="alert" id="buttonAlert" v-bind:class="{ 'alert-danger' : accion==='agregarN' }">
+                        <div class="alert alert-success collapse" role="alert" id="buttonAlert"
+                            v-bind:class="{ 'alert-danger' : accion==='agregarN' }">
                             <span v-if="accion==='agregarE'"><strong>Exito!</strong> Registro Agregado
                                 Correctamente</span>
                             <span v-if="accion==='editarE'"><strong>Exito!</strong> Registro Editado
                                 Correctamente</span>
                             <span v-if="accion==='eliminarE'"><strong>Exito!</strong> Registro Eliminado
                                 Correctamente</span>
-                            <span v-if="accion==='agregarN'"><strong>Error!</strong> Debe Llenar Los Campos 
-                                Marcados Con *</span>
+                            <span v-if="accion==='agregarN'"><strong>Error!</strong> Debe Ingresar El Nombre del Cliente</span>
                         </div>
                         <!--Fin: Alertas-->
 
 
                         <div class="container container-sm container-md">
                             <!--Inicio: Tabla-->
-                            <div class="table-wrapper-scroll-y d-lg-block d-sm-block my-custom-scrollbar">
-                                <table class="table table-sm table-bordered mb-0 " style="width: 100%;">
+                            <div class="table-wrapper-scroll-y d-lg-block d-sm-block my-custom-scrollbar" style="height:250px;">
+                                <table class="table table-sm table-bordered mb-0 " style="width: 100%; height: 100%;">
                                     <thead class="bg-primary text-white">
                                         <tr>
                                             <th style="position: sticky; top: 0; background-color: rgb(78, 115, 223);"
@@ -232,44 +237,44 @@
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label class="font-weight-bold text-dark">Telefono Casa
-                                                            *</label>
+                                                            </label>
                                                         <input id="telefonoCasa" v-model="cliente.telefonoCasa"
-                                                            type="text" class="form-control" required>
+                                                            type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Celular *</label>
+                                                        <label class="font-weight-bold text-dark">Celular </label>
                                                         <input id="celular" v-model="cliente.celular" type="tel"
-                                                            class="form-control" required>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label class="font-weight-bold text-dark">WhatsApp</label>
                                                         <input id="whatsapp" v-model="cliente.whatsapp" type="tel"
-                                                            class="form-control" required>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Dirección *</label>
+                                                        <label class="font-weight-bold text-dark">Dirección </label>
                                                         <input id="direccion" v-model="cliente.direccion" type="text"
-                                                            class="form-control" required>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Departamento *</label>
+                                                        <label class="font-weight-bold text-dark">Departamento </label>
                                                         <input id="departamento" v-model="cliente.departamento"
-                                                            type="text" class="form-control" required>
+                                                            type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Municipio *</label>
+                                                        <label class="font-weight-bold text-dark">Municipio </label>
                                                         <input id="municipio" v-model="cliente.municipio" type="text"
-                                                            class="form-control" required>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -278,14 +283,14 @@
                                                             Referencia</label>
                                                         <input id="puntoDeReferencia"
                                                             v-model="cliente.puntoDeReferencia" type="text"
-                                                            class="form-control" required>
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
                                                         <label class="font-weight-bold text-dark">Observaciones</label>
                                                         <input id="observaciones" v-model="cliente.observaciones"
-                                                            type="text" class="form-control" required>
+                                                            type="text" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -302,7 +307,7 @@
 
                                         <!--Inicio:Botones Modal-->
                                         <div class="modal-footer bg-gradient-primary">
-                                            
+
                                             <button type="button" class="btn btntable btn-sm text-white"
                                                 data-dismiss="modal" @Click="btnCancelar();">Cancelar</button>
 
@@ -445,13 +450,14 @@
 
                                         <!--Inicio:Botones Modal-->
                                         <div class="modal-footer bg-gradient-primary">
-                                            
+
                                             <button type="button" class="btn btntable btn-sm text-white"
                                                 @Click="btnCancelar();" data-dismiss="modal"
                                                 v-if="accionb==='detalle'">Cerrar</button>
 
-                                            <button type="button" class="btn btntable btn-sm text-white" @Click="btnCancelar();"
-                                                data-dismiss="modal" v-if="accionb==='eliminar'">Cancelar</button>
+                                            <button type="button" class="btn btntable btn-sm text-white"
+                                                @Click="btnCancelar();" data-dismiss="modal"
+                                                v-if="accionb==='eliminar'">Cancelar</button>
 
                                             <button type="button" class="btn btn-sm text-white"
                                                 style="background-color: #FF082D; border-color: white;"
@@ -481,7 +487,7 @@
                                             </div>
                                         </div>
                                         <!--Fin:Cabecera Modal-->
-                                        
+
                                         <!--Inicio: Cuerpo Modal-->
                                         <div class="modal-body bd-example-modal-xl">
                                             <h1>AQUI DEBE ESTAR EL MAPA</h1>
@@ -490,7 +496,7 @@
 
                                         <!--Inicio:Botones Modal-->
                                         <div class="modal-footer bg-gradient-primary">
-                                            
+
                                             <button type="button" class="btn btntable btn-sm text-white"
                                                 data-dismiss="modal" @Click="">Cancelar</button>
 
