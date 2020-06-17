@@ -139,8 +139,8 @@ var vm = new Vue({
                     this.users = res.data
                 }).catch(er => console.error(er))
         },
-        getParametros() {
-            axios.get(ApiRestUrl + '/parametros')
+       async getParametros() {
+            await axios.get(ApiRestUrl + '/parametros')
                 .then(res => {
                     this.parametros = res.data
                 }).catch(er => console.error(er))
@@ -565,18 +565,20 @@ var vm = new Vue({
         }
     },
     mounted() {
-        this.getParametros()
+        this.getParametros().then(res =>{
+            if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+                this.editarOrdenImp = false;
+                this.setProdImprimir();
+            } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+                this.editarOrdenImp = true;
+                this.setProdImprimir();
+            }
+        })
         this.ordenar()
         this.mostrarActivos()
         this.alertLauncher()
         this.getUsers()
-        if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
-            this.editarOrdenImp = false;
-            this.setProdImprimir();
-        } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir) {
-            this.editarOrdenImp = true;
-            this.setProdImprimir();
-        }
+        
     },
     created() {
         if (localStorage.vue_session_key) {
