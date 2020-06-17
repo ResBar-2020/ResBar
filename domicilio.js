@@ -175,8 +175,8 @@ var vmm=new Vue({
             })
         },
         getDomicilios: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=0")
-                .then(
+            axios.get(this.urlApi + "?filter[where][or][1][domicilioEtapa][neq]=2&filter[where][or][1][domicilio]=true&filter[where][or][1][estado]=C&filter[where][or][0][domicilio]=true&filter[where][or][0][estado]=A")
+            .then(
                     response => {
                         this.ordenes = response.data
                     }
