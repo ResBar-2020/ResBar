@@ -22,18 +22,18 @@
     </div>
     <div class="container-fluid" id="appRESBAR">
         <div class="box col-12 col-lg-12 col-md-12 col-sm-12">
-            <h2 class="text-uppercase">Resbar <i class="fas fa-glass-martini"></i></h2>
+            <h2 class="text-uppercase">Resbar <i class="fas fa-glass-martini rotate"></i></h2>
             <form>
                 <div class="inputBox">
                     <small id="errorMsg" class="form-text text-center"></small>
-                    <input id="loggin" type="text" v-model="user.loggin" required><label>Usuario</label>
+                    <input id="loggin" type="text" v-model="user.loggin" required><label><i class="fas fa-user-tag"></i> Usuario</label>
                 </div>
                 <div class="inputBox">
-                    <input id="password" type="password" v-model="user.clave" required><label>password</label>
+                    <input id="password" type="password" v-model="user.clave" required><label><i class="fas fa-lock"></i> password</label>
                 </div>
                 <div class="inputBox">
                     <small class="form-text text-center">Ingresa de forma rapida usando tu pin</small>
-                    <input id=pin type="text" v-model="user.pin" required><label>Pin</label>
+                    <input id=pin type="text" v-model="user.pin" required><label><i class="fas fa-key"></i> Pin</label>
                     <small id="pinMsg" class="form-text text-center"></small>
                 </div>
                 <input type="submit" class="float-right mt-0" value="Enviar" v-on:click="Login()"

@@ -21,7 +21,7 @@ body{
 .box:hover{
     box-shadow: 10px 15px 25px rgba(255,255, 255, .5);
 }
-.box i{
+.box .rotate{
     transform: rotate(-15deg);
 }
 .box h2{
@@ -37,15 +37,6 @@ body{
 }
 .box .inputBox{
     position: relative;
-}
-.box .selectBox{
-    position: relative;
-    font-size: 16px;
-}
-.box .selectBox label{
-    color: #fff;
-    transition: .6s;
-    
 }
 .box .inputBox small{
     position: relative;
@@ -100,6 +91,7 @@ body{
     transition: .5s;
 }
 .box input[type="submit"]:hover{
+    transform: scale(1.1);
     color: #fff;
     background: #000;
     border-color: #FFF;
