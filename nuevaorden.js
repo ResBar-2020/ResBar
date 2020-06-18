@@ -29,10 +29,10 @@ var app = new Vue({
             loggin: "",
             descripcion: ""
         },
-        admin:admin,
+        admin: admin,
 
         textoBusqueda: '',
-        clientes:{},
+        clientes: {},
         cliente: {
             nombreCompleto: "",
             telefonoCasa: "",
@@ -46,7 +46,7 @@ var app = new Vue({
             fechaRegistro: "",
             coordenadas: ""
         },
-        agrega:'',
+        agrega: '',
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -119,7 +119,7 @@ var app = new Vue({
                 .get(this.url + '/productos')
                 .then(response => {
                     //se agregan dos atributos, cantidad y subtotal
-                    this.productos = response.data.map(function (obj) {
+                    this.productos = response.data.map(function(obj) {
                         let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0, preparado: obj.preparado };
                         return rObj;
                     });
@@ -141,8 +141,8 @@ var app = new Vue({
             });
         },
 
-        newCliente(){
-            this.cliente={
+        newCliente() {
+            this.cliente = {
                 nombreCompleto: "",
                 telefonoCasa: "",
                 celular: "",
@@ -160,31 +160,31 @@ var app = new Vue({
         },
 
         agregarCliente() {
-            if (this.cliente.nombreCompleto != "" ) {
+            if (this.cliente.nombreCompleto != "") {
                 this.cliente.fechaRegistro = new Date().toISOString();
-                axios.post(this.url+'/clientes', JSON.stringify(this.cliente), {
+                axios.post(this.url + '/clientes', JSON.stringify(this.cliente), {
                         headers: {
                             'content-type': 'application/json'
                         }
                     }).then(response => {
-                        this.agrega='si';
-                        this.textoBusqueda='';
+                        this.agrega = 'si';
+                        this.textoBusqueda = '';
                     })
                     .catch(err => {
                         console.log("Error:", err);
-                        this.agrega='err';
-                        this.textoBusqueda='';
+                        this.agrega = 'err';
+                        this.textoBusqueda = '';
                     });
             } else {
                 $('#addNuevoCliente').modal('toggle');
-                this.agrega='no';
-                this.textoBusqueda='';
+                this.agrega = 'no';
+                this.textoBusqueda = '';
             }
         },
 
         /* Realiza una busqueda en el array clientes utilizando el parametro X que es la palabra clave para ver un registro */
         buscarClientes(x) {
-            if (this.textoBusqueda == ""){
+            if (this.textoBusqueda == "") {
                 return true;
             }
             var cad = this.clientes[x].nombreCompleto +
@@ -193,29 +193,29 @@ var app = new Vue({
                 this.clientes[x].direccion;
             cad = cad.toUpperCase();
 
-            if (cad.indexOf(this.textoBusqueda.toUpperCase()) >= 0){
+            if (cad.indexOf(this.textoBusqueda.toUpperCase()) >= 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        
+
         },
 
         /* */
-        showModalAddCliente(){
+        showModalAddCliente() {
             this.obtenerClientes();
             $('#modalAddCliente').modal('show')
         },
-        
+
         /* */
-        addCliente(){
+        addCliente() {
             this.nuevaOrden.cliente = this.cliente.nombreCompleto;
             $('#modalAddCliente').modal('toggle');
         },
 
-        btnClienteCls(){
-            this.textoBusqueda='';
-            this.cliente={
+        btnClienteCls() {
+            this.textoBusqueda = '';
+            this.cliente = {
                 nombreCompleto: "",
                 telefonoCasa: "",
                 celular: "",
@@ -229,7 +229,7 @@ var app = new Vue({
                 coordenadas: ""
             };
         },
-        
+
         cambiarADomicilio() {
             check = document.getElementById("domic");
             if (check.checked) {
@@ -285,12 +285,12 @@ var app = new Vue({
             form.classList.add('was-validated');
         },
         disableFormSubmit() {
-            window.addEventListener('load', function () {
+            window.addEventListener('load', function() {
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
