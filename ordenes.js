@@ -526,6 +526,9 @@ var vm = new Vue({
         setProdImprimir: function () {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
+                if(localStorage.addProd){
+                    this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
+                }
                 this.fecha = new Date(response.fecha);
                 this.fecha = moment(this.fecha);
                 this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
@@ -533,6 +536,7 @@ var vm = new Vue({
                 if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0 || this.imprimirProd.domicilio === true) {
                     window.print()
                 } else {
+                    localStorage.removeItem('addProd');
                     localStorage.removeItem('estado');
                     localStorage.removeItem('idOrdenImprimir');
                 }
