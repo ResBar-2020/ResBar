@@ -276,16 +276,18 @@
                               <h4 class="card-text">FECHA: {{orden.fecha.substring(0,10)}}</h4>
 
                               <!-- se mostraran las acciones-->
-                              <button v-if="orden.domicilioEtapa!=2" type="button" class="btn btn-sm button4 bouncy"
+                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" type="button" class="btn btn-sm button4 bouncy"
                                 @click="ordenSelected=orden; agregarProductos();" title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
+                            
                               <button v-else type="button" class="btn btn btn-sm button4 disabled"
                                 title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
+                              
 
-                              <button v-if="orden.domicilioEtapa!=2" style="animation-delay:0.07s" type="button"
+                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" style="animation-delay:0.07s" type="button"
                                 @click="ordenSelected=orden; modificarOrden();" class="btn btn-sm button4 bouncy"
                                 title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
@@ -293,15 +295,20 @@
                               <button v-else type="button" class="btn btn-sm button4 disabled" title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
                               </button>
-                              <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.14s"
+                              <button v-if="orden.estado=='A'" type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.14s"
                                 @click="ordenSelected=orden; cobrarOrden();" title="Cobrar Orden">
                                 <i class="fas text-white fa-money-bill"></i></a>
                               </button>
-                              <button type="button" class="btn btn-sm button4 bouncy"
+                              <button v-else="orden.estado=='C'" type="button" class="btn btn-sm button4 disabled"
+                               title="Cobrar Orden">
+                              <i class="fas text-white fa-money-bill"></i></a>
+                            </button>
+                              <button  type="button" class="btn btn-sm button4 bouncy"
                                 @click="ordenSelected=orden; mostrarEliminar()" style="animation-delay:0.21s"
                                 title="Eliminar Orden">
                                 <i class="fas text-white fa-trash"></i></a>
                               </button>
+  
                               <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.28s"
                                 title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                 <i @click="ordenSelected=orden;" class="fas text-white fa-print"></i>

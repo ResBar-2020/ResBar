@@ -184,26 +184,6 @@ var vmm=new Vue({
                     console.log(ex)
                 })
         },
-        getDomiciliosdespachado: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=1")
-                .then(
-                    response => {
-                        this.ordenes = response.data
-                    }
-                ).catch(ex => {
-                    console.log(ex)
-                })
-        },
-        getDomiciliosentregados: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=2")
-                .then(
-                    response => {
-                        this.ordenes = response.data
-                    }
-                ).catch(ex => {
-                    console.log(ex)
-                })
-        },
         filtro(valor) {
             if (this.searchDisplay === "") return true;
             let array = (this.ordenes[valor].id + this.ordenes[valor].cliente).toUpperCase();
