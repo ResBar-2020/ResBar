@@ -20,7 +20,7 @@
             height: fit-content;
             background-image: linear-gradient(to right, rgb(37, 170, 225), rgb(68, 129, 235), rgb(4, 190, 254), rgb(63, 134, 237));
         }
-
+        
         .date-css-1 {
             user-select: none;
             border-radius: 50px;
@@ -68,8 +68,7 @@
                                 class="fas fa-tools"></i><span>PARAMETROS</span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <!-- Termina navbar lateral -->
@@ -82,10 +81,8 @@
                 <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
                 <div id="appRESBAR">
                     <!-- Inicia navbar top -->
-                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-md-none"
-                        style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
-                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-                            style="color: #585858;" href="#">
+                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-md-none" style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" style="color: #585858;" href="#">
                             <div class="sidebar-brand-icon rotate-n-15">
                                 <i class="fas fa-glass-martini"></i>
                             </div>
@@ -93,9 +90,7 @@
                         </a>
 
                         <div class="navbar-header page-scroll">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target=".navbar-ex1-collapse"
-                                style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
                                 aria-expanded="false">
                                 <span style="color: #585858;"><i class="fas fa-bars"></i></span>
                             </button>
@@ -117,13 +112,11 @@
                                             class="fas fa-file-alt"></i><span>INFORMES</span></a>
                                     <a class="topNavLink active" href="users.html"><i
                                             class="fas fa-users"></i><span>USUARIOS</span></a>
-                                    <a class="topNavLink active" href="bitacoras.html"
-                                        style="background-color: #585858;color: white;"><i
+                                    <a class="topNavLink active" href="bitacoras.html" style="background-color: #585858;color: white;"><i
                                             class="fas fa-archive"></i><span>BITACORAS</span></a>
                                     <a class="topNavLink active" href="parametros.html"><i
                                             class="fas fa-users"></i><span>PARAMETROS</span></a>
-                                    <button type="button" class="btn btn-sm btn-danger float-right"
-                                        v-on:click="salir">Salir</button>
+                                    <button type="button" class="btn btn-sm btn-danger float-right" v-on:click="salir">Salir</button>
                                 </li>
                             </ul>
                         </div>
@@ -136,8 +129,7 @@
                         <!-- inicio de titulo -->
                         <div class="row my-4">
                             <div class="col-12 ag">
-                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right"
-                                    v-on:click="salir">Salir</button>
+                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right" v-on:click="salir">Salir</button>
                                 <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
                                     {{ logName }}</label><br>
                                 <h1 class="text-center">Bitacoras RESBAR</h1>
@@ -173,16 +165,14 @@
                                 </div>
                             </div>
                             <!--boton final-->
-                            <button id="buscarFechas" class="btn btn-sm agg text-white" @click="getBuscarPorFechas()"
-                                onclick="alerta()">Buscar por fechas</button>
+                            <button id="buscarFechas" class="btn btn-sm agg text-white" @click="getBuscarPorFechas()" onclick="alerta()">Buscar por fechas</button>
                             <button id="borrarFiltros" class="btn btn-sm agg text-white" @click="borrarFiltros()">Borrar
                                 Filtros</button>
                         </div>
                         <!--termina de div del buscador, rango de fechas y boton-->
 
                         <!--Inicio: Alertas-->
-                        <div class="alert alert-info collapse" role="alert" id="buttonAlert"
-                            v-bind:class="{ 'alert-success' : accion==='exito' }">
+                        <div class="alert alert-info collapse" role="alert" id="buttonAlert" v-bind:class="{ 'alert-success' : accion==='exito' }">
                             <span v-if="accion==='danger1'"><strong>Error!</strong> Error ingrese las fechas:
                                 <strong>DESDE</strong> y <strong>HASTA.</strong></span>
                             <span v-if="accion==='danger2'"><strong>Error!</strong> Error ingrese <strong>la fecha
@@ -217,7 +207,7 @@
                                         <td style="text-align: center;" scope="col">
                                             {{ String((item.id).substring(17,24))}}
                                         </td>
-                                        <td style="text-align: center;" scope="col">{{ item.fecha.substring(0,10) }}
+                                        <td style="text-align: center; width: 110px" scope="col">{{ item.fecha.substring(0,10) }}
                                         </td>
                                         <td style="text-align: center;" scope="col">{{ item.accion }}</td>
                                         <td style="text-align: center;" scope="col">{{ item.nombreCompleto }}</td>
@@ -228,10 +218,8 @@
                             </table>
 
                             <ul class="pagination justify-content-center">
-                                <button @click="anteriorPage" :disabled="irPagAnterior"
-                                    class="btn btn-sm agg text-white" style="margin: 8px; ">Anterior</button>
-                                <button @click="siguientePage" :disabled="irPagSiguiente"
-                                    class="btn btn-sm agg text-white" style="margin: 8px;">Siguiente</button>
+                                <button @click="anteriorPage" :disabled="irPagAnterior" class="btn btn-sm agg text-white" style="margin: 8px; ">Anterior</button>
+                                <button @click="siguientePage" :disabled="irPagSiguiente" class="btn btn-sm agg text-white" style="margin: 8px;">Siguiente</button>
 
                             </ul>
 
@@ -239,17 +227,14 @@
                         <!-- Termina Tabla -->
 
                         <!-- Modal de eliminar por rango -->
-                        <button type="button" class="btn btn-sm agg text-white" data-toggle="modal"
-                            v-if="admin === true" data-target=".bd-example-modal-lg">Eliminar Registro</button>
+                        <button type="button" class="btn btn-sm agg text-white" data-toggle="modal" v-if="admin === true" data-target=".bd-example-modal-lg">Eliminar Registro</button>
 
-                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-content">
                                         <div class="modal-header bg-gradient-primary">
-                                            <h5 class="modal-title text-white" id="exampleModalLabel">ELIMINAR
-                                                BITACORAS POR RANGO DE FECHAS
+                                            <h5 class="modal-title text-white" id="exampleModalLabel">ELIMINAR BITACORAS POR RANGO DE FECHAS
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -263,16 +248,14 @@
                                                 <div class="espacio-divs">
                                                     Desde:
                                                     <div class="div-date-1 animated bounceIn">
-                                                        <input type="date" id="inicioDelete" class="date-css-1"
-                                                            v-model="inicioDelete"><br>
+                                                        <input type="date" id="inicioDelete" class="date-css-1" v-model="inicioDelete"><br>
                                                     </div>
                                                 </div>
                                                 <!--fecha de final delete-->
                                                 <div class="espacio-divs">
                                                     Hasta:
                                                     <div class="div-date-1 animated bounceIn delay1">
-                                                        <input type="date" id="hastaDelete" class="date-css-1"
-                                                            v-model="hastaDelete"><br>
+                                                        <input type="date" id="hastaDelete" class="date-css-1" v-model="hastaDelete"><br>
                                                     </div>
                                                 </div>
                                             </div>
@@ -282,11 +265,9 @@
 
                                         <div class="modal-footer">
                                             <!--boton eliminar cancelar-->
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                             <!--boton eliminar rango-->
-                                            <button id="deletePorFechas" class="btn btn-primary" data-dismiss="modal"
-                                                @click="deletePorFechas()">Eliminar Rango</button>
+                                            <button id="deletePorFechas" class="btn btn-primary" data-dismiss="modal" @click="deletePorFechas()">Eliminar Rango</button>
                                         </div>
                                     </div>
                                 </div>
@@ -326,10 +307,10 @@
     <script src="./bitacoras.js"></script>
 
     <script type="text/javascript">
-        window.onbeforeunload = function () {
+        window.onbeforeunload = function() {
             $("#loader").show()
         }
-        window.onload = function () {
+        window.onload = function() {
             $("#loader").hide()
         }
     </script>
