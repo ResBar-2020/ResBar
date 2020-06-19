@@ -176,61 +176,61 @@
                             <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="aggModal"
                                 data-backdrop="static" tabindex="-1">
                                 <div class="modal-dialog modal-md">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-gradient-primary">
+                                    <div class="bg modal-content">
+                                        <div class="modal-header bg-header">
                                             <h4 class="text-center text-white">Registrar Usuario</h4>
                                             <label class="text-white float-right" style="font-size:20px;"
                                                 v-on:click="closeModal">x</label>
                                         </div>
-                                        <div class="modal-body bg-gradient-light">
+                                        <div class="modal-body">
                                             <form>
                                                 <label id="errorMsg"
                                                     class="form-text text-uppercase text-center"></label>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Nombre
+                                                        <label class="font-weight-bold mText">Nombre
                                                             Completo</label>
                                                         <input id="nombre" v-model="user.nombreCompleto" type="text"
-                                                            class="form-control" required>
+                                                            class="form-control text-white userCtrl" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Password</label>
+                                                        <label class="font-weight-bold mText">Password</label>
                                                         <input id="clave" v-model="user.clave" type="password"
-                                                            class="form-control" required>
+                                                            class="form-control text-white userCtrl" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Usuario</label>
+                                                        <label class="font-weight-bold mText">Usuario</label>
                                                         <input id="loggin" v-model="user.loggin" type="text"
-                                                            class="form-control" required>
+                                                            class="form-control text-white userCtrl" required>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Pin</label>
+                                                        <label class="font-weight-bold mText">Pin</label>
                                                         <input id="pin" v-model="user.pin" id="id" type="text"
-                                                            class="form-control" data-mask="00000" required>
+                                                            class="form-control text-white userCtrl" data-mask="00000" required>
                                                         <small id="iguales" class="form-text text-danger"></small>
                                                         <small id="tamanio" class="form-text ">Ejemplo: 14564</small>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
-                                                        <label class="font-weight-bold text-dark">Rol</label>
-                                                        <select id="rol" v-model="user.rol" class="form-control">
+                                                        <label class="font-weight-bold mText">Rol</label>
+                                                        <select id="rol" v-model="user.rol" class="form-control text-white userCtrl">
                                                             <option value="admin">admin</option>
                                                             <option value="mesero">mesero</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <button type="button" v-if="!editar" class="btn btntable text-white"
+                                                <button type="button" v-if="!editar" class="btn mBtn"
                                                     v-on:click="RegistrarUsuario">Registrar</button>
-                                                <button type="button" v-else class="btn btntable text-white"
+                                                <button type="button" v-else class="btn mBtn"
                                                     v-on:click="EditUser(user)">Editar</button>
-                                                <button type="button" class="btn btn-danger"
+                                                <button type="button" class="btn mBtnCan"
                                                     v-on:click="closeModal">Cancelar</button>
                                             </form>
 

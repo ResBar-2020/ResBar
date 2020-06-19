@@ -92,8 +92,7 @@ new Vue({
         //Elimina un usuario de la tabla
         DelUser: function (user) {
             swal({
-                title: "Hecho!",
-                text: "¿Seguro de eliminar a " + user.nombreCompleto + "?",
+                title: "¿Seguro de eliminar a " + user.nombreCompleto + "?",
                 icon: 'warning',
                 buttons: true,
                 dangerMode: true,

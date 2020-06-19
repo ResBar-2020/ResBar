@@ -576,3 +576,56 @@ tr:nth-child(even) {
 .sidebar-brand-icon:hover {
     transform: rotateZ(35deg);
 }
+
+.bg {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.bg-header {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.userCtrl {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+    border-radius: unset;
+    outline: none;
+    padding: 4px;
+}
+
+.userCtrl:focus {
+    background: transparent;
+    outline: none;
+}
+.mText{
+    color: rgb(0, 255, 64);
+}
+.mBtn{
+    background: transparent;
+    color: rgb(0, 189, 85);
+    border: 1px solid rgb(0, 189, 85);
+    transition: 0.5s;
+}
+.mBtnCan{
+    margin-left: 5px;
+    background: transparent;
+    color: red;
+    border: 1px solid red;
+    transition: 0.5s
+}
+.mBtn:hover{
+    color: #fff;
+    background: rgb(0, 189, 85);
+    border-color: #fff;
+    transform: scale(1.1);
+}
+.mBtnCan:hover{
+    background: red;
+    color: #fff;
+    border-color: #fff;
+    transform: scale(1.1);
+}
+select option{
+    background: #000;
+}
