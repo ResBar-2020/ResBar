@@ -150,9 +150,21 @@ var vmm=new Vue({
                     }
 
                     if (valor.domicilioEtapa == 0) {
-                        swal("Completado!", "Orden en Proceso", "success");
+                        swal({
+                            title: "Completado!",
+                            text: "Orden en Proceso",
+                            icon: 'success',
+                            buttons: false,
+                            timer: 3000
+                        })
                     } else if (valor.domicilioEtapa == 1) {
-                        swal("Completado!", "Orden Entregada!", "success");
+                        swal({
+                            title: "Completado!",
+                            text: "Orden Entregada!",
+                            icon: 'success',
+                            buttons: false,
+                            timer: 3000
+                        })
                     }
                     console.log(response.status);
                 }
@@ -177,26 +189,6 @@ var vmm=new Vue({
         getDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][or][1][domicilioEtapa][neq]=2&filter[where][or][1][domicilio]=true&filter[where][or][1][estado]=C&filter[where][or][0][domicilio]=true&filter[where][or][0][estado]=A")
             .then(
-                    response => {
-                        this.ordenes = response.data
-                    }
-                ).catch(ex => {
-                    console.log(ex)
-                })
-        },
-        getDomiciliosdespachado: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=1")
-                .then(
-                    response => {
-                        this.ordenes = response.data
-                    }
-                ).catch(ex => {
-                    console.log(ex)
-                })
-        },
-        getDomiciliosentregados: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[where][domicilioEtapa]=2")
-                .then(
                     response => {
                         this.ordenes = response.data
                     }
