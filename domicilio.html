@@ -229,7 +229,7 @@
                                   <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
                                   <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
-                                    class="button1 bouncy" style="animation-delay:0.07s">Preparar</a>
+                                    class="button1 bouncy" style="animation-delay:0.07s">Preparado</a>
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>
@@ -244,7 +244,7 @@
                                   <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
                                   <h5 class="card-title"> {{String((orden.id).substring(17,24))}} </h5>
                                   <a v-if="orden.domicilioEtapa!=2" v-on:click="domicilioEtapa(orden)"
-                                    class="button1 bouncy" style="animation-delay:0.07s">Entregar</a>
+                                    class="button1 bouncy" style="animation-delay:0.07s">Entregado</a>
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>

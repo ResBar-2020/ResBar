@@ -150,9 +150,21 @@ var vmm=new Vue({
                     }
 
                     if (valor.domicilioEtapa == 0) {
-                        swal("Completado!", "Orden en Proceso", "success");
+                        swal({
+                            title: "Completado!",
+                            text: "Orden en Proceso",
+                            icon: 'success',
+                            buttons: false,
+                            timer: 3000
+                        })
                     } else if (valor.domicilioEtapa == 1) {
-                        swal("Completado!", "Orden Entregada!", "success");
+                        swal({
+                            title: "Completado!",
+                            text: "Orden Entregada!",
+                            icon: 'success',
+                            buttons: false,
+                            timer: 3000
+                        })
                     }
                     console.log(response.status);
                 }
