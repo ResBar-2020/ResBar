@@ -46,6 +46,7 @@ var vm = new Vue({
             this.nuevoDetalleOrden.nombre = this.productos[this.productoSelected].nombre;
             this.nuevoDetalleOrden.precio = this.productos[this.productoSelected].precio;
             this.nuevoDetalleOrden.categoria = this.productos[this.productoSelected].categoria;
+            this.nuevoDetalleOrden.preparado = this.productos[this.productoSelected].preparado;
 
             if (this.detallesDeNuevaOrden.length === 0) {
                 this.nuevoDetalleOrden.cantidad = 1;
@@ -167,6 +168,9 @@ var vm = new Vue({
                     if (this.detallesDeNuevaOrden.length == 0) {
                         window.location = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20, 24)}`
                     } else {
+                        localStorage.setItem('addProd', JSON.stringify(this.detallesDeNuevaOrden));
+                        localStorage.setItem('estado', "nuevo");
+                        localStorage.setItem('idOrdenImprimir', this.ordenSelected.id);
                         this.registrarBitacora();
                         this.regresarOrdenes();
                     }
