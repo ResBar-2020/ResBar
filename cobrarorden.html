@@ -282,21 +282,30 @@
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
-                                                        <td colspan=""><strong>Total:</strong></td>
+                                                        <td colspan=""><strong>Subtotal:</strong></td>
                                                         <td><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
-                                                        <td colspan="">Propina (10%):</td>
-                                                        <td>${{(ordenSelected.total*0.1).toFixed(2)}}</td>
+                                                        <td colspan="">Propina:</td>
+                                                        <td>${{parseFloat(ordenSelected.total*factorPropina()).toFixed(2)}}</td>
+                                                    </tr>
+                                                    <tr v-show="ordenSelected.domicilio==true">
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td colspan="">Costo de envío:</td>
+                                                        <td v-for="param in parametros" v-if="param.id==11">{{param.valor}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
                                                         <td class="titulo"><strong>TOTAL:</strong></td>
-                                                        <td class="titulo">
-                                                            <strong>${{(ordenSelected.total+(ordenSelected.total*0.1)).toFixed(2)}}</strong>
+                                                        <td v-show="ordenSelected.domicilio==false" class="titulo">
+                                                            <strong>${{(ordenSelected.total+(ordenSelected.total*factorPropina())).toFixed(2)}}</strong>
+                                                        </td>
+                                                        <td v-show="ordenSelected.domicilio==true" class="titulo">
+                                                            <strong>${{(ordenSelected.total+(costoDeEnvio())+(ordenSelected.total*factorPropina())).toFixed(2)}}</strong>
                                                         </td>
                                                     </tr>
 

@@ -10,8 +10,6 @@ new Vue({
       valor: "",
     },
     urlApi: `${ApiRestUrl}/parametros`,
-    // urlParam: "${ApiRestUrl}/parametros",
-    // urlParam: ApiRestUrl + "/parametros",
 
     ordenSelected: "",
     nuevoResumen: {
@@ -63,6 +61,12 @@ new Vue({
           console.log(ex);
         });
     },
+    async getParametros() {
+      await axios.get(ApiRestUrl + '/parametros')
+          .then(res => {
+              this.parametros = res.data
+          }).catch(er => console.error(er))
+  },
 
     //Obtener orden seleccionada
     obtenerSelected() {
@@ -305,6 +309,27 @@ new Vue({
         printJS("ticket", "html");
       }
     },
+
+    factorPropina(){
+      let valor = this.parametros[8].valor; 
+      try {
+          valor = valor.split('%');
+          valor = (valor[0])/100; 
+          return parseFloat(valor);    
+      } catch (error) {
+          console.error(error);
+      }
+   },
+   
+  //  Obtiene el valor del costo de envio de los parametros
+   costoDeEnvio(){
+    let valor = this.parametros[10].valor; 
+    try {
+        return parseFloat(valor);    
+    } catch (error) {
+        console.error(error);
+    }
+ },
 
     registrarBitacora() {
       this.bitacora.fecha = new Date().toISOString();
