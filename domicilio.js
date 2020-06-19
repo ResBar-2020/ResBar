@@ -359,6 +359,16 @@ var vmm=new Vue({
                     this.parametros = res.data
                 }).catch(er => console.error(er))
         },
+        factorPropina(){
+            let valor = this.parametros[8].valor; 
+            try {
+                valor = valor.split('%');
+                valor = (valor[0])/100; 
+                return parseFloat(valor);    
+            } catch (error) {
+                console.error(error);
+            }
+         }
 
     
 

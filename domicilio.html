@@ -17,7 +17,6 @@
   <!-- Estilo de borrador de orden -->
   <link rel="stylesheet" href="assets/css/print.min.css">
 
-
 </head>
 
 <body>
@@ -677,22 +676,22 @@
                               <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                 <td></td>
                                 <td></td>
-                                <td>Subtotal</td>
+                                <td>Subtotal:</td>
                                 <td>${{orden.total.toFixed(2)}}</td>
                               </tr>
                               <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                 <td></td>
                                 <td></td>
-                                <td>Propina (10%)</td>
-                                <td>${{(orden.total*0.1).toFixed(2)}}</td>
+                                <td>Propina (10%):</td>
+                                <td>${{parseFloat(orden.total*factorPropina()).toFixed(2)}}</td>
                               </tr>
                               <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                 <td></td>
                                 <td></td>
-                                <td><strong><span>TOTAL</span></strong></td>
+                                <td><strong><span>TOTAL:</span></strong></td>
                                 <td class="titulo">
-                                  <strong>${{(orden.total+(orden.total*0.1)).toFixed(2)}}</strong>
-                                </td>
+                                  <strong>${{(orden.total+(orden.total*factorPropina())).toFixed(2)}}</strong>
+                              </td>
 
                               </tr>
                             </tbody>
