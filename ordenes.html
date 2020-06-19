@@ -759,6 +759,12 @@
                                     <td style="text-align: center; border: solid 1px black;">
                                         ${{(imprimirProd.total*1).toFixed(2)}}</td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align: right; border: solid 1px black;">
+                                        Propina: </td>
+                                    <td style="text-align: center; border: solid 1px black;">
+                                        ${{parseFloat(imprimirProd.total*factorPropina()).toFixed(2)}}</td>
+                                </tr>
                                 <tr style="border: solid 1px black;">
                                     <td colspan="3" style="text-align: right; border: solid 1px black;">Costo de envio
                                     </td>
@@ -766,7 +772,7 @@
                                 </tr>
                                 <tr style="border: solid 1px black;">
                                     <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
-                                        <p style="margin: 1mm 5mm;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)).toFixed(2)}}
+                                        <p style="margin: 1mm 5mm;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+parseFloat(imprimirProd.total*factorPropina())).toFixed(2)}}
                                         </p>
                                     </td>
                                 </tr>
@@ -783,10 +789,10 @@
                                 <p>DESPRENDIBLE ORDEN ENTREGADA <br> Se entregó la orden:</p>
                             </div>
                             <div style="margin: 2mm; ">
-                                <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total: ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}}<br>
+                                <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total: ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}} Propina: ${{parseFloat(imprimirProd.total*factorPropina()).toFixed(2)}}<br>
                             </div>
                             <div style="text-align: center;">
-                                <p style="font-weight: bold;">TOTAL: ${{((imprimirProd.total*1)+(parametros[10].valor*1)).toFixed(2)}}
+                                <p style="font-weight: bold;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+parseFloat(imprimirProd.total*factorPropina())).toFixed(2)}}
                                 </p>
                             </div>
 
