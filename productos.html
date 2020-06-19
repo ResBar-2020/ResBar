@@ -130,7 +130,7 @@
 
                         <div class="row my-5">
                             <!-- Filtro buscar -->
-                            <div class="col-md-12 ">
+                            <div class="col-md-10 ">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text buscar"><i class="fas fa-search"></i></span>
@@ -140,10 +140,10 @@
                             </div>
 
                             <!-- Boton Agregar nuevo -->
-                            <div class="col-md-4 " style="display: flex; justify-content: center;">
+                            <div class="col-md-2 " style="display: flex; justify-content: end;">
                                 <button class="btn agg text-white" type="button" data-toggle="modal"
                                     data-target="#frmagregar" v-on:click="obtenerCategorias"><i
-                                        class="fa fa-plus-circle mr-2 text-white"></i>Agregar</button>
+                                        class="fa fa-plus-circle mr-2 text-white btn-md"></i>Agregar</button>
                             </div>
                         </div>
 
@@ -168,11 +168,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :class="{ active:categoriaSelected === true }" data-toggle="tab"
-                                    v-bind:id="todos+'-tab'" v-bind:href="'#'+todos" role="tab"
-                                    @click.prevent="categoriaSelected=true">
-                                    Todos</a>
+                                <a class="nav-link"
+                                    data-toggle="tab" v-bind:id="todos+'-tab'"
+                                    v-bind:href="'#'+categoriaSelected" role="tab"
+                                    @click.prevent="categoriaSelected=todos">
+                                    Todos
+                                </a>
                             </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" :class="{ active:categoriaSelected === todos }" data-toggle="tab"
+                                    v-bind:id="todos+'-tab'" v-bind:href="'#'+todos" role="tab"
+                                    @click.prevent="categoriaSelected=todos">
+                                    Todos</a>
+                            </li> -->
                         </ul>
                         <!-- Incia Tabla -->
                         <!-- Incia div.tab-content de productos a agregar-->
@@ -194,7 +202,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(producto, index) in productos "
-                                            v-if='producto.categoria.nombre == categoria.nombre || categoriaSelected === true'
+                                            v-if='producto.categoria.nombre == categoria.nombre || categoriaSelected === todos'
                                             v-show="buscar(index)" v-on:click="productoSelected=producto"
                                             v-bind:class="{ 'font-weight-bold' : productoSelected==producto, 'text-dark': productoSelected==producto }">
                                             <td style="text-align: center;">
