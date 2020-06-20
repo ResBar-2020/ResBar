@@ -651,3 +651,6 @@ tr:nth-child(even) {
 select option {
     background: #000;
 }
+.swal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
