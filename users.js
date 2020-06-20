@@ -40,6 +40,9 @@ new Vue({
                 pin: 0,
                 rol: ""
             }
+            document.getElementById("errorMsg").textContent = "";
+            document.getElementById("iguales").textContent = "";
+            document.getElementById("pin").classList.remove('is-invalid')
         },
         //Registra un nuevo usuario
         RegistrarUsuario: function () {

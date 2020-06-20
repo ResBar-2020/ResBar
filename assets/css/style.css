@@ -585,7 +585,8 @@ tr:nth-child(even) {
 }
 
 .bg {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 15px 25px rgb(3, 169, 244);
 }
 
 .bg-header {
@@ -595,19 +596,27 @@ tr:nth-child(even) {
 .userCtrl {
     border: none;
     background: transparent;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid rgb(3, 169, 244);
     border-radius: unset;
     outline: none;
     padding: 4px;
+    color: rgb(28, 200, 138);
 }
 
 .userCtrl:focus {
     background: transparent;
+}
+
+.form-control:focus,
+.form-control:visited {
     outline: none;
+    color: rgb(28, 200, 138);
+    box-shadow: none;
 }
 
 .mText {
-    color: rgb(0, 255, 64);
+    color: rgb(3, 169, 244);
+    text-shadow: 2px 5px 9px rgb(5, 125, 224);
 }
 
 .mBtn {
