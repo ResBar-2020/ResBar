@@ -20,18 +20,20 @@ Vue.component('semaforo', {
 
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
-                    if (porcentaje < 60) {
+                    if (porcentaje < 60 && segundos>=0) {
+                        
                         element.style.backgroundColor = "#10752D";
-                        this.color = "#10752D";
 
-                    } else if (porcentaje > 60 && porcentaje < 100) {
+                    } else if (porcentaje > 60 && porcentaje < 100 && segundos>=0) {
 
                         element.style.backgroundColor = "#C2B314";
-                        this.color = "#C2B314";
+                    }else if(isNaN(segundos)){
+                        element.innerHTML = '<div ><span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
+                        element.style.backgroundColor = "#43cbc9";
+
+
                     } else {
                         element.style.backgroundColor = "#751C1D";
-                        this.color = "#751C1D";
-
 
                     }
                 },
@@ -46,22 +48,20 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
+            
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
             var sign = secs < 0 ? '-' : '';
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
-        }
+    }
 
 
     },
-    template: `<div class="d-flex">
-    <div class="semaforo mt-2" v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
-    </div>
-    <button class="btn btn-sm btn-danger semaforoBtn" v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
-     
-     </div>`
+    template: `
+    <div class="semaforo mt-2" v-bind:id="'timer-'+this.idorden">
+    </div>`
 })
 
 
@@ -165,6 +165,10 @@ var vmm=new Vue({
                             buttons: false,
                             timer: 3000
                         })
+                        var etapafut=valor.domicilioEtapa+1
+                        if(etapafut==2){
+                            this.modificartiempo(valor.id)
+                        }
                     }
                     console.log(response.status);
                 }
