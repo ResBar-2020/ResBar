@@ -28,7 +28,7 @@ Vue.component('semaforo', {
                         
                     }else if(isNaN(segundos)){
                         element.innerHTML = '<div > <span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
-                        element.style.backgroundColor = "#43cbc9";
+                        element.style.backgroundColor = "#1a9c9a";
 
 
                     }
