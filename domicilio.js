@@ -46,22 +46,23 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
+            if(secs>=0){
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
             var sign = secs < 0 ? '-' : '';
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
+        }else{
+            return "Entregado"
         }
+    }
 
 
     },
-    template: `<div>
+    template: `
     <div class="semaforo mt-2" v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'">
-    </div>
-    <button class="btn btn-sm btn-danger semaforoBtn" v-bind:onclick="'vmm.modificartiempo(\`'+this.idorden+'\`)'">X</button>
-     
-     </div>`
+    </div>`
 })
 
 
@@ -165,6 +166,10 @@ var vmm=new Vue({
                             buttons: false,
                             timer: 3000
                         })
+                        var etapafut=valor.domicilioEtapa+1
+                        if(etapafut==2){
+                            this.modificartiempo(valor.id)
+                        }
                     }
                     console.log(response.status);
                 }

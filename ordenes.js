@@ -42,14 +42,18 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
+            if(secs>=0){
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
             var sign = secs < 0 ? '-' : '';
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
-        }
+        }else{
 
+            return "Entregado"
+        }
+    }
 
     },
     template:
