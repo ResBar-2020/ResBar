@@ -601,19 +601,16 @@ tr:nth-child(even) {
     outline: none;
     padding: 4px;
     color: rgb(28, 200, 138);
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    transition: 0.3s;
 }
 
-.userCtrl:focus {
+.userCtrl:focus{
     background: transparent;
+    text-shadow: 0 2px 5px rgb(28, 200, 138);
+    border-bottom: 1px solid rgb(28, 200, 138);
 }
-
-.form-control:focus,
-.form-control:visited {
-    outline: none;
-    color: rgb(28, 200, 138);
-    box-shadow: none;
-}
-
 .mText {
     color: rgb(3, 169, 244);
     text-shadow: 2px 5px 9px rgb(5, 125, 224);
@@ -651,6 +648,7 @@ tr:nth-child(even) {
 select option {
     background: #000;
 }
+
 .swal-overlay {
     background-color: rgba(0, 0, 0, 0.7);
-  }
+}
