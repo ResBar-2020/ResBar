@@ -146,12 +146,12 @@
                                                         <h3 v-if="propina != ''" class="font-weight-bold"
                                                             style="color: black;" id="total">
                                                             Total:
-                                                            {{parseFloat(ordenSelected.total.toFixed(2))+parseFloat(propina)}}
+                                                            ${{parseFloat(ordenSelected.total.toFixed(2))+parseFloat(propina)}}
                                                         </h3>
                                                         <h3 v-else class="font-weight-bold"
                                                             style="color: black;" id="total">
                                                             Total:
-                                                            {{parseFloat(ordenSelected.total.toFixed(2))}}
+                                                            ${{parseFloat(ordenSelected.total.toFixed(2))}}
                                                         </h3>
                                                     </span>
                                                 </div>
@@ -167,7 +167,7 @@
                                                     <input type="number" class="form-control" id="lblpropina" readonly
                                                         v-model="ordenSelected.total"
                                                         v-show="ordenSelected.estado==&quot;A&quot;"
-                                                        style="background: rgba(100, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
+                                                        style="background: rgba(0, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(0, 25, 100, 0.8);">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -374,6 +374,7 @@
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
     <script src="assets/js/vue-session.min.js"></script>
+    <script src="assets/js/jquery.mask.min.js"></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="config.js"></script>
     <script src="./cobrarorden.js"></script>
