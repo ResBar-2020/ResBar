@@ -575,6 +575,7 @@ tr:nth-child(even) {
     transform: scale(1.1);
     background: #224abe94;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+    color: #fff;
 }
 .nav-link::before{
     position: absolute;
