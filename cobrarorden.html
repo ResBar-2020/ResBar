@@ -52,8 +52,7 @@
                     -->
 
                     <!--cobrar orden -->
-                    <div class="" id="mdlCobrarOrden" tabindex="-1" role="dialog" aria-labelledby="titleCobrar"
-                        aria-hidden="true">
+                    <div class="" id="mdlCobrarOrden" tabindex="-1" role="dialog" aria-labelledby="titleCobrar" aria-hidden="true">
                         <div class="border border-info" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -131,22 +130,18 @@
 
                                             <div class="row">
                                                 <div class="col-sm-2">
-                                                    <label for="lblEfectivo" class="col-form-label"
-                                                        style="color: black;"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Ingrese el
+                                                    <label for="lblEfectivo" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;"><strong>Ingrese el
                                                             efectivo:</strong> </label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="lblEfectivo" required
-                                                        v-show="ordenSelected.estado==&quot;A&quot;" />
+                                                    <input type="number" class="form-control" id="lblEfectivo" required v-show="ordenSelected.estado==&quot;A&quot;" />
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <span class="badge" style="background-color: #5CB32B;"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;">
+                                                    <span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;">
                                                         <h3 v-if="propina != ''" class="font-weight-bold"
                                                             style="color: black;" id="total">
                                                             Total:
-                                                            ${{parseFloat(ordenSelected.total.toFixed(2))+parseFloat(propina)}}
+                                                            ${{(parseFloat(ordenSelected.total.toFixed(2))+parseFloat(propina)+parseFloat(domicilio)).toFixed(2)}}
                                                         </h3>
                                                         <h3 v-else class="font-weight-bold"
                                                             style="color: black;" id="total">
@@ -158,29 +153,29 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-2">
-                                                    <label for="propina" id="lblPropina" class="col-form-label"
-                                                        style="color: black;"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Subtotal:
+                                                    <label for="propina" id="lblPropina" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;"><strong>Subtotal:
                                                         </strong> </label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="lblpropina" readonly
-                                                        v-model="ordenSelected.total"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;"
-                                                        style="background: rgba(0, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(0, 25, 100, 0.8);">
+                                                    <input type="number" class="form-control" id="lblpropina" readonly v-model="ordenSelected.total" v-show="ordenSelected.estado==&quot;A&quot;" style="background: rgba(0, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(0, 25, 100, 0.8);">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-2">
-                                                    <label for="propina" id="lblPropina" class="col-form-label"
-                                                        style="color: black;"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Propina:
+                                                    <label for="propina" id="lblPropina" class="col-form-label" style="color: black;" v-show="ordenSelected.estado==&quot;A&quot;"><strong>Propina:
                                                         </strong> </label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="text" class="form-control" id="propina"
-                                                        v-model="propina" v-show="ordenSelected.estado==&quot;A&quot;"
-                                                        style="background: rgba(100, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
+                                                    <input type="text" class="form-control" id="propina" v-model="propina" v-show="ordenSelected.estado==&quot;A&quot;" style="background: rgba(100, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="domicilio" id="lblDomicilio" class="col-form-label" style="color: black;" v-show="ordenSelected.domicilio==true&&ordenSelected.estado==&quot;A&quot;"><strong>Costo de envio:
+                                                        </strong> </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" readonly class="form-control" id="domicilio" v-model="domicilio" v-show="ordenSelected.domicilio==true&&ordenSelected.estado==&quot;A&quot;" style="background: #35AACC; color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
                                                 </div>
                                             </div>
                                         </div>
@@ -205,14 +200,10 @@
 
                                     </div>
                                 </div>
-                                <div class="modal-footer col-md-12"
-                                    style="display: flex; justify-content: center; align-items: center;">
+                                <div class="modal-footer col-md-12" style="display: flex; justify-content: center; align-items: center;">
                                     <!-- <div ><span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;"><h3 class="font-weight-bold" style="color: black;" id="total"></h3></span></div> -->
-                                    <button type="button " class="btn btn-secondary btn-xs"
-                                        @click="redireccionarAOrdenes();"
-                                        v-show="ordenSelected.estado==&quot;A&quot;">Cancelar</button>
-                                    <button type="button " class="btn btn-primary btn-xs" @click="cobrar()"
-                                        v-show="ordenSelected.estado==&quot;A&quot;">Cobrar</button>
+                                    <button type="button " class="btn btn-secondary btn-xs" @click="redireccionarAOrdenes();" v-show="ordenSelected.estado==&quot;A&quot;">Cancelar</button>
+                                    <button type="button " class="btn btn-primary btn-xs" @click="cobrar()" v-show="ordenSelected.estado==&quot;A&quot;">Cobrar</button>
                                     <!-- <button type="button" class="btn btn-primary btn-lg" @click="volver()" v-show="ordenSelected.estado==&quot;C&quot;">Volver a Ordenes</button> -->
 
                                 </div>
@@ -228,8 +219,7 @@
                     <!-- Termina cobrar orden -->
 
                     <!--Inicia el modal Imprimir Orden-->
-                    <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="" data-backdrop="static"
-                        tabindex="-1">
+                    <div class="modal fade bd-example-modal-xl" style="border-radius: 8px;" id="" data-backdrop="static" tabindex="-1">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <!--Head modal-->
@@ -253,8 +243,7 @@
                                                     <tr>
                                                         <td><strong><span v-for="param in parametros" v-if="param.id==1"
                                                                     class="titulo2">{{param.valor}}</span></strong><br />
-                                                            <span v-for="param in parametros"
-                                                                v-if="param.id==6">{{param.valor}}</span> <br />
+                                                            <span v-for="param in parametros" v-if="param.id==6">{{param.valor}}</span> <br />
                                                             <span v-for="param in parametros" v-if="param.id==3">TEL:
                                                                 {{param.valor}}</span> <br />
                                                             <span v-for="param in parametros" v-if="param.id==4">NIT:
@@ -273,8 +262,7 @@
                                                 <tbody>
                                                     <tr>
                                                         <td><strong>Cuenta No.</strong> {{ordenSelected.id}}  <br />
-                                                            <strong>Fecha:</strong>
-                                                            {{ordenSelected.fecha.substring(0,10)}} <br />
+                                                            <strong>Fecha:</strong> {{ordenSelected.fecha.substring(0,10)}} <br />
                                                             <span><strong>Mesa:</strong> {{ordenSelected.mesa}}</span>
                                                             <span><strong>Mesero</strong> {{ordenSelected.mesero}}
                                                             </span>
@@ -335,16 +323,14 @@
                                                 </tbody>
                                             </table>
                                             <div class="centrar">
-                                                <span v-for="param in parametros"
-                                                    v-if="param.id==2">{{param.valor}}</span>
+                                                <span v-for="param in parametros" v-if="param.id==2">{{param.valor}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!--Footer modal-->
                                 <div class="modal-footer bg-gradient-primary">
-                                    <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal"
-                                        @click="limpiarMotivo()">Cerrar</button>
+                                    <button class="btn btntable btn-sm text-white" type="button" data-dismiss="modal" @click="limpiarMotivo()">Cerrar</button>
                                 </div>
 
                             </div>
@@ -379,11 +365,11 @@
     <script src="config.js"></script>
     <script src="./cobrarorden.js"></script>
     <script type="text/javascript">
-        window.onbeforeunload = function () {
+        window.onbeforeunload = function() {
 
             $("#loader").show()
         }
-        window.onload = function () {
+        window.onload = function() {
             $("#loader").hide()
         }
     </script>

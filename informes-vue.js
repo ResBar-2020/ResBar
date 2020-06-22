@@ -333,6 +333,7 @@ var vm = new Vue({
                 this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde).then(response => {
                 let resumen = response.data;
                 console.log(resumen);
+                this.propina = 0;
                 for (let i = 0; i < resumen.length; i++) {
                     if (resumen[i].propina == null) {
                         this.propina += 0;
@@ -340,6 +341,7 @@ var vm = new Vue({
                         this.propina += resumen[i].propina;
                     }
                 }
+                this.domicilio = 0;
                 for (let i = 0; i < resumen.length; i++) {
                     if (resumen[i].costoEnvio == null) {
                         this.domicilio += 0;
