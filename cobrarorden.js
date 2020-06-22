@@ -29,7 +29,7 @@ new Vue({
       descripcion: "",
     },
     logName: logName,
-    propina:null
+    propina: null
   },
   mounted: function () {
     this.getParam();
@@ -45,9 +45,9 @@ new Vue({
       name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
-      return results === null
-        ? ""
-        : decodeURIComponent(results[1].replace(/\+/g, " "));
+      return results === null ?
+        "" :
+        decodeURIComponent(results[1].replace(/\+/g, " "));
     },
 
     getParam() {
@@ -55,7 +55,7 @@ new Vue({
         .get(this.urlApi)
         .then((response) => {
           this.parametros = response.data;
-          this.propina = parseFloat(this.parametros[8].valor)/100
+          this.propina = parseFloat(this.parametros[8].valor) / 100
         })
         .catch((ex) => {
           console.log(ex);
@@ -63,10 +63,10 @@ new Vue({
     },
     async getParametros() {
       await axios.get(ApiRestUrl + '/parametros')
-          .then(res => {
-              this.parametros = res.data
-          }).catch(er => console.error(er))
-  },
+        .then(res => {
+          this.parametros = res.data
+        }).catch(er => console.error(er))
+    },
 
     //Obtener orden seleccionada
     obtenerSelected() {
@@ -74,7 +74,7 @@ new Vue({
         .get(this.uri + this.getParameterByName("id"))
         .then((response) => {
           this.ordenSelected = response.data;
-          this.propina = this.ordenSelected.total*this.propina
+          this.propina = this.ordenSelected.total * this.propina
           this.propina = this.propina.toFixed(2)
           this.productosOrden = this.ordenSelected.detalleOrden;
           let fecha = this.convertDate(this.ordenSelected.fecha);
@@ -210,7 +210,9 @@ new Vue({
         cambio.toFixed(2);
       axios
         .post(this.uriVentas, JSON.stringify(this.nuevoResumen), {
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json"
+          },
         })
         .then((response) => {
           window.location = cadena;
@@ -278,7 +280,9 @@ new Vue({
         cambio.toFixed(2);
       axios
         .put(uriId, JSON.stringify(datos), {
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json"
+          },
         })
         .then((response) => {
           window.location = cad2;
@@ -293,7 +297,11 @@ new Vue({
       this.checkEstado();
       let efectivo = document.getElementById("lblEfectivo").value;
       let propina = document.getElementById("propina").value;
-      totalEfectivo = this.ordenSelected.total + parseFloat(propina)
+      if (propina != '') {
+        totalEfectivo = this.ordenSelected.total + parseFloat(propina)
+      } else {
+        totalEfectivo = this.ordenSelected.total
+      }
       if (efectivo < totalEfectivo) {
         document.getElementById("lblEfectivo").classList.add("is-invalid");
         document.getElementById("propina").classList.add("is-invalid");
@@ -310,26 +318,26 @@ new Vue({
       }
     },
 
-    factorPropina(){
-      let valor = this.parametros[8].valor; 
+    factorPropina() {
+      let valor = this.parametros[8].valor;
       try {
-          valor = valor.split('%');
-          valor = (valor[0])/100; 
-          return parseFloat(valor);    
+        valor = valor.split('%');
+        valor = (valor[0]) / 100;
+        return parseFloat(valor);
       } catch (error) {
-          console.error(error);
-      }
-   },
-   
-  //  Obtiene el valor del costo de envio de los parametros
-   costoDeEnvio(){
-    let valor = this.parametros[10].valor; 
-    try {
-        return parseFloat(valor);    
-    } catch (error) {
         console.error(error);
-    }
- },
+      }
+    },
+
+    //  Obtiene el valor del costo de envio de los parametros
+    costoDeEnvio() {
+      let valor = this.parametros[10].valor;
+      try {
+        return parseFloat(valor);
+      } catch (error) {
+        console.error(error);
+      }
+    },
 
     registrarBitacora() {
       this.bitacora.fecha = new Date().toISOString();
@@ -363,8 +371,7 @@ new Vue({
   },
 
   created() {
-    if (localStorage.vue_session_key) {
-    } else {
+    if (localStorage.vue_session_key) {} else {
       window.location = "./login.html";
     }
   },

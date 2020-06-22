@@ -143,9 +143,31 @@
                                                 <div class="col-sm-2">
                                                     <span class="badge" style="background-color: #5CB32B;"
                                                         v-show="ordenSelected.estado==&quot;A&quot;">
-                                                        <h3 class="font-weight-bold" style="color: black;" id="total">
-                                                            Total: {{ordenSelected.total.toFixed(2)}}</h3>
+                                                        <h3 v-if="propina != ''" class="font-weight-bold"
+                                                            style="color: black;" id="total">
+                                                            Total:
+                                                            ${{parseFloat(ordenSelected.total.toFixed(2))+parseFloat(propina)}}
+                                                        </h3>
+                                                        <h3 v-else class="font-weight-bold"
+                                                            style="color: black;" id="total">
+                                                            Total:
+                                                            ${{parseFloat(ordenSelected.total.toFixed(2))}}
+                                                        </h3>
                                                     </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="propina" id="lblPropina" class="col-form-label"
+                                                        style="color: black;"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;"><strong>Subtotal:
+                                                        </strong> </label>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="number" class="form-control" id="lblpropina" readonly
+                                                        v-model="ordenSelected.total"
+                                                        v-show="ordenSelected.estado==&quot;A&quot;"
+                                                        style="background: rgba(0, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(0, 25, 100, 0.8);">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -156,9 +178,8 @@
                                                         </strong> </label>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="propina"
-                                                        v-model="propina"
-                                                        v-show="ordenSelected.estado==&quot;A&quot;"
+                                                    <input type="text" class="form-control" id="propina"
+                                                        v-model="propina" v-show="ordenSelected.estado==&quot;A&quot;"
                                                         style="background: rgba(100, 25, 100, 0.8); color: white; box-shadow: 5px 10px 15px rgba(100, 25, 100, 0.8);">
                                                 </div>
                                             </div>
@@ -289,13 +310,15 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td colspan="">Propina:</td>
-                                                        <td>${{parseFloat(ordenSelected.total*factorPropina()).toFixed(2)}}</td>
+                                                        <td>${{parseFloat(ordenSelected.total*factorPropina()).toFixed(2)}}
+                                                        </td>
                                                     </tr>
                                                     <tr v-show="ordenSelected.domicilio==true">
                                                         <td></td>
                                                         <td></td>
                                                         <td colspan="">Costo de envío:</td>
-                                                        <td v-for="param in parametros" v-if="param.id==11">{{param.valor}}</td>
+                                                        <td v-for="param in parametros" v-if="param.id==11">
+                                                            {{param.valor}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
@@ -351,6 +374,7 @@
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
     <script src="assets/js/vue-session.min.js"></script>
+    <script src="assets/js/jquery.mask.min.js"></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="config.js"></script>
     <script src="./cobrarorden.js"></script>

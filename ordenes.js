@@ -19,13 +19,20 @@ Vue.component('semaforo', {
 
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
-                    if (porcentaje < 60) {
+                    if (porcentaje < 60 && segundos>=0) {
                         element.style.backgroundColor = "#10752D";
 
-                    } else if (porcentaje > 60 && porcentaje < 100) {
+                    } else if (porcentaje > 60 && porcentaje < 100 && segundos>=0) {
 
                         element.style.backgroundColor = "#C2B314";
-                    } else {
+                        
+                    }else if(isNaN(segundos)){
+                        element.innerHTML = '<div > <span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
+                        element.style.backgroundColor = "#1a9c9a";
+
+
+                    }
+                     else {
                         element.style.backgroundColor = "#751C1D";
 
 
@@ -42,21 +49,22 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
+        
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
             var sign = secs < 0 ? '-' : '';
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
-        }
 
+    }
 
     },
     template:
     
     
     `<div class="d-flex">
-    <div v-bind:id="'timer-'+this.idorden"  v-bind:style="'background-color:'+this.color+';'" class="semaforo">
+    <div v-bind:id="'timer-'+this.idorden" class="semaforo">
     </div>
     <span class="btn btn-sm semaforoBtn" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</span>
      
