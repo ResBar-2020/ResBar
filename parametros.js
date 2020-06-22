@@ -70,6 +70,11 @@ new Vue({
             axios
                 .put(this.uri + id, obj)
                 .then((response) => {
+                    swal({
+  title: "Actualizado!",
+  text: "Parametros actualizados correctamente!",
+  icon: "success",
+});
                     console.log(response);
                 })
                 .catch((e) => {
