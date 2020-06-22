@@ -1,7 +1,7 @@
 Vue.component('reactive', {
     extends: VueChartJs.Bar,
     mixins: [VueChartJs.mixins.reactiveProp],
-    data: function () {
+    data: function() {
         return {
             options: {
                 scales: {
@@ -31,7 +31,7 @@ Vue.component('reactive', {
                     enabled: true,
                     mode: 'single',
                     callbacks: {
-                        label: function (tooltipItems, data) {
+                        label: function(tooltipItems, data) {
                             return '$' + tooltipItems.yLabel;
                         }
                     }
@@ -75,6 +75,8 @@ var vm = new Vue({
         platoMasVendido: "Carne Asada",
         pmvCantidad: 104,
         ordenesActivas: 30,
+        propina: 0,
+        domicilio: 0,
         //mejor mesero block a
         meseroOrdenes: [{
             _id: "Mesero A",
@@ -185,12 +187,12 @@ var vm = new Vue({
 
     },
     mounted() {
-        this.$nextTick(function () {
+        this.$nextTick(function() {
             window.addEventListener("resize", this.resizeOrOnload);
             //Init
             this.resizeOrOnload();
         })
-        Promise.resolve(this.mesActual()).then(this.getFourDivsData()).catch(function (reason) {
+        Promise.resolve(this.mesActual()).then(this.getFourDivsData()).catch(function(reason) {
             console.log('Manejar promesa rechazada (' + reason + ') aquí.');
         });
         this.today = this.moment(this.moment().calendar()).format('YYYY-MM-DD');
@@ -258,17 +260,17 @@ var vm = new Vue({
         resizeOrOnload() {
             document.getElementById("bar-chart").style.width = (document.getElementById("idPalChar").clientWidth - 10) + "px";
         },
-        moment: function () {
+        moment: function() {
             return moment();
         },
-        mesActual: function () {
+        mesActual: function() {
             var date = new Date();
             this.hasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
             this.desde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
             this.empHasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
             this.empDesde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
         },
-        getFourDivsData: function () {
+        getFourDivsData: function() {
             let boolean;
             /*     if (moment.duration(moment(this.hasta, "YYYY-MM-DD").diff(moment(this.desde, "YYYY-MM-DD"))).asDays() > 0) {*/
             if (!moment(this.hasta).isSameOrBefore(this.desde)) {
@@ -276,12 +278,13 @@ var vm = new Vue({
                 this.divDos();
                 this.divTres();
                 this.divCuatro();
+                this.divCincoSeis();
             } else {
                 boolean = true;
             }
             this.applyCssAlert(boolean);
         },
-        divDos: function () {
+        divDos: function() {
             let inicio = new Date(new Date(this.desde).setHours(0, 0, 0, 0)).toISOString();
             let fin = new Date(new Date(new Date(this.hasta).setDate(new Date(this.hasta).getDate() + 1)).setHours(23, 59, 59, 999)).toISOString();
             axios.get(this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + fin + '&filter[where][and][1][fecha][gte]=' + inicio + '&filter[where][and][2][estado][like]=C').
@@ -297,7 +300,7 @@ var vm = new Vue({
             });
 
         },
-        divTres: function () {
+        divTres: function() {
             console.log(this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde);
             axios.get(
                 this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde).then(response => {
@@ -316,7 +319,7 @@ var vm = new Vue({
                 console.log(e)
             });
         },
-        divCuatro: function () {
+        divCuatro: function() {
             axios.get(
                 this.uri + '/ordenes?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde + '&filter[where][and][2][estado][like]=A').then(response => {
                 let valor = response.data;
@@ -325,15 +328,38 @@ var vm = new Vue({
                 console.log(e)
             });
         },
-        ordenarPorClave: function (clave, arregloObjetos, ordenarMenorAMayor = false) {
+        divCincoSeis: function() {
+            axios.get(
+                this.uri + '/resumenDeVentas?filter[where][and][0][fecha][lte]=' + this.hasta + '&filter[where][and][1][fecha][gte]=' + this.desde).then(response => {
+                let resumen = response.data;
+                console.log(resumen);
+                for (let i = 0; i < resumen.length; i++) {
+                    if (resumen[i].propina == null) {
+                        this.propina += 0;
+                    } else {
+                        this.propina += resumen[i].propina;
+                    }
+                }
+                for (let i = 0; i < resumen.length; i++) {
+                    if (resumen[i].costoEnvio == null) {
+                        this.domicilio += 0;
+                    } else {
+                        this.domicilio += resumen[i].costoEnvio;
+                    }
+                }
+            }).catch(e => {
+                console.log(e)
+            });
+        },
+        ordenarPorClave: function(clave, arregloObjetos, ordenarMenorAMayor = false) {
             return arregloObjetos.sort((a, b) => {
                 return ordenarMenorAMayor == false ? b[clave] - a[clave] : a[clave] - b[clave];
             });
         },
-        getOrdenSelected: function (id) {
+        getOrdenSelected: function(id) {
             console.log(id);
         },
-        applyCssAlert: function (parameter) {
+        applyCssAlert: function(parameter) {
             if (parameter === true) {
                 document.getElementById("modalError").style.display = "block";
                 document.querySelectorAll('.div-date').forEach(element => {
@@ -354,7 +380,7 @@ var vm = new Vue({
                 });
             }
         },
-        applyCssAlertEmp: function (parameter) {
+        applyCssAlertEmp: function(parameter) {
             if (parameter === true) {
                 document.getElementById("empWarning").style.display = "block";
                 [document.getElementById("divStartEmp"), document.getElementById("divEndEmp")].forEach(element => {
@@ -375,7 +401,7 @@ var vm = new Vue({
                 });
             }
         },
-        getTotalPorMes: function (year = this.moment().format('YYYY')) {
+        getTotalPorMes: function(year = this.moment().format('YYYY')) {
             let i = 0;
             let rangeMonth = [];
             this.mesTotal = [];
@@ -408,7 +434,7 @@ var vm = new Vue({
             });
             this.recalcularDia();
         },
-        getTotalPorSemana: function (year = this.anioPicker, month = this.moment().format('MM')) {
+        getTotalPorSemana: function(year = this.anioPicker, month = this.moment().format('MM')) {
             let i = 0;
             let dias = ((this.moment().set({
                 'year': year,
@@ -434,7 +460,7 @@ var vm = new Vue({
             });
             this.recalcularDia();
         },
-        getTotalporDia: function (year, month, week) {
+        getTotalporDia: function(year, month, week) {
             this.rangeWeeks = this.rangoSemanas();
             //genero los labels por si al inicio se va directo a la semana, y para no tener que llamar al mes para que no consuma tiempo
             this.rangeWeeks.forEach((param, index) => {
@@ -442,7 +468,7 @@ var vm = new Vue({
             });
             this.diaProcedure(week, year, month);
         },
-        diaProcedure: function (week, year, month) {
+        diaProcedure: function(week, year, month) {
             let j = 0;
             while (j < 4) {
                 if (week === j) {
@@ -482,7 +508,7 @@ var vm = new Vue({
             }
             this.recalcularDia();
         },
-        rangoSemanas: function (year = this.anioPicker, month = this.mesPicked.id < 10 ? ('0' + this.mesPicked.id) : this.mesPicked.id) {
+        rangoSemanas: function(year = this.anioPicker, month = this.mesPicked.id < 10 ? ('0' + this.mesPicked.id) : this.mesPicked.id) {
             let rangeWeeks = [];
             try {
                 switch (this.moment().set({
@@ -675,7 +701,7 @@ var vm = new Vue({
             // });
             return rangeWeeks;
         },
-        pruebaDeFechas: function () {
+        pruebaDeFechas: function() {
             console.log(this.moment().set({
                 'year': 2020,
                 'month': 01,
@@ -713,7 +739,7 @@ var vm = new Vue({
                 'millisecond': 999
             }).add(1, 'millisecond').toISOString());
         },
-        mejoresMeseros: function () {
+        mejoresMeseros: function() {
             let empWarning;
             if (!moment(this.empHasta).isSameOrBefore(this.empDesde)) {
                 empWarning = false;
@@ -751,7 +777,7 @@ var vm = new Vue({
             }
             this.applyCssAlertEmp(empWarning);
         },
-        horaInicio: function () {
+        horaInicio: function() {
             this.horaNombre = this.nameDays[new Date().getDay()] + " " + new Date().getDate();
             //Generar labels por semana por si se selecciona no tener que cargar datos de la semana
             let inicio = new Date(this.rangoSemanas()[this.semanaNum.id].inicio);
@@ -765,7 +791,7 @@ var vm = new Vue({
                 contador++;
             }
         },
-        inicioDiaPorSemana: function () {
+        inicioDiaPorSemana: function() {
             let semanas = ["Sem 1", "Sem 2", "Sem 3", "Sem 4"];
             this.rangoSemanas().forEach((param, index) => {
                 let inicio = new Date(param.inicio);
@@ -776,7 +802,7 @@ var vm = new Vue({
                 }
             });
         },
-        recalcularDia: function () {
+        recalcularDia: function() {
             let diaChange = this.moment().set({
                 'year': this.anioPicker,
                 'month': (this.mesPicked.id < 10 ? ('0' + this.mesPicked.id) : this.mesPicked.id),
@@ -784,7 +810,7 @@ var vm = new Vue({
             });
             this.horaNombre = this.nameDays[diaChange.format("d")] + " " + diaChange.format("D");
         },
-        totalPorHora: function (param) {
+        totalPorHora: function(param) {
             let diaChange = this.moment().set({
                 'year': this.anioPicker,
                 'month': (this.mesPicked.id < 10 ? ('0' + this.mesPicked.id) : this.mesPicked.id),
@@ -814,7 +840,7 @@ var vm = new Vue({
         clickHora() {
             this.$refs.horaId.click();
         },
-        salir: function () {
+        salir: function() {
             swal({
                 title: "¿Seguro que desea cerrar sesión?",
                 icon: 'info',
@@ -829,11 +855,11 @@ var vm = new Vue({
         }
     },
     watch: {
-        anioPicker: function (value) {
+        anioPicker: function(value) {
             this.totalPorSemana = [];
             this.$refs.anioRef.click()
         },
-        mesPicked: function () {
+        mesPicked: function() {
             this.$refs.semanaId.click();
         },
     },
