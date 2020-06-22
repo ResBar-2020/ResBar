@@ -534,9 +534,9 @@ var vm = new Vue({
         setProdImprimir: function () {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
-                if(localStorage.addProd){
-                    this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
-                }
+                    if(localStorage.addProd && !this.imprimirProd.domicilio){
+                        this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
+                    }
                 this.fecha = new Date(response.fecha);
                 this.fecha = moment(this.fecha);
                 this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');

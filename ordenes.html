@@ -954,6 +954,7 @@
             $(".loader ").hide()
         }
         window.onafterprint = function() {
+            localStorage.removeItem('addProd');
             localStorage.removeItem('estado');
             localStorage.removeItem('idOrdenImprimir');
         }
