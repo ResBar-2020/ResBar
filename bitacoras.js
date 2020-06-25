@@ -18,7 +18,15 @@ new Vue({
     inicioDelete: null,
     hastaDelete: null,
     bitacorasDelete: [],
-    admin: admin
+    admin: admin,
+
+    bitacora: {
+      fecha: "",
+      accion: "",
+      nombreCompleto: "",
+      loggin: "",
+      descripcion: "",
+    }
   },
 
   created: function () {
@@ -132,22 +140,18 @@ new Vue({
                 //console.log(i + "El id: " + this.bitacorasDelete[i].id)
                 axios.delete(this.urlApi + '/' + this.bitacorasDelete[i].id)
                   .then(function (res) {
-                    alert("Exito! Se han borrado un total de datos " + totalDelete);
                   }).catch(e => {
                     console.log(e)
                   })
               }
-
+              alert("Exito! Se han borrado un total de datos " + totalDelete);
+              this.registrarBitacora();
             }
 
           }).catch(ex => {
             console.log(ex)
           })
-
-        this.getAllBitacoras();
       }
-      this.inicioDelete = null;
-      this.hastaDelete = null;
     },
 
     /*
@@ -206,7 +210,7 @@ new Vue({
     */
     salir: function () {
       swal({
-        title: "¿Seguro que desea cerrar sesión?",
+        title: "Â¿Seguro que desea cerrar sesiÃ³n?",
         icon: 'info',
         buttons: true,
         dangerMode: true,
@@ -216,6 +220,40 @@ new Vue({
           window.location = "./login.html"
         }
       })
+    },
+
+    /*
+    Registra a bitacoras cuando se eliminan un rango de bitacoras
+    */
+    registrarBitacora() {
+      let vm = this
+      let inicioDeleteFormat = vm.inicioDelete; //le da formato a la fecha de input
+      let hastaDeleteFormat = vm.hastaDelete; //le da formato a la fecha de input
+
+      this.bitacora.fecha = new Date().toISOString();
+      this.bitacora.accion = "Eliminación de Bitacoras";
+      this.bitacora.nombreCompleto = logName;
+
+      const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"'); //ver si el usuario es adm o mesero
+      var logTipoUsuario = tipoUsuario[1];
+      this.bitacora.loggin = logTipoUsuario;
+
+      this.bitacora.descripcion = "Se eliminaron un total de registro de " + this.bitacorasDelete.length + " en el rango de fecha "
+        + inicioDeleteFormat + " a " + hastaDeleteFormat + ".";
+
+      this.inicioDelete = null;
+      this.hastaDelete = null;
+
+      axios.post(ApiRestUrl + "/bitacoras", JSON.stringify(this.bitacora), {
+        headers: {
+          "content-type": "application/json",
+        },
+
+      }).then((response) => {
+        //response.data;
+        this.getAllBitacoras();
+      })
+        .catch((error) => { });
     },
 
 
@@ -234,7 +272,11 @@ new Vue({
     irPagSiguiente() {
       //console.log("actual page" + this.actualPage);
       //console.log("datos: " + this.bitacoras.length);
-      return this.actualPage > this.bitacoras.length;
+      if (this.actualPage === 0 &&  this.bitacoras.length < 10) {
+        return true;
+      } else {
+        return this.actualPage > this.bitacoras.length;
+      }
     },
 
   }
