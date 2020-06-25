@@ -9,6 +9,15 @@ new Vue({
     mounted: function () {
         this.getParametros();
     },
+    created() {
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "./ordenes.html"
+            }
+        } else {
+            window.location = "./login.html"
+        }
+    },
     methods: {
 
         salir: function () {
@@ -71,10 +80,10 @@ new Vue({
                 .put(this.uri + id, obj)
                 .then((response) => {
                     swal({
-  title: "Actualizado!",
-  text: "Parametros actualizados correctamente!",
-  icon: "success",
-});
+                        title: "Actualizado!",
+                        text: "Parametros actualizados correctamente!",
+                        icon: "success",
+                    });
                     console.log(response);
                 })
                 .catch((e) => {
