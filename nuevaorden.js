@@ -237,11 +237,13 @@ var app = new Vue({
                 this.domicilioAux = false;
                 $("#divMesa").show();
                 $("#divMesero").show();
+                $("#divDireccion").hide();
             } else {
                 //A domicilio
                 this.domicilioAux = true;
                 $('#divMesa').hide();
                 $('#divMesero').hide();
+                $("#divDireccion").show();
             }
         },
 
