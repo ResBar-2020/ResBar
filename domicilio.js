@@ -20,14 +20,14 @@ Vue.component('semaforo', {
 
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
-                    if (porcentaje < 60 && segundos>=0) {
-                        
+                    if (porcentaje < 60 && segundos >= 0) {
+
                         element.style.backgroundColor = "#10752D";
 
-                    } else if (porcentaje > 60 && porcentaje < 100 && segundos>=0) {
+                    } else if (porcentaje > 60 && porcentaje < 100 && segundos >= 0) {
 
                         element.style.backgroundColor = "#C2B314";
-                    }else if(isNaN(segundos)){
+                    } else if (isNaN(segundos)) {
                         element.innerHTML = '<div ><span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
                         element.style.backgroundColor = "#43cbc9";
 
@@ -48,14 +48,14 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
-            
+
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
             var sign = secs < 0 ? '-' : '';
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
-    }
+        }
 
 
     },
@@ -65,7 +65,7 @@ Vue.component('semaforo', {
 })
 
 
-var vmm=new Vue({
+var vmm = new Vue({
 
     el: "#appRESBAR",
     data: {
@@ -101,11 +101,11 @@ var vmm=new Vue({
 
         modificartiempo(idorden) {
             axios.get(
-                    this.urlApi + "/" + idorden)
+                this.urlApi + "/" + idorden)
                 .then(res => {
                     var orden = res.data
                     orden.tiempoPreparacion = null;
-                    console.log(orden)                    
+                    console.log(orden)
                     axios.put(this.urlApi + '/' + idorden, orden)
                         .then(response => {
                             console.log(response)
@@ -139,9 +139,9 @@ var vmm=new Vue({
          * Aumentar el valor de la etapa de la orden a domicilio
          * 
          */
-        domicilioEtapa(valor) {
-            axios.patch(`${this.urlApi}/${valor.id}`, {
-                domicilioEtapa: valor.domicilioEtapa + 1
+        domicilioEtapa(valor_orden) {
+            axios.patch(`${this.urlApi}/${valor_orden.id}`, {
+                domicilioEtapa: valor_orden.domicilioEtapa + 1
             }).then(
                 response => {
                     if (this.active == true) {
@@ -150,13 +150,13 @@ var vmm=new Vue({
                         this.getAllDomicilios();
                     }
 
-                    if (valor.domicilioEtapa == 0) {
-                        this.accion="Etapa0"
-                    } else if (valor.domicilioEtapa == 1) {
-                        this.accion="Etapa1"
-                        var etapafut=valor.domicilioEtapa+1
-                        if(etapafut==2){
-                            this.modificartiempo(valor.id)
+                    if (valor_orden.domicilioEtapa == 0) {
+                        this.accion = "Etapa0"
+                    } else if (valor_orden.domicilioEtapa == 1) {
+                        this.accion = "Etapa1"
+                        var etapafut = valor_orden.domicilioEtapa + 1
+                        if (etapafut == 2) {
+                            this.modificartiempo(valor_orden.id)
                         }
                     }
                     console.log(response.status);
@@ -166,12 +166,12 @@ var vmm=new Vue({
             })
 
             $("#alertaDomicilio").show('fade');
-            setTimeout(function(){
+            setTimeout(function () {
                 $("#alertaDomicilio").hide('fade');
-            },4000);
+            }, 4000);
         },
 
-        direccionCliente(orden){
+        direccionCliente(orden) {
             swal({
                 title: "UBICACIÓN CLIENTE",
                 text: orden.cliente.direccion,
@@ -193,7 +193,7 @@ var vmm=new Vue({
         },
         getDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][or][1][domicilioEtapa][neq]=2&filter[where][or][1][domicilio]=true&filter[where][or][1][estado]=C&filter[where][or][0][domicilio]=true&filter[where][or][0][estado]=A")
-            .then(
+                .then(
                     response => {
                         this.ordenes = response.data
                     }
@@ -201,9 +201,9 @@ var vmm=new Vue({
                     console.log(ex)
                 })
         },
-        filtro(valor) {
+        filtro(valor_orden) {
             if (this.searchDisplay === "") return true;
-            let array = (this.ordenes[valor].id + this.ordenes[valor].cliente).toUpperCase();
+            let array = (this.ordenes[valor_orden].id + this.ordenes[valor_orden].cliente).toUpperCase();
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
         },
         salir: function () {
@@ -248,55 +248,8 @@ var vmm=new Vue({
         /*
         COPY PASTE DEL TAMAÑO DEL UNIVERSO XD (CREDITOS A ORDENES :V)
         */
-        printTicket: function () {
-            printJS('borrador', 'html')
-        },
-        //Muestra el modal Eliminar
-        mostrarEliminar: function () {
-            if (admin) {
-                $('#modalEliminar').modal('show');
-            } else {
-                this.action = 'eliminar'
-                this.showConfirm()
-            }
-        },
-        setProdImprimir: function () {
-            getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
-                this.imprimirProd = response;
-                this.fecha = new Date(response.fecha);
-                this.fecha = moment(this.fecha);
-                this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
-                document.getElementById("horaImpProd").innerHTML = "Hora: " + new Date(response.fecha).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0 || this.imprimirProd.domicilio === true) {
-                    window.print()
-                } else {
-                    localStorage.removeItem('estado');
-                    localStorage.removeItem('idOrdenImprimir');
-                }
-            });
-        },
-        confirmUser: function (pin) {
-            if (this.user.pin != "") {
-                res = this.users.filter(user => pin == user.pin)
-                if (res[0].rol == "admin") {
-                    if (this.action == 'eliminar') {
-                        this.closeConfirm()
-                        $('#modalEliminar').modal('show');
-                    } else {
-                        window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
-                    }
-                } else {
-                    document.getElementById("errorMsg").classList.add('text-danger');
-                    document.getElementById("errorMsg").textContent = "El pin debe ser de un administrador";
-                    document.getElementById("pin").classList.add('is-invalid');
-                    this.user.pin = ''
-                }
-            } else {
-                document.getElementById("errorMsg").classList.add('text-warning');
-                document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
-            }
 
-        },
+
         //Metodo eliminar Orden
         eliminarOrden: function () {
 
@@ -326,7 +279,81 @@ var vmm=new Vue({
             }
 
         },
-   
+        //Muestra el modal Eliminar
+        mostrarEliminar: function () {
+            if (admin) {
+                $('#modalEliminar').modal('show');
+            } else {
+                this.action = 'eliminar'
+                this.showConfirm()
+            }
+        },
+        // for login
+        confirmUser: function (pin) {
+            if (this.user.pin != "") {
+                res = this.users.filter(user => pin == user.pin)
+                if (res[0].rol == "admin") {
+                    if (this.action == 'eliminar') {
+                        this.closeConfirm()
+                        $('#modalEliminar').modal('show');
+                    } else {
+                        window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
+                    }
+                } else {
+                    document.getElementById("errorMsg").classList.add('text-danger');
+                    document.getElementById("errorMsg").textContent = "El pin debe ser de un administrador";
+                    document.getElementById("pin").classList.add('is-invalid');
+                    this.user.pin = ''
+                }
+            } else {
+                document.getElementById("errorMsg").classList.add('text-warning');
+                document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
+            }
+
+        },
+
+        getUsers() {
+            axios.get('http://localhost:3000/usuarios')
+                .then(res => {
+                    this.users = res.data
+                }).catch(er => console.error(er))
+        },
+        async getParametros() {
+            await axios.get(ApiRestUrl + '/parametros')
+                .then(res => {
+                    this.parametros = res.data
+                }).catch(er => console.error(er))
+        },
+
+
+        /*
+        referente a ticketes
+        */
+        printTicket: function () {
+            printJS('borrador', 'html')
+        },
+
+        setProdImprimir: function () {
+            getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
+                this.imprimirProd = response;
+                    if(localStorage.addProd && !this.imprimirProd.domicilio){
+                        this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
+                    }
+                this.fecha = new Date(response.fecha);
+                this.fecha = moment(this.fecha);
+                this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
+                document.getElementById("horaImpProd").innerHTML = "Hora: " + new Date(response.fecha).toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+                if (this.imprimirProd.detalleOrden.filter(e => e.preparado === true && e.cantidad > 0).length > 0 || this.imprimirProd.domicilio === true) {
+                    window.print()
+                } else {
+                    localStorage.removeItem('addProd');
+                    localStorage.removeItem('estado');
+                    localStorage.removeItem('idOrdenImprimir');
+                }
+            });
+        },
+
+
         //Limpiar el Motivo por el cual se elimino la orden
         limpiarMotivo: function () {
             $("#modalEliminar").find("input").val("");
@@ -334,6 +361,7 @@ var vmm=new Vue({
             document.getElementById("alertaMotivo").textContent = "";
 
         },
+     
         reimprimir() {
             this.reimpresion = true;
             getProductsFromOrder(this.imprimirProd.id).then(response => {
@@ -352,19 +380,8 @@ var vmm=new Vue({
             this.reimpresion = false;
 
         },
-        getUsers() {
-            axios.get('http://localhost:3000/usuarios')
-                .then(res => {
-                    this.users = res.data
-                }).catch(er => console.error(er))
-        },
-        getParametros() {
-            axios.get(ApiRestUrl + '/parametros')
-                .then(res => {
-                    this.parametros = res.data
-                }).catch(er => console.error(er))
-        },
-        factorPropina(){
+
+    factorPropina(){
             let valor = this.parametros[8].valor; 
             try {
                 valor = valor.split('%');
@@ -374,22 +391,22 @@ var vmm=new Vue({
                 console.error(error);
             }
          }
-
-    
-
-
     },
     mounted() {
-        this.getParametros();
+       
         this.getDomicilios();
-        this.getUsers();
-        if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir) {
-            this.editarOrdenImp = false;
-            this.setProdImprimir();
-        } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir) {
-            this.editarOrdenImp = true;
-            this.setProdImprimir();
-        }
+      
+        this.getParametros().then(res =>{
+            if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+                this.editarOrdenImp = false;
+                this.setProdImprimir();
+            } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+                this.editarOrdenImp = true;
+                this.setProdImprimir();
+            }
+        })
+        this.getUsers()
+        
     },
     created() {
         if (!localStorage.vue_session_key) {
