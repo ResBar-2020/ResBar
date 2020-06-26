@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link  rel="icon"   href="assets/images/favicon.png" type="png" />
+  <title>RESBAR</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/googlefonts.css">
   <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -202,7 +203,12 @@
 
 
             <!--aca iran las alertas-->
-
+            <!--Inicio: Alertas-->
+            <div role="alert" class="alert alert-success collapse" id="alertaDomicilio">
+              <span v-if="accion==='Etapa0'"><strong>Completado!</strong> Orden en Proceso! </span>
+              <span v-if="accion==='Etapa1'"><strong>Completado!</strong> Orden Entregada! </span>
+            </div>
+          <!--Fin: Alertas-->
 
             <!--comienza el contenido-->
             <div class="container">
