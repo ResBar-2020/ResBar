@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-on="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -99,6 +99,9 @@
                                         class="fas fa-archive"></i><span>BITACORAS</span></a>
                                 <a class="topNavLink active" href="parametros.html"><i
                                         class="fas fa-tools"></i><span>PARAMETROS</span></a>
+                                <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
+                                        {{ logName }}</span>
+                                <button type="button" class="btn btn-sm btn-danger float-right" v-on:click="salir">Salir</button>
                             </li>
                         </ul>
                     </div>
@@ -111,6 +114,9 @@
                     <!--Inicio: Titulo Pagina-->
                     <div class="row my-4">
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-block ag">
+                            <button type="button" class="btn d-none d-lg-inline btn-danger float-right" v-on:click="salir">Salir</button>
+                                <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
+                                    {{ logName }}</label><br>
                             <h1 class="text-center d-none d-lg-block">Administración de Clientes</h1>
                             <h1 class="text-center d-12 d-lg-none">Admin de Clientes</h1>
                         </div>
@@ -294,7 +300,7 @@
                                                             type="text" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" v-if="accionb==='agregar'">
                                                     <div class="col-md-12">
                                                         <label class="font-weight-bold text-dark">Ubicación:</label>
                                                         <button class="btn btntable btn-sm"
@@ -538,12 +544,22 @@
     <script src="assets/js/theme.js "></script>
     <script src="assets/js/Script.js "></script>
     <script src="assets/js/vue-session.min.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
     <!--Fin: Scripts-->
 
     <!--Inicio: Codigo Vuejs-->
     <script src="./config.js"></script>
     <script src="./clientes.js"></script>
     <!--Fin: Codigo Vuejs-->
+
+    <script type="text/javascript">
+        window.onbeforeunload = function() {
+            $("#loader").show()
+        }
+        window.onload = function() {
+            $("#loader").hide()
+        }
+    </script>
 </body>
 
 </html>
