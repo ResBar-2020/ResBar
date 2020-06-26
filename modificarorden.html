@@ -95,7 +95,21 @@
                                         <label for="iptCliente " class="col-form-label ">Cliente: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-lg-5 ">
-                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente ">
+                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente.nombreCompleto">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-2 "></div>
+                                    <div class="col-md-3 col-sm-5 col-lg-4 d-flex justify-content-end mt-2" v-if="this.domicilioAux == false">
+                                        <button type="button" class="btn btn-danger ml-auto d-md-none d-lg-none d-xl-none" id="btnEliminarOrdenIcon" onClick="$('#mdlEliminarOrden').modal('show')"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-danger ml-auto d-none d-md-inline-block" id="btnEliminarOrden " onClick="$('#mdlEliminarOrden').modal('show')">Eliminar Orden</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row " v-if="this.domicilioAux == true">
+                                    <div class="col-md-2 col-sm-2 col-lg-1 ">
+                                        <label for="iptCliente " class="col-form-label ">Dirección: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-lg-5 ">
+                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente.direccion+', '+ordenSelected.cliente.departamento+', '+
+                                            ordenSelected.cliente.municipio">
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-lg-2 "></div>
                                     <div class="col-md-3 col-sm-5 col-lg-4 d-flex justify-content-end mt-2">

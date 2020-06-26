@@ -68,7 +68,7 @@
                                             <h5 class="modal-title" id="mesero">Mesero: {{ordenSelected.mesero}}</h5>
                                         </span>
                                         <span class="badge badge-pill badge-primary " style=" margin: 5px;">
-                                            <h5 class="modal-title" id="cliente">Cliente: {{ordenSelected.cliente}}</h5>
+                                            <h5 class="modal-title" id="cliente">Cliente: {{ordenSelected.cliente.nombreCompleto}}</h5>
                                         </span>
 
                                         <span class="badge badge-pill badge-primary " style=" margin: 5px;">
@@ -268,7 +268,7 @@
                                                             <span><strong>Mesero</strong> {{ordenSelected.mesero}}
                                                             </span>
                                                             <span><strong>Cliente:</strong>
-                                                                {{ordenSelected.cliente}}</span>
+                                                                {{ordenSelected.cliente.nombreCompleto}}</span>
                                                         </td>
                                                     </tr>
                                                 </tbody>
