@@ -94,7 +94,8 @@ var vmm=new Vue({
         },
         editarOrdenImp: false,
         reimpresion: false,
-        admin: admin
+        admin: admin,
+        accion: " "
     },
     methods: {
 
@@ -150,21 +151,9 @@ var vmm=new Vue({
                     }
 
                     if (valor.domicilioEtapa == 0) {
-                        swal({
-                            title: "Completado!",
-                            text: "Orden en Proceso",
-                            icon: 'success',
-                            buttons: false,
-                            timer: 3000
-                        })
+                        this.accion="Etapa0"
                     } else if (valor.domicilioEtapa == 1) {
-                        swal({
-                            title: "Completado!",
-                            text: "Orden Entregada!",
-                            icon: 'success',
-                            buttons: false,
-                            timer: 3000
-                        })
+                        this.accion="Etapa1"
                         var etapafut=valor.domicilioEtapa+1
                         if(etapafut==2){
                             this.modificartiempo(valor.id)
@@ -175,6 +164,11 @@ var vmm=new Vue({
             ).catch(ex => {
                 console.log(ex)
             })
+
+            $("#alertaDomicilio").show('fade');
+            setTimeout(function(){
+                $("#alertaDomicilio").hide('fade');
+            },4000);
         },
 
         direccionCliente(orden){
@@ -185,7 +179,6 @@ var vmm=new Vue({
                 dangerMode: true,
                 timer: 3600
             })
-            
         },
 
         getAllDomicilios: function () {
