@@ -203,7 +203,7 @@
                                         <label for="txtCliente">Cliente: </label>
                                     </div>
                                     <div class="col">
-                                        <input readonly v-model="cliente.nombreCompleto" pattern="[A-Za-z]+[A-Za-z .]{2,}" type="text" class="form-control" id="txtCliente" placeholder="Enter name">
+                                        <input readonly v-model="nuevaOrden.cliente.nombreCompleto" pattern="[A-Za-z]+[A-Za-z .]{2,}" type="text" class="form-control" id="txtCliente" placeholder="Enter name">
                                         <div class="invalid-feedback">
                                             Ingrese un nombre valido mayor a 3 caracteres
                                         </div>
@@ -222,7 +222,7 @@
                                         <label for="txtDireccion">Dirección: </label>
                                     </div>
                                     <div class="col">
-                                        <textarea  readonly v-model="cliente.direccion" type="text" class="form-control" id="txtObservacion" rows="3" style="resize: none;"></textarea>
+                                        <textarea  readonly v-model="nuevaOrden.cliente.direccion" type="text" class="form-control" id="txtObservacion" rows="3" style="resize: none;"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row" id="divMesero">
@@ -325,14 +325,14 @@
                                             <div class="form-group row">
                                                 <label for="staticClient" class="col-3 col-form-label">Cliente:</label>
                                                 <div class="col-9">
-                                                    <input type="text" readonly class="form-control-plaintext" id="staticClient" v-model="nuevaOrden.cliente">
+                                                    <input type="text" readonly class="form-control-plaintext" id="staticClient" v-model="nuevaOrden.cliente.nombreCompleto">
                                                 </div>
                                             </div>
                                             <div class="form-group row" v-if="this.domicilioAux==true">
                                                 <label for="staticWaiter" class="col-3 col-form-label">Dirección:</label>
                                                 <div class="col-9">
                                                     <textarea readonly class="form-control-plaintext" id="staticObs" 
-                                                    v-model="cliente.direccion" style="resize: none;"></textarea>
+                                                    v-model="nuevaOrden.cliente.direccion" style="resize: none;"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">

@@ -7,7 +7,7 @@ var app = new Vue({
             domicilio: false,
             domicilioEtapa: 0,
             mesa: null,
-            cliente: "",
+            cliente: [],
             estado: "A",
             total: 0,
             observacion: '',
@@ -45,7 +45,7 @@ var app = new Vue({
             observaciones: "",
             fechaRegistro: "",
             coordenadas: ""
-        },
+    },
         agrega: '',
     },
     created() {
@@ -209,7 +209,7 @@ var app = new Vue({
 
         /* */
         addCliente() {
-            this.nuevaOrden.cliente = this.cliente.nombreCompleto;
+            this.nuevaOrden.cliente = this.cliente;
             $('#modalAddCliente').modal('toggle');
         },
 
@@ -249,7 +249,6 @@ var app = new Vue({
 
         saveOrden() {
             this.mensajeApi = "Guardando Orden...";
-            this.nuevaOrden.cliente = this.cliente.nombreCompleto;
             axios
                 .post(this.url + '/ordenes', this.nuevaOrden)
                 .then(response => {
@@ -263,6 +262,7 @@ var app = new Vue({
                 .catch(error => {
                     this.mensajeApi = "Error al guardar orden";
                 });
+                console.log(this.nuevaOrden);
 
         },
         redireccionarAOrdenes() {
