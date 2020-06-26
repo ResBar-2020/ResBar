@@ -289,7 +289,7 @@
                                         v-on:dblClick="mostrarDetalle"
                                         v-bind:class="{ 'font-weight-bold' : ordenSelected==orden, 'text-dark': ordenSelected==orden } ">
                                         <td>{{orden.id.substring(20,24)}}</td>
-                                        <td>{{orden.cliente}}</td>
+                                        <td>{{orden.cliente.nombreCompleto}}</td>
                                         <td>{{orden.mesa}}</td>
                                         <td>{{orden.mesero}}</td>
 
@@ -418,7 +418,7 @@
                                         v-on:click="ordenSelected=orden" v-on:dblClick="mostrarDetalle"
                                         v-bind:class="{ 'font-weight-bold' : ordenSelected==orden, 'text-dark': ordenSelected==orden } ">
                                         <td>{{orden.id.substring(20,24)}}</td>
-                                        <td>{{orden.cliente}}</td>
+                                        <td>{{orden.cliente.nombreCompleto}}</td>
                                         <td>{{orden.mesa}}</td>
                                         <td>
                                             <button type="button" class="btn btntable btn-sm"><i
@@ -582,7 +582,7 @@
                                             <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
                                             <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                 Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}
-                                                <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente}} <br />
+                                                <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente.nombreCompleto}} <br />
                                             </p>
                                         </div>
 
@@ -683,7 +683,7 @@
                         <h1 class="centrado">COCINA</h1>
                         <div style="padding: 1rem;">
                             <div style="display: flex;justify-content: space-between;">
-                                <div style="display: inline;">Cliente: {{imprimirProd.cliente}}</div>
+                                <div style="display: inline;">Cliente: {{imprimirProd.cliente.nombreCompleto}</div>
                                 <div style="display: inline;">
                                     <p id="horaImpProd"></p>
                                 </div>
@@ -781,7 +781,7 @@
                         <p style=" border-bottom: 1px solid black; width: 7cm; margin-left: 4mm;">Observaciones: {{imprimirProd.observacion}}
                         </p>
                         <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
-                            Cliente: {{imprimirProd.cliente}}<br> Direccion: <br> Ref. <br> Telefonos:
+                            Cliente: {{imprimirProd.cliente.nombreCompleto}}<br> Direccion: <br> Ref. <br> Telefonos:
                             <br>
                         </div>
                         <div style="border: 1px solid black; margin-left: 4mm; margin-right: 4mm; margin-top: 3mm; margin-bottom: 3mm;">

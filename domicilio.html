@@ -170,12 +170,12 @@
                       <li>
                         <button class="btn btn-dark btn-sm" data-toggle="tab" style="background-color: #0652DD;">
                           PREPARADAS</button>
-                          
+
                       </li>
                       <li>
                         <button class="btn btn-dark btn-sm" data-toggle="tab" style="background-color:#1B1464;">
                           ENTREGADAS</button>
-                         
+
                       </li>
                     </ul>
 
@@ -221,7 +221,8 @@
                         <div class="tarjeta" :class="{ 'tarjeta-flip' : detalle }">
                           <!-- parte delantera del card-->
                           <div class="adelante card1">
-                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white " style="background-color:#1289A7;">
+                            <div v-if="orden.domicilioEtapa==0" class="card-header text-white "
+                              style="background-color:#1289A7;">
                               <div class="row">
                                 <div class="col-md-6">
                                   <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
@@ -232,12 +233,21 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>
+
+                                  DIRECCIÓN
+                                  <button type="button" @click="direccionCliente(orden)" class="btn btn-sm button4 bouncy" style="animation-delay:0.21s"
+                                    title="Ubicación">
+                                    <i class="fas text-white fa-map-marker-alt"></i>
+                                    <i class="fas text-white fa-map-marked-alt"></i></a>
+                                  </button>
+
                                 </div>
                               </div>
 
                             </div>
-                            <div v-if="orden.domicilioEtapa==1" class="card-header text-white" style="background-color: #0652DD;">
-                              <div class="row" >
+                            <div v-if="orden.domicilioEtapa==1" class="card-header text-white"
+                              style="background-color: #0652DD;">
+                              <div class="row">
                                 <div class="col-md-6">
                                   <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
                                   <span v-if="orden.estado=='A'" class="bgpendiente">$$ pendiente</span>
@@ -247,11 +257,18 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>
+                                  DIRECCIÓN
+                                  <button type="button" @click="direccionCliente(orden)" class="btn btn-sm button4 bouncy" style="animation-delay:0.21s"
+                                    title="Ubicación">
+                                    <i class="fas text-white fa-map-marker-alt"></i>
+                                    <i class="fas text-white fa-map-marked-alt"></i></a>
+                                  </button>
 
                                 </div>
                               </div>
                             </div>
-                            <div v-if="orden.domicilioEtapa==2" class="card-header text-white"  style="background-color:#1B1464 ;">
+                            <div v-if="orden.domicilioEtapa==2" class="card-header text-white"
+                              style="background-color:#1B1464 ;">
                               <div class="row">
                                 <div class="col-md-6">
                                   <span v-if="orden.estado=='C'" class="bgcobrado">$$ pendiente</span>
@@ -262,6 +279,14 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h2 class="card-title"> $ {{orden.total}} </h2>
+                                  
+                                  DIRECCIÓN
+                                  <button type="button" @click="direccionCliente(orden)" class="btn btn-sm button4 bouncy" style="animation-delay:0.21s"
+                                    title="Ubicación">
+                                    <i class="fas text-white fa-map-marker-alt"></i>
+                                    <i class="fas text-white fa-map-marked-alt"></i></a>
+                                  </button>
+                                  
 
                                 </div>
                               </div>
@@ -271,43 +296,46 @@
                             <div class="card-body"
                               style="font: italic normal 400 16px/22px Arial, Verdana, Sans-serif;">
 
-                              <h4 class="card-text">CLIENTE: {{orden.cliente}}</h4>
-                              <h4 class="card-text">FECHA: {{orden.fecha.substring(0,10)}}</h4>
+                              <h4 class="card-text">CLIENTE: {{orden.cliente.nombreCompleto}}</h4>
+                              <!--h4 class="card-text">DIRECCIÓN: {{orden.cliente.direccion}}</h4 -->
+                              <h4 class="card-text">CONTACTO: {{orden.cliente.celular}}</h4>
 
                               <!-- se mostraran las acciones-->
-                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" type="button" class="btn btn-sm button4 bouncy"
-                                @click="ordenSelected=orden; agregarProductos();" title="Agregar Mas Productos">
+                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" type="button"
+                                class="btn btn-sm button4 bouncy" @click="ordenSelected=orden; agregarProductos();"
+                                title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
-                            
+
                               <button v-else type="button" class="btn btn btn-sm button4 disabled"
                                 title="Agregar Mas Productos">
                                 <i class="fas text-white fa-plus-circle"></i></a>
                               </button>
-                              
 
-                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" style="animation-delay:0.07s" type="button"
-                                @click="ordenSelected=orden; modificarOrden();" class="btn btn-sm button4 bouncy"
-                                title="Modificar Orden">
+
+                              <button v-if="orden.domicilioEtapa!=2 && orden.estado!='C'" style="animation-delay:0.07s"
+                                type="button" @click="ordenSelected=orden; modificarOrden();"
+                                class="btn btn-sm button4 bouncy" title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
                               </button>
                               <button v-else type="button" class="btn btn-sm button4 disabled" title="Modificar Orden">
                                 <i class="fas text-white fa-edit"></i></a>
                               </button>
-                              <button v-if="orden.estado=='A'" type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.14s"
-                                @click="ordenSelected=orden; cobrarOrden();" title="Cobrar Orden">
+                              <button v-if="orden.estado=='A'" type="button" class="btn btn-sm button4 bouncy"
+                                style="animation-delay:0.14s" @click="ordenSelected=orden; cobrarOrden();"
+                                title="Cobrar Orden">
                                 <i class="fas text-white fa-money-bill"></i></a>
                               </button>
                               <button v-else="orden.estado=='C'" type="button" class="btn btn-sm button4 disabled"
-                               title="Cobrar Orden">
-                              <i class="fas text-white fa-money-bill"></i></a>
-                            </button>
-                              <button  type="button" class="btn btn-sm button4 bouncy"
+                                title="Cobrar Orden">
+                                <i class="fas text-white fa-money-bill"></i></a>
+                              </button>
+                              <button type="button" class="btn btn-sm button4 bouncy"
                                 @click="ordenSelected=orden; mostrarEliminar()" style="animation-delay:0.21s"
                                 title="Eliminar Orden">
                                 <i class="fas text-white fa-trash"></i></a>
                               </button>
-  
+
                               <button type="button" class="btn btn-sm button4 bouncy" style="animation-delay:0.28s"
                                 title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                 <i @click="ordenSelected=orden;" class="fas text-white fa-print"></i>
@@ -336,7 +364,7 @@
                             <div class="card-body">
                               <h5 class="card-header text-white" style="background-color: #130f40;">Detalle: </h5>
                               <p class="card-header text-white" style="background-color: #130f40;">
-                                {{String((orden.id).substring(17,24))}} {{orden.cliente}} </p>
+                                {{String((orden.id).substring(17,24))}} {{orden.cliente.nombreCompleto}} </p>
                               <ol class="rounded-list" v-for="item in orden.detalleOrden">
                                 <li class="align-items-center list-group-item-action list-group-item-primary">
                                   <a> {{item.nombre}} cantidad: {{item.cantidad}} </a>
@@ -351,7 +379,7 @@
 
 
                           </div>
-                        </div>
+
                       </div>
                     </div>
 
@@ -363,6 +391,9 @@
                 </ul>
               </div>
               <!--FINALIZAN CARDS-->
+
+
+
 
 
 
@@ -436,7 +467,7 @@
                     {{imprimirProd.observacion}}
                   </p>
                   <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
-                    Cliente: {{imprimirProd.cliente}}<br> Direccion: <br> Ref. <br> Telefonos:
+                    Cliente: {{imprimirProd.cliente.nombreCompleto}}<br> Direccion: <br> Ref. <br> Telefonos:
                     <br>
                   </div>
                   <div
@@ -505,7 +536,7 @@
                               class="col-3 text-center col-form-label text-white total">Cliente:</label>
                             <div class="col-9">
                               <label id="cliente" style="color: #000000;"
-                                class="form-control-plaintext">{{orden.cliente}} </label>
+                                class="form-control-plaintext">{{orden.cliente.nombreCompleto}} </label>
                             </div>
                           </div>
                           <div class="form-group row">
@@ -650,7 +681,7 @@
                           <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
                           <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                             Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}
-                            <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente}}
+                            <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente.nombreCompleto}}
                             <br />
                           </p>
                         </div>
@@ -691,7 +722,7 @@
                                 <td><strong><span>TOTAL:</span></strong></td>
                                 <td class="titulo">
                                   <strong>${{(orden.total+(orden.total*factorPropina())).toFixed(2)}}</strong>
-                              </td>
+                                </td>
 
                               </tr>
                             </tbody>

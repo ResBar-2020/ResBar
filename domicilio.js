@@ -175,11 +175,19 @@ var vmm=new Vue({
             ).catch(ex => {
                 console.log(ex)
             })
-
-
-
-
         },
+
+        direccionCliente(orden){
+            swal({
+                title: "UBICACIÓN CLIENTE",
+                text: orden.cliente.direccion,
+                buttons: 'EXIT',
+                dangerMode: true,
+                timer: 3600
+            })
+            
+        },
+
         getAllDomicilios: function () {
             axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
                 response => {
