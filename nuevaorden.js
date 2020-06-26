@@ -47,6 +47,7 @@ var app = new Vue({
             coordenadas: ""
     },
         agrega: '',
+        direccionDom:'',
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -180,6 +181,9 @@ var app = new Vue({
                 this.agrega = 'no';
                 this.textoBusqueda = '';
             }
+            this.nuevaOrden.cliente = this.cliente;
+            this.direccionDom = this.cliente.direccion +', '+
+            this.cliente.departamento +', '+ this.cliente.municipio;
         },
 
         /* Realiza una busqueda en el array clientes utilizando el parametro X que es la palabra clave para ver un registro */
@@ -210,6 +214,8 @@ var app = new Vue({
         /* */
         addCliente() {
             this.nuevaOrden.cliente = this.cliente;
+            this.direccionDom = this.cliente.direccion +', '+
+            this.cliente.departamento +', '+ this.cliente.municipio;
             $('#modalAddCliente').modal('toggle');
         },
 
@@ -262,7 +268,6 @@ var app = new Vue({
                 .catch(error => {
                     this.mensajeApi = "Error al guardar orden";
                 });
-                console.log(this.nuevaOrden);
 
         },
         redireccionarAOrdenes() {
