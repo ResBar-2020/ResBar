@@ -582,8 +582,7 @@
                                         <div class="centrar">
                                             <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
                                             <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
-                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}
-                                                <br /> Mesa: {{orden.mesa}}<br /> mesero {{orden.mesero}} <br /> Cliente: {{orden.cliente.nombreCompleto}} <br />
+                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}&nbsp;&nbsp;{{orden.fecha.substring(11,16)}}<br><span v-show="orden.domicilio==false">Mesa: {{orden.mesa}}&nbsp;&nbsp;Mesero: {{orden.mesero}}<br></span>Cliente: {{orden.cliente.nombreCompleto}} <br />
                                             </p>
                                         </div>
 
