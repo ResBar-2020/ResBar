@@ -182,7 +182,7 @@ var vmm=new Vue({
         },
 
         getAllDomicilios: function () {
-            axios.get(this.urlApi + "?filter[where][domicilio]=true").then(
+            axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[order]=fecha%20DESC").then(
                 response => {
                     this.ordenes = response.data
                     console.log(response.data);

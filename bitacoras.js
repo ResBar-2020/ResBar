@@ -47,7 +47,7 @@ new Vue({
     Trae paginado los los datos a mostrar
     */
     getAllBitacoras: function () {
-      axios.get(this.urlApi + `?filter[limit]=${this.limitePage}&filter[skip]=${this.actualPage}`).then(
+      axios.get(this.urlApi + `?filter[limit]=${this.limitePage}&filter[skip]=${this.actualPage}&filter[order]=fecha%20DESC`).then(
         response => {
           this.bitacoras = response.data;
           //console.log(response.data);
