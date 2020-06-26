@@ -210,7 +210,7 @@ new Vue({
     */
     salir: function () {
       swal({
-        title: "Â¿Seguro que desea cerrar sesiÃ³n?",
+        title: "¿Seguro que desea cerrar sesión?",
         icon: 'info',
         buttons: true,
         dangerMode: true,
@@ -272,9 +272,12 @@ new Vue({
     irPagSiguiente() {
       //console.log("actual page" + this.actualPage);
       //console.log("datos: " + this.bitacoras.length);
-      if (this.actualPage === 0 &&  this.bitacoras.length < 10) {
+      if (this.actualPage === 0 && this.bitacoras.length < 10) {
         return true;
+      } if (this.actualPage >= 20 && this.bitacoras.length === 10) {
+        return false;
       } else {
+        //console.log(this.actualPage > this.bitacoras.length);
         return this.actualPage > this.bitacoras.length;
       }
     },
