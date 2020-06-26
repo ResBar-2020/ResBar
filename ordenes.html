@@ -225,7 +225,7 @@
                                                 <button type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="ordenSelected=orden; mostrarEliminar()">
                                                     <i class="fas text-white fa-trash"></i></a>
                                                 </button>
-                                                <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                                                <button v-show="orden.domicilio==false" type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                     <i @click="ordenSelected=orden;"
                                                         class="fas text-white fa-print"></i></a>
                                                 </button>
@@ -310,7 +310,7 @@
                                             <button type="button" class="btn btntable btn-sm" title="Eliminar Orden" @click="ordenSelected=orden; mostrarEliminar()">
                                                 <i class="fas text-white fa-trash"></i></a>
                                             </button>
-                                            <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                                            <button v-show="orden.domicilio==false" type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                 <i @click="ordenSelected=orden;" class="fas text-white fa-print"></i>
                                             </button>
                                             <button v-if="orden.domicilio" type="button" class="btn btntable btn-sm" title="Reimprimir ticket" @click="imprimirProd=orden; reimprimir()">
@@ -370,7 +370,7 @@
                                                     class="fas fa-money-bill" style="color: rgb(254, 254, 255);"
                                                     title="Cobrar Orden"
                                                     @click="ordenSelected=orden; cobrarOrden();"></i></button>
-                                            <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                                            <button v-show="orden.domicilio==false" type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                 <i class="fas text-white fa-print"
                                                     style="color: rgb(254, 254, 255);"></i>
                                             </button>
@@ -438,7 +438,7 @@
                                                     title="Eliminar Orden"
                                                     @click="ordenSelected=orden; mostrarEliminar()"></i></button>
                                             </button>
-                                            <button type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
+                                            <button v-show="orden.domicilio==false" type="button" class="btn btntable btn-sm" title="Imprimir Orden" @click="ordenSelected=orden; printTicket()">
                                                 <i class="fas text-white fa-print"
                                                     style="color: rgb(254, 254, 255);"></i>
                                             </button>
@@ -582,7 +582,7 @@
                                         <div class="centrar">
                                             <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
                                             <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
-                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}&nbsp;&nbsp;{{orden.fecha.substring(11,16)}}<br><span v-show="orden.domicilio==false">Mesa: {{orden.mesa}}&nbsp;&nbsp;Mesero: {{orden.mesero}}<br></span>Cliente: {{orden.cliente.nombreCompleto}} <br />
+                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}&nbsp;&nbsp;{{orden.fecha.substring(11,16)}}<br><span>Mesa: {{orden.mesa}}&nbsp;&nbsp;Mesero: {{orden.mesero}}<br></span>Cliente: {{orden.cliente.nombreCompleto}} <br />
                                             </p>
                                         </div>
 
