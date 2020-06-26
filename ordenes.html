@@ -613,7 +613,7 @@
                                                     <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                         <td></td>
                                                         <td></td>
-                                                        <td>Propina (10%):</td>
+                                                        <td>Propina({{parametros[8].valor}}%):</td>
                                                         <td>${{parseFloat(orden.total*factorPropina()).toFixed(2)}}</td>
                                                     </tr>
                                                     <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
