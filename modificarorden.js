@@ -11,7 +11,8 @@ new Vue({
         lactivos: null,
         textoBusqueda: "",
         totalAux: '',
-        domicilioAux: false
+        domicilioAux: false,
+        clientesito: ""
     },
 
     mounted: function() {
@@ -63,6 +64,7 @@ new Vue({
 
         // modificar la orden 
         modificarOrden() {
+            this.clientesito=this.ordenSelected.cliente.nombreCompleto;
             this.ordenSelected.tiempoPreparacion=new Date(Date.now()).toISOString();
             if (this.domicilioAux == true) {
                 this.ordenSelected.mesa = "0";
@@ -110,6 +112,7 @@ new Vue({
             if (this.ordenSelected.domicilio == true) {
                 this.domicilioAux = true;
             }
+            this.clientesito=this.ordenSelected.cliente.nombreCompleto;
         },
 
         cambiarADomicilio() {

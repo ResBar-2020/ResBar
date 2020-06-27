@@ -62,7 +62,7 @@
                                         <label class="col-form-label ">Id Orden:</label>                              
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-lg-5 ">
-                                        <label class="col-form-label ">{{ordenSelected.id.substring(20)}} </label>                             
+                                        <label class="col-form-label ">{{String(ordenSelected.id).substring(20)}} </label>                             
                                     </div>
                                     <div class="col-sm-2 col-lg-1 col-form-label">
                                         <label>A Domicilio: </label>
@@ -95,7 +95,7 @@
                                         <label for="iptCliente " class="col-form-label ">Cliente: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-lg-5 ">
-                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente.nombreCompleto">
+                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="clientesito">
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-lg-2 "></div>
                                     <div class="col-md-3 col-sm-5 col-lg-4 d-flex justify-content-end mt-2" v-if="this.domicilioAux == false">
@@ -169,13 +169,13 @@
                         <div class="modal-dialog " role="document ">
                             <div class="modal-content ">
                                 <div class="modal-header ">
-                                    <h5 class="modal-title " id="tituloEliminar ">Eliminar orden # {{ordenSelected.id.substring(20)}}</h5>
+                                    <h5 class="modal-title " id="tituloEliminar ">Eliminar orden # {{String(ordenSelected.id).substring(20)}}</h5>
                                     <button type="button " class="close " data-dismiss="modal" aria-label="Close ">
                                      <span aria-hidden="true ">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body ">
-                                    ¿Desea eliminar la orden con codigo {{ordenSelected.id.substring(20)}} ?
+                                    ¿Desea eliminar la orden con codigo {{String(ordenSelected.id).substring(20)}} ?
                                 </div>
                                 <div class="modal-footer ">
                                     <button type="button " class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
