@@ -127,7 +127,7 @@ var vm = new Vue({
                 for (y = 0; y < this.arrayAux.length; y++) {
                     if (this.ordenSelected.detalleOrden[x].nombre === this.arrayAux[y].nombre) {
                         this.ordenSelected.detalleOrden[x].cantidad = this.ordenSelected.detalleOrden[x].cantidad + this.arrayAux[y].cantidad;
-                        this.ordenSelected.detalleOrden[x].subtotal = parseFloat(this.ordenSelected.detalleOrden[x].cantidad * this.ordenSelected.detalleOrden[x].precio).toFixed(2);
+                        this.ordenSelected.detalleOrden[x].subtotal = this.ordenSelected.detalleOrden[x].cantidad * this.ordenSelected.detalleOrden[x].precio;
                         this.arrayAux.splice(y, 1);
                     }
                 }
@@ -143,7 +143,7 @@ var vm = new Vue({
             for (const iterator of this.ordenSelected.detalleOrden) {
                 total = total + iterator.subtotal;
             }
-            this.ordenSelected.total =parseFloat(total).toFixed(2);
+            this.ordenSelected.total = total;
         },
 
         /*Busca las cantidades que hay de productos en la orden seleccionada para modificar y mostrar los pruductos que ya
