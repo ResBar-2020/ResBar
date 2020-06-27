@@ -14,25 +14,24 @@ Vue.component('semaforo', {
                     var segundos = (t - tiempoinicio) / 1000;
 
                     var element = document.querySelector('#timer-' + self.idorden);
-                                      
+
                     element.innerHTML = self.secondsToHMS(segundos);
 
                     var porcentaje = ((segundos / 60) / self.maxim) * 100;
 
-                    if (porcentaje < 60 && segundos>=0) {
+                    if (porcentaje < 60 && segundos >= 0) {
                         element.style.backgroundColor = "#10752D";
 
-                    } else if (porcentaje > 60 && porcentaje < 100 && segundos>=0) {
+                    } else if (porcentaje > 60 && porcentaje < 100 && segundos >= 0) {
 
                         element.style.backgroundColor = "#C2B314";
-                        
-                    }else if(isNaN(segundos)){
+
+                    } else if (isNaN(segundos)) {
                         element.innerHTML = '<div > <span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
                         element.style.backgroundColor = "#1a9c9a";
 
 
-                    }
-                     else {
+                    } else {
                         element.style.backgroundColor = "#751C1D";
 
 
@@ -49,7 +48,7 @@ Vue.component('semaforo', {
     },
     methods: {
         secondsToHMS: function (secs) {
-        
+
             function z(n) {
                 return (n < 10 ? '0' : '') + n;
             }
@@ -57,13 +56,13 @@ Vue.component('semaforo', {
             secs = Math.abs(secs);
             return sign + z(secs / 3600 | 0) + ':' + z((secs % 3600) / 60 | 0) + ':' + parseInt(z(secs % 60));
 
-    }
+        }
 
     },
     template:
-    
-    
-    `<div class="d-flex">
+
+
+        `<div class="d-flex">
     <div v-bind:id="'timer-'+this.idorden" class="semaforo">
     </div>
     <span class="btn btn-sm semaforoBtn" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</span>
@@ -89,7 +88,7 @@ var vm = new Vue({
         },
         users: {},
         action: '',
-        logName: logName, 
+        logName: logName,
         imprimirProd: {
             "id": "",
             "fecha": "",
@@ -147,7 +146,7 @@ var vm = new Vue({
                     this.users = res.data
                 }).catch(er => console.error(er))
         },
-       async getParametros() {
+        async getParametros() {
             await axios.get(ApiRestUrl + '/parametros')
                 .then(res => {
                     this.parametros = res.data
@@ -421,6 +420,11 @@ var vm = new Vue({
         },
         showConfirm() {
             $('#confirmModal').modal('show')
+            document.getElementById("errorMsg").classList.remove('text-danger');
+            document.getElementById("errorMsg").classList.remove('text-warning');
+            document.getElementById("pin").classList.remove('is-invalid');
+            document.getElementById("pin").value = "";
+            document.getElementById("errorMsg").textContent = "";
         },
         modificarOrden() {
             if (admin) {
@@ -434,22 +438,24 @@ var vm = new Vue({
         confirmUser: function (pin) {
             if (this.user.pin != "") {
                 res = this.users.filter(user => pin == user.pin)
-                if (res[0].rol == "admin") {
-                    if (this.action == 'eliminar') {
-                        this.closeConfirm()
-                        $('#modalEliminar').modal('show');
+                if (res.length != 0) {
+                    if (res[0].rol == "admin") {
+                        if (this.action == 'eliminar') {
+                            this.closeConfirm()
+                            $('#modalEliminar').modal('show');
+                        } else {
+                            window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
+                        }
                     } else {
-                        window.location = "./" + this.action + ".html?id=" + this.ordenSelected.id;
+                        document.getElementById("errorMsg").classList.add('text-danger');
+                        document.getElementById("errorMsg").textContent = "El pin debe ser de un administrador";
+                        document.getElementById("pin").classList.add('is-invalid');
+                        this.user.pin = ''
                     }
                 } else {
-                    document.getElementById("errorMsg").classList.add('text-danger');
-                    document.getElementById("errorMsg").textContent = "El pin debe ser de un administrador";
-                    document.getElementById("pin").classList.add('is-invalid');
-                    this.user.pin = ''
+                    document.getElementById("errorMsg").classList.add('text-warning');
+                    document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
                 }
-            } else {
-                document.getElementById("errorMsg").classList.add('text-warning');
-                document.getElementById("errorMsg").textContent = "Por favor ingrese un pin valido";
             }
 
         },
@@ -534,9 +540,9 @@ var vm = new Vue({
         setProdImprimir: function () {
             getProductsFromOrder(localStorage.idOrdenImprimir).then(response => {
                 this.imprimirProd = response;
-                    if(localStorage.addProd && !this.imprimirProd.domicilio){
-                        this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
-                    }
+                if (localStorage.addProd && !this.imprimirProd.domicilio) {
+                    this.imprimirProd.detalleOrden = JSON.parse(localStorage.addProd);
+                }
                 this.fecha = new Date(response.fecha);
                 this.fecha = moment(this.fecha);
                 this.fecha = this.fecha.format('DD-MM-YYYY HH:MM:SS');
@@ -576,23 +582,23 @@ var vm = new Vue({
 
         },
 
-    factorPropina(){
-            let valor = this.parametros[8].valor; 
+        factorPropina() {
+            let valor = this.parametros[8].valor;
             try {
                 valor = valor.split('%');
-                valor = (valor[0])/100; 
-                return parseFloat(valor);    
+                valor = (valor[0]) / 100;
+                return parseFloat(valor);
             } catch (error) {
                 console.error(error);
             }
-         }
+        }
     },
     mounted() {
-        this.getParametros().then(res =>{
-            if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+        this.getParametros().then(res => {
+            if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir && vm.parametros[6].valor === "true") {
                 this.editarOrdenImp = false;
                 this.setProdImprimir();
-            } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
+            } else if (localStorage.estado === "editar" && localStorage.idOrdenImprimir && vm.parametros[6].valor === "true") {
                 this.editarOrdenImp = true;
                 this.setProdImprimir();
             }
@@ -601,7 +607,7 @@ var vm = new Vue({
         this.mostrarActivos()
         this.alertLauncher()
         this.getUsers()
-        
+
     },
     created() {
         if (localStorage.vue_session_key) {
