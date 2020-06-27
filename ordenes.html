@@ -781,7 +781,9 @@
                         <p style=" border-bottom: 1px solid black; width: 7cm; margin-left: 4mm;">Observaciones: {{imprimirProd.observacion}}
                         </p>
                         <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
-                            Cliente: {{imprimirProd.cliente.nombreCompleto}}<br> Direccion: <br> Ref. <br> Telefonos:
+                           <Strong>Cliente:</Strong> {{imprimirProd.cliente.nombreCompleto}}<br> <Strong>Direccion:</Strong> {{imprimirProd.cliente.direccion}}, {{imprimirProd.cliente.municipio}}, {{imprimirProd.cliente.departamento}} <br> 
+                            <strong>Ref.</strong> {{imprimirProd.cliente.puntoDeReferencia}} <br> <strong>Telefono Casa:</strong> {{imprimirProd.cliente.telefonoCasa}} <strong>Celular:</strong> {{imprimirProd.cliente.celular}},  <strong>WhatsApp:</strong> {{imprimirProd.cliente.whatsapp}} <br>
+                           <strong>Coordenadas:</strong>  {{imprimirProd.cliente.coordenadas}}
                             <br>
                         </div>
                         <div style="border: 1px solid black; margin-left: 4mm; margin-right: 4mm; margin-top: 3mm; margin-bottom: 3mm;">
