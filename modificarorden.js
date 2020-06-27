@@ -13,6 +13,13 @@ new Vue({
         totalAux: '',
         domicilioAux: false,
         clientesito: ""
+        , bitacora: {
+            fecha: "",
+            accion: "",
+            nombreCompleto: "",
+            loggin: "",
+            descripcion: "",
+        },
     },
 
     mounted: function() {
@@ -77,6 +84,7 @@ new Vue({
                     .then(response => {
                         localStorage.setItem('idOrdenImprimir', this.ordenSelected.id);
                         localStorage.setItem("estado", "editar");
+                        this.registrarBitacora();
                         this.redireccionarAOrdenes();
                     })
                     .catch(error => {
@@ -129,6 +137,33 @@ new Vue({
         redireccionarAOrdenes() {
             window.location = `./ordenes.html?alert=se modifico la orden ${this.ordenSelected.id} Satisfactoriamente`
         }
+
+        /*
+       Registra a bitacoras cuando se modifica una orden  
+       */
+        , registrarBitacora() {
+            this.bitacora.fecha = new Date().toISOString();
+            this.bitacora.accion = "Modificar Orden";
+            this.bitacora.nombreCompleto = logName;
+            if (admin === true) {
+                this.bitacora.loggin = "admin";
+            } else {
+                this.bitacora.loggin = "mesero";
+            }
+            if (this.domicilioAux === true) {
+                this.bitacora.descripcion = "Se modificó la orden ID=" + this.ordenSelected.id + ". Se cambio a domicilio. Nuevo total: $" + parseFloat(this.ordenSelected.total).toFixed(2) + ".";
+            } else {
+                this.bitacora.descripcion = "Se modificó la orden ID=" + this.ordenSelected.id + ". Nuevo total: $" + parseFloat(this.ordenSelected.total).toFixed(2) + ".";
+            }
+
+            axios.post(ApiRestUrl + "/bitacoras", JSON.stringify(this.bitacora), {
+                headers: {
+                    "content-type": "application/json",
+                },
+            }).then((response) => {
+                //response.data;
+            }).catch((error) => { });
+        },
 
     },
     created() {
