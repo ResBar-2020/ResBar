@@ -622,7 +622,7 @@
                                                         <td></td>
                                                         <td><strong><span>TOTAL:</span></strong></td>
                                                         <td class="titulo">
-                                                            <strong>${{(orden.total+orden.propina)}}</strong>
+                                                            <strong>${{(orden.total+(orden.total*valorPropina())).toFixed(2)}}</strong>
                                                         </td>
 
                                                     </tr>
