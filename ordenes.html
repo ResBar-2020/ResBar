@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>RESBAR</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
+    <link rel="icon" href="assets/images/favicon.png" type="png" />
     <link rel="stylesheet" href="assets/css/googlefonts.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -582,7 +582,8 @@
                                         <div class="centrar">
                                             <strong><span class="titulo">PRE-ORDEN</span></strong> <br>
                                             <p v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
-                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}&nbsp;&nbsp;{{orden.fecha.substring(11,16)}}<br><span>Mesa: {{orden.mesa}}&nbsp;&nbsp;Mesero: {{orden.mesero}}<br></span>Cliente: {{orden.cliente.nombreCompleto}} <br />
+                                                Orden: {{orden.id}}  <br /> Fecha: {{orden.fecha.substring(0,10)}}&nbsp;&nbsp;{{orden.fecha.substring(11,16)}}<br><span>Mesa: {{orden.mesa}}&nbsp;&nbsp;Mesero: {{orden.mesero}}<br></span>Cliente: {{orden.cliente.nombreCompleto}}
+                                                <br />
                                             </p>
                                         </div>
 
@@ -613,15 +614,15 @@
                                                     <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                         <td></td>
                                                         <td></td>
-                                                        <td>Propina({{parametros[8].valor}}%):</td>
-                                                        <td>${{parseFloat(orden.total*factorPropina()).toFixed(2)}}</td>
+                                                        <td v-if="parametros[8].valor">Propina({{parametros[8].valor}}%):</td>
+                                                        <td>${{orden.propina}}</td>
                                                     </tr>
                                                     <tr v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
                                                         <td></td>
                                                         <td></td>
                                                         <td><strong><span>TOTAL:</span></strong></td>
                                                         <td class="titulo">
-                                                            <strong>${{(orden.total+(orden.total*factorPropina())).toFixed(2)}}</strong>
+                                                            <strong>${{(orden.total+orden.propina)}}</strong>
                                                         </td>
 
                                                     </tr>
@@ -723,8 +724,8 @@
                         <div style="text-align: center;background-color: #000000;color: #ffffff;border: 3px solid black;" v-show="reimpresion">
                             <p style="margin: 0;padding: 0;">Reimpresion</p>
                         </div>
-                        <h4 class="centrado mt-3">{{parametros[0].valor}}</h4>
-                        <div class="mx-2 centrado">
+                        <h4 class="centrado mt-3" v-if="parametros[0].valor">{{parametros[0].valor}}</h4>
+                        <div class="mx-2 centrado" v-if="parametros[2].valor && parametros[3].valor && parametros[4].valor && parametros[5].valor">
                             {{parametros[5].valor}} <br> Tel.: {{parametros[2].valor}} <br> NIT: {{parametros[3].valor}} Giro:{{parametros[4].valor}}
                         </div>
                         <div style="padding: 1rem;">
@@ -763,16 +764,16 @@
                                     <td colspan="3" style="text-align: right; border: solid 1px black;">
                                         Propina: </td>
                                     <td style="text-align: center; border: solid 1px black;">
-                                        ${{parseFloat(imprimirProd.total*factorPropina()).toFixed(2)}}</td>
+                                        ${{parseFloat(imprimirProd.propina).toFixed(2)}}</td>
                                 </tr>
                                 <tr style="border: solid 1px black;">
                                     <td colspan="3" style="text-align: right; border: solid 1px black;">Costo de envio
                                     </td>
-                                    <td style="text-align: center;">${{parametros[10].valor}}</td>
+                                    <td style="text-align: center;" v-if="parametros[10].valor">${{parametros[10].valor}}</td>
                                 </tr>
                                 <tr style="border: solid 1px black;">
                                     <td style="font-weight: bold; text-align: right; font-size: 14px;" colspan="4">
-                                        <p style="margin: 1mm 5mm;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+parseFloat(imprimirProd.total*factorPropina())).toFixed(2)}}
+                                        <p style="margin: 1mm 5mm;" v-if="parametros[10].valor">TOTAL: ${{parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+imprimirProd.propina}}
                                         </p>
                                     </td>
                                 </tr>
@@ -781,20 +782,21 @@
                         <p style=" border-bottom: 1px solid black; width: 7cm; margin-left: 4mm;">Observaciones: {{imprimirProd.observacion}}
                         </p>
                         <div id="datosCliente" style="max-width: 8cm; margin-left: 5mm;">
-                           <Strong>Cliente:</Strong> {{imprimirProd.cliente.nombreCompleto}}<br> <Strong>Direccion:</Strong> {{imprimirProd.cliente.direccion}}, {{imprimirProd.cliente.municipio}}, {{imprimirProd.cliente.departamento}} <br> 
-                            <strong>Ref.</strong> {{imprimirProd.cliente.puntoDeReferencia}} <br> <strong>Telefono Casa:</strong> {{imprimirProd.cliente.telefonoCasa}} <strong>Celular:</strong> {{imprimirProd.cliente.celular}},  <strong>WhatsApp:</strong> {{imprimirProd.cliente.whatsapp}} <br>
-                           <strong>Coordenadas:</strong>  {{imprimirProd.cliente.coordenadas}}
+                            <Strong>Cliente:</Strong> {{imprimirProd.cliente.nombreCompleto}}<br>
+                            <Strong>Direccion:</Strong> {{imprimirProd.cliente.direccion}}, {{imprimirProd.cliente.municipio}}, {{imprimirProd.cliente.departamento}} <br>
+                            <strong>Ref.</strong> {{imprimirProd.cliente.puntoDeReferencia}} <br> <strong>Telefono Casa:</strong> {{imprimirProd.cliente.telefonoCasa}} <strong>Celular:</strong> {{imprimirProd.cliente.celular}}, <strong>WhatsApp:</strong>                            {{imprimirProd.cliente.whatsapp}} <br>
+                            <strong>Coordenadas:</strong> {{imprimirProd.cliente.coordenadas}}
                             <br>
                         </div>
                         <div style="border: 1px solid black; margin-left: 4mm; margin-right: 4mm; margin-top: 3mm; margin-bottom: 3mm;">
                             <div style="text-align: center;">
                                 <p>DESPRENDIBLE ORDEN ENTREGADA <br> Se entregó la orden:</p>
                             </div>
-                            <div style="margin: 2mm; ">
-                                <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total: ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}} Propina: ${{parseFloat(imprimirProd.total*factorPropina()).toFixed(2)}}<br>
+                            <div style="margin: 2mm; " v-if="parametros[10].valor">
+                                <strong> Orden No: {{imprimirProd.id}}</strong><br> Sub-total: ${{(imprimirProd.total*1).toFixed(2)}} Costo de envio: ${{parametros[10].valor}} Propina: ${{parseFloat(imprimirProd.propina).toFixed(2)}}<br>
                             </div>
-                            <div style="text-align: center;">
-                                <p style="font-weight: bold;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+parseFloat(imprimirProd.total*factorPropina())).toFixed(2)}}
+                            <div style="text-align: center;" v-if="parametros[10].valor">
+                                <p style="font-weight: bold;">TOTAL: ${{(parseFloat(imprimirProd.total)+parseFloat(parametros[10].valor)+imprimirProd.propina)}}
                                 </p>
                             </div>
 

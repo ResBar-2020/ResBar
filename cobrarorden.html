@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
+    <link rel="icon" href="assets/images/favicon.png" type="png" />
     <title>RESBAR</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/googlefonts.css">
@@ -68,11 +68,11 @@
                                             <h5 class="modal-title" id="mesero">Mesero: {{ordenSelected.mesero}}</h5>
                                         </span>
                                         <span class="badge badge-pill badge-primary " style=" margin: 5px;">
-                                            <h5 class="modal-title" id="cliente">Cliente: {{ordenSelected.cliente.nombreCompleto}}</h5>
+                                            <h5 class="modal-title" id="cliente" v-if="ordenSelected.cliente">Cliente: {{ordenSelected.cliente.nombreCompleto}}</h5>
                                         </span>
 
                                         <span class="badge badge-pill badge-primary " style=" margin: 5px;">
-                                            <h5 class="modal-title" id="fecha">Fecha:
+                                            <h5 class="modal-title" id="fecha" v-if="ordenSelected.fecha">Fecha:
                                                 {{ordenSelected.fecha.substring(0,10)}}</h5>
                                         </span>
                                         </br>
@@ -138,7 +138,7 @@
                                                     <input type="number" class="form-control" id="lblEfectivo" required v-show="ordenSelected.estado==&quot;A&quot;" />
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;">
+                                                    <span class="badge" style="background-color: #5CB32B;" v-show="ordenSelected.estado==&quot;A&quot;" v-if="ordenSelected.total">
                                                         <h3 v-if="propina != ''" class="font-weight-bold"
                                                             style="color: black;" id="total">
                                                             Total:
@@ -262,13 +262,13 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>
+                                                        <td v-if="ordenSelected.fecha">
                                                             <strong>Cuenta No.</strong>{{ordenSelected.id}}<br/>
                                                             <strong>Fecha:</strong>{{ordenSelected.fecha.substring(0,10)}}&nbsp;&nbsp;{{ordenSelected.fecha.substring(11,16)}}<br/>
                                                             <span><strong>Mesa:</strong>{{ordenSelected.mesa}}</span>&nbsp;
                                                             <span><strong>Mesero:</strong>{{ordenSelected.mesero}}</span><br/>
-                                                            <span><strong>Cliente:</strong>{{ordenSelected.cliente.nombreCompleto}}</span>
-                                                            </td>
+                                                            <span v-if="ordenSelected.cliente"><strong>Cliente:</strong>{{ordenSelected.cliente.nombreCompleto}}</span>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -285,14 +285,14 @@
                                                     <tr v-for="detalleOrdenAux in ordenSelected.detalleOrden">
                                                         <td class="text-center">{{detalleOrdenAux.cantidad}}</td>
                                                         <td class="name">{{detalleOrdenAux.nombre}}</td>
-                                                        <td>${{detalleOrdenAux.precio.toFixed(2)}}</td>
-                                                        <td>${{detalleOrdenAux.subtotal.toFixed(2)}}</td>
+                                                        <td v-if="detalleOrdenAux.precio">${{detalleOrdenAux.precio.toFixed(2)}}</td>
+                                                        <td v-if="detalleOrdenAux.subtotal">${{detalleOrdenAux.subtotal.toFixed(2)}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
                                                         <td colspan=""><strong>Subtotal:</strong></td>
-                                                        <td><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
+                                                        <td v-if="ordenSelected.total"><strong>${{(ordenSelected.total).toFixed(2)}}</strong></td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
@@ -313,9 +313,9 @@
                                                         <td></td>
                                                         <td class="titulo"><strong>TOTAL:</strong></td>
                                                         <td v-show="ordenSelected.domicilio==false" class="titulo">
-                                                            <strong>${{(ordenSelected.total+(valorPropina())).toFixed(2)}}</strong>
+                                                            <strong v-if="ordenSelected.total">${{(ordenSelected.total+(valorPropina())).toFixed(2)}}</strong>
                                                         </td>
-                                                        <td v-show="ordenSelected.domicilio==true" class="titulo">
+                                                        <td v-if="ordenSelected.domicilio==true && parametros[10].valor"class="titulo">
                                                             <strong>${{(ordenSelected.total+(costoDeEnvio())+(valorPropina())).toFixed(2)}}</strong>
                                                         </td>
                                                     </tr>

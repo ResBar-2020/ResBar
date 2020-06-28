@@ -373,11 +373,13 @@ new Vue({
 
     //  Obtiene el valor del costo de envio de los parametros
     costoDeEnvio() {
-      let valor = this.parametros[10].valor;
+      let valor;
       try {
+        valor = this.parametros[10].valor;
         return parseFloat(valor);
       } catch (error) {
         console.error(error);
+        return valor;
       }
     },
 

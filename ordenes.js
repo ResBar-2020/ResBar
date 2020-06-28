@@ -581,17 +581,6 @@ var vm = new Vue({
             this.reimpresion = false;
 
         },
-
-        factorPropina() {
-            let valor = this.parametros[8].valor;
-            try {
-                valor = valor.split('%');
-                valor = (valor[0]) / 100;
-                return parseFloat(valor);
-            } catch (error) {
-                console.error(error);
-            }
-        }
     },
     mounted() {
         this.getParametros().then(res => {

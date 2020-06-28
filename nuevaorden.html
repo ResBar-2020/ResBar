@@ -336,13 +336,13 @@
                                                     v-model="direccionDom" style="resize: none;"></textarea>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" v-if="nuevaOrden.domicilio === false">
                                                 <label for="staticWaiter" class="col-3 col-form-label">Mesero:</label>
                                                 <div class="col-9">
                                                     <input type="text" readonly class="form-control-plaintext" id="staticWaiter" v-model="nuevaOrden.mesero">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" v-if="nuevaOrden.domicilio === false">
                                                 <label for="staticTable" class="col-3 col-form-label">#Mesa:</label>
                                                 <div class="col-9">
                                                     <input type="text" readonly class="form-control-plaintext" id="staticTable" v-model="nuevaOrden.mesa">
@@ -416,7 +416,7 @@
                                     <tbody>
                                         <tr v-for="(client, index) in clientes" v-show="buscarClientes(index)"
                                             v-on:click.prevent="cliente = client;" v-on:dblClick=""
-                                            v-bind:class="{ 'font-weight-bold' :  cliente===client}">
+                                            v-bind:class="{ 'font-weight-bold' :  cliente===client}" style="user-select: none;cursor: pointer;">
                                             <td>{{client.nombreCompleto}}</td>
                                             <td>{{client.celular}}</td>
                                             <td>{{client.whatsapp}}</td>

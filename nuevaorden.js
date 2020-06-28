@@ -45,9 +45,10 @@ var app = new Vue({
             observaciones: "",
             fechaRegistro: "",
             coordenadas: ""
-    },
+        },
         agrega: '',
-        direccionDom:'',
+        direccionDom: '',
+        parametro: '',
     },
     created() {
         this.nuevaOrden.fecha = new Date().toISOString();
@@ -182,8 +183,8 @@ var app = new Vue({
                 this.textoBusqueda = '';
             }
             this.nuevaOrden.cliente = this.cliente;
-            this.direccionDom = this.cliente.direccion +', '+
-            this.cliente.departamento +', '+ this.cliente.municipio;
+            this.direccionDom = this.cliente.direccion + ', ' +
+                this.cliente.departamento + ', ' + this.cliente.municipio;
         },
 
         /* Realiza una busqueda en el array clientes utilizando el parametro X que es la palabra clave para ver un registro */
@@ -214,8 +215,8 @@ var app = new Vue({
         /* */
         addCliente() {
             this.nuevaOrden.cliente = this.cliente;
-            this.direccionDom = this.cliente.direccion +', '+
-            this.cliente.departamento +', '+ this.cliente.municipio;
+            this.direccionDom = this.cliente.direccion + ', ' +
+                this.cliente.departamento + ', ' + this.cliente.municipio;
             $('#modalAddCliente').modal('toggle');
         },
 
@@ -254,6 +255,7 @@ var app = new Vue({
         },
 
         saveOrden() {
+            this.nuevaOrden.propina = parseFloat((this.nuevaOrden.total * this.factorPropina()).toFixed(2));
             this.mensajeApi = "Guardando Orden...";
             axios
                 .post(this.url + '/ordenes', this.nuevaOrden)
@@ -339,7 +341,26 @@ var app = new Vue({
                 .catch(error => {
 
                 });
+        },
+        factorPropina() {
+            let valor = this.parametro.valor;
+            try {
+                valor = valor.split('%');
+                valor = (valor[0]) / 100;
+                return parseFloat(valor);
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        getParametroPropina() {
+            axios.get(ApiRestUrl + '/parametros/9')
+                .then(res => {
+                    this.parametro = res.data
+                }).catch(er => console.error(er))
         }
+    },
+    mounted() {
+        this.getParametroPropina();
     }
 
 })
