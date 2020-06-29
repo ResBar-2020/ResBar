@@ -50,7 +50,9 @@ new Vue({
             "fields": {
                 "id": true,
                 "fecha": true,
-                "total": true
+                "total": true,
+                "propina": true,
+                "costoEnvio": true
             }
         };
 
@@ -62,7 +64,7 @@ new Vue({
 
 
     },
-    created(){
+    created() {
         if (localStorage.vue_session_key) {
             if (localStorage.getItem(VueSession.key) == '"mesero"') {
                 window.location = "./ordenes.html"
