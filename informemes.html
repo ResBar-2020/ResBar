@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
+    <link rel="icon" href="assets/images/favicon.png" type="png" />
     <title>RESBAR</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/googlefonts.css">
@@ -38,8 +38,7 @@
                                 class="fas fa-file-alt"></i><span>INFORMES</span></a>
                     </li>
                 </ul>
-                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
-                        id="sidebarToggle" type="button"></button></div>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         <!-- Termina navbar lateral -->
@@ -82,12 +81,16 @@
                                     <tr>
                                         <th style="text-align: center;" scope="col">FECHA</th>
                                         <th style="text-align: center;" scope="col">TOTAL</th>
+                                        <th style="text-align: center;" scope="col">PROPINA</th>
+                                        <th style="text-align: center;" scope="col">DOMICILIOS</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="elemento in resumen">
                                         <td>{{ formatFecha(elemento.fecha) }}</td>
                                         <td>{{ "$ " + elemento.total}}</td>
+                                        <td>{{ "$ " + elemento.propina}}</td>
+                                        <td>{{ "$ " + elemento.costoEnvio}}</td>
                                     </tr>
                                 </tbody>
                             </table>
