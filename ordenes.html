@@ -251,7 +251,8 @@
                                                 </button>
                                                 </td>
                                                 <td>
-                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maxim="parametros[7].valor"></semaforo>
+                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" 
+                                                    :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
 
 
                             </div>
@@ -321,7 +322,9 @@
                                                 <input type="hidden" v-bind:value="orden.tiempoPreparacion" v-bind:id="'hidden-'+orden.id">
                                                 <div v-bind:id="orden.id" class="semaforo">
 
-                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maxim="parametros[7].valor"></semaforo>
+                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" 
+                                                    :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
+
 
                                                 </div>
 

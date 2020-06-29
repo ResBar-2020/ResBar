@@ -1,7 +1,7 @@
 Vue.component('semaforo', {
-    props: ['idorden', 'fechainicio', 'maximo', "par10"],
+    props: ['idorden', 'fechainicio', 'maximolocal', "maximodomicilio"],
     data: function () {
-        var maxim = this.maximo + this.par10;
+        var maxim = parseFloat(this.maximolocal) + parseFloat(this.maximodomicilio);
         var t = new Date();
         var tiempoinicio = Date.parse(this.fechainicio);
         this.segundos = (t - tiempoinicio) / 1000;
@@ -15,25 +15,43 @@ Vue.component('semaforo', {
                     var segundos = (t - tiempoinicio) / 1000;
 
                     var element = document.querySelector('#timer-' + self.idorden);
+                    var btnx = document.querySelector("#btn-" + self.idorden);
 
                     element.innerHTML = self.secondsToHMS(segundos);
+                    btnx.innerHTML = '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+                    
 
-                    var porcentaje = ((segundos / 60) / self.maxim) * 100;
+                    var porcentaje = ((segundos / 60) / parseFloat(maxim)) * 100;
 
                     if (porcentaje < 60 && segundos >= 0) {
 
                         element.style.backgroundColor = "#10752D";
+                        btnx.style.backgroundColor = "#10752D";
+                        btnx.style.border = "#10752D";
+                        btnx.style.color="white"
 
                     } else if (porcentaje > 60 && porcentaje < 100 && segundos >= 0) {
 
                         element.style.backgroundColor = "#C2B314";
+                        btnx.style.backgroundColor = "#C2B314";
+                        btnx.style.border = "#C2B314";
+                        btnx.style.color="white"
+
+
                     } else if (isNaN(segundos)) {
-                        element.innerHTML = '<div ><span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>'
+                        element.innerHTML = '<div ><span>Entregado</span> </div>'
                         element.style.backgroundColor = "#43cbc9";
+                        btnx.innerHTML='<i class="fa fa-check-circle" aria-hidden="true"></i>'
+                        btnx.style.backgroundColor = "#43cbc9";
+                        btnx.style.color = "white";
+                        btnx.style.border="#43cbc9";
 
 
                     } else {
                         element.style.backgroundColor = "#751C1D";
+                        btnx.style.backgroundColor = "#751C1D";
+                        btnx.style.border = "#751C1D";
+                        btnx.style.color="white"
 
                     }
                 },
@@ -59,9 +77,14 @@ Vue.component('semaforo', {
 
 
     },
-    template: `
-    <div class="semaforo mt-2" v-bind:id="'timer-'+this.idorden">
-    </div>`
+    template:`<div class="d-flex">
+    <div v-bind:id="'timer-'+this.idorden" class="semaforo">
+    </div>
+    <span v-bind:id="'btn-'+this.idorden" class="btn btn-sm semaforoBtn">
+    <i class="fa fa-clock-o" aria-hidden="true"></i>
+    </span>
+     
+     </div>`
 })
 
 
@@ -185,7 +208,7 @@ var vmm = new Vue({
             axios.get(this.urlApi + "?filter[where][domicilio]=true&filter[order]=fecha%20DESC").then(
                 response => {
                     this.ordenes = response.data
-                    console.log(response.data);
+                   // console.log(response.data);
                 }
             ).catch(ex => {
                 console.log(ex)
@@ -394,7 +417,7 @@ var vmm = new Vue({
     },
     mounted() {
        
-        this.getDomicilios();
+        
       
         this.getParametros().then(res =>{
             if (localStorage.estado === "nuevo" && localStorage.idOrdenImprimir && vm.parametros[6].valor==="true") {
@@ -404,8 +427,9 @@ var vmm = new Vue({
                 this.editarOrdenImp = true;
                 this.setProdImprimir();
             }
-        })
-        this.getUsers()
+        });
+        this.getUsers();
+        this.getDomicilios();
         
     },
     created() {

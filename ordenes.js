@@ -1,30 +1,43 @@
 Vue.component("semaforo", {
-  props: ["idorden", "fechainicio", "maxim"],
-  data: function () {
+  props: ['idorden', 'fechainicio', 'maximolocal', "maximodomicilio","domicilio"],
+    data: function () {
+    if (this.domicilio==true){
+        var maxim = parseFloat(this.maximolocal) + parseFloat(this.maximodomicilio);
+        // console.log("Tiempo domicilio: "+ maxim);
+     }else{
+        var maxim = parseFloat(this.maximolocal);
+     }
+    
     var t = new Date();
     var tiempoinicio = Date.parse(this.fechainicio);
     this.segundos = (t - tiempoinicio) / 1000;
     this.color = "red";
     const self = this;
+    
     this.interval1 = setInterval(function () {
       var t = new Date();
       var tiempoinicio = Date.parse(self.fechainicio);
       var segundos = (t - tiempoinicio) / 1000;
 
       var element = document.querySelector("#timer-" + self.idorden);
+      var btnx = document.querySelector("#btn-" + self.idorden);
 
       element.innerHTML = self.secondsToHMS(segundos);
 
-      var porcentaje = (segundos / 60 / self.maxim) * 100;
-
+      var porcentaje = (segundos / 60 / parseFloat(maxim)) * 100;
+      //console.log(self.idorden +"   =   "+maxim);
       if (porcentaje < 60 && segundos >= 0) {
         element.style.backgroundColor = "#10752D";
       } else if (porcentaje > 60 && porcentaje < 100 && segundos >= 0) {
         element.style.backgroundColor = "#C2B314";
       } else if (isNaN(segundos)) {
         element.innerHTML =
-          '<div > <span>Entregado</span> <i class="fa fa-check-circle" aria-hidden="true"></i></div>';
+          '<div > <span>Entregado</span></div>';
         element.style.backgroundColor = "#1a9c9a";
+        btnx.innerHTML='<i class="fa fa-check-circle" aria-hidden="true"></i>'
+        btnx.style.backgroundColor = "#1a9c9a";
+        btnx.style.color = "white";
+        btnx.style.border="#1a9c9a";
       } else {
         element.style.backgroundColor = "#751C1D";
       }
@@ -52,7 +65,8 @@ Vue.component("semaforo", {
   template: `<div class="d-flex">
     <div v-bind:id="'timer-'+this.idorden" class="semaforo">
     </div>
-    <span class="btn btn-sm semaforoBtn" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'">X</span>
+    <span v-bind:id="'btn-'+this.idorden" class="btn btn-sm semaforoBtn" v-bind:onclick="'vm.modificartiempo(\`'+this.idorden+'\`)'"><i class="fa fa-times-circle" aria-hidden="true"></i>
+    </span>
      
      </div>`,
 });
