@@ -251,8 +251,7 @@
                                                 </button>
                                                 </td>
                                                 <td>
-                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" 
-                                                    :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
+                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
 
 
                             </div>
@@ -322,8 +321,7 @@
                                                 <input type="hidden" v-bind:value="orden.tiempoPreparacion" v-bind:id="'hidden-'+orden.id">
                                                 <div v-bind:id="orden.id" class="semaforo">
 
-                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" 
-                                                    :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
+                                                    <semaforo :idorden="orden.id" :fechainicio="orden.tiempoPreparacion" :maximolocal="parametros[7].valor" :maximodomicilio="parametros[9].valor" :domicilio="orden.domicilio"></semaforo>
 
 
                                                 </div>
@@ -548,9 +546,21 @@
                                                 </table>
                                             </div>
                                             <div class="row" v-for="orden in ordenes" v-show="orden.id==ordenSelected.id">
-                                                <div class="col-md-4"><strong><label class="mTotal"
-                                                            style="padding: 5px; color: #ffffff;">TOTAL : $
+                                                <div class="col-md-2"><strong><label class="mTotal"
+                                                            style="padding: 5px; color: #ffffff;">SUBTOTAL  $
                                                             {{ orden.total.toFixed(2) }}</label></strong></div>
+                                                <div class="col-md-2"><strong><label class="mTotal"
+                                                                style="padding: 5px; color: #ffffff;">PROPINA $
+                                                                {{ orden.propina }}</label></strong></div>
+                                                <div class="col-md-3"><strong><label class="mTotal" v-show="orden.domicilio==true"
+                                                                    style="padding: 5px; color: #ffffff;">COSTO DE ENVIO $
+                                                                    $1.50</label></strong></div>
+                                                <div class="col-md-3"><strong><label class="mTotal" v-if="orden.domicilio==true"
+                                                                        style="padding: 5px; color: #ffffff;">TOTAL $
+                                                                        {{ parseFloat(orden.total.toFixed(2)) +  parseFloat(orden.propina) + 1.50 }}</label></strong></div>
+                                                <div class="col-md-3"><strong><label class="mTotal" v-if="orden.domicilio==false"
+                                                                            style="padding: 5px; color: #ffffff;">TOTAL $
+                                                                            {{ parseFloat(orden.total.toFixed(2)) +  parseFloat(orden.propina)}}</label></strong></div>
                                             </div>
                                         </div>
                                     </div>
