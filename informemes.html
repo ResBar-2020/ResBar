@@ -89,8 +89,10 @@
                                     <tr v-for="elemento in resumen">
                                         <td>{{ formatFecha(elemento.fecha) }}</td>
                                         <td>{{ "$ " + elemento.total}}</td>
-                                        <td>{{ "$ " + elemento.propina}}</td>
-                                        <td>{{ "$ " + elemento.costoEnvio}}</td>
+                                        <td v-if="elemento.propina">{{ "$ " + elemento.propina}}</td>
+                                        <td v-else>$ 0.00</td>
+                                        <td v-if="elemento.costoEnvio">{{ "$ " + elemento.costoEnvio}}</td>
+                                        <td v-else>$ 0.00</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -132,6 +134,7 @@
         <!--Aqui va tu codigo de vue js-->
         <script src="./config.js"></script>
         <script src="./informemes.js"></script>
+
 
 
 </body>

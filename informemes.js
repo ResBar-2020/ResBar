@@ -28,7 +28,12 @@ new Vue({
                 }
             ).catch(ex => { console.log(ex) })
 
-        }
+        },
+        formatFecha: function(date) {
+            var fecha = new Date(date.split("-")[0], date.split("-")[1], date.split("-")[2].split("T")[0], 0, 0, 0, 0);
+            var ms = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Augosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            return fecha.getDate() + " de " + ms[fecha.getMonth()] + " del " + fecha.getFullYear();
+        },
     },
 
     mounted() {
@@ -38,6 +43,7 @@ new Vue({
         var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
         this.hasta = new Date(date.getFullYear(), date.getMonth() + 1, 0).toISOString().substring(0, 10);
         this.desde = new Date(date.getFullYear(), date.getMonth(), 1).toISOString().substring(0, 10);
+        console.log(firstDay);
 
 
         var filter = {
@@ -74,9 +80,3 @@ new Vue({
         }
     }
 });
-
-function formatFecha(date) {
-    var fecha = new Date(date.split("-")[0], date.split("-")[1], date.split("-")[2].split("T")[0], 0, 0, 0, 0);
-    var ms = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Augosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    return fecha.getDate() + " de " + ms[fecha.getMonth()] + " del " + fecha.getFullYear();
-}
