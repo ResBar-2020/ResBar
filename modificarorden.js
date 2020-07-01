@@ -10,7 +10,16 @@ new Vue({
         activos: true,
         lactivos: null,
         textoBusqueda: "",
-        totalAux: ''
+        totalAux: '',
+        domicilioAux: false,
+        clientesito: ""
+        , bitacora: {
+            fecha: "",
+            accion: "",
+            nombreCompleto: "",
+            loggin: "",
+            descripcion: "",
+        },
     },
 
     mounted: function() {
@@ -62,10 +71,20 @@ new Vue({
 
         // modificar la orden 
         modificarOrden() {
+            this.clientesito=this.ordenSelected.cliente.nombreCompleto;
+            this.ordenSelected.tiempoPreparacion=new Date(Date.now()).toISOString();
+            if (this.domicilioAux == true) {
+                this.ordenSelected.mesa = "0";
+                this.ordenSelected.mesero = "";                
+            }
             //Se comprueba si la orden tiene productos si la orden no tiene productos se elimina 
             if (this.ordenSelected.detalleOrden.length > 0) {
+                //A Domicilio
                 axios.put(this.uri + '/' + this.ordenSelected.id, this.ordenSelected)
                     .then(response => {
+                        localStorage.setItem('idOrdenImprimir', this.ordenSelected.id);
+                        localStorage.setItem("estado", "editar");
+                        this.registrarBitacora();
                         this.redireccionarAOrdenes();
                     })
                     .catch(error => {
@@ -98,13 +117,62 @@ new Vue({
             if (this.ordenSelected === undefined || this.ordenSelected === {}) {
                 window.location = `./ordenes.html`
             }
-
+            if (this.ordenSelected.domicilio == true) {
+                this.domicilioAux = true;
+            }
+            this.clientesito=this.ordenSelected.cliente.nombreCompleto;
         },
+
+        cambiarADomicilio() {
+            check = document.getElementById("domic");
+            if (check.checked) {
+                //Comer En el local
+                this.domicilioAux = false;
+            } else {
+                //A domicilio
+                this.domicilioAux = true;
+            }
+        },
+
         redireccionarAOrdenes() {
             window.location = `./ordenes.html?alert=se modifico la orden ${this.ordenSelected.id} Satisfactoriamente`
         }
 
+        /*
+       Registra a bitacoras cuando se modifica una orden  
+       */
+        , registrarBitacora() {
+            this.bitacora.fecha = new Date().toISOString();
+            this.bitacora.accion = "Modificar Orden";
+            this.bitacora.nombreCompleto = logName;
+            if (admin === true) {
+                this.bitacora.loggin = "admin";
+            } else {
+                this.bitacora.loggin = "mesero";
+            }
+            if (this.domicilioAux === true) {
+                this.bitacora.descripcion = "Se modificó la orden ID=" + this.ordenSelected.id + ". Se cambio a domicilio. Nuevo total: $" + parseFloat(this.ordenSelected.total).toFixed(2) + ".";
+            } else {
+                this.bitacora.descripcion = "Se modificó la orden ID=" + this.ordenSelected.id + ". Nuevo total: $" + parseFloat(this.ordenSelected.total).toFixed(2) + ".";
+            }
+
+            axios.post(ApiRestUrl + "/bitacoras", JSON.stringify(this.bitacora), {
+                headers: {
+                    "content-type": "application/json",
+                },
+            }).then((response) => {
+                //response.data;
+            }).catch((error) => { });
+        },
+
     },
+    created() {
+        if (localStorage.vue_session_key) {
+
+        } else {
+            window.location = "./login.html"
+        }
+    }
 
 })
 

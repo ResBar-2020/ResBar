@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>RESBAR</title>
+    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/googlefonts.css">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
@@ -12,6 +13,14 @@
 </head>
 
 <body id="page-top">
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div id="wrapper">
 
         <div class="d-flex flex-column" id="content-wrapper">
@@ -48,28 +57,59 @@
                         <div class="mt-5">
                             <!-- <form class="form-inline"> -->
                             <form>
-                                <div class="form-group row my-0">
+                                <div class="form-group row my-0 ">
+                                    <div class="col-md-2 col-sm-2 col-lg-1 ">
+                                        <label class="col-form-label ">Id Orden:</label>                              
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-lg-5 ">
+                                        <label class="col-form-label ">{{String(ordenSelected.id).substring(20)}} </label>                             
+                                    </div>
+                                    <div class="col-sm-2 col-lg-1 col-form-label">
+                                        <label>A Domicilio: </label>
+                                    </div>
+                                    <div class="col-sm-2 col-lg-1 col-form-label">
+                                        <label class="switch">
+                                            <input type="checkbox" id="domic" v-model="ordenSelected.domicilio">
+                                            <span class="slider round" v-on:click="cambiarADomicilio"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row my-0" v-if="this.domicilioAux == false">
                                     <label for="lblMesa" class="col-sm-2 col-lg-1 col-form-label">Mesa: </label>
                                     <div class="col-sm-3 mr-md-5 col-lg-3">
                                         <input type="text" class="form-control form-control-sm" id="lblMesa" v-model="ordenSelected.mesa">
                                     </div>
-                                    <label class=" col-sm col-lg ml-md-5 d-none d-lg-block ">Id Orden: {{ordenSelected.id.substring(20)}} </label>
-                                </div>
-                                <div class="form-group row my-0 ">
-                                    <div class="col-md-2 col-sm-2 col-lg-1 ">
-                                        <label for="iptCliente " class="col-form-label ">Cliente: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-4 col-lg-5 ">
-                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente ">
-                                    </div>
-                                    <div class="col-md-4 col-sm-6 col-lg-6 "></div>
-                                </div>
-                                <div class="form-group row ">
+                               </div>
+                                <div class="form-group row my-0 " v-if="this.domicilioAux == false">
                                     <div class="col-md-2 col-sm-2 col-lg-1 ">
                                         <label for="lblMesero " class="col-form-label ">Mesero: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-lg-5 ">
                                         <input type="text " class="form-control form-control-sm " id="lblMesero " v-model="ordenSelected.mesero">
+                                    </div>
+                                    <div class="col-md-4 col-sm-6 col-lg-6 "></div>
+                                </div>
+                                <div class="form-group row ">
+                                    <div class="col-md-2 col-sm-2 col-lg-1 ">
+                                        <label for="iptCliente " class="col-form-label ">Cliente: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-lg-5 ">
+                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="clientesito">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-lg-2 "></div>
+                                    <div class="col-md-3 col-sm-5 col-lg-4 d-flex justify-content-end mt-2" v-if="this.domicilioAux == false">
+                                        <button type="button" class="btn btn-danger ml-auto d-md-none d-lg-none d-xl-none" id="btnEliminarOrdenIcon" onClick="$('#mdlEliminarOrden').modal('show')"><i class="far fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-danger ml-auto d-none d-md-inline-block" id="btnEliminarOrden " onClick="$('#mdlEliminarOrden').modal('show')">Eliminar Orden</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row " v-if="this.domicilioAux == true">
+                                    <div class="col-md-2 col-sm-2 col-lg-1 ">
+                                        <label for="iptCliente " class="col-form-label ">Dirección: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-lg-5 ">
+                                        <input type="text " class="form-control form-control-sm " id="iptCliente " v-model="ordenSelected.cliente.direccion+', '+ordenSelected.cliente.departamento+', '+
+                                            ordenSelected.cliente.municipio">
                                     </div>
                                     <div class="col-md-1 col-sm-1 col-lg-2 "></div>
                                     <div class="col-md-3 col-sm-5 col-lg-4 d-flex justify-content-end mt-2">
@@ -129,13 +169,13 @@
                         <div class="modal-dialog " role="document ">
                             <div class="modal-content ">
                                 <div class="modal-header ">
-                                    <h5 class="modal-title " id="tituloEliminar ">Eliminar orden # {{ordenSelected.id.substring(20)}}</h5>
+                                    <h5 class="modal-title " id="tituloEliminar ">Eliminar orden # {{String(ordenSelected.id).substring(20)}}</h5>
                                     <button type="button " class="close " data-dismiss="modal" aria-label="Close ">
                                      <span aria-hidden="true ">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body ">
-                                    ¿Desea eliminar la orden con codigo {{ordenSelected.id.substring(20)}} ?
+                                    ¿Desea eliminar la orden con codigo {{String(ordenSelected.id).substring(20)}} ?
                                 </div>
                                 <div class="modal-footer ">
                                     <button type="button " class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
@@ -164,10 +204,19 @@
     <script src="assets/js/vue-router.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
+    <script src="assets/js/vue-session.min.js"></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="./modificarorden.js"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
 
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 
 
 </body>

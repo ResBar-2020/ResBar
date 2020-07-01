@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
     <title>RESBAR</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/googlefonts.css">
@@ -14,6 +15,14 @@
 </head>
 
 <body id="page-top">
+    <div id="loader" class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
@@ -52,7 +61,7 @@
                         </div>
                         <div class="form-group mb-2">
                             <label style="font-size: 12px; margin-left:10px;" for="lblCliente" class="col-sm-0 col-form-label col-form-label-sm">Cliente:</label>
-                            <input style="font-size: 12px; width: 92px;margin-left: 5px;" type="text" id="lblCliente" v-model="ordenSelected.cliente" readonly class="form-control form-control-sm form-control-plaintext">
+                            <input style="font-size: 12px; width: 92px;margin-left: 5px;" type="text" id="lblCliente" v-model="ordenSelected.cliente.nombreCompleto" readonly class="form-control form-control-sm form-control-plaintext">
                         </div>
                     </form>
                     <hr/>
@@ -136,7 +145,7 @@
                                     </div>
                                     <div class="form-group mb-2">
                                         <label style="font-size: 12px; margin-left:10px;" for="lblCliente1" class="col-sm-0 col-form-label col-form-label-sm">Cliente:</label>
-                                        <input style="font-size: 12px; width: 100px;margin-left: 5px;" type="text" id="lblCliente1" v-model="ordenSelected.cliente" readonly class="form-control form-control-sm form-control-plaintext">
+                                        <input style="font-size: 12px; width: 100px;margin-left: 5px;" type="text" id="lblCliente1" v-model="ordenSelected.cliente.nombreCompleto" readonly class="form-control form-control-sm form-control-plaintext">
                                     </div>
                                     <hr/>
                                 </form>
@@ -207,10 +216,19 @@
     <script src="assets/js/vue-router.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/Script.js"></script>
+    <script src="assets/js/vue-session.min.js"></script>
     <!--Aqui va tu codigo de vue js-->
     <script src="./config.js"></script>
     <script src="./addmasproductos.js"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
 
+            $("#loader").show()
+        }
+        window.onload = function () {
+            $("#loader").hide()
+        }
+    </script>
 
 </body>
 

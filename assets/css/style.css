@@ -85,17 +85,13 @@ input:checked+.slider:before {
     border-color: white;
     background-size: 300% 100%;
     background-image: linear-gradient(45deg, #3d69e4 0%, #428BCA 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    transition: 0.3s linear;
 }
 
 .agg:hover {
+    transform: scale(1.1);
     background-position: 100% 0;
     background-image: linear-gradient(45deg, #903cda 0%, #05abe0 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
 }
 
 .total {
@@ -109,25 +105,15 @@ input:checked+.slider:before {
     border-radius: 8px;
 }
 
-.ag {
-    padding: 14px;
-    border-radius: 15px;
-    color: #fff;
-    border-color: white;
-    background-size: 300% 100%;
-    background-image: linear-gradient(45deg, #3d69e4 0%, #428BCA 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
-    box-shadow: 0 0 8px #2196f3;
+.ag h1 {
+    color: rgb(5, 125, 224);
+    text-shadow: 12px 15px 25px rgba(5, 125, 224);
+    transition: 0.5s ease-in-out;
 }
 
-.ag:hover {
-    background-position: 100% 0;
-    background-image: linear-gradient(45deg, #903cda 0%, #05abe0 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+.ag:hover h1 {
+    color: rgb(5, 171, 224);
+    text-shadow: 12px 15px 25px rgba(5, 171, 224);
 }
 
 input {
@@ -160,25 +146,28 @@ th {
     border-color: white;
     background-size: 300% 100%;
     background-image: linear-gradient(45deg, #3d69e4 0%, #428BCA 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -o-transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
 }
 
 .btntable:hover {
+    transform: scale(1.1);
     background-position: 100% 0;
     background-image: linear-gradient(45deg, #903cda 0%, #05abe0 100%);
-    -o-transition: all .4s ease-in-out;
-    -webkit-transition: all .4s ease-in-out;
-    transition: all .4s ease-in-out;
+    -o-transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
 }
 
 tr {
     color: #000000;
     background-color: #fff;
+    transition: 0.3s;
 }
 
-tr:hover {
+tr:hover,
+tr:nth-child(even):hover {
     background-color: #9ebffde0;
     color: #000000;
 }
@@ -192,6 +181,7 @@ tr:nth-child(even) {
 /* ==================== animaciones ==================== */
 
 @-webkit-keyframes bounceIn {
+
     from,
     20%,
     40%,
@@ -201,28 +191,34 @@ tr:nth-child(even) {
         -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
     }
+
     0% {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
         transform: scale3d(0.3, 0.3, 0.3)
     }
+
     20% {
         -webkit-transform: scale3d(1.1, 1.1, 1.1);
         transform: scale3d(1.1, 1.1, 1.1)
     }
+
     40% {
         -webkit-transform: scale3d(0.9, 0.9, 0.9);
         transform: scale3d(0.9, 0.9, 0.9)
     }
+
     60% {
         opacity: 1;
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
         transform: scale3d(1.03, 1.03, 1.03)
     }
+
     80% {
         -webkit-transform: scale3d(0.97, 0.97, 0.97);
         transform: scale3d(0.97, 0.97, 0.97)
     }
+
     to {
         opacity: 1;
         -webkit-transform: scale3d(1, 1, 1);
@@ -231,6 +227,7 @@ tr:nth-child(even) {
 }
 
 @keyframes bounceIn {
+
     from,
     20%,
     40%,
@@ -240,28 +237,34 @@ tr:nth-child(even) {
         -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
         animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1)
     }
+
     0% {
         opacity: 0;
         -webkit-transform: scale3d(0.3, 0.3, 0.3);
         transform: scale3d(0.3, 0.3, 0.3)
     }
+
     20% {
         -webkit-transform: scale3d(1.1, 1.1, 1.1);
         transform: scale3d(1.1, 1.1, 1.1)
     }
+
     40% {
         -webkit-transform: scale3d(0.9, 0.9, 0.9);
         transform: scale3d(0.9, 0.9, 0.9)
     }
+
     60% {
         opacity: 1;
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
         transform: scale3d(1.03, 1.03, 1.03)
     }
+
     80% {
         -webkit-transform: scale3d(0.97, 0.97, 0.97);
         transform: scale3d(0.97, 0.97, 0.97)
     }
+
     to {
         opacity: 1;
         -webkit-transform: scale3d(1, 1, 1);
@@ -358,11 +361,13 @@ tr:nth-child(even) {
 }
 
 @-webkit-keyframes shake {
+
     from,
     to {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0)
     }
+
     10%,
     30%,
     50%,
@@ -371,6 +376,7 @@ tr:nth-child(even) {
         -webkit-transform: translate3d(-10px, 0, 0);
         transform: translate3d(-10px, 0, 0)
     }
+
     20%,
     40%,
     60%,
@@ -381,11 +387,13 @@ tr:nth-child(even) {
 }
 
 @keyframes shake {
+
     from,
     to {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0)
     }
+
     10%,
     30%,
     50%,
@@ -394,6 +402,7 @@ tr:nth-child(even) {
         -webkit-transform: translate3d(-10px, 0, 0);
         transform: translate3d(-10px, 0, 0)
     }
+
     20%,
     40%,
     60%,
@@ -406,4 +415,261 @@ tr:nth-child(even) {
 .shake {
     -webkit-animation-name: shake;
     animation-name: shake
+}
+
+.bg-list-color-transparent {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+
+.topNavLink {
+    display: block;
+    padding: .5rem 1rem;
+    color: #585858;
+    margin-left: 20px;
+}
+
+.topNavLink:hover {
+    background-color: tomato;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Animacion de loader*/
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.loader .face {
+    position: absolute;
+    border: 2px solid #121212;
+}
+
+.loader .face.face1 {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #090909;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    border-radius: 50%;
+    border-left: 2px solid #ffff00;
+    border-top: 2px solid #ffff00;
+    animation: animate 3s linear infinite;
+}
+
+.loader .face.face2 {
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    background: #090909;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    border-radius: 50%;
+    border-right: 2px solid #03a9f4;
+    border-bottom: 2px solid #03a9f4;
+    animation: animate 3s linear reverse infinite;
+}
+
+.loader .face .circle {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 50%;
+    width: 50%;
+    height: 2px;
+    transform-origin: left;
+}
+
+.loader .face.face1 .circle {
+    transform: rotate(-45deg);
+}
+
+.loader .face.face2 .circle {
+    transform: rotate(-45deg);
+}
+
+.loader .face .circle::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    top: -4px;
+    right: -6px;
+}
+
+.loader .face.face2 .circle::before {
+    background: #03a9f4;
+    box-shadow: 0 0 20px #03a9f4,
+        0 0 40px #03a9f4,
+        0 0 60px #03a9f4,
+        0 0 80px #03a9f4,
+        0 0 100px #03a9f4,
+        0 0 0 5px rgba(255, 255, 0, .1);
+}
+
+.loader .face.face1 .circle::before {
+    background: #ffff00;
+    box-shadow: 0 0 20px #ff0,
+        0 0 40px #ff0,
+        0 0 60px #ff0,
+        0 0 80px #ff0,
+        0 0 100px #ff0,
+        0 0 0 5px rgba(3, 169, 244, .1);
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.semaforo {
+    border-radius: 20px 0 0 20px;
+    padding: 2px 15px;
+    width: 90%;
+    text-align: center;
+    color: white;
+    text-shadow: 0 5px 10px rgba(100, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+.semaforo:hover {
+    transform: scale(1.1);
+}
+
+.semaforoBtn {
+    border-radius: 0 20px 20px 0;
+    width: 20%;
+    padding: 2px;
+    background: transparent;
+    color: #c21c00;
+    border: 1px solid #c21c00;
+    transition: 0.4s;
+}
+
+.semaforoBtn:hover {
+    background: #C21C00;
+    color: #fff;
+}
+
+.nav-link {
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-item .nav-link:hover {
+    transform: scale(1.1);
+    background: #224abe94;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+    color: #fff;
+}
+.nav-link::before{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 8, 8, 0.7);
+    transition: .3s;
+    transform-origin: right;
+    z-index: -1;
+    transform: scaleX(0);
+}
+.nav-link:hover::before{
+    transition: .3s;
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+
+.sidebar-brand-icon {
+    transition: 0.5s;
+}
+
+.sidebar-brand-icon:hover {
+    transform: rotateZ(35deg);
+}
+
+.bg {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 15px 25px rgb(3, 169, 244);
+}
+
+.bg-header {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.userCtrl {
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgb(3, 169, 244);
+    border-radius: unset;
+    outline: none;
+    padding: 4px;
+    color: rgb(28, 200, 138);
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    transition: 0.3s;
+}
+
+.userCtrl:focus{
+    background: transparent;
+    text-shadow: 0 2px 5px rgb(28, 200, 138);
+    border-bottom: 1px solid rgb(28, 200, 138);
+}
+.mText {
+    color: rgb(3, 169, 244);
+    text-shadow: 2px 5px 9px rgb(5, 125, 224);
+}
+
+.mBtn {
+    background: transparent;
+    color: rgb(0, 189, 85);
+    border: 1px solid rgb(0, 189, 85);
+    transition: 0.5s;
+}
+
+.mBtnCan {
+    margin-left: 5px;
+    background: transparent;
+    color: red;
+    border: 1px solid red;
+    transition: 0.5s
+}
+
+.mBtn:hover {
+    color: #fff;
+    background: rgb(0, 189, 85);
+    border-color: #fff;
+    transform: scale(1.1);
+}
+
+.mBtnCan:hover {
+    background: red;
+    color: #fff;
+    border-color: #fff;
+    transform: scale(1.1);
+}
+
+select option {
+    background: #000;
+}
+
+.swal-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
 }

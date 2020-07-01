@@ -20,8 +20,18 @@ var vm = new Vue({
         categoria: {},
         nuevoDetalleOrden: {},
 
+
+        bitacora: {
+            fecha: "",
+            accion: "",
+            nombreCompleto: "",
+            loggin: "",
+            descripcion: ""
+        },
+        logName: logName
+
     },
-    mounted: function() {
+    mounted: function () {
         this.obtenerCategorias()
         this.obtenerProductos()
         this.obtenerOrdenes()
@@ -36,6 +46,7 @@ var vm = new Vue({
             this.nuevoDetalleOrden.nombre = this.productos[this.productoSelected].nombre;
             this.nuevoDetalleOrden.precio = this.productos[this.productoSelected].precio;
             this.nuevoDetalleOrden.categoria = this.productos[this.productoSelected].categoria;
+            this.nuevoDetalleOrden.preparado = this.productos[this.productoSelected].preparado;
 
             if (this.detallesDeNuevaOrden.length === 0) {
                 this.nuevoDetalleOrden.cantidad = 1;
@@ -151,11 +162,16 @@ var vm = new Vue({
           ordenSelecte sean actualizados*/
         agregarProductosOrden() {
             this.addOrdenSelected();
+            this.ordenSelected.tiempoPreparacion=new Date(Date.now()).toISOString();
             axios.put(ApiRestUrl + '/ordenes/' + this.ordenSelected.id, this.ordenSelected)
                 .then(response => {
                     if (this.detallesDeNuevaOrden.length == 0) {
-                        window.location = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20,24)}`
+                        window.location = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20, 24)}`
                     } else {
+                        localStorage.setItem('addProd', JSON.stringify(this.detallesDeNuevaOrden));
+                        localStorage.setItem('estado', "nuevo");
+                        localStorage.setItem('idOrdenImprimir', this.ordenSelected.id);
+                        this.registrarBitacora();
                         this.regresarOrdenes();
                     }
                 })
@@ -243,12 +259,44 @@ var vm = new Vue({
         /*Esta función redirige a la pantalla de Ordenes aplicando los cambios que se hayan realizado a la
           orden que haya sido seleccionada indicando cual es el número de orden*/
         regresarOrdenes() {
-            window.location = `./ordenes.html?alert=Productos Agregados a la Orden  ${this.ordenSelected.id.substring(20,24)} Satisfactoriamente`
+            window.location = `./ordenes.html?alert=Productos Agregados a la Orden  ${this.ordenSelected.id.substring(20, 24)} Satisfactoriamente`
         },
 
         /*Esta función redirige a la pantalla de Ordenes sin realizar ninguna acción en la orden seleccionada*/
         cancelar() {
-            window.location.href = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20,24)}`
+            window.location.href = `./ordenes.html?alert=No se realizo ningun cambio a la orden ${this.ordenSelected.id.substring(20, 24)}`
+        }
+
+        /*
+        registra en bitacoras cuando un usuario (admin o mesero) registra una nueva orden
+        */
+        ,
+        registrarBitacora() {
+            this.bitacora.fecha = new Date().toISOString();
+            this.bitacora.accion = "Agregar más producto";
+            this.bitacora.nombreCompleto = logName;
+
+            const tipoUsuario = localStorage.getItem(VueSession.key).toString().split('"') //ver si el usuario es adm o mesero
+            var logTipoUsuario = tipoUsuario[1]
+
+            this.bitacora.loggin = logTipoUsuario;
+            this.bitacora.descripcion = "Se agregaron más productos a la orden de ID=" + this.ordenSelected.id.substring(20, 24);
+
+            axios.post(this.uri + '/bitacoras', JSON.stringify(this.bitacora), {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(response => {
+                    //response.data;
+                }).catch(error => {});
+        }
+
+    },
+    created() {
+        if (localStorage.vue_session_key) {
+
+        } else {
+            window.location = "./login.html"
         }
     }
 })

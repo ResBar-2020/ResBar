@@ -13,7 +13,8 @@ new Vue({
         displayOption: "",
         agg: true,
         searchDisplay: "",
-        urlApi: `${ApiRestUrl}/categorias`
+        urlApi: `${ApiRestUrl}/categorias`,
+        logName: logName
     },
     methods: {
 
@@ -21,9 +22,6 @@ new Vue({
         Modifica el registro seleccionado
         */
 
-        
-
-        
         edithRegistro() {
             // Tambien actualiza la tabla producto CASCADA
             // obtengo el nombre anterior
@@ -31,7 +29,11 @@ new Vue({
                 response => {
                     this.nombreold = response.data.nombre
                 }
-            ).catch(ex => { console.log(ex) })
+
+            ).catch(ex => {
+                console.log(ex)
+            })
+
 
             //Actualizando la categoria
             axios.patch(`${this.urlApi}/${this.categoria.id}`, {
@@ -43,25 +45,42 @@ new Vue({
                     this.getAll();
                     console.log(response.status);
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
 
         },
         //modifica los productos en CASCADA
         edithProductosCascada(viejo, nuevo) {
             //obteniendo los productos a actualizar categoria
-            var filtro = { "where": { "categoria.nombre": `${viejo}` } };
+
+            var filtro = {
+                "where": {
+                    "categoria.nombre": `${viejo}`
+                }
+            };
+
             axios.get(ApiRestUrl + "/productos?filter=" + JSON.stringify(filtro)).then(
                 response => {
                     this.productos = response.data
                     for (elemento in this.productos) {
                         this.productos[elemento].categoria.nombre = nuevo;
                         axios.patch(ApiRestUrl + "/productos/" + this.productos[elemento].id,
-                            JSON.stringify(this.productos[elemento]), { headers: { 'content-type': 'application/json', } });
+
+                            JSON.stringify(this.productos[elemento]), {
+                                headers: {
+                                    'content-type': 'application/json',
+                                }
+                            });
                     }
 
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
         },
+
+
 
 
         /*
@@ -96,7 +115,9 @@ new Vue({
                     this.getAll();
                     console.log(response.status)
                 }
-            ).catch(ex => { console.log(ex) });
+            ).catch(ex => {
+                console.log(ex)
+            });
 
         },
 
@@ -108,7 +129,9 @@ new Vue({
                 response => {
                     this.categorias = response.data
                 }
-            ).catch(ex => { console.log(ex) })
+            ).catch(ex => {
+                console.log(ex)
+            })
         },
 
         /*
@@ -133,6 +156,19 @@ new Vue({
             if (this.searchDisplay === "") return true;
             let array = (this.categorias[valor].id + this.categorias[valor].nombre).toUpperCase();
             return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+        },
+        salir: function () {
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
     },
     /*
@@ -141,6 +177,15 @@ new Vue({
     mounted() {
         this.getAll();
     },
+    created() {
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "./ordenes.html"
+            }
+        } else {
+            window.location = "./login.html"
+        }
+    }
 });
 
 //funcion para quitar los espacios en blanco
@@ -148,3 +193,4 @@ function AvoidSpace(event) {
     var k = event ? event.which : window.event.keyCode;
     if (k == 32) return false;
 }
+

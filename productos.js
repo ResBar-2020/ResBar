@@ -3,33 +3,59 @@ new Vue({
     data: {
         // Aqui inician las propiedades que vamos a necesitar
         //para almacenar nuestros objetos de trabajo
+        logName: logName,
         categorias: [],
-        productoSelected: { id: "0", nombre: "", precio: 0.00, categoria: { nombre: "" } },
+        productoSelected: {
+            id: "0",
+            nombre: "",
+            precio: 0.00,
+            categoria: {
+                nombre: ""
+            },
+            preparado: ""
+        },
         productos: [],
+        categoriaSelected: "",
         producto: {
             id: "0",
             nombre: "",
             precio: "0.00",
-            categoria: ""
+            categoria: "",
+            preparado: false
         },
 
         displayOption: "",
         txtBuscar: "",
-        productomodificado: { id: "0", nombre: "", precio: 0.00, categoria: { nombre: "" } },
-
-
-
-
+        productomodificado: {
+            id: "0",
+            nombre: "",
+            precio: 0.00,
+            categoria: {
+                nombre: ""
+            },
+            preparado: ""
+        },
+        todos: false,
     },
-    created: function() {
+    created: function () {
+        this.obtenerCategorias();
         this.obtenerProductos();
+        if (localStorage.vue_session_key) {
+            if (localStorage.getItem(VueSession.key) == '"mesero"') {
+                window.location = "./ordenes.html"
+            }
+        } else {
+            window.location = "./login.html"
+        }
     },
     methods: {
 
         obtenerProductos() {
             axios
                 .get(ApiRestUrl + '/productos')
-                .then(response => { this.productos = response.data; })
+                .then(response => {
+                    this.productos = response.data;
+                })
 
 
         },
@@ -38,7 +64,7 @@ new Vue({
             axios
                 .get(ApiRestUrl + '/categorias')
                 .then(response => {
-                   // console.log(response)
+                    // console.log(response)
                     this.categorias = response.data;
                 })
 
@@ -57,84 +83,92 @@ new Vue({
 
 
         },
-        
-        async setCategoriaProducto(producto){
-           var categorias = await axios
-            .get(ApiRestUrl + '/categorias')
-           
-           categorias=categorias.data
-           console.log(categorias)
-           categorias.forEach(categoria => {
-               if(categoria.nombre==producto.categoria.nombre){
-                   producto.categoria=categoria;
-               }
-           });
-           return producto
+
+        async setCategoriaProducto(producto) {
+            var categorias = await axios
+                .get(ApiRestUrl + '/categorias')
+
+            categorias = categorias.data
+            console.log(categorias)
+            categorias.forEach(categoria => {
+                if (categoria.nombre == producto.categoria.nombre) {
+                    producto.categoria = categoria;
+                }
+            });
+            return producto
 
         },
 
         modalmodificarProducto() {
-            
+
             this.obtenerCategorias();
             this.productomodificado = this.productoSelected;
             //console.log(this.categoria);
             this.setCategoriaProducto(this.productomodificado).then(
-                resultado=>{
+                resultado => {
                     console.log(resultado)
                 }
             )
-        
+
             this.obtenerProductos();
         },
 
         modificarProducto() {
             this.productomodificado = this.productoSelected;
             let precio = parseFloat(this.productomodificado.precio).toFixed(2);
-            if(precio>0 && this.productomodificado.nombre.replace(/\s/g, '').length>0 && this.productomodificado.categoria.nombre.replace(/\s/g, '').length>0 )
-           { 
-            this.productomodificado.precio = "aaaa";
-            let data = JSON.stringify(this.productomodificado);
-            data = data.replace('"aaaa"', precio);
-            console.log(data);
-            axios.patch(ApiRestUrl + '/productos/' + this.productomodificado.id,
-                data, { headers: { 'content-type': 'application/json', } }
+            if (precio > 0 && this.productomodificado.nombre.replace(/\s/g, '').length > 0 && this.productomodificado.categoria.nombre.replace(/\s/g, '').length > 0) {
+                this.productomodificado.precio = "aaaa";
+                let data = JSON.stringify(this.productomodificado);
+                data = data.replace('"aaaa"', precio);
+                console.log(data);
+                axios.patch(ApiRestUrl + '/productos/' + this.productomodificado.id,
+                    data, {
+                        headers: {
+                            'content-type': 'application/json',
+                        }
+                    }
 
-            ).then(response => {
-                console.log(response);
-                this.clearData();
-                alert("Guardado con exito");
-                this.obtenerProductos();
-            }).catch(ex => {
-                console.log(ex)
-            })}else{
+                ).then(response => {
+                    console.log(response);
+                    this.clearData();
+                    alert("Guardado con exito");
+                    this.obtenerProductos();
+                }).catch(ex => {
+                    console.log(ex)
+                })
+            } else {
                 this.clearData();
                 alert("!No se ha Podido realizar la modificacion!\n\nVerifique que los campos del formulario sean correctos");
 
-            }
-            ;
+            };
 
 
         },
 
         crearProducto() {
             let precio = parseFloat(this.producto.precio).toFixed(2);
-            if(precio>0.00 && this.producto.nombre.replace(/\s/g, '').length>0 && this.producto.categoria.nombre.replace(/\s/g, '').length>0)
-            {this.producto.precio = "aaaa";
-            delete this.producto.id;
-            let data = JSON.stringify(this.producto);
-            data = data.replace('"aaaa"', precio);
-            console.log(this.producto);
-            axios.post(ApiRestUrl + '/productos',
-                data, { headers: { 'content-type': 'application/json', } }
+            if (precio > 0.00 && this.producto.nombre.replace(/\s/g, '').length > 0 && this.producto.categoria.nombre.replace(/\s/g, '').length > 0) {
+                this.producto.precio = "aaaa";
+                delete this.producto.id;
+                let data = JSON.stringify(this.producto);
+                data = data.replace('"aaaa"', precio);
+                console.log(this.producto);
+                axios.post(ApiRestUrl + '/productos',
+                    data, {
+                        headers: {
+                            'content-type': 'application/json',
+                        }
+                    }
 
-            ).then(response => {
-                console.log(response);
-                this.clearData();
-                alert("Guardado con exito");
-                this.obtenerProductos();
-            }).catch(ex => {
-                console.log(ex)
-            })}else{
+                ).then(response => {
+                    console.log(response);
+                    this.clearData();
+                    alert("Guardado con exito");
+                    this.obtenerProductos();
+                }).catch(ex => {
+                    console.log(ex)
+                })
+            } else {
                 this.clearData();
                 alert("!No se ha Podido Guardar!\n\nVerifique que los campos del formulario sean correctos");
 
@@ -174,7 +208,14 @@ new Vue({
                 precio: "0.00",
                 categoria: ""
             };
-            this.productoSelected = { id: "0", nombre: "", precio: 0.00, categoria: { nombre: "" } };
+            this.productoSelected = {
+                id: "0",
+                nombre: "",
+                precio: 0.00,
+                categoria: {
+                    nombre: ""
+                }
+            };
             this.obtenerProductos();
             this.productomodificado;
 
@@ -185,7 +226,7 @@ new Vue({
             this.producto = productoSelected;
             console.log(producto);
         },
-        buscar: function(x) {
+        buscar: function (x) {
 
             if (this.txtBuscar == "")
                 return true;
@@ -201,8 +242,21 @@ new Vue({
                 return true;
             else
                 return false;
+        },
+        salir: function () {
+            swal({
+                title: "¿Seguro que desea cerrar sesión?",
+                icon: 'info',
+                buttons: true,
+                dangerMode: true,
+            }).then(opcion => {
+                if (opcion) {
+                    logout()
+                    window.location = "./login.html"
+                }
+            })
         }
-    },
+    }
 
 
 })

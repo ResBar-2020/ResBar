@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>RESBAR</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link  rel="icon"   href="assets/images/favicon.png" type="png" />
+    <link rel="stylesheet" href="assets/css/googlefonts.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/imprimirTicket.css">
+    <!-- Estilo de borrador de orden -->
+    <link rel="stylesheet" href="assets/css/print.min.css">
+</head>
+
+<body id="page-top">
+    <div class="loader">
+        <div class="face face1">
+            <div class="circle"></div>
+        </div>
+        <div class="face face2">
+            <div class="circle"></div>
+        </div>
+    </div>
+
+    <div id="appRESBAR">
+        <div id="wrapper">
+            <!-- Inicia navbar lateral -->
+            <nav
+                class="navbar d-none d-lg-flex navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+                <div class="container-fluid d-flex flex-column p-0">
+                    <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-glass-martini"></i></div>
+                        <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                    </a>
+                    <hr class="sidebar-divider my-0">
+                    <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" href="ordenes.html"><i
+                                    class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                            <a class="nav-link active" href="domicilio.html"><i
+                                    class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                            <a class="nav-link active" href="clientes.html"><i
+                                    class="fas fa-users"></i><span>CLIENTES</span></a>
+                            <a class="nav-link active" href="productos.html"><i
+                                    class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                            <a class="nav-link active" href="categorias.html"><i
+                                    class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                            <a class="nav-link active" href="informes.html"><i
+                                    class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                            <a class="nav-link active" href="users.html"><i
+                                    class="fas fa-users"></i><span>USUARIOS</span></a>
+                            <a class="nav-link active" href="bitacoras.html"><i
+                                    class="fas fa-archive"></i><span>BITACORAS</span></a>
+                            <a class="nav-link active" href="parametros.html" style="background: rgba(8, 8, 8, 0.7);"><i
+                                    class="fas fa-tools"></i><span>PARAMETROS</span></a>
+                        </li>
+                    </ul>
+                    <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                            id="sidebarToggle" type="button"></button></div>
+                </div>
+            </nav>
+            <!-- Termina navbar lateral -->
+
+            <div class="d-flex flex-column" id="content-wrapper">
+                <div id="content">
+                    <!-- Inicia navbar top -->
+                    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top d-lg-none"
+                        style="box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);margin-bottom: 10px;" role="navigation">
+                        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                            style="color: #585858;" href="#">
+                            <div class="sidebar-brand-icon rotate-n-15">
+                                <i class="fas fa-glass-martini"></i>
+                            </div>
+                            <div class="sidebar-brand-text mx-3"><span>RESBAR</span></div>
+                        </a>
+
+                        <div class="navbar-header page-scroll">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target=".navbar-ex1-collapse"
+                                style="position: relative;padding: 9px 10px;background-color: transparent;background-image: none;border: 1px solid transparent;border-radius: 4px;border-color: #ddd;"
+                                aria-expanded="false">
+                                <span style="color: #585858;"><i class="fas fa-bars"></i></span>
+                            </button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="navbar-collapse navbar-ex1-collapse collapse">
+                            <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                                <li class="nav-item" role="presentation">
+                                    <a class="topNavLink active" href="ordenes.html"><i
+                                            class="fas fa-list-ol"></i><span>ORDENES</span></a>
+                                    <a class="topNavLink active" href="domicilio.html"><i
+                                            class="fas fa-truck"></i><span>DOMICILIO</span></a>
+                                    <a class="topNavLink active" href="clientes.html"><i
+                                            class="fas fa-users"></i><span>CLIENTES</span></a>
+                                    <a class="topNavLink active" href="productos.html"><i
+                                            class="fas fa-box"></i><span>PRODUCTOS</span></a>
+                                    <a class="topNavLink active" href="categorias.html"><i
+                                            class="fas fa-sitemap"></i><span>CATEGORÍAS</span></a>
+                                    <a class="topNavLink active" href="informes.html"><i
+                                            class="fas fa-file-alt"></i><span>INFORMES</span></a>
+                                    <a class="topNavLink active" href="users.html"><i
+                                            class="fas fa-users"></i><span>USUARIOS</span></a>
+                                    <a class="topNavLink active" href="bitacoras.html"><i
+                                            class="fas fa-archive"></i><span>BITACORAS</span></a>
+                                    <a class="topNavLink active" href="parametros.html"
+                                        style="background-color: #585858;color: white;"><i
+                                            class="fas fa-tools"></i><span>PARAMETROS</span></a>
+                                    <span class="my-1 mx-1 float-left text-success"><i class="fas fa-user-alt"></i>
+                                        {{ logName }}</span>
+                                    <button type="button" class="btn btn-sm btn-danger float-right"
+                                        v-on:click="salir">Salir</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Termina navbar top -->
+
+                    <!-- Inicia el contenedor de la pagina (Codigo nuevo aquí)-->
+                    <div class="container-fluid">
+
+
+                        <!-- TITULO -->
+
+
+                        <div class="row my-4">
+                            <div class="col-12 ag">
+                                <button type="button" class="btn d-none d-lg-inline btn-danger float-right"
+                                    v-on:click="salir">Salir</button>
+                                <label class="my-1 mx-1 text-success d-none d-lg-inline"><i class="fas fa-user-alt"></i>
+                                    {{ logName }}</label><br>
+                                <h1 class="text-center">Parametros RESBAR</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <form>
+                            <div class="form-group">
+                                <label for="nombreNegocio">Nombre del negocio</label>
+                                <input type="text" class="form-control border border-primary" id="nombreNegocio">
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripcion final(pie de ticket)</label>
+                                <textarea class="form-control border border-primary" id="descripcion"
+                                    rows="3"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="telefono">Telefono</label>
+                                    <input type="text" class="form-control border border-primary" id="telefono"
+                                        name="field-name" data-mask="0000-0000">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="nit">NIT</label>
+                                    <input type="text" class="form-control border border-primary" id="nit"
+                                        data-mask="000-000000-000-0">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="giro">Giro</label>
+                                    <input type="text" class="form-control border border-primary" id="giro">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="direccion">Direccion</label>
+                                <textarea class="form-control border border-primary" id="direccion" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="imprimirTicket">Imprimir ticket de productos preparados</label>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="imprimirTicketSi" name="customRadio"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="imprimirTicketSi">Si</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="imprimirTicketNo" name="customRadio"
+                                        class="custom-control-input">
+                                    <label class="custom-control-label" for="imprimirTicketNo">No</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    </br>
+                                    <label for="propina">Propina(%)</label>
+                                    </label>
+                                    <input type="text" class="form-control border border-primary" id="propina"
+                                        data-mask="000%">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="tiempoPreparacion">Tiempo máximo de preparación de orden
+                                        (minutos)</label>
+                                    <input type="text" class="form-control border border-primary"
+                                        id="tiempoPreparacion">
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="tiempoDomicilio">Tiempo máximo de entrega domicilio (minutos)</label>
+                                    <input type="text" class="form-control border border-primary" id="tiempoDomicilio">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    </br>
+                                    <label for="costoDomicilio">Costo de envío a domicilio</label>
+                                    <input type="text" class="form-control border border-primary" id="costoDomicilio">
+                                    </br>
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-lg"
+                                    @click="actualizar();">Actualizar</button>
+                            </div><br/><br/>
+                        </form>
+                    </div>
+
+                    <!-- Termina el contenedor de la pagina y el dominio de VUE-->
+
+                </div><a class="border rounded d-inline scroll-to-top " href="#page-top "><i
+                        class="fas fa-angle-up "></i></a>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js "></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js "></script>
+    <script src="assets/js/jquery.easing.js "></script>
+    <script src="assets/js/vue.js "></script>
+    <script src="assets/js/axios.min.js "></script>
+    <script src="assets/js/theme.js "></script>
+    <script src="assets/js/Script.js "></script>
+    <script src="assets/js/vue-session.min.js "></script>
+    <!--Aqui va tu codigo de vue js-->
+    <script src="assets/js/moment.js "></script>
+    <script src="assets/js/sweetalert.min.js "></script>
+    <script src="config.js "></script>
+    <script src="parametros.js "></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
+            $(".loader").show()
+        }
+        window.onload = function () {
+            $(".loader").hide()
+        }
+    </script>
+    <script src="assets/js/jquery.mask.min.js"></script>
+
+
+</body>
+
+</html>
