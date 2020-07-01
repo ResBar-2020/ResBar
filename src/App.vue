@@ -26,7 +26,6 @@ export default {
       } else {
         this.layout = "layout-mesero";
       }
-      this.layout = "layout-mesero";
     }
 
   },
