@@ -180,9 +180,11 @@ new Vue({
                     if (this.resumenDeVenta.length == 0) {
                         console.log("vacio");
                         this.createResumenDeVentas();
+
                     } else {
                         console.log("AQUI LO LLAMARE updateResumenDeVentas");
                         this.updateResumenDeVentas();
+
                     }
                     console.log("estoy aqui");
                 })
@@ -194,8 +196,10 @@ new Vue({
         //Si aun no hay un resumen de ventas creamos uno nuevo.
         createResumenDeVentas() {
             let efectivo = document.getElementById("lblEfectivo").value;
+
             let cambio =
                 efectivo - this.ordenSelected.total - this.propina - this.domicilio;
+
             let fechaResumen = this.convertDate();
             let productosOrden = this.ordenSelected.detalleOrden;
             let totalOrden = parseFloat(this.ordenSelected.total.toFixed(2));
@@ -236,6 +240,7 @@ new Vue({
                 .catch((ex) => {
                     console.log(ex);
                 });
+
         },
 
         //Si ya hay un resumen solo lo actualizamos
@@ -243,6 +248,7 @@ new Vue({
             let efectivo = document.getElementById("lblEfectivo").value;
             let cambio =
                 efectivo - this.ordenSelected.total - this.propina - this.domicilio;
+
             console.log("updateResumenDeVentas");
             let obj = [];
             for (let i = 0; i < this.ordenSelected.detalleOrden.length; i++) {
@@ -266,6 +272,7 @@ new Vue({
                         j == this.resumenDeVenta[0].productos.length - 1 &&
                         flag == 0
                     ) {
+
                         console.log(obj[i].nombre);
                         objResumen.unshift(obj[i]);
                     }
