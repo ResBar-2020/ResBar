@@ -23,5 +23,6 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-Ok
-modificando local
+//comando para publicar
+git push origin
+
