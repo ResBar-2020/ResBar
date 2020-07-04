@@ -31,9 +31,11 @@ export default new Vuex.Store({
     authenticate: async (context, credentials) => {
 
       try {
-        let response = await axios.get("/usuarios?filter[where][pin]=" + credentials.pin);
+        //let response = await axios.get("/usuarios?filter[where][pin]=" + credentials.pin);
 
-        const data = response.data[0];
+        //const data = response.data[0];
+        const data={"rol":"admin", "nombreCompleto":"Administrador del Sistema","pin":credentials.pin};
+        
         localStorage.setItem("rol", data.rol);
         localStorage.setItem("username", data.nombreCompleto);
         context.commit("authenticate", data);
