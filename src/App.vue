@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <component :is="layout"></component>
 
     <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">{{ snackbar.message }}</v-snackbar>
@@ -34,3 +34,11 @@ export default {
   }
 };
 </script>
+<style>
+.fondoBG{
+  background: rgb(244, 247, 246);
+}
+.fondo{
+  background: rgb(216, 208, 196);
+}
+</style>
