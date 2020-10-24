@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import domicilio from './modules/domicilio'
 
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:3000"
@@ -48,5 +49,6 @@ export default new Vuex.Store({
 
   },
   modules: {
+    domicilio,
   }
 })
