@@ -1,0 +1,134 @@
+[
+    {
+        "_id": "2269fc1c847d0a718a6101833d02a679",
+        "_rev": "3-ff13c9cd3e8049eed72c4f4bc151b258",
+        "fecha": "2020-10-07T00:34:49.251+00:00",
+        "mesero": "Mario Rivera",
+        "tipo": "DOMICILIO",
+        "domicilioEtapa": 1,
+        "mesa": "",
+        "cliente": {
+          "_id": "2269fc1c847d0a718a6101833d006216",
+          "nombreCompleto": "Claudia Teresa Martinez",
+          "telefonoCasa": "2434-2323",
+          "celular": "",
+          "whatsapp": "7234-2342",
+          "direccion": "Colonia Lamatepec, pasaje el jocote casa 24B",
+          "municipio": "Santa Ana",
+          "departamento": "Santa Ana",
+          "puntoDeReferencia": "",
+          "observaciones": "",
+          "fechaRegistro": "2020-07-08T21:55:18.859+00:00"
+        },
+        "cobrada": false,
+        "entregada": false,
+        "observacion": "Sin cebolla",
+        "tiempoPreparacion": null,
+        "detalleOrden": [
+          {
+            "nombre": "Deditos de Queso",
+            "cantidad": 2,
+            "precio": 2.5,
+            "categoria": {
+              "_id": "2269fc1c847d0a718a6101833d000936",
+              "nombre": "Entradas"
+            },
+            "subtotal": 5,
+            "preparado": true
+          }
+        ],
+        "subtotal": 5,
+        "propina": 0.5,
+        "costoEnvio": 1.25,
+        "total": 6.75
+      },
+      
+      {
+        "_id": "2269fc1c847d0a718a6101833d02a679",
+        "_rev": "3-ff13c9cd3e8049eed72c4f4bc151b258",
+        "fecha": "2020-10-07T00:34:49.251+00:00",
+        "mesero": "Mario Rivera",
+        "tipo": "DOMICILIO",
+        "domicilioEtapa": 1,
+        "mesa": "",
+        "cliente": {
+          "_id": "2269fc1c847d0a718a6101833d006216",
+          "nombreCompleto": "Claudia Teresa Martinez",
+          "telefonoCasa": "2434-2323",
+          "celular": "",
+          "whatsapp": "7234-2342",
+          "direccion": "Colonia Lamatepec, pasaje el jocote casa 24B",
+          "municipio": "Santa Ana",
+          "departamento": "Santa Ana",
+          "puntoDeReferencia": "",
+          "observaciones": "",
+          "fechaRegistro": "2020-07-08T21:55:18.859+00:00"
+        },
+        "cobrada": false,
+        "entregada": false,
+        "observacion": "Sin cebolla",
+        "tiempoPreparacion": null,
+        "detalleOrden": [
+          {
+            "nombre": "Deditos de Queso",
+            "cantidad": 2,
+            "precio": 2.5,
+            "categoria": {
+              "_id": "2269fc1c847d0a718a6101833d000936",
+              "nombre": "Entradas"
+            },
+            "subtotal": 5,
+            "preparado": true
+          }
+        ],
+        "subtotal": 5,
+        "propina": 0.5,
+        "costoEnvio": 1.25,
+        "total": 6.75
+      },
+      {
+        "_id": "2269fc1c847d0a718a6101833d02a679",
+        "_rev": "3-ff13c9cd3e8049eed72c4f4bc151b258",
+        "fecha": "2020-10-07T00:34:49.251+00:00",
+        "mesero": "Mario Rivera",
+        "tipo": "DOMICILIO",
+        "domicilioEtapa": 1,
+        "mesa": "",
+        "cliente": {
+          "_id": "2269fc1c847d0a718a6101833d006216",
+          "nombreCompleto": "Claudia Teresa Martinez",
+          "telefonoCasa": "2434-2323",
+          "celular": "",
+          "whatsapp": "7234-2342",
+          "direccion": "Colonia Lamatepec, pasaje el jocote casa 24B",
+          "municipio": "Santa Ana",
+          "departamento": "Santa Ana",
+          "puntoDeReferencia": "",
+          "observaciones": "",
+          "fechaRegistro": "2020-07-08T21:55:18.859+00:00"
+        },
+        "cobrada": false,
+        "entregada": false,
+        "observacion": "Sin cebolla",
+        "tiempoPreparacion": null,
+        "detalleOrden": [
+          {
+            "nombre": "Deditos de Queso",
+            "cantidad": 2,
+            "precio": 2.5,
+            "categoria": {
+              "_id": "2269fc1c847d0a718a6101833d000936",
+              "nombre": "Entradas"
+            },
+            "subtotal": 5,
+            "preparado": true
+          }
+        ],
+        "subtotal": 5,
+        "propina": 0.5,
+        "costoEnvio": 1.25,
+        "total": 6.75
+      }
+      
+
+]
