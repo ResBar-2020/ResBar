@@ -1,7 +1,7 @@
 import orden from '../../assets/mock/ordenes';
 
 const getters = {
-    ordenes: state => state.ordenes
+    allOrdenes: state => state.ordenes
 };
 
 const state = {
