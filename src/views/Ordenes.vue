@@ -32,7 +32,7 @@
                 <td>
                   <v-alert class="utilities"  v-if="orden.tipo=='DOMICILIO'" color="red">{{ orden.tipo }}</v-alert>
                   <v-alert class="utilities"  v-else-if="orden.tipo=='MESA'" color="light-blue darken-4">{{ orden.tipo }}</v-alert>
-                  <v-alert class="utilities"  v-else color="info">{{ orden.tipo }}</v-alert>
+                  <v-alert class="utilities"  v-else color="green darken-3">{{ orden.tipo }}</v-alert>
                 </td>
                 <td>{{ orden.tiempoPreparacion }}</td>
                 <td class="d-flex">
@@ -122,7 +122,7 @@ tbody tr{
   cursor: pointer;
 }
 tr:hover{
-  background: #4A148C;
+  background: #43A047;
   color: #fff;
 }
 td {
@@ -138,6 +138,7 @@ td {
   transform: scale(1.1) rotateZ(360deg);
 }
 .utilities{
+  font-weight: 700;
   color: #fff;
   transition: 0.3s;
 }
