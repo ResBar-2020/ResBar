@@ -5,9 +5,17 @@
       subtitle="Ordenes"
     ></header-dashboard>
     <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
-    <v-container fluid class="d-flex flex-column align-center justify-center">
+    <v-container fluid>
       <v-row>
-        <v-col>
+        <v-col cols="4" offset="1">
+          <v-text-field label="Buscar"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6" class="d-flex align-center justify-center">
+          <v-switch label="Ordenes Activas" color="indigo"></v-switch>
+        </v-col>
+        <v-col cols="6" class="d-flex align-center justify-start">
           <v-btn
             color="light-blue darken-4"
             class="utilities"
@@ -18,7 +26,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="d-flex align-center justify-center">
           <table>
             <thead>
               <th scope="col">Id</th>
