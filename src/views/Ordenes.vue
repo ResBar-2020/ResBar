@@ -6,7 +6,7 @@
     ></header-dashboard>
     <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
     <v-container fluid class="centered">
-      <v-btn color="cyan darken-1" @click="showMessage(snackbar)">Nueva Orden</v-btn>
+      <v-btn color="light-blue darken-4" class="utilities" @click="showMessage(snackbar)"> <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn>
       <v-row>
         <v-col cols="12">
           <table>
@@ -17,6 +17,7 @@
               <th scope="col">Mesa</th>
               <th scope="col">Observacion</th>
               <th scope="col">Total</th>
+              <th scope="col">Tipo</th>
               <th scope="col">Tiempo preparacion</th>
               <th scope="col">Acciones</th>
             </thead>
@@ -28,8 +29,13 @@
                 <td>{{ orden.mesa }}</td>
                 <td>{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
-                <td>{{ orden.tiempoPreparacion }}</td>
                 <td>
+                  <v-alert class="utilities"  v-if="orden.tipo=='DOMICILIO'" color="red">{{ orden.tipo }}</v-alert>
+                  <v-alert class="utilities"  v-else-if="orden.tipo=='MESA'" color="light-blue darken-4">{{ orden.tipo }}</v-alert>
+                  <v-alert class="utilities"  v-else color="info">{{ orden.tipo }}</v-alert>
+                </td>
+                <td>{{ orden.tiempoPreparacion }}</td>
+                <td class="d-flex">
                   <v-btn
                     class="mr-2 text-center action"
                     small
@@ -46,14 +52,7 @@
                     @click="showMessage(snackbar)"
                     ><v-icon>mdi-clipboard</v-icon></v-btn
                   >
-                  <v-btn
-                    class="mr-2 text-center action"
-                    small
-                    fab
-                    color="red"
-                    @click="showMessage(snackbar)"
-                    ><v-icon>mdi-delete</v-icon></v-btn
-                  >
+                  <eliminar-orden :orden="orden" />
                 </td>
               </tr>
             </tbody>
@@ -68,8 +67,9 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
+import EliminarOrden from "../components/ordenes/EliminarOrden";
 export default {
-  components: { HeaderDashboard },
+  components: { HeaderDashboard, EliminarOrden},
   computed: {
     ...mapGetters(["allOrdenes"]),
   },
@@ -103,6 +103,7 @@ table {
   position: relative;
   text-align: center;
   border-collapse: collapse;
+  box-shadow: 15px 15px 35px rgb(46, 70, 0);
 }
 thead {
   position: relative;
@@ -121,7 +122,7 @@ tbody tr{
   cursor: pointer;
 }
 tr:hover{
-  background: #D81B60;
+  background: #4A148C;
   color: #fff;
 }
 td {
@@ -135,5 +136,12 @@ td {
 }
 .action:hover {
   transform: scale(1.1) rotateZ(360deg);
+}
+.utilities{
+  color: #fff;
+  transition: 0.3s;
+}
+.utilities:hover{
+  transform: scale(1.1);
 }
 </style>
