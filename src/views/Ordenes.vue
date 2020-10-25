@@ -5,8 +5,18 @@
       subtitle="Ordenes"
     ></header-dashboard>
     <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
-    <v-container fluid class="centered">
-      <v-btn color="light-blue darken-4" class="utilities" @click="showMessage(snackbar)"> <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn>
+    <v-container fluid class="d-flex flex-column align-center justify-center">
+      <v-row>
+        <v-col>
+          <v-btn
+            color="light-blue darken-4"
+            class="utilities"
+            @click="showMessage(snackbar)"
+          >
+            <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn
+          >
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="12">
           <table>
@@ -23,19 +33,37 @@
             </thead>
             <tbody>
               <tr v-for="orden in allOrdenes" :key="orden._id">
-                <td>{{ String(orden._id.substring(18, 24))}}</td>
+                <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
                 <td>{{ orden.mesa }}</td>
                 <td>{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
                 <td>
-                  <v-alert class="utilities"  v-if="orden.tipo=='DOMICILIO'" color="red">{{ orden.tipo }}</v-alert>
-                  <v-alert class="utilities"  v-else-if="orden.tipo=='MESA'" color="light-blue darken-4">{{ orden.tipo }}</v-alert>
-                  <v-alert class="utilities"  v-else color="green darken-3">{{ orden.tipo }}</v-alert>
+                  <v-alert
+                    dense
+                    class="utilities"
+                    v-if="orden.tipo == 'DOMICILIO'"
+                    color="red"
+                    >{{ orden.tipo }}</v-alert
+                  >
+                  <v-alert
+                    dense
+                    class="utilities"
+                    v-else-if="orden.tipo == 'MESA'"
+                    color="light-blue darken-4"
+                    >{{ orden.tipo }}</v-alert
+                  >
+                  <v-alert
+                    dense
+                    class="utilities"
+                    v-else
+                    color="green darken-3"
+                    >{{ orden.tipo }}</v-alert
+                  >
                 </td>
                 <td>{{ orden.tiempoPreparacion }}</td>
-                <td class="d-flex">
+                <td class="d-block d-md-flex">
                   <v-btn
                     class="mr-2 text-center action"
                     small
@@ -69,7 +97,7 @@ import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 export default {
-  components: { HeaderDashboard, EliminarOrden},
+  components: { HeaderDashboard, EliminarOrden },
   computed: {
     ...mapGetters(["allOrdenes"]),
   },
@@ -92,13 +120,6 @@ export default {
 </script>
 
 <style scoped>
-.centered {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
 table {
   position: relative;
   text-align: center;
@@ -106,43 +127,37 @@ table {
   box-shadow: 15px 15px 35px rgb(46, 70, 0);
 }
 thead {
-  position: relative;
   background: rgb(46, 70, 0);
   color: #fff;
 }
-tbody{
-  position: relative;
-}
-th{
+th {
   padding: 1em;
 }
-tbody tr{
-  position: relative;
+tbody tr {
   transition: 0.3s;
   cursor: pointer;
 }
-tr:hover{
-  background: #43A047;
+tr:hover {
+  background: #43a047;
   color: #fff;
 }
 td {
-  position: relative;
   padding: 1em;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .action {
-  color: #FFF;
+  color: #fff;
   transition: 0.5s;
 }
 .action:hover {
   transform: scale(1.1) rotateZ(360deg);
 }
-.utilities{
+.utilities {
   font-weight: 700;
   color: #fff;
   transition: 0.3s;
 }
-.utilities:hover{
+.utilities:hover {
   transform: scale(1.1);
 }
 </style>
