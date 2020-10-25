@@ -40,26 +40,26 @@
                 <td>{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
                 <td>
-                  <v-alert
+                  <v-chip
                     dense
                     class="utilities"
                     v-if="orden.tipo == 'DOMICILIO'"
                     color="red"
-                    >{{ orden.tipo }}</v-alert
+                    >{{ orden.tipo }}</v-chip
                   >
-                  <v-alert
+                  <v-chip
                     dense
                     class="utilities"
                     v-else-if="orden.tipo == 'MESA'"
                     color="light-blue darken-4"
-                    >{{ orden.tipo }}</v-alert
+                    >{{ orden.tipo }}</v-chip
                   >
-                  <v-alert
+                  <v-chip
                     dense
                     class="utilities"
                     v-else
                     color="green darken-3"
-                    >{{ orden.tipo }}</v-alert
+                    >{{ orden.tipo }}</v-chip
                   >
                 </td>
                 <td>{{ orden.tiempoPreparacion }}</td>
