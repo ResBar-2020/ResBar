@@ -52,7 +52,7 @@ Vue.use(VueRouter)
     {
       path: '/ordenes/nuevaOrden',
       name: 'nuevaOrden',
-      component: () => import('../components/nuevaOrden/nuevaOrden.vue')
+      component: () => import('../views/nuevaOrden.vue')
     }
 ]
 
