@@ -2,7 +2,7 @@
   <div>
     <template>
       <v-row justify="center">
-        <v-dialog v-model="dialog" width="600px">
+        <v-dialog v-model="dialog" width="800px">
           <template v-slot:activator="{ on, attrs }">
             <v-chip
               dark
@@ -38,41 +38,56 @@
             <v-tabs-items v-model="tab">
               <v-tab-item :value="'tab-1'">
                 <v-card-title>
-                  <span class="headline">Productos Adquiridos</span>
+                  <span class="headline prod_title">Productos Adquiridos</span>
                 </v-card-title>
-                <v-card-text v-for="detalle in orden.detalleOrden" :key="detalle.nombre">
-                  {{ detalle.cantidad }}
-                  {{ detalle.nombre }}
-                  ${{ detalle.subtotal }}
+                <v-card-text
+                  v-for="detalle in orden.detalleOrden"
+                  :key="detalle.nombre"
+                >
+                  <span class="productos">{{ detalle.cantidad }} </span>
+                  <span class="productos">{{ detalle.nombre }} </span>
+                  <span class="productos">${{ detalle.subtotal }} </span>
                 </v-card-text>
-                <h3>
-                  Consumo: ${{orden.total}}
-                  Costo de Envio: ${{orden.costoEnvio}}
-                </h3>
+                <div>
+                  <label class="box total"
+                    >Consumo: <span>${{ orden.total }}</span></label
+                  >
+                  <label class="box envio"
+                    >Costo de Envio: <span>${{ orden.costoEnvio }}</span></label
+                  >
+                </div>
               </v-tab-item>
               <!-- tab numero dos -->
               <v-tab-item :value="'tab-2'">
                 <v-card-title>
-                  <span class="headline">Contacto del cliente:</span>
+                  <span class="headline prod_title">Contacto del cliente:</span>
                 </v-card-title>
+                <div class="bg">
                 <v-card-text>
-                 Nombre: {{ orden.cliente.nombreCompleto }}
+                  <span class="cliente"
+                    >Nombre:</span> <span class="item"> {{ orden.cliente.nombreCompleto }}</span>
                 </v-card-text>
                 <v-card-text>
-                  Whatsapp:  {{ orden.cliente.whatsapp }}
+                  <span class="cliente"
+                    >Whatsapp:</span> <span class="item"> {{ orden.cliente.whatsapp }}</span>
                 </v-card-text>
                 <v-card-text>
-                 Telefono:  {{ orden.cliente.telefonoCasa }}
+                  <span class="cliente"
+                    >Telefono:</span> <span class="item"> {{ orden.cliente.telefonoCasa }}</span>
                 </v-card-text>
                 <v-card-text>
-                  Celular: {{ orden.cliente.celular }}
+                  <span class="cliente"
+                    >Celular:</span> <span class="item"> {{ orden.cliente.celular }}</span>
                 </v-card-text>
                 <v-card-text>
-                  Dirección: {{ orden.cliente.direccion }}
+                  <span class="cliente"
+                    >Dirección:</span> <p class="item" style="margin-top:9px;"> {{ orden.cliente.direccion }}</p>
                 </v-card-text>
                 <v-card-text>
-                  Referencia: {{ orden.cliente.puntoDeReferencia }}
+                  <span class="cliente"
+                    >Referencia:</span> <span class="item"> {{ orden.cliente.puntoDeReferencia }}</span>
                 </v-card-text>
+                </div>
               </v-tab-item>
             </v-tabs-items>
             <v-card-actions>
@@ -105,4 +120,49 @@ export default {
 </script>
 
 <style scoped>
+.productos {
+  font-weight: 500;
+  font-size: 1em;
+}
+.prod_title {
+  text-transform: uppercase;
+}
+.box {
+  position: relative;
+  padding: 10px;
+  border-radius: 25px;
+  margin: 5px;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 5px 10px #ff6b9e;
+}
+.box span {
+  font-weight: 700;
+}
+.total {
+  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+}
+.envio {
+  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+}
+.cliente {
+  font-size: 1.2em;
+  font-weight: 500;
+  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+  box-shadow: 0 5px 25px #ff6b9e;
+  border-radius: 20px;
+  color: #FFF;
+  padding: 5px;
+}
+.bg{
+  background: rgb(31, 43, 40);
+}
+.item{
+  font-size: 1.1em;
+  padding: 10px;
+  font-weight: 400;
+  background: linear-gradient(90deg, #d85583 50%, rgb(255, 99, 71) 100%);
+  box-shadow: 0 10px 25px tomato;
+  color: #FFF;
+  border-radius: 10px;
+}
 </style>
