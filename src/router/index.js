@@ -48,6 +48,11 @@ Vue.use(VueRouter)
       path: '/usuarios',
       name: 'Usuarios',
       component: () => import('../views/Usuarios.vue')
+    },
+    {
+      path: '/ordenes/nuevaOrden',
+      name: 'nuevaOrden',
+      component: () => import('../components/nuevaOrden/nuevaOrden.vue')
     }
 ]
 

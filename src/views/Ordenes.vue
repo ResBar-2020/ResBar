@@ -6,7 +6,9 @@
     ></header-dashboard>
     <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
     <v-container fluid class="centered">
+      <router-link :to="{name: 'nuevaOrden'}">
       <v-btn color="light-blue darken-4" class="utilities" @click="showMessage(snackbar)"> <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn>
+      </router-link>
       <v-row>
         <v-col cols="12">
           <table>
