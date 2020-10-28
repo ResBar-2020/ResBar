@@ -45,6 +45,11 @@ Vue.use(VueRouter)
       component: () => import('../views/Productos.vue')
     },
     {
+      path: '/recoger',
+      name: 'Recoger',
+      component: () => import('../views/Recoger.vue')
+    },
+    {
       path: '/usuarios',
       name: 'Usuarios',
       component: () => import('../views/Usuarios.vue')
