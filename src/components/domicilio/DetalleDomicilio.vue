@@ -157,11 +157,10 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: 1.5em;
-  box-shadow: -10px 20px 15px #d85583;
   transition: 0.5s;
 }
 .box:hover{
-  transform: scale(1.09);
+  transform: scale(1.05);
   box-shadow: 0 0 55px #d85583;
 }
 .box span {
