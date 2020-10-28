@@ -4,7 +4,6 @@
       title="Resbar Ordenes"
       subtitle="Ordenes"
     ></header-dashboard>
-    <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
     <v-container fluid>
       <v-row>
         <v-col cols="4" offset="1">
@@ -44,7 +43,7 @@
                 <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa }}</td>
+                <td>{{ orden.mesa? orden.mesa:"Sin Mesa" }}</td>
                 <td>{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
                 <td>

@@ -6,7 +6,7 @@
         "mesero": "Mario Rivera",
         "tipo": "MESA",
         "domicilioEtapa": 0,
-        "mesa": "",
+        "mesa": "5",
         "cliente": {
           "_id": "2269fc1c847d0a718a6101833d006216",
           "nombreCompleto": "Claudia Teresa Martinez",
