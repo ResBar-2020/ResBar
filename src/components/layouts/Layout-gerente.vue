@@ -18,6 +18,7 @@ export default {
     items: [
       { title: "Ordenes", route: "/ordenes", icon: "mdi-clipboard-text" },
       { title: "Domicilio", route: "/domicilio", icon: "mdi-truck" },
+      { title: "Recoger", route: "/recoger", icon: "mdi-car" },
       {
         title: "Clientes",
         route: "/clientes",

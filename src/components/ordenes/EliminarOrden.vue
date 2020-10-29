@@ -10,7 +10,6 @@
           small
           fab
           color="red"
-          @click="showMessage(snackbar)"
           ><v-icon>mdi-delete</v-icon></v-btn
         >
       </template>
