@@ -83,7 +83,7 @@ export default {
 }
 
 p {
-  font-size: 3em;
+  font-size: 1.5em;
   letter-spacing: 1px;
   line-height: 1em;
   color: black;
