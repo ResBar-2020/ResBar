@@ -15,7 +15,7 @@
           <v-switch label="Ordenes Activas" color="indigo"></v-switch>
         </v-col>
         <v-col cols="6" class="d-flex align-center justify-start">
-          <router-link :to="{ name: 'nuevaOrden' }">
+          <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
             <v-btn
               color="light-blue darken-4"
               class="utilities"

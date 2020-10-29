@@ -175,19 +175,12 @@ export default {
 .cliente {
   font-size: 1.1em;
   font-weight: 500;
-  /*background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);*/
+  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
   border-radius: 20px;
-  box-shadow: 0 10px 5px #FFF;
   color: #fff;
   padding: 10px;
   transition: 0.5s;
   cursor: pointer;
-}
-.cliente:hover, 
-.item:hover{
-  background: #fff;
-  color: #000;
-  box-shadow: 0 0px 55px #FFF;
 }
 .bg {
   position: relative;
@@ -195,17 +188,30 @@ export default {
   background: rgb(32, 34, 33);
 }
 .item {
+  position: relative;
   font-size: 1.1em;
   padding: 5px 10px 5px 10px;
   font-weight: 600;
   color: #fff;
-  box-shadow: 10px 10px 5px #FFF;
-  border-radius: 10px;
   display: inline-block;
   position: relative;
   margin: 0;
   margin-left: 1em;
   transition: 0.5s ease-in-out;
+}
+.item::before{
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+  transition: 0.5s;
+}
+.item:hover::before{
+  width: 100%;
+  box-shadow: 0 -10px 15px #af4fbf;
 }
 .bg::before {
   content: "";
