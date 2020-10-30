@@ -1,6 +1,6 @@
 
     <template>
-  <div class="text-center">
+  <div class="text-center" style="display:inline-block">
     <v-dialog v-model="dialog" width="700">
       <template v-slot:activator="{ on, attrs }">
         <v-btn

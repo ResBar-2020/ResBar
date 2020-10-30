@@ -2,8 +2,8 @@
     <div>
         <v-parallax
                 dark
-                height="115"
-                src="../assets/images/font.jpg"
+                height="220"
+                src="../assets/images/resbar-ordenes.png"
         >
             <v-container fluid>
             <v-row dense
@@ -14,7 +14,7 @@
                         class="text-center "
                         cols="12"
                 >
-                    <h1 class="display-1 font-weight-thin mb-4">
+                    <h1 class="display-1 font-weight mb-4 text-uppercase" style="transform:scale(1.5)">
                        <strong> {{title}} </strong>
                     </h1>
                     <h4 class="subheading">

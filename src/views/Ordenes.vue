@@ -72,7 +72,8 @@
                   >
                 </td>
                 <td>{{ orden.tiempoPreparacion }}</td>
-                <td class="d-block d-md-flex">
+                <td>
+                  <nobr>
                   <v-btn
                     class="mr-2 text-center action"
                     small
@@ -90,6 +91,7 @@
                     ><v-icon>mdi-clipboard</v-icon></v-btn
                   >
                   <eliminar-orden :orden="orden" />
+                  </nobr>
                 </td>
               </tr>
             </tbody>
@@ -132,11 +134,12 @@ export default {
 table {
   position: relative;
   text-align: center;
-  border-collapse: collapse;
-  box-shadow: 15px 15px 35px rgb(46, 70, 0);
+  border-collapse: separate!important; 
+  border-spacing: 0 10px!important; 
+  margin-top: -10px!important; /* correct offset on first border spacing if desired */
 }
 thead {
-  background: rgb(46, 70, 0);
+  background: #00579c;
   color: #fff;
 }
 th {
@@ -146,12 +149,13 @@ tbody tr {
   transition: 0.3s;
   cursor: pointer;
 }
-tr:hover {
-  background: #43a047;
-  color: #fff;
+tr{
+   border-radius:10px!important;
+   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2)!important;
+   
 }
 td {
-  padding: 1em;
+  padding: 1em!important;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .action {
@@ -169,4 +173,26 @@ td {
 .utilities:hover {
   transform: scale(1.1);
 }
+
+table tr:hover {
+  border-radius: 10px;
+  background: #4c89b8;
+  color: #fff;
+}
+table tr:hover td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+table tr:hover td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+table  thead  th:first-child{
+  border-radius: 10px 0 0 0!important;
+}
+table  thead  th:last-child{
+  border-radius: 0 10px 0 0!important;
+}
+
 </style>
