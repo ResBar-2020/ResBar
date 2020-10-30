@@ -7,7 +7,7 @@
     <v-container>
       <!-- Inica fila de boton agregar y campo de texto buscar -->
       <v-row id="fila">
-        <!-- Btn agregar nuevo usuario -->
+        <!-- Btn agregar usuario -->
         <v-col cols="2">
           <v-btn class="my-5" color="primary" @click="modalAgregar = true">
             Agregar<v-icon dark class="mx-2"> mdi-plus-circle </v-icon>
@@ -102,13 +102,13 @@
       </v-simple-table>
       <!-- Termina tabla de usuarios -->
 
-      <!-- Inicia Dialog para agregar nuevo usuario -->
+      <!-- Inicia Dialog para agregar usuario -->
       <v-row>
         <v-col cols="12">
           <v-dialog v-model="modalAgregar" persistent max-width="500">
             <v-card>
               <v-card-title class="headline">
-                Agregar Nuevo Usuario
+                Agregar Usuario
               </v-card-title>
               <v-card-text>
                 <template>
@@ -170,7 +170,7 @@
           </v-dialog>
         </v-col>
       </v-row>
-      <!-- Termina Dialog para agregar nuevo usuario -->
+      <!-- Termina Dialog para agregar usuario -->
 
       <!-- Inicia modal para editar usuario -->
       <v-dialog v-model="modalEdit" width="500">
