@@ -11,7 +11,7 @@
 
         <v-col cols="12" sm="8">
           <p>
-           Aqui debe ir componente productos
+            <agregar-productos></agregar-productos>
           </p>
         </v-col>
       </v-row>
@@ -22,12 +22,13 @@
 
 <script>
 import ClienteForm from "../components/nuevaOrden/clienteForm.vue";
+import AgregarProductos from "../components/AgregarProductos";
 
 export default {
   name: "nuevaOrden",
 
   components: {
-    ClienteForm,
+    ClienteForm, AgregarProductos
   },
 };
 </script>
