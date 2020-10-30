@@ -42,8 +42,8 @@
             </td>
           </tr>
           <tr>
-            <td>Tiliche</td>
-            <td>$ 0.05</td>
+            <td>Nachos</td>
+            <td>$ 2.0</td>
             <td><v-btn class="mx-2" fab dark small color="primary">
                 <v-icon dark>
                   mdi-minus
