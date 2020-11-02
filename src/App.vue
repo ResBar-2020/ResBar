@@ -40,4 +40,17 @@ export default {
 .fondo{
   background: rgb(216, 208, 196);
 }
+body::-webkit-scrollbar{
+  width: 1em;
+}
+body::-webkit-scrollbar-track{
+  background: #000;
+}
+body::-webkit-scrollbar-thumb{
+  background: rgb(145, 37, 155);
+  border-radius: 5px;
+}
+body::-webkit-scrollbar-thumb:active{
+  background: rgb(145, 37, 155);
+}
 </style>

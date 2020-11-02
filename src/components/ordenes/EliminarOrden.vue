@@ -31,7 +31,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn class="actions" color="red" @click="dialog = false"><v-icon>mdi-delete</v-icon> Eliminar </v-btn>
-          <v-btn class="actions" color="green accent-4" @click="dialog = false"> Cancelar </v-btn>
+          <v-btn class="actions" color="indigo darken-4" @click="dialog = false"> Cancelar </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

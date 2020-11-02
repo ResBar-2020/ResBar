@@ -15,7 +15,7 @@
       </template>
       <v-card>
         <v-card-title
-          class="headline amber darken-4 text--white title text-uppercase"
+          class="headline orange darken-4 text--white title text-uppercase"
         >
           Modificar Orden
         </v-card-title>
@@ -101,7 +101,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="actions" color="green accent-4" @click="dialog = false"> Guardar </v-btn>
+          <v-btn class="actions" color="indigo darken-4" @click="dialog = false"> Guardar </v-btn>
           <v-btn class="actions" color="red" @click="dialog = false"> Cancelar </v-btn>
         </v-card-actions>
       </v-card>
@@ -152,7 +152,7 @@ tr {
 }
 th {
   color: #fff;
-  background: rgb(83, 54, 97);
+  background: #37474F;
 }
 tr{
   color: #000;
@@ -161,7 +161,7 @@ tr{
 }
 tbody tr:hover{
   color: #fff;
-  background: rgb(83, 54, 97);
+  background: #37474F;
 }
 td{
   padding-top: 0.2em;
