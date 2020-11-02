@@ -1,6 +1,6 @@
 
     <template>
-  <div class="text-center">
+  <div class="text-center" style="display:inline-block">
     <v-dialog v-model="dialog" width="700">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -31,7 +31,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn class="actions" color="red" @click="dialog = false"><v-icon>mdi-delete</v-icon> Eliminar </v-btn>
-          <v-btn class="actions" color="green accent-4" @click="dialog = false"> Cancelar </v-btn>
+          <v-btn class="actions" color="indigo darken-4" @click="dialog = false"> Cancelar </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -83,7 +83,7 @@ export default {
 }
 
 p {
-  font-size: 3em;
+  font-size: 1.5em;
   letter-spacing: 1px;
   line-height: 1em;
   color: black;

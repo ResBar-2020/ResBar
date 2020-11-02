@@ -15,13 +15,15 @@
           <v-switch label="Ordenes Activas" color="indigo"></v-switch>
         </v-col>
         <v-col cols="6" class="d-flex align-center justify-start">
-          <v-btn
-            color="light-blue darken-4"
-            class="utilities"
-            @click="showMessage(snackbar)"
-          >
-            <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn
-          >
+          <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
+            <v-btn
+              color="light-blue darken-4"
+              class="utilities"
+              @click="showMessage(snackbar)"
+            >
+              <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn
+            >
+          </router-link>
         </v-col>
       </v-row>
       <v-row>
@@ -43,7 +45,7 @@
                 <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa? orden.mesa:"Sin Mesa" }}</td>
+                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
                 <td>{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
                 <td>
@@ -70,24 +72,12 @@
                   >
                 </td>
                 <td>{{ orden.tiempoPreparacion }}</td>
-                <td class="d-block d-md-flex">
-                  <v-btn
-                    class="mr-2 text-center action"
-                    small
-                    fab
-                    color="deep-purple"
-                    @click="showMessage(snackbar)"
-                    ><v-icon>mdi-plus</v-icon></v-btn
-                  >
-                  <v-btn
-                    class="mr-2 text-center action"
-                    small
-                    fab
-                    color="pink"
-                    @click="showMessage(snackbar)"
-                    ><v-icon>mdi-clipboard</v-icon></v-btn
-                  >
+                <td>
+                  <nobr>
+                  <agregar-productos :orden="orden"/>
+                  <modificar-orden :orden="orden"/>
                   <eliminar-orden :orden="orden" />
+                  </nobr>
                 </td>
               </tr>
             </tbody>
@@ -103,8 +93,10 @@
 import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
+import ModificarOrden from "../components/ordenes/ModificarOrden";
+import AgregarProductos from "../components/ordenes/AgregarProductos";
 export default {
-  components: { HeaderDashboard, EliminarOrden },
+  components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductos },
   computed: {
     ...mapGetters(["allOrdenes"]),
   },
@@ -130,11 +122,12 @@ export default {
 table {
   position: relative;
   text-align: center;
-  border-collapse: collapse;
-  box-shadow: 15px 15px 35px rgb(46, 70, 0);
+  border-collapse: separate!important; 
+  border-spacing: 0 10px!important; 
+  margin-top: -10px!important; /* correct offset on first border spacing if desired */
 }
 thead {
-  background: rgb(46, 70, 0);
+  background: #00579c;
   color: #fff;
 }
 th {
@@ -144,12 +137,13 @@ tbody tr {
   transition: 0.3s;
   cursor: pointer;
 }
-tr:hover {
-  background: #43a047;
-  color: #fff;
+tr{
+   border-radius:10px!important;
+   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2)!important;
+   
 }
 td {
-  padding: 1em;
+  padding: 1em!important;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 .action {
@@ -167,4 +161,26 @@ td {
 .utilities:hover {
   transform: scale(1.1);
 }
+
+table tr:hover {
+  border-radius: 10px;
+  background: #4c89b8;
+  color: #fff;
+}
+table tr:hover td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+table tr:hover td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+table  thead  th:first-child{
+  border-radius: 10px 0 0 0!important;
+}
+table  thead  th:last-child{
+  border-radius: 0 10px 0 0!important;
+}
+
 </style>

@@ -3,7 +3,7 @@
     v-model="drawer"
     :mini-variant.sync="mini"
     permanent
-    color="primary"
+    color="#01579b"
     app
     dark
   >
@@ -35,7 +35,7 @@
 
     <template v-slot:append>
       <div class="pa-2" v-show="!mini">
-        <v-btn @click="logout" block>Logout</v-btn>
+        <v-btn @click="logout" block class="black--text white">Logout</v-btn>
       </div>
     </template>
   </v-navigation-drawer>
