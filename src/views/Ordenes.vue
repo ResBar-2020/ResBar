@@ -74,22 +74,8 @@
                 <td>{{ orden.tiempoPreparacion }}</td>
                 <td>
                   <nobr>
-                  <v-btn
-                    class="mr-2 text-center action"
-                    small
-                    fab
-                    color="deep-purple"
-                    @click="showMessage(snackbar)"
-                    ><v-icon>mdi-plus</v-icon></v-btn
-                  >
-                  <v-btn
-                    class="mr-2 text-center action"
-                    small
-                    fab
-                    color="pink"
-                    @click="showMessage(snackbar)"
-                    ><v-icon>mdi-clipboard</v-icon></v-btn
-                  >
+                  <agregar-productos :orden="orden"/>
+                  <modificar-orden :orden="orden"/>
                   <eliminar-orden :orden="orden" />
                   </nobr>
                 </td>
@@ -107,8 +93,10 @@
 import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
+import ModificarOrden from "../components/ordenes/ModificarOrden";
+import AgregarProductos from "../components/ordenes/AgregarProductos";
 export default {
-  components: { HeaderDashboard, EliminarOrden },
+  components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductos },
   computed: {
     ...mapGetters(["allOrdenes"]),
   },
