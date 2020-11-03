@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-dialog v-model="selectClient" persistent max-width="700" scrollable>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on"
+          <v-btn color="primary" dark v-bind="attrs" v-on="on" class="m-0 p-0"
             ><v-icon right dark class="mx-1">mdi-plus-circle-outline</v-icon
             >Cliente
           </v-btn>
