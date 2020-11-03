@@ -23,6 +23,7 @@
                 ></v-progress-linear>
               </template>
               <v-banner
+                style="color: white;"
                 elevation="6"
                 single-line
                 sticky
