@@ -87,7 +87,7 @@
               Cancelar
             </v-btn>
             <v-btn
-              class="green"
+              class="green darken-1"
               color="white"
               text
               @click="selectClient = false"
@@ -179,7 +179,7 @@
                 Cancelar
               </v-btn>
               <v-btn
-                class="green"
+                class="green darken-1"
                 color="white"
                 text
                 @click="modalAgregar = false"
