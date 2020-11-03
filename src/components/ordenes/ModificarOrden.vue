@@ -6,6 +6,7 @@
           class="mr-2 text-center action"
           v-bind="attrs"
           v-on="on"
+          @click="dom(orden)"
           small
           fab
           color="pink"
@@ -40,10 +41,11 @@
               <seleccionar-cliente></seleccionar-cliente>
             </div>
               <v-switch
+                v-model="domicilio"
                 label="A Domicilio"
                 color="red"
-                value="red"
                 class="switch"
+                inset
               ></v-switch>
             </v-col>
           </v-row>
@@ -122,10 +124,23 @@ export default {
   props: ["orden"],
   data() {
     return {
+      domicilio: false,
       dialog: false,
       tab: null,
     };
   },
+  methods:{
+     dom : function(orden) {
+        if(orden.doc.tipo==='DOMICILIO'){
+          console.log(orden.doc.tipo)
+          this.domicilio = true;
+          console.log(this.domicilio)
+        }else{
+          console.log(orden.doc.tipo)
+          console.log(this.domicilio)
+        }
+      }
+  }
 };
 </script>
 <style scoped>
