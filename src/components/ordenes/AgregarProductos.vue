@@ -26,14 +26,14 @@
             <div class="informacion">
               <v-col cols="4">
                 <label>Orden:</label
-                ><span>{{ String(orden._id.substring(18, 24)) }}</span>
+                ><span>{{ String(orden.doc._id.substring(18, 24)) }}</span>
               </v-col>
               <v-col cols="4">
-                <label>Mesero:</label><span>{{ orden.mesero }}</span>
+                <label>Mesero:</label><span>{{ orden.doc.mesero }}</span>
               </v-col>
               <v-col cols="6">
                 <label>Cliente:</label
-                ><span>{{ orden.cliente.nombreCompleto }}</span>
+                ><span>{{ orden.doc.cliente.nombreCompleto }}</span>
               </v-col>
             </div>
           </v-row>
@@ -127,7 +127,7 @@
 
 <script>
 export default {
-  name: "AgregarProductos",
+  name: "AgregarProductosOrden",
   props: ["orden"],
   data() {
     return {

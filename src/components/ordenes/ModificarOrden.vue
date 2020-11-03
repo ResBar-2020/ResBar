@@ -23,23 +23,22 @@
             <v-col cols="6">
               <form>
                 <label>ID Orden</label>
-                <input type="text" v-model="orden._id" disabled />
+                <input type="text" v-model="orden.doc._id" disabled />
 
                 <label>Mesa</label>
-                <input type="text" v-model="orden.mesa" />
+                <input type="text" v-model="orden.doc.mesa" />
 
                 <label>Mesero</label>
-                <input type="text" v-model="orden.mesero" />
+                <input type="text" v-model="orden.doc.mesero" />
 
                 <label>Cliente</label>
-                <input type="text" v-model="orden.cliente.nombreCompleto" />
-
-                <v-div id="filaCliente" class="mb-4">
-                  <seleccionar-cliente></seleccionar-cliente>
-                </v-div>
+                <input type="text" v-model="orden.doc.cliente.nombreCompleto" />
               </form>
             </v-col>
             <v-col cols="6">
+            <div id="filaCliente" class="float-left">
+              <seleccionar-cliente></seleccionar-cliente>
+            </div>
               <v-switch
                 label="A Domicilio"
                 color="red"
@@ -51,10 +50,6 @@
 
           <v-row>
             <v-col cols="12">
-              <v-btn small color="red" class="actions float-right"
-                >Eliminar Orden</v-btn
-              >
-
               <table>
                 <thead>
                   <th scope="col">Nombre</th>
@@ -65,7 +60,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="detalle in orden.detalleOrden"
+                    v-for="detalle in orden.doc.detalleOrden"
                     :key="detalle.nombre"
                   >
                     <td>{{ detalle.nombre }}</td>
@@ -97,7 +92,7 @@
           <v-row>
             <v-col cols="12" class="d-flex flex-column">
               <label>Observaciones</label>
-              <textarea v-model="orden.observacion"></textarea>
+              <textarea v-model="orden.doc.observacion"></textarea>
             </v-col>
           </v-row>
         </v-card-text>

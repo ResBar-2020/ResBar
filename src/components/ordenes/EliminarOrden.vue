@@ -22,7 +22,7 @@
         <v-card-text class="text-center">
           <p>
             ¿Está seguro de eliminar la orden de
-            <span>{{ orden.cliente.nombreCompleto }}</span>?
+            <span>{{ orden.doc.cliente.nombreCompleto }}</span>?
           </p>
         </v-card-text>
 

@@ -41,40 +41,40 @@
               <th scope="col">Acciones</th>
             </thead>
             <tbody>
-              <tr v-for="orden in allOrdenes" :key="orden._id">
-                <td>{{ String(orden._id.substring(18, 24)) }}</td>
-                <td>{{ orden.mesero }}</td>
-                <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
-                <td>{{ orden.observacion }}</td>
-                <td>${{ orden.total }}</td>
+              <tr v-for="orden in allOrdenes" :key="orden.doc._id">
+                <td>{{ String(orden.doc._id.substring(18, 24)) }}</td>
+                <td>{{ orden.doc.mesero }}</td>
+                <td>{{ orden.doc.cliente.nombreCompleto }}</td>
+                <td>{{ orden.doc.mesa ? orden.doc.mesa : "Sin Mesa" }}</td>
+                <td>{{ orden.doc.observacion }}</td>
+                <td>${{ orden.doc.total }}</td>
                 <td>
                   <v-chip
                     dense
                     class="utilities"
-                    v-if="orden.tipo == 'DOMICILIO'"
+                    v-if="orden.doc.tipo == 'DOMICILIO'"
                     color="red"
-                    >{{ orden.tipo }}</v-chip
+                    >{{ orden.doc.tipo }}</v-chip
                   >
                   <v-chip
                     dense
                     class="utilities"
-                    v-else-if="orden.tipo == 'MESA'"
+                    v-else-if="orden.doc.tipo == 'MESA'"
                     color="light-blue darken-4"
-                    >{{ orden.tipo }}</v-chip
+                    >{{ orden.doc.tipo }}</v-chip
                   >
                   <v-chip
                     dense
                     class="utilities"
                     v-else
                     color="green darken-3"
-                    >{{ orden.tipo }}</v-chip
+                    >{{ orden.doc.tipo }}</v-chip
                   >
                 </td>
-                <td>{{ orden.tiempoPreparacion }}</td>
+                <td>{{ orden.doc.tiempoPreparacion }}</td>
                 <td>
                   <nobr>
-                  <agregar-productos :orden="orden"/>
+                  <agregar-productos-orden :orden="orden"/>
                   <modificar-orden :orden="orden"/>
                   <eliminar-orden :orden="orden" />
                   </nobr>
@@ -94,9 +94,9 @@ import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
-import AgregarProductos from "../components/ordenes/AgregarProductos";
+import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 export default {
-  components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductos },
+  components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductosOrden },
   computed: {
     ...mapGetters(["allOrdenes"]),
   },

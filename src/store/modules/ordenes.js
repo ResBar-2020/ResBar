@@ -1,5 +1,6 @@
-import orden from '../../assets/mock/ordenes';
-
+//import orden from '../../assets/mock/ordenes';
+import axios from 'axios'
+const url = "http://localhost:5984/ordenes/"
 const getters = {
     allOrdenes: state => state.ordenes
 };
@@ -10,9 +11,18 @@ const state = {
 
 const actions = {
     async getOrdenes({commit}){
-        const response = await orden.getOrdenes();
-        console.log('mockData',response);
-        commit('setOrdenes',response);
+     await axios
+        .get(`${url}/_all_docs?include_docs=true`, {
+          auth: {
+            username: "admin",
+            password: "admin",
+          },
+        })
+        .then((res) => {
+            console.log('mockData',res.data.rows);
+            commit('setOrdenes',res.data.rows);
+        });
+     //   commit('setOrdenes',response);
     },
 };
 
