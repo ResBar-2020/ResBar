@@ -28,7 +28,7 @@ const actions = {
 
     async modificarEtapa({commit}, orden){
         const response = await axios.patch(`${BASE_URL}`,orden,credentials.authentication);
-      commit('updateOrden', response.data.docs)
+      commit('updateOrden', response.data.docs);
     },
 };
 

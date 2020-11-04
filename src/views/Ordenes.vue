@@ -41,37 +41,37 @@
               <th scope="col">Acciones</th>
             </thead>
             <tbody>
-              <tr v-for="orden in allOrdenes" :key="orden.doc._id">
-                <td>{{ String(orden.doc._id.substring(18, 24)) }}</td>
-                <td>{{ orden.doc.mesero }}</td>
-                <td>{{ orden.doc.cliente.nombreCompleto }}</td>
-                <td>{{ orden.doc.mesa ? orden.doc.mesa : "Sin Mesa" }}</td>
-                <td>{{ orden.doc.observacion }}</td>
-                <td>${{ orden.doc.total }}</td>
+              <tr v-for="orden in allOrdenes" :key="orden._id">
+                <td>{{ String(orden._id.substring(18, 24)) }}</td>
+                <td>{{ orden.mesero }}</td>
+                <td>{{ orden.cliente.nombreCompleto }}</td>
+                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
+                <td>{{ orden.observacion }}</td>
+                <td>${{ orden.total }}</td>
                 <td>
                   <v-chip
                     dense
                     class="utilities"
-                    v-if="orden.doc.tipo == 'DOMICILIO'"
+                    v-if="orden.tipo === 'DOMICILIO'"
                     color="red"
-                    >{{ orden.doc.tipo }}</v-chip
+                    >{{ orden.tipo }}</v-chip
                   >
                   <v-chip
                     dense
                     class="utilities"
-                    v-else-if="orden.doc.tipo == 'MESA'"
+                    v-else-if="orden.tipo === 'MESA'"
                     color="light-blue darken-4"
-                    >{{ orden.doc.tipo }}</v-chip
+                    >{{ orden.tipo }}</v-chip
                   >
                   <v-chip
                     dense
                     class="utilities"
                     v-else
                     color="green darken-3"
-                    >{{ orden.doc.tipo }}</v-chip
+                    >{{ orden.tipo }}</v-chip
                   >
                 </td>
-                <td>{{ orden.doc.tiempoPreparacion }}</td>
+                <td>{{ orden.tiempoPreparacion }}</td>
                 <td>
                   <nobr>
                   <agregar-productos-orden :orden="orden"/>

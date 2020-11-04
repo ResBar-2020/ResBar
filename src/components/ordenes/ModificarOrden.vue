@@ -24,16 +24,16 @@
             <v-col cols="6">
               <form>
                 <label>ID Orden</label>
-                <input type="text" v-model="orden.doc._id" disabled />
+                <input type="text" v-model="orden._id" disabled />
 
                 <label>Mesa</label>
-                <input type="text" v-model="orden.doc.mesa" />
+                <input type="text" v-model="orden.mesa" />
 
                 <label>Mesero</label>
-                <input type="text" v-model="orden.doc.mesero" />
+                <input type="text" v-model="orden.mesero" />
 
                 <label>Cliente</label>
-                <input type="text" v-model="orden.doc.cliente.nombreCompleto" />
+                <input type="text" v-model="orden.cliente.nombreCompleto" />
               </form>
             </v-col>
             <v-col cols="6">
@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="detalle in orden.doc.detalleOrden"
+                    v-for="detalle in orden.detalleOrden"
                     :key="detalle.nombre"
                   >
                     <td>{{ detalle.nombre }}</td>
@@ -94,7 +94,7 @@
           <v-row>
             <v-col cols="12" class="d-flex flex-column">
               <label>Observaciones</label>
-              <textarea v-model="orden.doc.observacion"></textarea>
+              <textarea v-model="orden.observacion"></textarea>
             </v-col>
           </v-row>
         </v-card-text>
@@ -131,12 +131,12 @@ export default {
   },
   methods:{
      dom : function(orden) {
-        if(orden.doc.tipo==='DOMICILIO'){
-          console.log(orden.doc.tipo)
+        if(orden.tipo==='DOMICILIO'){
+          console.log(orden.tipo)
           this.domicilio = true;
           console.log(this.domicilio)
         }else{
-          console.log(orden.doc.tipo)
+          console.log(orden.tipo)
           console.log(this.domicilio)
         }
       }

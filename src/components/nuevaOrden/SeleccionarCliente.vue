@@ -54,13 +54,13 @@
                     <th id="tituloTabla" class="text-left white--text">
                       Nombre
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th  class="text-left white--text">
                       Celular
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th  class="text-left white--text">
                       WhatsApp
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th class="text-left white--text">
                       Direccion
                     </th>
                   </tr>
