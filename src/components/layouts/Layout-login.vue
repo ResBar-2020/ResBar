@@ -67,3 +67,18 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-main{
+  background: url('../../assets/images/bg.jpg');
+  background-size: cover;
+}
+.v-card{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(-30%, -30%);
+    width: 400px;
+}
+
+
+</style>
