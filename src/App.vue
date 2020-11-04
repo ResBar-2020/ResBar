@@ -20,7 +20,7 @@ export default {
   created() {
     let rol = localStorage.getItem("rol");
     if (rol) {
-      if (rol.includes("admin")) {
+      if (rol.includes("ADMIN")) {
         this.layout = "layout-gerente";
       } else {
         this.layout = "layout-mesero";

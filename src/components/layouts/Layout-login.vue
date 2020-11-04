@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-main>
       <v-card width="500" class="mx-auto mt-16" elevation="10">
         <v-card-title class="primary white--text justify-center">
           Inicia sesión en Resbar
@@ -9,9 +9,11 @@
           <v-text-field
             label="Nombre de usuario"
             prepend-icon="mdi-account-circle"
+            v-model="user.loggin"
           />
           <v-text-field
             label="Contraseña"
+            v-model="user.clave"
             :type="showPassword ? 'text' : 'password'"
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -30,7 +32,7 @@
           >
         </v-card-actions>
       </v-card>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -41,9 +43,8 @@ export default {
     return {
       showPassword: false,
       user: {
-        username: "",
-        password: "",
-        pin: "",
+        loggin: "",
+        clave: "",
       },
     };
   },
@@ -55,14 +56,13 @@ export default {
   },
   watch: {
     username: function() {
-      this.$router.go("Ordenes");
+      this.$router.go("/Ordenes");
     },
   },
   created() {
     this.user = {
       loggin: "",
       clave: "",
-      pin: "",
     };
   },
 };

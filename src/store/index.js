@@ -5,7 +5,7 @@ import domicilio from './modules/domicilio'
 import ordenes from './modules/ordenes'
 
 Vue.use(Vuex)
-axios.defaults.baseURL = "http://localhost:3000"
+axios.defaults.baseURL = "http://localhost:5984"
 
 export default new Vuex.Store({
   state: {
@@ -33,14 +33,29 @@ export default new Vuex.Store({
     authenticate: async (context, credentials) => {
 
       try {
-        //let response = await axios.get("/usuarios?filter[where][pin]=" + credentials.pin);
+        axios.post(`${axios.defaults.baseURL}/usuarios/_find`, {
+          //Parametros de la query
+          "selector": {
+            loggin: credentials.loggin,
+            clave: credentials.clave
+          }
 
-        //const data = response.data[0];
-        const data={"rol":"admin", "nombreCompleto":"Administrador del Sistema","pin":credentials.pin};
+        }, {
+          //autorizacion de la DB
+          auth: {
+            username: "admin",
+            password: "admin",
+          }
+        }).then((res) => {
+          //Si el objeto no esta vacio asigna los valores
+          if (res.data.docs.length > 0) {
+            localStorage.setItem("rol", res.data.docs[0].rol);
+            localStorage.setItem("username", res.data.docs[0].nombreCompleto);
+            context.commit("authenticate", res.data.docs[0]);
+          }
+        })
         
-        localStorage.setItem("rol", data.rol);
-        localStorage.setItem("username", data.nombreCompleto);
-        context.commit("authenticate", data);
+
 
       } catch (error) {
         console.log(error);
