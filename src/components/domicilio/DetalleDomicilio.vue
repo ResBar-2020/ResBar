@@ -40,9 +40,7 @@
                 <v-row>
                   <v-col>
                     <v-card-title>
-                      <span class="headline prod_title"
-                        >Productos Adquiridos</span
-                      >
+                      <span class="headline prod_title">Productos Adquiridos</span>
                     </v-card-title>
                     <v-card-text
                       v-for="detalle in orden.detalleOrden"
