@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import domicilio from './modules/domicilio'
 import ordenes from './modules/ordenes'
+import recoger from './modules/recoger'
 import idioma from "./modules/idioma";
 import authentication from "./modules/credentials";
 Vue.use(Vuex)
@@ -41,13 +42,7 @@ export default new Vuex.Store({
             clave: credentials.clave
           }
 
-        }, {
-          //autorizacion de la DB
-          auth: {
-            username: authentication.authentication.auth.username,
-            password: authentication.authentication.auth.password,
-          }
-        }).then((res) => {
+        }, authentication.authentication).then((res) => {
           //Si el objeto no esta vacio asigna los valores
           if (res.data.docs.length > 0) {
             localStorage.setItem("rol", res.data.docs[0].rol);
@@ -69,6 +64,6 @@ export default new Vuex.Store({
 
   },
   modules: {
-    domicilio, ordenes, idioma
+    domicilio, ordenes,  idioma, recoger
   }
 })

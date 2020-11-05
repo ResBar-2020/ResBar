@@ -14,12 +14,12 @@ const state = {
 
 
 const actions = {
-    /* obtener ordenes de tipo DOMICILIO
+    /* obtener ordenes de tipo RECOGER
     * mediante selectores*/
-    async getOrdenesDomicilio({commit}){
+    async getOrdenesRecoger({commit}){
         const response = await axios.post(`${BASE_URL}_find`,{
             "selector": {
-                "tipo": "DOMICILIO"
+                "tipo": "RECOGER"
             },
             "limit":state.pagesize
         },credentials.authentication);
@@ -28,7 +28,7 @@ const actions = {
 
     async modificarEtapa({commit}, orden){
         const response = await axios.patch(`${BASE_URL}`,orden,credentials.authentication);
-      commit('updateOrden', response.data.docs);
+      commit('updateOrden', response.data.docs)
     },
 };
 

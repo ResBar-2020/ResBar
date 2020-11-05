@@ -49,9 +49,9 @@
                 <div>
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
                     <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
-                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon>mdi-plus</v-icon></v-btn>
-                    <eliminar-orden :orden="orden"/>
-                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-pencil-circle-outline</v-icon></v-btn>
+                    <agregar-productos-orden :orden="orden"/>
+                    <modificar-orden :orden="orden"/>
+                    <eliminar-orden :orden="orden" />
                   </v-chip-group>
                 </div>
               </v-card>
@@ -83,8 +83,10 @@ import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 import DetalleDomicilio from "../components/domicilio/DetalleDomicilio";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
+import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
+import ModificarOrden from "../components/ordenes/ModificarOrden";
 export default {
-  components: {EliminarOrden, DetalleDomicilio, HeaderDashboard},
+  components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard},
   computed: {
     ...mapGetters(['ordenes','idiomas']),
   },

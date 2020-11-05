@@ -26,14 +26,14 @@
             <div class="informacion">
               <v-col cols="4">
                 <label>Orden:</label
-                ><span>{{ String(orden.doc._id.substring(18, 24)) }}</span>
+                ><span>{{ String(orden._id.substring(18, 24)) }}</span>
               </v-col>
               <v-col cols="4">
-                <label>Mesero:</label><span>{{ orden.doc.mesero }}</span>
+                <label>Mesero:</label><span>{{ orden.mesero }}</span>
               </v-col>
               <v-col cols="6">
                 <label>Cliente:</label
-                ><span>{{ orden.doc.cliente.nombreCompleto }}</span>
+                ><span>{{ orden.cliente.nombreCompleto }}</span>
               </v-col>
             </div>
           </v-row>
