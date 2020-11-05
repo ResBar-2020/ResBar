@@ -15,6 +15,7 @@
               prepend-icon="mdi-account-circle"
               v-model="user.loggin"
               :rules="validRules"
+              autocomplete = "off"
             />
             <v-text-field
               label="Contraseña"
@@ -72,11 +73,11 @@ export default {
     ...mapState(["username"]),
     ...mapGetters(["error"])
   },
-  /*watch: {
+  watch: {
     username: function () {
       this.$router.go("/ordenes");
     },
-  },*/
+  },
   created() {
     this.user = {
       loggin: "",
