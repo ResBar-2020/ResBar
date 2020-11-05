@@ -10,6 +10,8 @@ Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
 
 export default new Vuex.Store({
+
+  
   state: {
     rol: localStorage.getItem("rol") || null,
     username: localStorage.getItem("username") || null,
@@ -17,8 +19,12 @@ export default new Vuex.Store({
       show: false,
       message: "",
       timeout: 2000
-    }
+    },
+    error: false
 
+  },
+  getters: {
+    error: state => state.error
   },
   mutations: {
     authenticate(state, data) {
@@ -29,6 +35,9 @@ export default new Vuex.Store({
       state.snackbar.message = params.message || "sin mensaje";
       state.snackbar.show = true;
       state.snackbar.timeout = params.timeout || 3000;
+    },
+    loginError(state, value){
+      state.error = value
     }
   },
   actions: {
@@ -48,8 +57,10 @@ export default new Vuex.Store({
             localStorage.setItem("rol", res.data.docs[0].rol);
             localStorage.setItem("username", res.data.docs[0].nombreCompleto);
             context.commit("authenticate", res.data.docs[0]);
-          }else{
-            console.log(authentication)
+            
+          //Si el usuario o contrasenia no coinciden
+          }else if(credentials.loggin != "" && credentials.clave != ""){
+            context.commit("loginError", true)
           }
         
         })
