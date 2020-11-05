@@ -56,7 +56,7 @@ export default {
   },
   watch: {
     username: function() {
-      this.$router.go("/Ordenes");
+      this.$router.go("/ordenes");
     },
   },
   created() {

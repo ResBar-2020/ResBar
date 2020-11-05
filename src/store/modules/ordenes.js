@@ -19,7 +19,7 @@ const actions = {
           },
         })
         .then((res) => {
-            console.log('mockData',res.data.rows);
+            //console.log('mockData',res.data.rows);
             commit('setOrdenes',res.data.rows);
         });
      //   commit('setOrdenes',response);

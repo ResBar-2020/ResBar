@@ -4,7 +4,7 @@ import axios from 'axios'
 import domicilio from './modules/domicilio'
 import ordenes from './modules/ordenes'
 import idioma from "./modules/idioma";
-
+import authentication from "./modules/credentials";
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
 
@@ -44,8 +44,8 @@ export default new Vuex.Store({
         }, {
           //autorizacion de la DB
           auth: {
-            username: "admin",
-            password: "admin",
+            username: authentication.authentication.auth.username,
+            password: authentication.authentication.auth.password,
           }
         }).then((res) => {
           //Si el objeto no esta vacio asigna los valores
@@ -53,7 +53,10 @@ export default new Vuex.Store({
             localStorage.setItem("rol", res.data.docs[0].rol);
             localStorage.setItem("username", res.data.docs[0].nombreCompleto);
             context.commit("authenticate", res.data.docs[0]);
+          }else{
+            console.log(authentication)
           }
+        
         })
         
 
