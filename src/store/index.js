@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import domicilio from './modules/domicilio'
 import ordenes from './modules/ordenes'
+import recoger from './modules/recoger'
 import idioma from "./modules/idioma";
 
 Vue.use(Vuex)
@@ -66,6 +67,6 @@ export default new Vuex.Store({
 
   },
   modules: {
-    domicilio, ordenes, idioma
+    domicilio, ordenes,  idioma, recoger
   }
 })
