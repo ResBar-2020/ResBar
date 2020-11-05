@@ -7,7 +7,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="4" offset="1">
-          <v-text-field label="Buscar"></v-text-field>
+          <v-text-field label="Buscar..." solo></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -122,9 +122,9 @@ export default {
 table {
   position: relative;
   text-align: center;
-  border-collapse: separate!important; 
-  border-spacing: 0 10px!important; 
-  margin-top: -10px!important; /* correct offset on first border spacing if desired */
+  border-collapse: separate; 
+  border-spacing: 0 10px; 
+  margin-top: -10px; /* correct offset on first border spacing if desired */
 }
 thead {
   background: #00579c;
@@ -134,17 +134,14 @@ th {
   padding: 1em;
 }
 tbody tr {
-  transition: 0.3s;
+  transition: 1s;
   cursor: pointer;
-}
-tr{
-   border-radius:10px!important;
-   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2)!important;
-   
+   border-radius:10px;
+   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 td {
-  padding: 1em!important;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  padding: 1em;
+  /*font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;*/
 }
 .action {
   color: #fff;
@@ -157,15 +154,16 @@ td {
   font-weight: 700;
   color: #fff;
   transition: 0.3s;
+  letter-spacing: 0.1em;
 }
 .utilities:hover {
   transform: scale(1.1);
 }
 
 table tr:hover {
-  border-radius: 10px;
   background: #4c89b8;
   color: #fff;
+  transform: rotateX(360deg);
 }
 table tr:hover td:first-child {
   border-top-left-radius: 10px;
@@ -177,10 +175,10 @@ table tr:hover td:last-child {
 }
 
 table  thead  th:first-child{
-  border-radius: 10px 0 0 0!important;
+  border-radius: 10px 0 0 0;
 }
 table  thead  th:last-child{
-  border-radius: 0 10px 0 0!important;
+  border-radius: 0 10px 0 0;
 }
 
 </style>
