@@ -7,7 +7,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="4" offset="1">
-          <v-text-field label="Buscar..." solo></v-text-field>
+          <v-text-field v-model="search" label="Buscar..." solo></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -40,7 +40,48 @@
               <th scope="col">Tiempo preparacion</th>
               <th scope="col">Acciones</th>
             </thead>
-            <tbody>
+            <tbody v-if="filteredOrdenes != undefined">
+              <tr v-for="orden in filteredOrdenes" :key="orden._id">
+                <td>{{ String(orden._id.substring(18, 24)) }}</td>
+                <td>{{ orden.mesero }}</td>
+                <td>{{ orden.cliente.nombreCompleto }}</td>
+                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
+                <td>{{ orden.observacion }}</td>
+                <td>${{ orden.total }}</td>
+                <td>
+                  <v-chip
+                    dense
+                    class="utilities"
+                    v-if="orden.tipo === 'DOMICILIO'"
+                    color="red"
+                    >{{ orden.tipo }}</v-chip
+                  >
+                  <v-chip
+                    dense
+                    class="utilities"
+                    v-else-if="orden.tipo === 'MESA'"
+                    color="light-blue darken-4"
+                    >{{ orden.tipo }}</v-chip
+                  >
+                  <v-chip
+                    dense
+                    class="utilities"
+                    v-else
+                    color="green darken-3"
+                    >{{ orden.tipo }}</v-chip
+                  >
+                </td>
+                <td>{{ orden.tiempoPreparacion }}</td>
+                <td>
+                  <nobr>
+                  <agregar-productos-orden :orden="orden"/>
+                  <modificar-orden :orden="orden"/>
+                  <eliminar-orden :orden="orden" />
+                  </nobr>
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else>
               <tr v-for="orden in allOrdenes" :key="orden._id">
                 <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
@@ -81,6 +122,7 @@
                 </td>
               </tr>
             </tbody>
+            
           </table>
         </v-col>
       </v-row>
@@ -98,7 +140,15 @@ import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 export default {
   components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductosOrden },
   computed: {
-    ...mapGetters(["allOrdenes"]),
+    ...mapGetters(["allOrdenes", "filteredOrdenes"]),
+    search:{
+      get(){
+        return this.$store.state.query;
+      },
+      set(val){
+        this.$store.commit('setQuery', val)
+      }
+    }
   },
   data() {
     return {

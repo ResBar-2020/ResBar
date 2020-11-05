@@ -3,11 +3,17 @@ import axios from 'axios'
 import credentials from "./credentials";
 const url = "http://localhost:5984/ordenes/"
 const getters = {
-    allOrdenes: state => state.ordenes
+    allOrdenes: state => state.ordenes,
+    filteredOrdenes(state){
+        if(state.query.length > 0){
+            return state.ordenes.filter(orden => orden.cliente.nombreCompleto.toLowerCase().includes(state.query));
+        }
+    }
 };
 
 const state = {
     ordenes: [],
+    query: ''
 };
 
 const actions = {
@@ -22,6 +28,10 @@ const actions = {
 const mutations = {
     setOrdenes(state,data){
       state.ordenes = data;
+    },
+
+    setQuery(state, query){
+        state.query = query
     }
 };
 
