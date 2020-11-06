@@ -184,7 +184,7 @@ th {
   padding: 1em;
 }
 tbody tr {
-  transition: 1s;
+  transition: 0.5s;
   cursor: pointer;
    border-radius:10px;
    box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
@@ -213,7 +213,7 @@ td {
 table tr:hover {
   background: #4c89b8;
   color: #fff;
-  transform: rotateX(360deg);
+  transform: scale(1.1);
 }
 table tr:hover td:first-child {
   border-top-left-radius: 10px;
