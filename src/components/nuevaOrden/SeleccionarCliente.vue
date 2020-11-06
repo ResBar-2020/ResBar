@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-dialog v-model="selectClient" persistent max-width="700" scrollable>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on"
+          <v-btn color="primary" dark v-bind="attrs" v-on="on" class="m-0 p-0"
             ><v-icon right dark class="mx-1">mdi-plus-circle-outline</v-icon
             >Cliente
           </v-btn>
@@ -54,13 +54,13 @@
                     <th id="tituloTabla" class="text-left white--text">
                       Nombre
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th  class="text-left white--text">
                       Celular
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th  class="text-left white--text">
                       WhatsApp
                     </th>
-                    <th id="tituloTabla" class="text-left white--text">
+                    <th class="text-left white--text">
                       Direccion
                     </th>
                   </tr>
@@ -87,7 +87,7 @@
               Cancelar
             </v-btn>
             <v-btn
-              class="green"
+              class="green darken-1"
               color="white"
               text
               @click="selectClient = false"
@@ -179,7 +179,7 @@
                 Cancelar
               </v-btn>
               <v-btn
-                class="green"
+                class="green darken-1"
                 color="white"
                 text
                 @click="modalAgregar = false"

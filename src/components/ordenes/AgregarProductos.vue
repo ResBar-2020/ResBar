@@ -127,7 +127,7 @@
 
 <script>
 export default {
-  name: "AgregarProductos",
+  name: "AgregarProductosOrden",
   props: ["orden"],
   data() {
     return {

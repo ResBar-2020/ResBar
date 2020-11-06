@@ -1,12 +1,12 @@
-
-    <template>
+<template>
   <div class="text-center" style="display: inline-block">
-    <v-dialog v-model="dialog" width="700">
+    <v-dialog v-model="dialog" width="750" scrollable>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="mr-2 text-center action"
           v-bind="attrs"
           v-on="on"
+          @click="dom(orden)"
           small
           fab
           color="pink"
@@ -37,22 +37,21 @@
               </form>
             </v-col>
             <v-col cols="6">
+            <div id="filaCliente" class="float-left">
+              <seleccionar-cliente></seleccionar-cliente>
+            </div>
               <v-switch
+                v-model="domicilio"
                 label="A Domicilio"
                 color="red"
-                value="red"
                 class="switch"
+                inset
               ></v-switch>
             </v-col>
           </v-row>
+
           <v-row>
             <v-col cols="12">
-              <v-btn
-              small
-              color="red"
-              class="actions float-right"
-                >Eliminar Orden</v-btn>
-
               <table>
                 <thead>
                   <th scope="col">Nombre</th>
@@ -69,12 +68,12 @@
                     <td>{{ detalle.nombre }}</td>
                     <td>{{ detalle.precio }}</td>
                     <td>
-                      <button class="btn" >
-                      <v-icon>mdi-minus</v-icon>   
-                      </button> 
+                      <button class="btn">
+                        <v-icon>mdi-minus</v-icon>
+                      </button>
                       {{ detalle.cantidad }}
                       <button class="btn">
-                         <v-icon>mdi-plus</v-icon> 
+                        <v-icon>mdi-plus</v-icon>
                       </button>
                     </td>
                     <td>{{ detalle.subtotal }}</td>
@@ -101,8 +100,16 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="actions" color="indigo darken-4" @click="dialog = false"> Guardar </v-btn>
-          <v-btn class="actions" color="red" @click="dialog = false"> Cancelar </v-btn>
+          <v-btn
+            class="actions"
+            color="indigo darken-4"
+            @click="dialog = false"
+          >
+            Guardar
+          </v-btn>
+          <v-btn class="actions" color="red" @click="dialog = false">
+            Cancelar
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -110,19 +117,34 @@
 </template>
 
 <script>
+import SeleccionarCliente from "../nuevaOrden/SeleccionarCliente";
 export default {
+  components: { SeleccionarCliente },
   name: "ModificarOrden",
   props: ["orden"],
   data() {
     return {
+      domicilio: false,
       dialog: false,
       tab: null,
     };
   },
+  methods:{
+     dom : function(orden) {
+        if(orden.tipo==='DOMICILIO'){
+          console.log(orden.tipo)
+          this.domicilio = true;
+          console.log(this.domicilio)
+        }else{
+          console.log(orden.tipo)
+          console.log(this.domicilio)
+        }
+      }
+  }
 };
 </script>
 <style scoped>
-.btn{
+.btn {
   position: relative;
   border: 2px solid rgb(83, 54, 97);
   border-radius: 5px;
@@ -131,16 +153,16 @@ export default {
   background: rgb(255, 255, 255);
   transition: 0.3s;
 }
-.btn:hover{
+.btn:hover {
   background: rgb(83, 54, 97);
 }
-.v-icon:hover{
+.v-icon:hover {
   color: rgb(255, 255, 255);
 }
 .v-icon {
-    color: rgb(83, 54, 97);
-    font-size: 1.5em;
-    line-height: 0;
+  color: rgb(83, 54, 97);
+  font-size: 1.5em;
+  line-height: 0;
 }
 table {
   border-collapse: collapse;
@@ -152,18 +174,18 @@ tr {
 }
 th {
   color: #fff;
-  background: #37474F;
+  background: #37474f;
 }
-tr{
+tr {
   color: #000;
   transition: 0.3s;
   cursor: pointer;
 }
-tbody tr:hover{
+tbody tr:hover {
   color: #fff;
-  background: #37474F;
+  background: #37474f;
 }
-td{
+td {
   padding-top: 0.2em;
 }
 .actions {
@@ -210,7 +232,8 @@ label {
   font-weight: 500;
   margin-bottom: 2px;
 }
-input, textarea{
+input,
+textarea {
   cursor: pointer;
   margin-bottom: 5px;
   border-bottom: 2px solid #000;
@@ -219,12 +242,15 @@ input, textarea{
   transition: 0.5s;
 }
 input:focus,
-textarea:focus{
+textarea:focus {
   outline: none;
   transform: scale(1.05);
   border-color: rgb(156, 9, 224);
 }
 .title {
   color: #fff;
+}
+#filaCliente {
+  height: 0px;
 }
 </style>

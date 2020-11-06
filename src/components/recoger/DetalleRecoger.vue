@@ -29,10 +29,6 @@
                 Detalle Orden
                 <v-icon>mdi-format-list-bulleted-square</v-icon>
               </v-tab>
-              <v-tab href="#tab-2">
-                Cliente
-                <v-icon>mdi-account</v-icon>
-              </v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -40,7 +36,9 @@
                 <v-row>
                   <v-col>
                     <v-card-title>
-                      <span class="headline prod_title">Productos Adquiridos</span>
+                      <span class="headline prod_title"
+                        >Productos Adquiridos</span
+                      >
                     </v-card-title>
                     <v-card-text
                       v-for="detalle in orden.detalleOrden"
@@ -54,53 +52,17 @@
                   <v-col cols="6">
                   <div>
                     <label class="box total"
-                      >Consumo: <span>${{ orden.total }}</span></label
+                      >Cliente: <span>{{ orden.cliente.nombreCompleto }}</span></label
                     >
-                    <label class="box envio"
-                      >Costo de Envio:
-                      <span>${{ orden.costoEnvio }}</span></label
+                    <label class="box total"
+                      >Tiempo de Preparacion: <span>{{ orden.tiempoPreparacion }}</span></label
+                    >
+                    <label class="box total"
+                      >Consumo: <span>${{ orden.total }}</span></label
                     >
                   </div>
                   </v-col>
                 </v-row>
-              </v-tab-item>
-              <!-- tab numero dos -->
-              <v-tab-item :value="'tab-2'" class="bg">
-                <v-card-title>
-                  <span class="headline prod_title">Contacto del cliente:</span>
-                </v-card-title>
-                <div>
-                  <v-card-text>
-                    <span class="cliente">Nombre:</span>
-                    <span class="item">
-                      {{ orden.cliente.nombreCompleto }}</span
-                    >
-                  </v-card-text>
-                  <v-card-text>
-                    <span class="cliente">Whatsapp:</span>
-                    <span class="item"> {{ orden.cliente.whatsapp }}</span>
-                  </v-card-text>
-                  <v-card-text>
-                    <span class="cliente">Telefono:</span>
-                    <span class="item"> {{ orden.cliente.telefonoCasa }}</span>
-                  </v-card-text>
-                  <v-card-text>
-                    <span class="cliente">Celular:</span>
-                    <span class="item"> {{ orden.cliente.celular }}</span>
-                  </v-card-text>
-                  <v-card-text>
-                    <span class="cliente">Dirección:</span>
-                    <p class="item" style="margin-top: 9px">
-                      {{ orden.cliente.direccion }}
-                    </p>
-                  </v-card-text>
-                  <v-card-text>
-                    <span class="cliente">Referencia:</span>
-                    <span class="item">
-                      {{ orden.cliente.puntoDeReferencia }}</span
-                    >
-                  </v-card-text>
-                </div>
               </v-tab-item>
             </v-tabs-items>
             <v-card-actions style="background: rgb(32,34,33);">
@@ -121,7 +83,7 @@
 
 <script>
 export default {
-  name: "DetalleDomicilio",
+  name: "DetalleRecoger",
   props: ["orden"],
   data() {
     return {

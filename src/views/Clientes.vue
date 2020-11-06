@@ -69,7 +69,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                       @click="modalEdit = true"
-                      color="green"
+                      color="green darken-1"
                       class="mx-2"
                       fab
                       dark
@@ -78,7 +78,7 @@
                       v-on="on"
                     >
                       <v-icon dark>
-                        mdi-pencil
+                        mdi-pencil-box-outline
                       </v-icon>
                     </v-btn>
                   </template>
@@ -204,7 +204,7 @@
                   Cancelar
                 </v-btn>
                 <v-btn
-                  class="green"
+                  class="green darken-1"
                   color="white"
                   text
                   @click="modalAgregar = false"
@@ -288,7 +288,12 @@
             <v-btn class="red" color="white" text @click="modalEdit = false">
               Cancelar
             </v-btn>
-            <v-btn class="green" color="white" text @click="modalEdit = false">
+            <v-btn
+              class="green darken-1"
+              color="white"
+              text
+              @click="modalEdit = false"
+            >
               Aceptar
             </v-btn>
           </v-card-actions>
@@ -322,7 +327,7 @@
               Cancelar
             </v-btn>
             <v-btn
-              class="green"
+              class="green darken-1"
               color="white"
               text
               @click="modalEliminar = false"

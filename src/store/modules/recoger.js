@@ -3,23 +3,23 @@ import credentials from "./credentials";
 const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
-    ordenes: state => state.ordenes
+    ordenesRecoger: state => state.ordenes
 };
 
 const state = {
     ordenes: [],
-    pagesize: 4,
+    pagesize: 3,
     nextPage: 1
 };
 
 
 const actions = {
-    /* obtener ordenes de tipo DOMICILIO
+    /* obtener ordenes de tipo RECOGER
     * mediante selectores*/
-    async getOrdenesDomicilio({commit}){
+    async getOrdenesRecoger({commit}){
         const response = await axios.post(`${BASE_URL}_find`,{
             "selector": {
-                "tipo": "DOMICILIO"
+                "tipo": "RECOGER"
             },
             "limit":state.pagesize
         },credentials.authentication);
