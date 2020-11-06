@@ -8,7 +8,7 @@
       <v-col cols="4" offset="1">
         <v-text-field label="Buscar" v-model="searchDisplay"></v-text-field>
       </v-col>
-      <v-col cols="4" offset="1">
+      <v-col cols="2" offset="1">
           <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
             <v-btn
               class="primary white--text my-3"
@@ -17,10 +17,78 @@
             >
           </router-link>
       </v-col>
+      <v-col cols="2" offset="1">
+          <v-switch
+            label="Mostrar Todas las Ordenes"
+            color="primary"
+            v-model="todas"
+          ></v-switch>
+      </v-col>
     </v-row>
     <v-container fluid>
-      <v-row>
+      <v-row v-if="todas">
         <v-col  v-for="(orden,index) in ordenesRecoger" :key="index" v-show="filtro(index)">
+          <template >
+            <v-card :loading="loading"  max-width="374" hover height="360" elevation="17">
+              <template slot="progress">
+                <v-progress-linear
+                  color="deep-purple"
+                  height="10"
+                  indeterminate
+                ></v-progress-linear>
+              </template>
+              <v-banner
+                style="color: white;"
+                elevation="6"
+                single-line
+                sticky
+                :class="{'red': orden.entregada==false,'green':orden.entregada==true}"
+              >
+                {{orden.entregada==false?'PENDIENTE':'ENTREGADA'}}
+              </v-banner>
+              <v-card class="overflow-y-auto pa-2" height="260" >
+                <h3>
+                  {{String(orden._id.substring(18, 24))}}
+                  {{ orden.cliente.nombreCompleto }}
+                </h3>
+                <div>
+                  <v-chip class="ma-2 v-card--hover" color="purple" outlined>
+                    <v-icon left> mdi-label </v-icon> Costo: $ •
+                    {{ orden.total}}
+                  </v-chip>
+                  <div>Tiempo de preparacion:</div>
+                  <div> {{ orden.cliente.tiempoPreparacion }}</div>
+                </div>
+                <v-divider class="mx-2"></v-divider>
+                <h3>Acciones</h3>
+                <div>
+                  <v-chip-group active-class="deep-purple accent-4 white--text" column>
+                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
+                    <agregar-productos-orden :orden="orden"/>
+                    <modificar-orden :orden="orden"/>
+                    <eliminar-orden :orden="orden" />
+                  </v-chip-group>
+                </div>
+              </v-card>
+              <v-divider></v-divider> 
+              <v-card-actions>
+                <v-footer absolute class="font-weight-medium">
+                  <v-chip-group>
+                    <v-chip class="ma-2" color="teal" text-color="white" @click="completeEtapa(orden)" :disabled="orden.entregada==true" dark>
+                      <v-avatar left>
+                        <v-icon>mdi-checkbox-marked-circle</v-icon>
+                      </v-avatar>
+                      Completar</v-chip>
+                    <detalle-recoger :orden="orden"/>
+                  </v-chip-group>
+                </v-footer>
+              </v-card-actions>           
+            </v-card>
+          </template>
+        </v-col>
+      </v-row>
+      <v-row v-else>
+        <v-col  v-for="(orden,index) in ordenesRecogerPendientes" :key="index" v-show="filtro(index)">
           <template >
             <v-card :loading="loading"  max-width="374" hover height="360" elevation="17">
               <template slot="progress">
@@ -94,11 +162,12 @@ import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 export default {
   components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard},
   computed: {
-    ...mapGetters(['ordenesRecoger']),
+    ...mapGetters(['ordenesRecoger', 'ordenesRecogerPendientes']),
   },
   data() {
     return {
       show: false,
+      todas: false,
       loading: false,
       dialog: false,
       searchDisplay: "",
@@ -114,9 +183,22 @@ export default {
     ...mapMutations(["showMessage"]),
     ...mapActions(['getOrdenesRecoger']),
     filtro(valor_orden) {
-      if (this.searchDisplay === "") return true;
-      let array = (this.ordenesRecoger[valor_orden].id + this.ordenesRecoger[valor_orden].cliente.nombreCompleto).toUpperCase();
-      return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+      if(this.todas){
+        if (this.searchDisplay === "") return true;
+        let array = (
+          this.ordenesRecoger[valor_orden].id + 
+          this.ordenesRecoger[valor_orden].cliente.nombreCompleto
+          ).toUpperCase();
+          return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+        }else{
+          if (this.searchDisplay === "") return true;
+          let array = (
+          this.ordenesRecogerPendientes[valor_orden].id + 
+          this.ordenesRecogerPendientes[valor_orden].cliente.nombreCompleto
+          ).toUpperCase();
+          return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+        }
+        
     },
     completeEtapa(orden) {
         this.loading = true;

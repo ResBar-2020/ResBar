@@ -3,12 +3,16 @@ import credentials from "./credentials";
 const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
-    ordenesRecoger: state => state.ordenes
+    ordenesRecoger: state => state.ordenes,
+    ordenesRecogerPendientes(state){
+        return state.ordenes.filter(orden => orden.entregada===false)
+     }
+
 };
 
 const state = {
     ordenes: [],
-    pagesize: 3,
+    pagesize: 4,
     nextPage: 1
 };
 
