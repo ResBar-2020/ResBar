@@ -7,7 +7,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="4" offset="1">
-          <v-text-field v-model="search" label="Buscar..." solo></v-text-field>
+          <v-text-field v-model="search" label="Buscar..."></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -15,7 +15,10 @@
           <v-switch label="Ordenes Activas" color="indigo"></v-switch>
         </v-col>
         <v-col cols="6" class="d-flex align-center justify-start">
-          <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
+          <router-link
+            :to="{ name: 'nuevaOrden' }"
+            style="text-decoration: none"
+          >
             <v-btn
               color="light-blue darken-4"
               class="utilities"
@@ -40,7 +43,7 @@
               <th scope="col">Tiempo preparacion</th>
               <th scope="col">Acciones</th>
             </thead>
-            <tbody v-if="filteredOrdenes != undefined">
+            <!--<tbody v-if="filteredOrdenes != undefined">
               <tr v-for="orden in filteredOrdenes" :key="orden._id">
                 <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
@@ -80,9 +83,13 @@
                   </nobr>
                 </td>
               </tr>
-            </tbody>
-            <tbody v-else>
-              <tr v-for="orden in allOrdenes" :key="orden._id">
+            </tbody>-->
+            <tbody>
+              <tr
+                v-for="(orden, index) in allOrdenes"
+                :key="index"
+                v-show="filtro(index)"
+              >
                 <td>{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
@@ -115,14 +122,13 @@
                 <td>{{ orden.tiempoPreparacion }}</td>
                 <td>
                   <nobr>
-                  <agregar-productos-orden :orden="orden"/>
-                  <modificar-orden :orden="orden"/>
-                  <eliminar-orden :orden="orden" />
+                    <agregar-productos-orden :orden="orden" />
+                    <modificar-orden :orden="orden" />
+                    <eliminar-orden :orden="orden" />
                   </nobr>
                 </td>
               </tr>
             </tbody>
-            
           </table>
         </v-col>
       </v-row>
@@ -138,20 +144,26 @@ import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 export default {
-  components: { HeaderDashboard, EliminarOrden, ModificarOrden, AgregarProductosOrden },
+  components: {
+    HeaderDashboard,
+    EliminarOrden,
+    ModificarOrden,
+    AgregarProductosOrden,
+  },
   computed: {
     ...mapGetters(["allOrdenes", "filteredOrdenes"]),
-    search:{
+    /*search:{
       get(){
         return this.$store.state.query;
       },
       set(val){
         this.$store.commit('setQuery', val)
       }
-    }
+    }*/
   },
   data() {
     return {
+      search: "",
       snackbar: {
         message: "desde ordenes",
         timout: 2000,
@@ -161,6 +173,19 @@ export default {
   methods: {
     ...mapMutations(["showMessage"]),
     ...mapActions(["getOrdenes"]),
+    filtro(valor_orden) {
+      if (this.search === "") return true;
+      let array = (
+        this.allOrdenes[valor_orden]._id +
+        this.allOrdenes[valor_orden].mesero +
+        this.allOrdenes[valor_orden].cliente.nombreCompleto +
+        this.allOrdenes[valor_orden].mesa +
+        this.allOrdenes[valor_orden].observacion +
+        this.allOrdenes[valor_orden].total +
+        this.allOrdenes[valor_orden].tipo
+      ).toUpperCase();
+      return array.indexOf(this.search.toUpperCase()) >= 0;
+    },
   },
   created() {
     this.getOrdenes();
@@ -172,8 +197,8 @@ export default {
 table {
   position: relative;
   text-align: center;
-  border-collapse: separate; 
-  border-spacing: 0 10px; 
+  border-collapse: separate;
+  border-spacing: 0 10px;
   margin-top: -10px; /* correct offset on first border spacing if desired */
 }
 thead {
@@ -186,8 +211,8 @@ th {
 tbody tr {
   transition: 0.5s;
   cursor: pointer;
-   border-radius:10px;
-   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 td {
   padding: 1em;
@@ -213,7 +238,6 @@ td {
 table tr:hover {
   background: #4c89b8;
   color: #fff;
-  transform: scale(1.1);
 }
 table tr:hover td:first-child {
   border-top-left-radius: 10px;
@@ -224,11 +248,10 @@ table tr:hover td:last-child {
   border-bottom-right-radius: 10px;
 }
 
-table  thead  th:first-child{
+table thead th:first-child {
   border-radius: 10px 0 0 0;
 }
-table  thead  th:last-child{
+table thead th:last-child {
   border-radius: 0 10px 0 0;
 }
-
 </style>
