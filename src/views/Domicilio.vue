@@ -112,7 +112,8 @@ export default {
                 return true;
                 var cad = this.ordenes[valor_orden]._id +
                 this.ordenes[valor_orden].cliente.nombreCompleto +
-                this.ordenes[valor_orden].cliente.direccion 
+                this.ordenes[valor_orden].cliente.direccion +
+                this.ordenes[valor_orden].total
             cad = cad.toUpperCase();
             if (cad.indexOf(this.searchDisplay.toUpperCase()) >= 0) return true;
             else return false;
