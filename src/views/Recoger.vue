@@ -115,7 +115,7 @@ export default {
     ...mapActions(['getOrdenesRecoger']),
     filtro(valor_orden) {
       if (this.searchDisplay === "") return true;
-      let array = (this.ordenes[valor_orden].id + this.ordenes[valor_orden].cliente.nombreCompleto).toUpperCase();
+      let array = (this.ordenesRecoger[valor_orden].id + this.ordenesRecoger[valor_orden].cliente.nombreCompleto).toUpperCase();
       return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
     },
     completeEtapa(orden) {
