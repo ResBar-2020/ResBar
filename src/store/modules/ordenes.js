@@ -3,7 +3,11 @@ import axios from 'axios'
 import credentials from "./credentials";
 const url = "http://localhost:5984/ordenes/"
 const getters = {
-    allOrdenes: state => state.ordenes
+    allOrdenes: state => state.ordenes,
+
+    noEntregadas(state){
+       return state.ordenes.filter(orden => orden.entregada===false)
+    }
 };
 
 const state = {
@@ -14,7 +18,9 @@ const state = {
 const actions = {
     async getOrdenes({commit}){
     const response = await axios.post(`${url}_find`, {
-        "selector":{}
+        "selector":{
+            
+        }
     }, credentials.authentication);
         commit('setOrdenes',response.data.docs);
     },

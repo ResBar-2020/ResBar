@@ -12,9 +12,6 @@
       </v-row>
       <v-row>
         <v-col cols="6" class="d-flex align-center justify-center">
-          <v-switch label="Ordenes Activas" color="indigo"></v-switch>
-        </v-col>
-        <v-col cols="6" class="d-flex align-center justify-start">
           <router-link
             :to="{ name: 'nuevaOrden' }"
             style="text-decoration: none"
@@ -28,6 +25,13 @@
             >
           </router-link>
         </v-col>
+        <v-col cols="6" class="d-flex align-center justify-start">
+          <v-switch
+            label="Mostrar Todas las Ordenes"
+            color="primary"
+            v-model="todas"
+          ></v-switch>
+        </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
@@ -40,16 +44,18 @@
               <th scope="col" class="d-none d-md-block">Observacion</th>
               <th scope="col">Total</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Tiempo preparacion</th>
+              <!--<th scope="col">Tiempo preparacion</th>-->
               <th scope="col">Acciones</th>
             </thead>
-            <tbody>
+            <tbody v-if="todas">
               <tr
                 v-for="(orden, index) in allOrdenes"
                 :key="index"
                 v-show="filtro(index)"
               >
-                <td class="d-none d-md-block">{{ String(orden._id.substring(18, 24)) }}</td>
+                <td class="d-none d-md-table">
+                  {{ String(orden._id.substring(18, 24)) }}
+                </td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
                 <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
@@ -58,27 +64,52 @@
                 <td>
                   <v-chip
                     dense
-                    class="utilities"
-                    v-if="orden.tipo === 'DOMICILIO'"
-                    color="red"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                  <v-chip
-                    dense
-                    class="utilities"
-                    v-else-if="orden.tipo === 'MESA'"
-                    color="light-blue darken-4"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                  <v-chip
-                    dense
-                    class="utilities"
-                    v-else
-                    color="green darken-3"
+                    :class="{
+                      red: orden.tipo === 'DOMICILIO',
+                      'light-blue darken-4': orden.tipo === 'MESA',
+                      'green darken-3': orden.tipo === 'RECOGER',
+                    }"
+                    style="color: #fff; font-weight: 500"
                     >{{ orden.tipo }}</v-chip
                   >
                 </td>
-                <td>{{ orden.tiempoPreparacion }}</td>
+                <!--<td>{{ orden.tiempoPreparacion }}</td>-->
+                <td>
+                  <nobr>
+                    <agregar-productos-orden :orden="orden" />
+                    <modificar-orden :orden="orden" />
+                    <eliminar-orden :orden="orden" />
+                  </nobr>
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else>
+              <tr
+                v-for="(orden, index) in noEntregadas"
+                :key="index"
+                v-show="filtro(index)"
+              >
+                <td class="d-none d-md-table">
+                  {{ String(orden._id.substring(18, 24)) }}
+                </td>
+                <td>{{ orden.mesero }}</td>
+                <td>{{ orden.cliente.nombreCompleto }}</td>
+                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
+                <td class="d-none d-md-block">{{ orden.observacion }}</td>
+                <td>${{ orden.total }}</td>
+                <td>
+                  <v-chip
+                    dense
+                    :class="{
+                      red: orden.tipo === 'DOMICILIO',
+                      'light-blue darken-4': orden.tipo === 'MESA',
+                      'green darken-3': orden.tipo === 'RECOGER',
+                    }"
+                    style="color: #fff; font-weight: 500"
+                    >{{ orden.tipo }}</v-chip
+                  >
+                </td>
+                <!--<td>{{ orden.tiempoPreparacion }}</td>-->
                 <td>
                   <nobr>
                     <agregar-productos-orden :orden="orden" />
@@ -110,10 +141,11 @@ export default {
     AgregarProductosOrden,
   },
   computed: {
-    ...mapGetters(["allOrdenes"]),
+    ...mapGetters(["allOrdenes", "noEntregadas"]),
   },
   data() {
     return {
+      todas: false,
       search: "",
       snackbar: {
         message: "desde ordenes",
