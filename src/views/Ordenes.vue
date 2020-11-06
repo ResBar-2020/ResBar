@@ -30,71 +30,30 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" class="d-flex align-center justify-center">
+        <v-col cols="12">
           <table>
             <thead>
-              <th scope="col">Id</th>
+              <th scope="col" class="d-none d-md-block">Id</th>
               <th scope="col">Mesero</th>
               <th scope="col">Cliente</th>
               <th scope="col">Mesa</th>
-              <th scope="col">Observacion</th>
+              <th scope="col" class="d-none d-md-block">Observacion</th>
               <th scope="col">Total</th>
               <th scope="col">Tipo</th>
               <th scope="col">Tiempo preparacion</th>
               <th scope="col">Acciones</th>
             </thead>
-            <!--<tbody v-if="filteredOrdenes != undefined">
-              <tr v-for="orden in filteredOrdenes" :key="orden._id">
-                <td>{{ String(orden._id.substring(18, 24)) }}</td>
-                <td>{{ orden.mesero }}</td>
-                <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
-                <td>{{ orden.observacion }}</td>
-                <td>${{ orden.total }}</td>
-                <td>
-                  <v-chip
-                    dense
-                    class="utilities"
-                    v-if="orden.tipo === 'DOMICILIO'"
-                    color="red"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                  <v-chip
-                    dense
-                    class="utilities"
-                    v-else-if="orden.tipo === 'MESA'"
-                    color="light-blue darken-4"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                  <v-chip
-                    dense
-                    class="utilities"
-                    v-else
-                    color="green darken-3"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                </td>
-                <td>{{ orden.tiempoPreparacion }}</td>
-                <td>
-                  <nobr>
-                  <agregar-productos-orden :orden="orden"/>
-                  <modificar-orden :orden="orden"/>
-                  <eliminar-orden :orden="orden" />
-                  </nobr>
-                </td>
-              </tr>
-            </tbody>-->
             <tbody>
               <tr
                 v-for="(orden, index) in allOrdenes"
                 :key="index"
                 v-show="filtro(index)"
               >
-                <td>{{ String(orden._id.substring(18, 24)) }}</td>
+                <td class="d-none d-md-block">{{ String(orden._id.substring(18, 24)) }}</td>
                 <td>{{ orden.mesero }}</td>
                 <td>{{ orden.cliente.nombreCompleto }}</td>
                 <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
-                <td>{{ orden.observacion }}</td>
+                <td class="d-none d-md-block">{{ orden.observacion }}</td>
                 <td>${{ orden.total }}</td>
                 <td>
                   <v-chip
@@ -151,15 +110,7 @@ export default {
     AgregarProductosOrden,
   },
   computed: {
-    ...mapGetters(["allOrdenes", "filteredOrdenes"]),
-    /*search:{
-      get(){
-        return this.$store.state.query;
-      },
-      set(val){
-        this.$store.commit('setQuery', val)
-      }
-    }*/
+    ...mapGetters(["allOrdenes"]),
   },
   data() {
     return {
@@ -200,6 +151,7 @@ table {
   border-collapse: separate;
   border-spacing: 0 10px;
   margin-top: -10px; /* correct offset on first border spacing if desired */
+  width: 90vw;
 }
 thead {
   background: #00579c;
