@@ -3,12 +3,12 @@ import credentials from "./credentials";
 const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
-    ordenes: state => state.ordenes
+    ordenesRecoger: state => state.ordenes
 };
 
 const state = {
     ordenes: [],
-    pagesize: 1,
+    pagesize: 3,
     nextPage: 1
 };
 
@@ -28,7 +28,7 @@ const actions = {
 
     async modificarEtapa({commit}, orden){
         const response = await axios.patch(`${BASE_URL}`,orden,credentials.authentication);
-      commit('updateOrden', response.data.docs)
+      commit('updateOrden', response.data.docs);
     },
 };
 
