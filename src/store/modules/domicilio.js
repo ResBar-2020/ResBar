@@ -8,7 +8,7 @@ const getters = {
 
 const state = {
     ordenes: [],
-    pagesize: 1,
+    pagesize: 4,
     nextPage: 1
 };
 
