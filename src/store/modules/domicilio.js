@@ -3,7 +3,7 @@ import credentials from "./credentials";
 const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
-    ordenes: state => state.ordenes
+    ordenesDomicilio: state => state.ordenes
 };
 
 const state = {

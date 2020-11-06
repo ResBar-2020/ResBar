@@ -13,7 +13,7 @@
     </v-row>
     <v-container fluid>
       <v-row>
-        <v-col  v-for="(orden,index) in ordenes" :key="index" v-show="filtro(index)">
+        <v-col  v-for="(orden,index) in ordenesDomicilio" :key="index" v-show="filtro(index)">
           <template >
             <v-card :loading="loading" max-width="374" hover height="360" elevation="17">
               <template slot="progress">
@@ -88,7 +88,7 @@ import ModificarOrden from "../components/ordenes/ModificarOrden";
 export default {
   components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard},
   computed: {
-    ...mapGetters(['ordenes','idiomas']),
+    ...mapGetters(['ordenesDomicilio','idiomas']),
   },
   data() {
     return {
