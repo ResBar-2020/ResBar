@@ -20,7 +20,7 @@
     </v-row>
     <v-container fluid>
       <v-row>
-        <v-col  v-for="(orden,index) in ordenes" :key="index" v-show="filtro(index)">
+        <v-col  v-for="(orden,index) in ordenesRecoger" :key="index" v-show="filtro(index)">
           <template >
             <v-card :loading="loading"  max-width="374" hover height="360" elevation="17">
               <template slot="progress">
@@ -94,7 +94,7 @@ import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 export default {
   components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard},
   computed: {
-    ...mapGetters(['ordenes']),
+    ...mapGetters(['ordenesRecoger']),
   },
   data() {
     return {
@@ -115,7 +115,7 @@ export default {
     ...mapActions(['getOrdenesRecoger']),
     filtro(valor_orden) {
       if (this.searchDisplay === "") return true;
-      let array = (this.ordenes[valor_orden].id + this.ordenes[valor_orden].cliente.nombreCompleto).toUpperCase();
+      let array = (this.ordenesRecoger[valor_orden].id + this.ordenesRecoger[valor_orden].cliente.nombreCompleto).toUpperCase();
       return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
     },
     completeEtapa(orden) {
