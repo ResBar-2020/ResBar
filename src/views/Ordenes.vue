@@ -157,17 +157,31 @@ export default {
     ...mapMutations(["showMessage"]),
     ...mapActions(["getOrdenes"]),
     filtro(valor_orden) {
-      if (this.search === "") return true;
-      let array = (
-        this.allOrdenes[valor_orden]._id +
-        this.allOrdenes[valor_orden].mesero +
-        this.allOrdenes[valor_orden].cliente.nombreCompleto +
-        this.allOrdenes[valor_orden].mesa +
-        this.allOrdenes[valor_orden].observacion +
-        this.allOrdenes[valor_orden].total +
-        this.allOrdenes[valor_orden].tipo
-      ).toUpperCase();
-      return array.indexOf(this.search.toUpperCase()) >= 0;
+      if (this.todas) {
+        if (this.search === "") return true;
+        let array = (
+          this.allOrdenes[valor_orden]._id +
+          this.allOrdenes[valor_orden].mesero +
+          this.allOrdenes[valor_orden].cliente.nombreCompleto +
+          this.allOrdenes[valor_orden].mesa +
+          this.allOrdenes[valor_orden].observacion +
+          this.allOrdenes[valor_orden].total +
+          this.allOrdenes[valor_orden].tipo
+        ).toUpperCase();
+        return array.indexOf(this.search.toUpperCase()) >= 0;
+      } else {
+        if (this.search === "") return true;
+        let array = (
+          this.noEntregadas[valor_orden]._id +
+          this.noEntregadas[valor_orden].mesero +
+          this.noEntregadas[valor_orden].cliente.nombreCompleto +
+          this.noEntregadas[valor_orden].mesa +
+          this.noEntregadas[valor_orden].observacion +
+          this.noEntregadas[valor_orden].total +
+          this.noEntregadas[valor_orden].tipo
+        ).toUpperCase();
+        return array.indexOf(this.search.toUpperCase()) >= 0;
+      }
     },
   },
   created() {
