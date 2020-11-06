@@ -13,7 +13,7 @@
     </v-row>
     <v-container fluid>
       <v-row>
-        <v-col  v-for="(orden,index) in ordenes" :key="index" v-show="filtro(index)">
+        <v-col  v-for="(orden,index) in ordenesDomicilio" :key="index" v-show="filtro(index)">
           <template >
             <v-card :loading="loading" max-width="374" hover height="360" elevation="17">
               <template slot="progress">
@@ -88,7 +88,7 @@ import ModificarOrden from "../components/ordenes/ModificarOrden";
 export default {
   components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard},
   computed: {
-    ...mapGetters(['ordenes','idiomas']),
+    ...mapGetters(['ordenesDomicilio','idiomas']),
   },
   data() {
     return {
@@ -108,9 +108,14 @@ export default {
     ...mapMutations(["showMessage"]),
     ...mapActions(['getOrdenesDomicilio','getIdioma']),
     filtro(valor_orden) {
-      if (this.searchDisplay === "") return true;
-      let array = (this.ordenes[valor_orden].id + this.ordenes[valor_orden].cliente.nombreCompleto).toUpperCase();
-      return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+       if (this.searchDisplay == "")
+                return true;
+                var cad = this.ordenes[valor_orden]._id +
+                this.ordenes[valor_orden].cliente.nombreCompleto +
+                this.ordenes[valor_orden].cliente.direccion 
+            cad = cad.toUpperCase();
+            if (cad.indexOf(this.searchDisplay.toUpperCase()) >= 0) return true;
+            else return false;
     },
     completeEtapa(orden) {
         this.loading = true;
