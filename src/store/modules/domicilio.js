@@ -1,6 +1,5 @@
 import axios from 'axios';
 import credentials from "./credentials";
-const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
     ordenes: state => state.ordenes
@@ -17,27 +16,36 @@ const actions = {
     /* obtener ordenes de tipo DOMICILIO
     * mediante selectores*/
     async getOrdenesDomicilio({commit}){
-        const response = await axios.post(`${BASE_URL}_find`,{
+        const response = await axios.post(`/ordenes/_find`,{
             "selector": {
                 "tipo": "DOMICILIO"
             },
             "limit":state.pagesize
         },credentials.authentication);
-        commit('setOrdenes',response.data.docs);
+        commit('setOrdenesDomicilio',response.data.docs);
     },
 
-    async modificarEtapa({commit}, orden){
-        const response = await axios.patch(`${BASE_URL}`,orden,credentials.authentication);
-      commit('updateOrden', response.data.docs);
+    /* modificar el indicador del progreso de la orden
+    * */
+    async modificarEtapaDomicilio({commit}, orden){
+        const response = await axios.put(`/ordenes/${orden._id}`,orden,{
+            params: {
+                "rev": orden._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        });
+      commit('updateOrdenDomicilio', response.data);
     },
 };
 
 const mutations = {
-    setOrdenes(state,data){
+    setOrdenesDomicilio(state,data){
       state.ordenes = data;
     },
-    updateOrden(state,data){
-        state.ordenes +=data;
+    updateOrdenDomicilio(state,data){
+     //TODO: notificar exitó o error deacuerdo al statusCode devuelto
+      console.log(data);
     }
 };
 

@@ -16,14 +16,12 @@ const actions = {
                 "_id":"ES"
             }
             },credentials.authentication);
-        console.log('response data: ',response.data);
         commit('languajes',response.data.docs);
     }
 };
 
 const mutations={
     languajes(state,data){
-        console.log(data);
         state.idioma = data;
     }
 };
