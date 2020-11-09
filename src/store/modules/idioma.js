@@ -23,12 +23,12 @@ const actions = {
             "selector": {
                 "_id": parametroIdioma.data.docs[0].valor
             }
+
         }, credentials.authentication);
         console.log('response data: ', response.data.docs[0]);
         commit('languajes', response.data.docs);
     },
 };
-
 const mutations = {
     languajes(state, data) {
         state.idioma = data;
