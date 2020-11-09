@@ -16,7 +16,7 @@ const actions = {
                 "_id":"ES"
             }
             },credentials.authentication);
-        console.log('response data: ',response.data);
+        console.log('response data: ',response.data.docs);
         commit('languajes',response.data.docs);
     }
 };

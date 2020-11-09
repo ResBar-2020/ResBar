@@ -11,7 +11,7 @@ axios.defaults.baseURL = "http://localhost:5984"
 
 export default new Vuex.Store({
 
-  
+
   state: {
     rol: localStorage.getItem("rol") || null,
     username: localStorage.getItem("username") || null,
@@ -36,45 +36,47 @@ export default new Vuex.Store({
       state.snackbar.show = true;
       state.snackbar.timeout = params.timeout || 3000;
     },
-    loginError(state, value){
+    loginError(state, value) {
       state.error = value
     }
   },
   actions: {
-    authenticate: async (context, credentials) => {
+    authenticate: async (context, user) => {
+      
+      if (user.loggin != undefined && user.clave != undefined) {
+        try {
+          axios.post(`${axios.defaults.baseURL}/usuarios/_find`, {
+            //Parametros de la query
+            "selector": {
+              loggin: user.loggin,
+              clave: user.clave
+            }
 
-      try {
-        axios.post(`${axios.defaults.baseURL}/usuarios/_find`, {
-          //Parametros de la query
-          "selector": {
-            loggin: credentials.loggin,
-            clave: credentials.clave
-          }
+          }, authentication.authentication).then((res) => {
+            //Si el objeto no esta vacio asigna los valores
+            if (res.data.docs.length > 0) {
+              localStorage.setItem("rol", res.data.docs[0].rol);
+              localStorage.setItem("username", res.data.docs[0].nombreCompleto);
+              context.commit("authenticate", res.data.docs[0]);
+              //Si el usuario o contrasenia no coinciden
+            } else if (user.loggin != "" && user.clave != "") {
+              context.commit("loginError", true)
+            }
 
-        }, authentication.authentication).then((res) => {
-          //Si el objeto no esta vacio asigna los valores
-          if (res.data.docs.length > 0) {
-            localStorage.setItem("rol", res.data.docs[0].rol);
-            localStorage.setItem("username", res.data.docs[0].nombreCompleto);
-            context.commit("authenticate", res.data.docs[0]);
-            
-          //Si el usuario o contrasenia no coinciden
-          }else if(credentials.loggin != "" && credentials.clave != ""){
-            context.commit("loginError", true)
-          }
-        
-        })
-        
+          })
 
 
-      } catch (error) {
-        console.log(error);
+        } catch (error) {
+          console.log(error);
+        }
       }
-
     }
 
   },
   modules: {
-    domicilio, ordenes,  idioma, recoger
+    domicilio,
+    ordenes,
+    idioma,
+    recoger
   }
 })

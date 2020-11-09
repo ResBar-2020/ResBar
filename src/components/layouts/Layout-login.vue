@@ -3,19 +3,16 @@
     <v-main>
       <v-card width="500" class="mx-auto mt-16" elevation="10">
         <v-card-title class="primary white--text justify-center text-uppercase">
-          Inicia sesión en Resbar
+          Resbar
         </v-card-title>
         <v-card-text>
-          <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation>
+          <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
               label="Nombre de usuario"
               prepend-icon="mdi-account-circle"
               v-model="user.loggin"
               :rules="validRules"
-              autocomplete = "off"
+              autocomplete="off"
             />
             <v-text-field
               label="Contraseña"
@@ -29,18 +26,32 @@
           </v-form>
         </v-card-text>
         <div class="text-center">
-        <label v-if="error" class="errorLogin">El usuario y la contraseña no coinciden</label>
+          <label v-if="error" class="errorLogin"
+            >El usuario y la contraseña no coinciden</label
+          >
         </div>
         <v-divider></v-divider>
         <v-card-actions>
-          <v-btn
-            class="mx-auto my-3"
-            color="primary"
-            @click="validate(); authenticate(user)"
-            @keyup.enter="authenticate(user)"
-            >Iniciar Sesión</v-btn
-          >
+          <v-row>
+            <v-col cols="12">
+              <v-btn
+                class="mx-auto my-3"
+                color="primary"
+                @click="
+                  validate();
+                  authenticate(user);
+                "
+                @keyup.enter="authenticate(user)"
+                >Iniciar Sesión</v-btn
+              >
+            </v-col>
+          </v-row>
         </v-card-actions>
+        <v-row justify="center"  no-gutters> 
+        <v-col class="py-4 text-center" cols="12">
+          <span>Copyright © Diseño I 2020</span>
+          </v-col>
+      </v-row>
       </v-card>
     </v-main>
   </v-app>
@@ -53,36 +64,34 @@ export default {
     return {
       valid: true,
       showPassword: false,
+      idiomasName:[],
       user: {
         loggin: "",
         clave: "",
       },
-      validRules: [
-        v => !!v || 'El campo es requerido',
-      ]
+      validRules: [(v) => !!v || "El campo es requerido"],
     };
   },
   methods: {
-    ...mapActions(["authenticate"]),
+    ...mapActions(["authenticate","getIdioma"]),
     
-    validate () {
-        this.$refs.form.validate()
-      },
+    validate() {
+      this.$refs.form.validate();
+    },
   },
   computed: {
     ...mapState(["username"]),
-    ...mapGetters(["error"])
+    ...mapGetters(["error","idiomas"]),
   },
   watch: {
     username: function () {
-      this.$router.go("/ordenes");
+      this.$router.push({name: "Ordenes"});
+      this.$router.go();
     },
   },
   created() {
-    this.user = {
-      loggin: "",
-      clave: "",
-    };
+    this.getIdioma();
+    this.user = {};
   },
 };
 </script>
@@ -98,7 +107,7 @@ export default {
   transform: translate(-30%, -30%);
   width: 400px;
 }
-.errorLogin{
+.errorLogin {
   color: red;
   text-shadow: 0 0 20px red;
 }

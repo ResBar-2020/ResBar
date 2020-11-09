@@ -51,7 +51,7 @@
               <tr
                 v-for="(orden, index) in allOrdenes"
                 :key="index"
-                v-show="filtro(index)"
+                v-show="filtrar(index)"
               >
                 <td class="d-none d-md-table">
                   {{ String(orden._id.substring(18, 24)) }}
@@ -87,7 +87,7 @@
               <tr
                 v-for="(orden, index) in noEntregadas"
                 :key="index"
-                v-show="filtro(index)"
+                v-show="filtrar(index)"
               >
                 <td class="d-none d-md-table">
                   {{ String(orden._id.substring(18, 24)) }}
@@ -156,7 +156,7 @@ export default {
   methods: {
     ...mapMutations(["showMessage"]),
     ...mapActions(["getOrdenes"]),
-    filtro(valor_orden) {
+    filtrar(valor_orden) {
       if (this.todas) {
         if (this.search === "") return true;
         let array = (
