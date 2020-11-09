@@ -7,6 +7,11 @@
         <router-view />
       </v-container>
     </v-main>
+    <v-footer dark padless>
+      <v-row justify="center"  no-gutters> 
+        <v-col class="py-4 text-center white--text" cols="12">Copyright © Diseño I 2020</v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 

@@ -55,6 +55,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("rol");
+      localStorage.removeItem("username");
       this.$router.go("Login");
     }
   },

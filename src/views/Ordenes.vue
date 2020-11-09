@@ -1,128 +1,130 @@
 <template>
   <div>
-    <header-dashboard
-      title="Resbar Ordenes"
-      subtitle="Ordenes"
-    ></header-dashboard>
-    <v-container fluid>
-      <v-row>
-        <v-col cols="4" offset="1">
-          <v-text-field v-model="search" label="Buscar..."></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="6" class="d-flex align-center justify-center">
-          <router-link
-            :to="{ name: 'nuevaOrden' }"
-            style="text-decoration: none"
-          >
-            <v-btn
-              color="light-blue darken-4"
-              class="utilities"
-              @click="showMessage(snackbar)"
+    <div v-for="(idioma) in idiomas" :key="idioma._id" >
+      <header-dashboard
+        :title="idioma.views[1].labels.title"
+        :subtitle="idioma.views[1].labels.subtitle"
+      ></header-dashboard>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="4" offset="1">
+            <v-text-field v-model="search" :label="idioma.views[1].labels.search"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="6" class="d-flex align-center justify-center">
+            <router-link
+              :to="{ name: 'nuevaOrden' }"
+              style="text-decoration: none"
             >
-              <v-icon>mdi-plus</v-icon> Nueva Orden</v-btn
-            >
-          </router-link>
-        </v-col>
-        <v-col cols="6" class="d-flex align-center justify-start">
-          <v-switch
-            label="Mostrar Todas las Ordenes"
-            color="primary"
-            v-model="todas"
-          ></v-switch>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12">
-          <table>
-            <thead>
-              <th scope="col" class="d-none d-md-block">Id</th>
-              <th scope="col">Mesero</th>
-              <th scope="col">Cliente</th>
-              <th scope="col">Mesa</th>
-              <th scope="col" class="d-none d-md-block">Observacion</th>
-              <th scope="col">Total</th>
-              <th scope="col">Tipo</th>
-              <!--<th scope="col">Tiempo preparacion</th>-->
-              <th scope="col">Acciones</th>
-            </thead>
-            <tbody v-if="todas">
-              <tr
-                v-for="(orden, index) in allOrdenes"
-                :key="index"
-                v-show="filtro(index)"
+              <v-btn
+                color="light-blue darken-4"
+                class="utilities"
+                @click="showMessage(snackbar)"
               >
-                <td class="d-none d-md-table">
-                  {{ String(orden._id.substring(18, 24)) }}
-                </td>
-                <td>{{ orden.mesero }}</td>
-                <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
-                <td class="d-none d-md-block">{{ orden.observacion }}</td>
-                <td>${{ orden.total }}</td>
-                <td>
-                  <v-chip
-                    dense
-                    :class="{
-                      red: orden.tipo === 'DOMICILIO',
-                      'light-blue darken-4': orden.tipo === 'MESA',
-                      'green darken-3': orden.tipo === 'RECOGER',
-                    }"
-                    style="color: #fff; font-weight: 500"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                </td>
-                <!--<td>{{ orden.tiempoPreparacion }}</td>-->
-                <td>
-                  <nobr>
-                    <agregar-productos-orden :orden="orden" />
-                    <modificar-orden :orden="orden" />
-                    <eliminar-orden :orden="orden" />
-                  </nobr>
-                </td>
-              </tr>
-            </tbody>
-            <tbody v-else>
-              <tr
-                v-for="(orden, index) in noEntregadas"
-                :key="index"
-                v-show="filtro(index)"
+                <v-icon>mdi-plus</v-icon> {{idioma.views[1].labels.new}}</v-btn
               >
-                <td class="d-none d-md-table">
-                  {{ String(orden._id.substring(18, 24)) }}
-                </td>
-                <td>{{ orden.mesero }}</td>
-                <td>{{ orden.cliente.nombreCompleto }}</td>
-                <td>{{ orden.mesa ? orden.mesa : "Sin Mesa" }}</td>
-                <td class="d-none d-md-block">{{ orden.observacion }}</td>
-                <td>${{ orden.total }}</td>
-                <td>
-                  <v-chip
-                    dense
-                    :class="{
-                      red: orden.tipo === 'DOMICILIO',
-                      'light-blue darken-4': orden.tipo === 'MESA',
-                      'green darken-3': orden.tipo === 'RECOGER',
-                    }"
-                    style="color: #fff; font-weight: 500"
-                    >{{ orden.tipo }}</v-chip
-                  >
-                </td>
-                <!--<td>{{ orden.tiempoPreparacion }}</td>-->
-                <td>
-                  <nobr>
-                    <agregar-productos-orden :orden="orden" />
-                    <modificar-orden :orden="orden" />
-                    <eliminar-orden :orden="orden" />
-                  </nobr>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </v-col>
-      </v-row>
-    </v-container>
+            </router-link>
+          </v-col>
+          <v-col cols="6" class="d-flex align-center justify-start">
+            <v-switch
+              :label="idioma.views[1].labels.toggle"
+              color="primary"
+              v-model="todas"
+            ></v-switch>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <table>
+              <thead>
+                <th scope="col" class="d-none d-md-block">Id</th>
+                <th scope="col">{{idioma.views[1].labels.table.waiter}}</th>
+                <th scope="col">{{idioma.views[1].labels.table.client}}</th>
+                <th scope="col">{{idioma.views[1].labels.table.table}}</th>
+                <th scope="col" class="d-none d-md-block">{{idioma.views[1].labels.table.observation}}</th>
+                <th scope="col">{{idioma.views[1].labels.table.total}}</th>
+                <th scope="col">{{idioma.views[1].labels.table.orderType}}</th>
+                <!--<th scope="col">Tiempo preparacion</th>-->
+                <th scope="col">{{idioma.views[1].labels.table.options}}</th>
+              </thead>
+              <tbody v-if="todas">
+                <tr
+                  v-for="(orden, index) in allOrdenes"
+                  :key="index"
+                  v-show="filtrar(index)"
+                >
+                  <td class="d-none d-md-block">
+                    {{ String(orden._id.substring(18, 24)) }}
+                  </td>
+                  <td>{{ orden.mesero }}</td>
+                  <td>{{ orden.cliente.nombreCompleto }}</td>
+                  <td>{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-block">{{ orden.observacion }}</td>
+                  <td>${{ orden.total }}</td>
+                  <td>
+                    <v-chip
+                      dense
+                      :class="{
+                        red: orden.tipo === 'DOMICILIO',
+                        'light-blue darken-4': orden.tipo === 'MESA',
+                        'green darken-3': orden.tipo === 'RECOGER',
+                      }"
+                      style="color: #fff; font-weight: 500"
+                      >{{ orden.tipo }}</v-chip
+                    >
+                  </td>
+                  <!--<td>{{ orden.tiempoPreparacion }}</td>-->
+                  <td>
+                    <nobr>
+                      <agregar-productos-orden :orden="orden" />
+                      <modificar-orden :orden="orden" />
+                      <eliminar-orden :orden="orden" />
+                    </nobr>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody v-else>
+                <tr
+                  v-for="(orden, index) in noEntregadas"
+                  :key="index"
+                  v-show="filtrar(index)"
+                >
+                  <td class="d-none d-md-block">
+                    {{ String(orden._id.substring(18, 24)) }}
+                  </td>
+                  <td>{{ orden.mesero }}</td>
+                  <td>{{ orden.cliente.nombreCompleto }}</td>
+                  <td>{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-block">{{ orden.observacion }}</td>
+                  <td>${{ orden.total }}</td>
+                  <td>
+                    <v-chip
+                      dense
+                      :class="{
+                        red: orden.tipo === 'DOMICILIO',
+                        'light-blue darken-4': orden.tipo === 'MESA',
+                        'green darken-3': orden.tipo === 'RECOGER',
+                      }"
+                      style="color: #fff; font-weight: 500"
+                      >{{ orden.tipo }}</v-chip
+                    >
+                  </td>
+                  <!--<td>{{ orden.tiempoPreparacion }}</td>-->
+                  <td>
+                    <nobr>
+                      <agregar-productos-orden :orden="orden" />
+                      <modificar-orden :orden="orden" />
+                      <eliminar-orden :orden="orden" />
+                    </nobr>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </v-col>
+        </v-row>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -141,7 +143,7 @@ export default {
     AgregarProductosOrden,
   },
   computed: {
-    ...mapGetters(["allOrdenes", "noEntregadas"]),
+    ...mapGetters(["allOrdenes", "noEntregadas", "idiomas"]),
   },
   data() {
     return {
@@ -155,8 +157,8 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getOrdenes"]),
-    filtro(valor_orden) {
+    ...mapActions(["getOrdenes", "getIdioma"]),
+    filtrar(valor_orden) {
       if (this.todas) {
         if (this.search === "") return true;
         let array = (
@@ -185,6 +187,7 @@ export default {
     },
   },
   created() {
+    this.getIdioma();
     this.getOrdenes();
   },
 };
@@ -192,10 +195,8 @@ export default {
 
 <style scoped>
 table {
-  position: relative;
   text-align: center;
-  border-collapse: separate;
-  border-spacing: 0 10px;
+  border-collapse: collapse;
   margin-top: -10px; /* correct offset on first border spacing if desired */
   width: 90vw;
 }
@@ -204,12 +205,13 @@ thead {
   color: #fff;
 }
 th {
+  text-transform: capitalize;
   padding: 1em;
 }
 tbody tr {
   transition: 0.5s;
   cursor: pointer;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
 }
 td {
@@ -235,9 +237,10 @@ td {
 
 table tr:hover {
   background: #4c89b8;
+  box-shadow: 0 0.125rem 0.8rem #00579c;
   color: #fff;
 }
-table tr:hover td:first-child {
+/*table tr:hover td:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -251,5 +254,5 @@ table thead th:first-child {
 }
 table thead th:last-child {
   border-radius: 0 10px 0 0;
-}
+}*/
 </style>
