@@ -33,7 +33,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-row>
-            <v-col cols="12">
+            <v-col class="marg" cols="12">
               <v-btn
                 class="mx-auto my-3"
                 color="primary"
@@ -48,8 +48,8 @@
           </v-row>
         </v-card-actions>
         <v-row justify="center"  no-gutters> 
-        <v-col class="py-4 text-center" cols="12">
-          <span>Copyright © Diseño I 2020</span>
+        <v-col class="py-4 text-center marg" cols="12">
+          <span class="copyrigth">Copyright © Diseño I 2020</span>
           </v-col>
       </v-row>
       </v-card>
@@ -96,6 +96,16 @@ export default {
 };
 </script>
 <style scoped>
+.v-btn:hover{
+  box-shadow: 0 10px 45px #01579b;
+}
+.copyrigth{
+  text-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+}
+.marg{
+  margin-top: -25px;
+}
+
 .v-main {
   background: url("../../assets/images/bg.jpg");
   background-size: cover;
