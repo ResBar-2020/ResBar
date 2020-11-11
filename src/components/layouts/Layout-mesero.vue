@@ -23,7 +23,7 @@ import routesAside from "../Routes-aside.vue";
 export default {
   data: () => ({
     items: [
-      { title: "Ordenes", route: "/ordenes", icon: "mdi-clipboard-text" },
+      { title: "Ordenes", route: "/", icon: "mdi-clipboard-text" },
       { title: "Domicilio", route: "/domicilio", icon: "mdi-truck" },
       {
         title: "Clientes",

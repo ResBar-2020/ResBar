@@ -89,7 +89,6 @@ export default {
   },
   watch: {
     username: function () {
-      this.$router.push({ name: "Ordenes" });
       this.$router.go();
     },
   },
