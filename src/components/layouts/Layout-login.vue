@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <div v-for="idioma in idiomas" :key="idioma._id">
-        <v-card width="500" class="mx-auto mt-16" elevation="10">
+        <v-card class="mx-auto mt-16" elevation="10">
           <v-card-title
             class="primary white--text justify-center text-uppercase"
           >
@@ -110,15 +110,15 @@ export default {
 }
 
 .v-main {
-  background: url("../../assets/images/bg.jpg");
+  background: url("../../assets/images/background.jpg");
   background-size: cover;
 }
 .v-card {
   position: absolute;
-  top: 20%;
-  left: 30%;
+  top: 25%;
+  left: 15%;
   transform: translate(-30%, -30%);
-  width: 400px;
+  width: 35em;
 }
 .errorLogin {
   color: red;
