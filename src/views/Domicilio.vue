@@ -13,65 +13,47 @@
       <v-col cols="2">
         <v-switch
                 v-model="showComplete"
-                label="Todas la Ordenes"
+                :label="idioma.views[0].labels.showAll"
                 color="indigo darken-3"
-                @change="initLista"
+                @change="changeLista"
                 hide-details
         ></v-switch>
       </v-col>
     </v-row>
     <v-container fluid>
-      <v-alert
-              v-model="alert"
-              dismissible
-              color="red"
-              border="left"
-              elevation="2"
-              colored-border
-              icon="mdi-alert"
-      >
-        <strong>Error </strong> la orden <strong>NO ESTA COBRADA</strong> dfck!.
-      </v-alert>
       <v-row>
         <v-col  v-for="(orden,index) in listaDomicilios" :key="index" v-show="filtro(index)">
           <template >
-            <v-card :loading="loading" max-width="374" hover height="360" elevation="17">
-              <template slot="progress">
-                <v-progress-linear
-                  color="deep-purple"
-                  height="10"
-                  indeterminate
-                ></v-progress-linear>
-              </template>
+            <v-card  max-width="374" hover height="360" elevation="17">
               <v-banner
                 elevation="6"
                 single-line
                 color="white--text"
                 sticky
-                :class="{'indigo lighten-2': orden.domicilioEtapa===0,'blue accent-4':orden.domicilioEtapa===1,'blue darken-4':orden.domicilioEtapa===2}"
+                :class="{'primary lighten-3': orden.domicilioEtapa===0,'primary':orden.domicilioEtapa===1,'primary darken-4':orden.domicilioEtapa===2}"
               >
                 {{orden.domicilioEtapa===0?idioma.views[0].labels.state.todo:orden.domicilioEtapa===1?idioma.views[0].labels.state.inprocess:idioma.views[0].labels.state.complete}}
               </v-banner>
-              <v-card class="overflow-y-auto pa-2" height="260" >
+              <v-card class="overflow-y-auto pa-2 scroll-hide" height="260" >
                 <h3>
                   {{ String(orden._id.substring(18, 24)) }}
                   {{ orden.cliente.nombreCompleto }}
                 </h3>
                 <div>
-                  <v-chip class="ma-2 v-card--hover" color="purple" outlined>
+                  <v-chip class="ma-2 v-card--hover"  color="purple" outlined>
                     <v-icon left> mdi-label </v-icon> Costo: $ •
-                    {{ orden.total + orden.costoEnvio }}
+                    {{ orden.total + orden.costoEnvio  }}
                   </v-chip>
                   <div>{{idioma.views[0].labels.direction +':'+ orden.cliente.direccion }}</div>
                 </div>
                 <v-divider class="mx-2"></v-divider>
                 <h3>{{idioma.views[0].labels.actions.title}}</h3>
                 <div>
-                  <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
+                  <v-chip-group active-class="deep-purple accent-4 white--text"  column>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center white--text action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
                     <agregar-productos-orden :orden="orden"/>
                     <modificar-orden :orden="orden"/>
-                    <eliminar-orden :orden="orden" />
+                    <eliminar-orden :orden="orden"  />
                   </v-chip-group>
                 </div>
               </v-card>
@@ -79,7 +61,7 @@
               <v-card-actions>
                 <v-footer absolute class="font-weight-medium">
                   <v-chip-group class="col">
-                    <v-chip class="ma-2 " color="teal" text-color="white" @click="completeStep(orden)" :disabled="orden.domicilioEtapa===2" dark>
+                    <v-chip class="ma-2 " color="teal" text-color="white" @click="completarEtapa(orden)" :disabled="orden.domicilioEtapa===2" dark>
                       <v-avatar left>
                         <v-icon>mdi-checkbox-marked-circle</v-icon>
                       </v-avatar>
@@ -105,6 +87,8 @@ import DetalleDomicilio from "../components/domicilio/DetalleDomicilio";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
+import { toastAlert } from "../store/modules/utilidades.js";
+
 export default {
   components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard},
   computed: {
@@ -112,9 +96,6 @@ export default {
   },
   data() {
     return {
-      //eliminar loading actual y cambiar por uno más apropiado.
-      loading: false,
-      alert: false,
       dialog: false,
       showComplete: false,
       searchDisplay: "",
@@ -133,62 +114,63 @@ export default {
      * Buscar coincidencias acorde el filtro.
      * */
     filtro(valor_orden) {
-       if (this.searchDisplay === "")
-                return true;
-                var cad = this.listaDomicilios[valor_orden]._id +
-                this.listaDomicilios[valor_orden].cliente.nombreCompleto +
-                this.listaDomicilios[valor_orden].cliente.direccion 
-            cad = cad.toUpperCase();
-            if (cad.indexOf(this.searchDisplay.toUpperCase()) >= 0) return true;
-            else return false;
+      if (this.searchDisplay === "") return true;
+      let cad = this.listaDomicilios[valor_orden]._id + this.listaDomicilios[valor_orden].cliente.nombreCompleto + this.listaDomicilios[valor_orden].cliente.direccion
+            return cad.toUpperCase().indexOf(this.searchDisplay.toUpperCase()) >= 0;
     },
     /*  modificar el progreso de la orden a domicilio
     * (code smell detected xd)
-    * TODO: requiere refactorizacion
     **/
-   completeStep(orden) {
-        this.loading = true;
-        setTimeout(() => (this.loading = false), 1500);
-        switch (orden.domicilioEtapa) {
-          case 0:
-            orden.domicilioEtapa = 1;
-            break;
-          case 1:
-            (!orden.cobrada)?this.alert = true: orden.domicilioEtapa = 2;
-              break;
-        }
-     if (!this.alert){
-       this.modificarEtapaDomicilio(orden);
+   async completarEtapa(orden) {
+     if(orden.domicilioEtapa===1 && !orden.cobrada){
+       this.alerta('error', this.idiomas[0].views[0].alerts.unpaid);
+     }else{
+       orden.domicilioEtapa +=1; await this.modificarEtapaDomicilio(orden);
+       this.changeLista();
+       this.alerta('success',  this.idiomas[0].views[0].alerts.success);
      }
-     setTimeout(() => (this.alert = false), 1700);
    },
     /*
     llenado de lista para filtrar las ordenes entregadas y las pendientes
      */
-        async initLista(){
+    async changeLista(){
          await this.getOrdenesDomicilio();
-
         if(!this.showComplete){
           this.listaDomicilios = this.ordenes.filter(orden => orden.domicilioEtapa!==2);
         }else{
            this.listaDomicilios =  this.ordenes;
         }
-        }
+    },
+    /**
+     * Alerta superior (toast)
+     * @param icono string del nombre del icono
+     * @param titulo mensaje a mostrar en la alerta
+     */
+    alerta(icono, titulo){
+      toastAlert.fire({
+        icon: icono,
+        title: titulo
+      });
+    }
   },
-
   created() {
-    this.initLista();
+    this.changeLista();
     this.getIdioma();
   },
 };
 </script>
 
 <style scoped>
-  .action {
-    color: #fff;
-    transition: 0.5s;
-  }
-  .action:hover {
-    transform: scale(1.1) rotateZ(360deg);
-  }
+.scroll-hide{
+  overflow-y: scroll;
+}
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 </style>
