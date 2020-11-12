@@ -41,4 +41,11 @@ export default {
 .fondo{
   background: rgb(216, 208, 196);
 }
+.action{
+  color: #fff;
+  transition: 0.5s;
+}
+.action:hover {
+  transform: scale(1.1) rotateZ(360deg);
+}
 </style>

@@ -2,13 +2,13 @@ import axios from 'axios';
 import credentials from "./credentials";
 
 const getters = {
-    ordenes: state => state.ordenes
+    ordenes: state => state.ordenes,
 };
 
 const state = {
     ordenes: [],
     pagesize: 4,
-    nextPage: 1
+    nextPage: 1,
 };
 
 
@@ -44,7 +44,6 @@ const mutations = {
       state.ordenes = data;
     },
     updateOrdenDomicilio(state,data){
-     //TODO: notificar exitó o error deacuerdo al statusCode devuelto
       console.log(data);
     }
 };
