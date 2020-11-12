@@ -39,13 +39,13 @@
           <v-col class="overflow-auto col-12">
             <table class="col-12">
               <thead>
-                <th scope="col" class="d-none d-md-block">Id</th>
+                <th scope="col" class="d-none d-md-table-cell">Id</th>
                 <th scope="col">{{idioma.views[1].labels.table.waiter}}</th>
                 <th scope="col">{{idioma.views[1].labels.table.client}}</th>
-                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.table}}</th>
-                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.observation}}</th>
+                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.table}}</th>
+                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.observation}}</th>
                 <th scope="col">{{idioma.views[1].labels.table.total}}</th>
-                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.orderType}}</th>
+                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.orderType}}</th>
                 <!--<th scope="col">Tiempo preparacion</th>-->
                 <th scope="col">{{idioma.views[1].labels.table.options}}</th>
               </thead>
@@ -55,15 +55,15 @@
                   :key="index"
                   v-show="filtrar(index)"
                 >
-                  <td class="d-none d-md-inline-block">
+                  <td class="d-none d-md-table-cell">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td class="d-none d-md-inline-block">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-inline-block">{{ orden.observacion }}</td>
+                  <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-table-cell">{{ orden.observacion }}</td>
                   <td>${{ orden.total }}</td>
-                  <td class="d-none d-md-inline-block">
+                  <td class="d-none d-md-table-cell">
                     <v-chip
                       dense
                       :class="{
@@ -91,15 +91,15 @@
                   :key="index"
                   v-show="filtrar(index)"
                 >
-                  <td class="d-none d-md-inline-block">
+                  <td class="d-none d-md-table-cell">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td class="d-none d-md-inline-block">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-inline-block">{{ orden.observacion }}</td>
+                  <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-table-cell">{{ orden.observacion }}</td>
                   <td>${{ orden.total }}</td>
-                  <td class="d-none d-md-block">
+                  <td class="d-none d-md-table-cell">
                     <v-chip
                       dense
                       :class="{
