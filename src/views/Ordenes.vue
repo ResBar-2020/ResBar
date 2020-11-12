@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div v-for="(idioma) in idiomas" :key="idioma._id" >
       <header-dashboard
         :title="idioma.views[1].labels.title"
@@ -7,12 +8,12 @@
       ></header-dashboard>
       <v-container fluid>
         <v-row>
-          <v-col cols="4" offset="1">
+          <v-col offset="1" class="col-md-4 col-11">
             <v-text-field v-model="search" :label="idioma.views[1].labels.search"></v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6" class="d-flex align-center justify-center">
+          <v-col class="d-flex align-center justify-center col-md-6 col-12">
             <router-link
               :to="{ name: 'nuevaOrden' }"
               style="text-decoration: none"
@@ -26,7 +27,7 @@
               >
             </router-link>
           </v-col>
-          <v-col cols="6" class="d-flex align-center justify-start">
+          <v-col class="d-flex align-center justify-start  col-md-6 col-12">
             <v-switch
               :label="idioma.views[1].labels.toggle"
               color="primary"
@@ -35,16 +36,16 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12">
-            <table>
+          <v-col class="overflow-auto col-12">
+            <table class="col-12">
               <thead>
                 <th scope="col" class="d-none d-md-block">Id</th>
                 <th scope="col">{{idioma.views[1].labels.table.waiter}}</th>
                 <th scope="col">{{idioma.views[1].labels.table.client}}</th>
-                <th scope="col">{{idioma.views[1].labels.table.table}}</th>
-                <th scope="col" class="d-none d-md-block">{{idioma.views[1].labels.table.observation}}</th>
+                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.table}}</th>
+                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.observation}}</th>
                 <th scope="col">{{idioma.views[1].labels.table.total}}</th>
-                <th scope="col">{{idioma.views[1].labels.table.orderType}}</th>
+                <th scope="col" class="d-none d-md-inline-block">{{idioma.views[1].labels.table.orderType}}</th>
                 <!--<th scope="col">Tiempo preparacion</th>-->
                 <th scope="col">{{idioma.views[1].labels.table.options}}</th>
               </thead>
@@ -54,15 +55,15 @@
                   :key="index"
                   v-show="filtrar(index)"
                 >
-                  <td class="d-none d-md-block">
+                  <td class="d-none d-md-inline-block">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td>{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-block">{{ orden.observacion }}</td>
+                  <td class="d-none d-md-inline-block">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-inline-block">{{ orden.observacion }}</td>
                   <td>${{ orden.total }}</td>
-                  <td>
+                  <td class="d-none d-md-inline-block">
                     <v-chip
                       dense
                       :class="{
@@ -90,15 +91,15 @@
                   :key="index"
                   v-show="filtrar(index)"
                 >
-                  <td class="d-none d-md-block">
+                  <td class="d-none d-md-inline-block">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td>{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-block">{{ orden.observacion }}</td>
+                  <td class="d-none d-md-inline-block">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
+                  <td class="d-none d-md-inline-block">{{ orden.observacion }}</td>
                   <td>${{ orden.total }}</td>
-                  <td>
+                  <td class="d-none d-md-block">
                     <v-chip
                       dense
                       :class="{
@@ -198,7 +199,7 @@ table {
   text-align: center;
   border-collapse: collapse;
   margin-top: -10px; /* correct offset on first border spacing if desired */
-  width: 90vw;
+  max-width: 90vw;
 }
 thead {
   background: #00579c;

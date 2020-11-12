@@ -30,7 +30,7 @@ Vue.use(VueRouter)
       component: () => import('../views/Informes.vue')
     },
     {
-      path: '/ordenes',
+      path: '/',
       name: 'Ordenes',
       component: () => import('../views/Ordenes.vue')
     },
