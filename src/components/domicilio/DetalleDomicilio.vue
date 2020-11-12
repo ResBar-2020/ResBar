@@ -1,36 +1,36 @@
 <template>
   <div>
     <template>
-      <v-row justify="center">
-        <v-dialog v-model="dialog" width="800px">
+      <v-row justify="center" >
+        <v-dialog v-model="dialog" width="800px" v-for="idioma in idiomas" :key="idioma._id">
           <template v-slot:activator="{ on, attrs }">
             <v-chip
               dark
               v-bind="attrs"
               v-on="on"
               class="ma-2 mx-2"
-              color="orange"
+              color="primary"
               text-color="white"
             >
               <v-icon dark> mdi-format-list-bulleted-square </v-icon>
-              Detalle</v-chip
+              {{idioma.componentes[1].labels.detail}}</v-chip
             >
           </template>
           <v-card>
             <v-tabs
               v-model="tab"
-              background-color="indigo darken-4"
+              background-color="primary accent-4"
               centered
               dark
               icons-and-text
             >
               <v-tabs-slider></v-tabs-slider>
               <v-tab href="#tab-1">
-                Detalle Orden
+                {{idioma.componentes[1].labels.detailorder}}
                 <v-icon>mdi-format-list-bulleted-square</v-icon>
               </v-tab>
               <v-tab href="#tab-2">
-                Cliente
+                {{idioma.componentes[1].labels.client}}
                 <v-icon>mdi-account</v-icon>
               </v-tab>
             </v-tabs>
@@ -40,7 +40,7 @@
                 <v-row>
                   <v-col>
                     <v-card-title>
-                      <span class="headline prod_title">Productos Adquiridos</span>
+                      <span class="headline prod_title">{{idioma.componentes[1].labels.products}}</span>
                     </v-card-title>
                     <v-card-text
                       v-for="detalle in orden.detalleOrden"
@@ -54,10 +54,10 @@
                   <v-col cols="6">
                   <div>
                     <label class="box total"
-                      >Consumo: <span>${{ orden.total }}</span></label
+                      >{{idioma.componentes[1].labels.charge}}: <span>${{ orden.total }}</span></label
                     >
                     <label class="box envio"
-                      >Costo de Envio:
+                      >{{idioma.componentes[1].labels.delivery}}
                       <span>${{ orden.costoEnvio }}</span></label
                     >
                   </div>
@@ -67,35 +67,35 @@
               <!-- tab numero dos -->
               <v-tab-item :value="'tab-2'" class="bg">
                 <v-card-title>
-                  <span class="headline prod_title">Contacto del cliente:</span>
+                  <span class="headline prod_title">{{idioma.componentes[1].labels.contactclient}}</span>
                 </v-card-title>
                 <div>
                   <v-card-text>
-                    <span class="cliente">Nombre:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.nameclient}}:</span>
                     <span class="item">
                       {{ orden.cliente.nombreCompleto }}</span
                     >
                   </v-card-text>
                   <v-card-text>
-                    <span class="cliente">Whatsapp:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.whatsapp}}:</span>
                     <span class="item"> {{ orden.cliente.whatsapp }}</span>
                   </v-card-text>
                   <v-card-text>
-                    <span class="cliente">Telefono:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.phone}}:</span>
                     <span class="item"> {{ orden.cliente.telefonoCasa }}</span>
                   </v-card-text>
                   <v-card-text>
-                    <span class="cliente">Celular:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.celphone}}:</span>
                     <span class="item"> {{ orden.cliente.celular }}</span>
                   </v-card-text>
                   <v-card-text>
-                    <span class="cliente">Dirección:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.direction}}:</span>
                     <p class="item" style="margin-top: 9px">
                       {{ orden.cliente.direccion }}
                     </p>
                   </v-card-text>
                   <v-card-text>
-                    <span class="cliente">Referencia:</span>
+                    <span class="cliente">{{idioma.componentes[1].labels.reference}}:</span>
                     <span class="item">
                       {{ orden.cliente.puntoDeReferencia }}</span
                     >
@@ -106,10 +106,10 @@
             <v-card-actions class="indigo darken-4">
               <v-spacer></v-spacer>
               <v-btn color="purple lighten-1" text @click="dialog = false">
-                Cerrar
+                {{idioma.componentes[1].labels.close}}
               </v-btn>
               <v-btn color="pink accent-2" text @click="dialog = false">
-                Aceptar
+                {{idioma.componentes[1].labels.accept}}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -120,9 +120,14 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "DetalleDomicilio",
   props: ["orden"],
+  computed: {
+    ...mapGetters(['idiomas']),
+  },
   data() {
     return {
       dialog: false,

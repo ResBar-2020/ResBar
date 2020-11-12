@@ -77,6 +77,6 @@ export default new Vuex.Store({
     domicilio,
     ordenes,
     idioma,
-    recoger
+    recoger,
   }
 })
