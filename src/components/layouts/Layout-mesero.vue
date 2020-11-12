@@ -1,17 +1,19 @@
 <template>
   <v-app>
-  
-   <routesAside :items="items"></routesAside>
+    <navbar-top :items="items" />
+    <routesAside class="d-none d-md-inline-block" :items="items"></routesAside>
 
     <v-main>
       <v-container fluid>
-        <router-view/>
+        <router-view />
       </v-container>
     </v-main>
 
     <v-footer dark padless>
-      <v-row justify="center"  no-gutters> 
-        <v-col class="py-4 text-center white--text" cols="12">Copyright © Diseño I 2020</v-col>
+      <v-row justify="center" no-gutters>
+        <v-col class="py-4 text-center white--text" cols="12"
+          >Copyright © Diseño I 2020</v-col
+        >
       </v-row>
     </v-footer>
   </v-app>
@@ -19,6 +21,7 @@
 
 <script>
 import routesAside from "../Routes-aside.vue";
+import NavbarTop from "../NavbarTop"
 
 export default {
   data: () => ({
@@ -28,15 +31,25 @@ export default {
       {
         title: "Clientes",
         route: "/clientes",
-        icon: "mdi-account-box-multiple"
+        icon: "mdi-account-box-multiple",
       },
       {
         title: "Parametros",
         route: "/parametros",
-        icon: "mdi-format-paragraph"
-      }
-    ]
+        icon: "mdi-format-paragraph",
+      },
+    ],
   }),
-  components: { routesAside }
+  components: { routesAside, NavbarTop},
 };
 </script>
+<style scoped>
+.v-main {
+  padding: 0 !important;
+}
+@media screen and (min-width: 960px) {
+  .v-main {
+    padding: 0 0 0 56px !important;
+  }
+}
+</style>

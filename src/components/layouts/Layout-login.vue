@@ -124,4 +124,10 @@ export default {
   color: red;
   text-shadow: 0 0 20px red;
 }
+@media screen and (max-width: 960px){
+  .v-card{
+    transform: translate(-10%, -30%);
+    width: 20em;
+  }
+}
 </style>
