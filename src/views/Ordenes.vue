@@ -8,7 +8,7 @@
       ></header-dashboard>
       <v-container fluid>
         <v-row>
-          <v-col offset="1" class="col-md-4 col-11">
+          <v-col class="col-md-4 offset-md-1 col-12">
             <v-text-field v-model="search" :label="idioma.views[1].labels.search"></v-text-field>
           </v-col>
         </v-row>
