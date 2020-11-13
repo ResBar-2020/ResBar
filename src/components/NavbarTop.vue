@@ -9,7 +9,6 @@
       <v-spacer></v-spacer>
       <v-btn @click="logout" color="red">
         <v-icon>mdi-power</v-icon>
-        <small>Cerrar Sesion</small>
       </v-btn>
     </v-app-bar>
 
