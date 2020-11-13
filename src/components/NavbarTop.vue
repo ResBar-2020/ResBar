@@ -25,7 +25,8 @@
         </v-list-item-avatar>
         <h1 class="mt-3" style="color:white; text-shadow: 0 0 25px white;">RESBAR</h1>
       </div>
-      <v-list nav dense class="text--white">
+      <v-list nav dense class="text--white"   style="height: 79vh;
+    overflow: auto;">
         <v-list-item-group v-model="group" active-class="blue darken-1">
           <v-list-item v-for="item in items" :key="item.title" link>
             <v-list-item-icon>
