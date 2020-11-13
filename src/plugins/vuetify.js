@@ -20,6 +20,9 @@ export default new Vuetify({
         success: '#a2c523',
         warning: '#7d4427'
       },
+      dark:{
+        primary: '#01579b',
+      }
     },
   },
     lang: {
