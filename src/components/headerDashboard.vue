@@ -14,7 +14,7 @@
                         class="text-center "
                         cols="12"
                 >
-                    <h1 class="display-1 font-weight mb-4 text-uppercase" style="transform:scale(1.5)">
+                    <h1 class="display-2 font-weight mb-4 text-uppercase">
                        <strong> {{title}} </strong>
                     </h1>
                     <h4 class="subheading">
