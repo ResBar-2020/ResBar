@@ -24,12 +24,25 @@ const actions = {
     }, credentials.authentication);
         commit('setOrdenes',response.data.docs);
     },
+    async updateOrden({commit},orden){
+    const response = await axios.put(`${url}${orden._id}`,orden,{
+        params: {
+            "rev": orden._rev
+        },
+        "auth": credentials.authentication.auth,
+        "headers": credentials.authentication.headers,
+    }, credentials.authentication);
+        commit('updateOrden',response.data);   
+    },
 };
 
 const mutations = {
     setOrdenes(state,data){
       state.ordenes = data;
-    }
+    },
+    updateOrden(){
+       console.log("orden cambiada");
+    },
 };
 
 export default {
