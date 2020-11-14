@@ -1,32 +1,32 @@
 <template>
   <div>
     <template>
-      <v-row justify="center">
-        <v-dialog v-model="dialog" width="800px">
+      <v-row justify="center" >
+        <v-dialog v-model="dialog" width="800px" v-for="idioma in idiomas" :key="idioma._id">
           <template v-slot:activator="{ on, attrs }">
             <v-chip
               dark
               v-bind="attrs"
               v-on="on"
               class="ma-2 mx-2"
-              color="orange"
+              color="primary"
               text-color="white"
             >
               <v-icon dark> mdi-format-list-bulleted-square </v-icon>
-              Detalle</v-chip
+              {{idioma.componentes[1].labels.detail}}</v-chip
             >
           </template>
           <v-card>
             <v-tabs
               v-model="tab"
-              background-color="cyan darken-4"
+              background-color="primary accent-4"
               centered
               dark
               icons-and-text
             >
               <v-tabs-slider></v-tabs-slider>
               <v-tab href="#tab-1">
-                Detalle Orden
+                {{idioma.componentes[1].labels.detailorder}}
                 <v-icon>mdi-format-list-bulleted-square</v-icon>
               </v-tab>
             </v-tabs>
@@ -36,9 +36,7 @@
                 <v-row>
                   <v-col>
                     <v-card-title>
-                      <span class="headline prod_title"
-                        >Productos Adquiridos</span
-                      >
+                      <span class="headline prod_title">{{idioma.componentes[1].labels.products}}</span>
                     </v-card-title>
                     <v-card-text
                       v-for="detalle in orden.detalleOrden"
@@ -52,26 +50,28 @@
                   <v-col cols="6">
                   <div>
                     <label class="box total"
-                      >Cliente: <span>{{ orden.cliente.nombreCompleto }}</span></label
+                      >{{idioma.componentes[1].labels.nameclient}}: <span>{{ orden.cliente.nombreCompleto }}</span></label
                     >
                     <label class="box total"
-                      >Tiempo de Preparacion: <span>{{ orden.tiempoPreparacion }}</span></label
+                      >{{idioma.views[2].labels.timePrep}}: <span>{{orden.tiempoPreparacion}}</span></label
                     >
-                    <label class="box total"
-                      >Consumo: <span>${{ orden.total }}</span></label
+                    <label class="box envio"
+                      >{{idioma.views[2].labels.total}}
+                      <span>${{ orden.total }}</span></label
                     >
                   </div>
                   </v-col>
                 </v-row>
               </v-tab-item>
+            
             </v-tabs-items>
-            <v-card-actions style="background: rgb(32,34,33);">
+            <v-card-actions class="indigo darken-4">
               <v-spacer></v-spacer>
               <v-btn color="purple lighten-1" text @click="dialog = false">
-                Cerrar
+                {{idioma.componentes[1].labels.close}}
               </v-btn>
               <v-btn color="pink accent-2" text @click="dialog = false">
-                Aceptar
+                {{idioma.componentes[1].labels.accept}}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -81,10 +81,16 @@
   </div>
 </template>
 
+
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "DetalleRecoger",
   props: ["orden"],
+  computed: {
+    ...mapGetters(['idiomas']),
+  },
   data() {
     return {
       dialog: false,
@@ -94,11 +100,12 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .productos {
   font-weight: 500;
   font-size: 1em;
-  color: #fff;
+ color: #fff;
 }
 .prod_title {
   text-transform: uppercase;
@@ -107,11 +114,11 @@ export default {
 }
 .box {
   position: relative;
-  padding: 10px;
-  border-radius: 25px;
+  padding: 5px;
+  border-radius: 15px;
   margin: 5px;
   color: rgb(255, 255, 255);
-  /*box-shadow: 0 5px 10px #ff6b9e;*/
+  box-shadow: 0 5px 10px #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -120,22 +127,22 @@ export default {
   transition: 0.5s;
 }
 .box:hover{
-  transform: scale(1.05);
-  box-shadow: 0 0 55px #d85583;
+  box-shadow: 10px 10px 20px #FFF;
 }
 .box span {
   font-weight: 700;
 }
 .total {
-  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+  background: linear-gradient(90deg, #514fbf 40%, rgba(94, 5, 136, 0.651) 100%);
 }
 .envio {
-  background: linear-gradient(90deg, #d85583 50%, #af4fbf 100%);
+  background: linear-gradient(90deg, rgba(94, 5, 136, 0.651) 20%, #514fbf 40%);
 }
 .cliente {
   font-size: 1.1em;
   font-weight: 500;
-  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+  background: linear-gradient(90deg, #5e0588 30%, #4f57bf 80%);
+  box-shadow: 0 5px 10px #fff;
   border-radius: 20px;
   color: #fff;
   padding: 10px;
@@ -145,7 +152,7 @@ export default {
 .bg {
   position: relative;
   overflow: hidden;
-  background: rgb(32, 34, 33);
+  background: rgb(100, 100, 100);
 }
 .item {
   position: relative;
@@ -166,12 +173,12 @@ export default {
   left: 0;
   width: 0;
   height: 3px;
-  background: linear-gradient(90deg, #af4fbf 50%, #d85583 100%);
+  background: linear-gradient(90deg, #4f69bf 50%, #d85583 100%);
   transition: 0.5s;
 }
 .item:hover::before{
   width: 100%;
-  box-shadow: 0 -10px 15px #af4fbf;
+  box-shadow: 0 0 10px #fff;
 }
 .bg::before {
   content: "";
@@ -180,7 +187,7 @@ export default {
   right: 0;
   width: 60%;
   height: 100%;
-  background: rgba(255, 0, 0, 0.5);
+  background: rgba(94, 5, 136, 0.651);
   transform: skew(-35deg);
   z-index: inherit;
 }

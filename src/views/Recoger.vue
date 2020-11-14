@@ -1,50 +1,41 @@
 <template>
   <div>
-    <header-dashboard 
-      title="Resbar Recoger"
-      subtitle="Ordenes a Recoger">
-    </header-dashboard>
+    <div v-for="(idioma) in idiomas" :key="idioma._id" >
+    <header-dashboard :title="idioma.views[2].labels.title" :subtitle="idioma.views[2].labels.subtitle"></header-dashboard>
     <v-row>
+      <v-col cols="4" offset="1" >
+        <v-text-field :label="idioma.views[2].labels.search" v-model="searchDisplay"></v-text-field>
+      </v-col>
       <v-col cols="4" offset="1">
-        <v-text-field label="Buscar" v-model="searchDisplay"></v-text-field>
+        <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
+          <v-btn  elevation="13" outlined @click="showMessage(snackbar)" class="primary white--text my-3" >
+            <v-icon>mdi-plus-circle-outline </v-icon>
+          {{idioma.views[0].labels.new}}</v-btn>
+        </router-link>
       </v-col>
-      <v-col cols="2" offset="1">
-          <router-link :to="{ name: 'nuevaOrden' }" style="text-decoration:none">
-            <v-btn
-              class="primary white--text my-3"
-            >
-              <v-icon>mdi-plus-circle-outline </v-icon> Nueva Orden</v-btn
-            >
-          </router-link>
-      </v-col>
-      <v-col cols="2" offset="1">
-          <v-switch
-            label="Mostrar Todas las Ordenes"
-            color="primary"
-            v-model="todas"
+      <v-col cols="2">
+        <v-switch
+            v-model="showComplete"
+            :label="idioma.views[2].labels.showAll"
+            color="indigo darken-3"
+            @change="cambiarLista"
+            hide-details
           ></v-switch>
       </v-col>
     </v-row>
-    <v-container fluid>
-      <v-row v-if="todas">
-        <v-col  v-for="(orden,index) in ordenesRecoger" :key="index" v-show="filtro(index)">
+    <v-container fluid> 
+      <v-row>
+        <v-col  v-for="(orden,index) in listaRecoger" :key="index" v-show="filtro(index)">
           <template >
-            <v-card :loading="loading"  max-width="374" hover height="360" elevation="17">
-              <template slot="progress">
-                <v-progress-linear
-                  color="deep-purple"
-                  height="10"
-                  indeterminate
-                ></v-progress-linear>
-              </template>
+            <v-card  max-width="374" hover height="360" elevation="17">
               <v-banner
                 style="color: white;"
                 elevation="6"
                 single-line
                 sticky
-                :class="{'red': orden.entregada==false,'green':orden.entregada==true}"
+                :class="{'primary lighten-3': orden.entregada==false,'primary darken-4':orden.entregada==true}"
               >
-                {{orden.entregada==false?'PENDIENTE':'ENTREGADA'}}
+                {{orden.entregada==false?idioma.views[2].labels.state.todo:idioma.views[2].labels.state.complete}}
               </v-banner>
               <v-card class="overflow-y-auto pa-2" height="260" >
                 <h3>
@@ -53,17 +44,17 @@
                 </h3>
                 <div>
                   <v-chip class="ma-2 v-card--hover" color="purple" outlined>
-                    <v-icon left> mdi-label </v-icon> Costo: $ •
+                    <v-icon left> mdi-label </v-icon> {{idioma.views[2].labels.total}}: $ •
                     {{ orden.total}}
                   </v-chip>
-                  <div>Tiempo de preparacion:</div>
-                  <div> {{ orden.cliente.tiempoPreparacion }}</div>
+                  <div>{{idioma.views[2].labels.timePrep}} :</div>
+                  <div> {{orden.tiempoPreparacion}}</div>
                 </div>
                 <v-divider class="mx-2"></v-divider>
-                <h3>Acciones</h3>
+                <h3>{{idioma.views[2].labels.actions.title}}</h3>
                 <div>
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
                     <agregar-productos-orden :orden="orden"/>
                     <modificar-orden :orden="orden"/>
                     <eliminar-orden :orden="orden" />
@@ -74,72 +65,11 @@
               <v-card-actions>
                 <v-footer absolute class="font-weight-medium">
                   <v-chip-group>
-                    <v-chip class="ma-2" color="teal" text-color="white" @click="completeEtapa(orden)" :disabled="orden.entregada==true" dark>
+                    <v-chip class="ma-2" color="teal" text-color="white" @click="completarEtapa(orden)" :disabled="orden.entregada==true" dark>
                       <v-avatar left>
                         <v-icon>mdi-checkbox-marked-circle</v-icon>
                       </v-avatar>
-                      Completar</v-chip>
-                    <detalle-recoger :orden="orden"/>
-                  </v-chip-group>
-                </v-footer>
-              </v-card-actions>           
-            </v-card>
-          </template>
-        </v-col>
-      </v-row>
-      <v-row v-else>
-        <v-col  v-for="(orden,index) in ordenesRecogerPendientes" :key="index" v-show="filtro(index)">
-          <template >
-            <v-card :loading="loading"  max-width="374" hover height="360" elevation="17">
-              <template slot="progress">
-                <v-progress-linear
-                  color="deep-purple"
-                  height="10"
-                  indeterminate
-                ></v-progress-linear>
-              </template>
-              <v-banner
-                style="color: white;"
-                elevation="6"
-                single-line
-                sticky
-                :class="{'red': orden.entregada==false,'green':orden.entregada==true}"
-              >
-                {{orden.entregada==false?'PENDIENTE':'ENTREGADA'}}
-              </v-banner>
-              <v-card class="overflow-y-auto pa-2" height="260" >
-                <h3>
-                  {{String(orden._id.substring(18, 24))}}
-                  {{ orden.cliente.nombreCompleto }}
-                </h3>
-                <div>
-                  <v-chip class="ma-2 v-card--hover" color="purple" outlined>
-                    <v-icon left> mdi-label </v-icon> Costo: $ •
-                    {{ orden.total}}
-                  </v-chip>
-                  <div>Tiempo de preparacion:</div>
-                  <div> {{ orden.cliente.tiempoPreparacion }}</div>
-                </div>
-                <v-divider class="mx-2"></v-divider>
-                <h3>Acciones</h3>
-                <div>
-                  <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
-                    <agregar-productos-orden :orden="orden"/>
-                    <modificar-orden :orden="orden"/>
-                    <eliminar-orden :orden="orden" />
-                  </v-chip-group>
-                </div>
-              </v-card>
-              <v-divider></v-divider> 
-              <v-card-actions>
-                <v-footer absolute class="font-weight-medium">
-                  <v-chip-group>
-                    <v-chip class="ma-2" color="teal" text-color="white" @click="completeEtapa(orden)" :disabled="orden.entregada==true" dark>
-                      <v-avatar left>
-                        <v-icon>mdi-checkbox-marked-circle</v-icon>
-                      </v-avatar>
-                      Completar</v-chip>
+                      {{idioma.views[2].labels.actions.complete}}</v-chip>
                     <detalle-recoger :orden="orden"/>
                   </v-chip-group>
                 </v-footer>
@@ -149,6 +79,7 @@
         </v-col>
       </v-row>
     </v-container>
+    </div>
   </div>
 </template>
 
@@ -159,19 +90,19 @@ import DetalleRecoger from "../components/recoger/DetalleRecoger";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
+import { toastAlert } from "../store/modules/utilidades.js";
+
 export default {
   components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard},
   computed: {
-    ...mapGetters(['ordenesRecoger', 'ordenesRecogerPendientes']),
+    ...mapGetters(['ordenesRecoger', 'ordenesRecogerPendientes','idiomas']),
   },
   data() {
     return {
-      show: false,
-      todas: false,
-      loading: false,
       dialog: false,
+      showComplete: false,
       searchDisplay: "",
-      items: [5,10,15],
+      listaRecoger: [],
       snackbar: {
         message: "recoger",
         timout: 2000,
@@ -181,44 +112,67 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(['getOrdenesRecoger']),
+    ...mapActions(['getOrdenesRecoger','getIdioma','modificarEtapaRecoger']),
+
     filtro(valor_orden) {
-      if(this.todas){
-        if (this.searchDisplay === "") return true;
-        let array = (
-          this.ordenesRecoger[valor_orden].id + 
-          this.ordenesRecoger[valor_orden].cliente.nombreCompleto
-          ).toUpperCase();
-          return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
-        }else{
-          if (this.searchDisplay === "") return true;
+      if (this.searchDisplay === "") return true;
           let array = (
-          this.ordenesRecogerPendientes[valor_orden].id + 
-          this.ordenesRecogerPendientes[valor_orden].cliente.nombreCompleto
+          this.listaRecoger[valor_orden].id + 
+          this.listaRecoger[valor_orden].cliente.nombreCompleto
           ).toUpperCase();
-          return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;
+          return array.indexOf(this.searchDisplay.toUpperCase()) >= 0;        
+    },
+  
+    async completarEtapa(orden) {
+     if(orden.entregada===false && !orden.cobrada){
+       this.alerta('error', this.idiomas[0].views[0].alerts.unpaid);
+     }else{
+       orden.entregada==true; 
+       await this.modificarEtapaRecoger(orden);
+       this.cambiarLista();
+       this.alerta('success',  this.idiomas[0].views[0].alerts.success);
+     }
+    },
+
+      async cambiarLista(){
+         await this.getOrdenesRecoger();
+        if(!this.showComplete){
+          this.listaRecoger = this.ordenesRecoger.filter(orden => orden.entregada===false);
+        }else{
+           this.listaRecoger =  this.ordenesRecoger;
         }
-        
     },
-    completeEtapa(orden) {
-        this.loading = true;
-        setTimeout(() => (this.loading = false), 1500);
-          orden.entregada=true;
-    },
+      /**
+     * Alerta superior (toast)
+     * @param icono string del nombre del icono
+     * @param titulo mensaje a mostrar en la alerta
+     */
+    alerta(icono, titulo){
+      toastAlert.fire({
+        icon: icono,
+        title: titulo
+      });
+    }
   },
 
   created() {
-    this.getOrdenesRecoger();
+    this.cambiarLista();
+    this.getIdioma();
   },
 };
 </script>
 
 <style scoped>
-  .action {
-    color: #fff;
-    transition: 0.5s;
-  }
-  .action:hover {
-    transform: scale(1.1) rotateZ(360deg);
-  }
+.scroll-hide{
+  overflow-y: scroll;
+}
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 </style>
