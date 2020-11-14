@@ -78,7 +78,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="detalle in ordenLocal.detalleorden"
+                    v-for="detalle in ordenLocal.detalleOrden"
                     :key="detalle.nombre"
                   >
                     <td>{{ detalle.nombre }}</td>
@@ -160,7 +160,7 @@ export default {
   props: ["orden"],
   data() {
     return {
-      ordenLocal: Object.assign({}, this.orden),
+      ordenLocal: { ...this.orden },
       dialog: false,
       tab: null,
       mesa: false,
