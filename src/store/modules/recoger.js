@@ -1,19 +1,14 @@
 import axios from 'axios';
 import credentials from "./credentials";
-const BASE_URL = 'http://127.0.0.1:5984/ordenes/';
 
 const getters = {
     ordenesRecoger: state => state.ordenes,
-    ordenesRecogerPendientes(state){
-        return state.ordenes.filter(orden => orden.entregada===false)
-     }
-
 };
 
 const state = {
     ordenes: [],
     pagesize: 4,
-    nextPage: 1
+    nextPage: 1,
 };
 
 
@@ -21,27 +16,35 @@ const actions = {
     /* obtener ordenes de tipo RECOGER
     * mediante selectores*/
     async getOrdenesRecoger({commit}){
-        const response = await axios.post(`${BASE_URL}_find`,{
+        const response = await axios.post(`/ordenes/_find`,{
             "selector": {
                 "tipo": "RECOGER"
             },
             "limit":state.pagesize
         },credentials.authentication);
-        commit('setOrdenes',response.data.docs);
+        commit('setOrdenesRecoger',response.data.docs);
     },
 
-    async modificarEtapa({commit}, orden){
-        const response = await axios.patch(`${BASE_URL}`,orden,credentials.authentication);
-      commit('updateOrden', response.data.docs);
+    /* modificar la entrega de la orden
+    * */
+    async modificarEtapaRecoger({commit}, orden){
+        const response = await axios.put(`/ordenes/${orden._id}`,orden,{
+            params: {
+                "rev": orden._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        });
+      commit('updateOrdenRecoger', response.data);
     },
 };
 
 const mutations = {
-    setOrdenes(state,data){
+    setOrdenesRecoger(state,data){
       state.ordenes = data;
     },
-    updateOrden(state,data){
-        state.ordenes +=data;
+    updateOrdenRecoger(state,data){
+      console.log(data);
     }
 };
 
