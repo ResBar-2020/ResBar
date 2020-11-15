@@ -78,6 +78,7 @@
                   <!--<td>{{ orden.tiempoPreparacion }}</td>-->
                   <td>
                     <nobr>
+                      <detalle-orden :orden="orden" />
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
@@ -114,6 +115,7 @@
                   <!--<td>{{ orden.tiempoPreparacion }}</td>-->
                   <td>
                     <nobr>
+                      <detalle-orden :orden="orden" />
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
@@ -136,15 +138,18 @@ import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
+import DetalleOrden from "../components/ordenes/DetalleOrden"
 export default {
   components: {
     HeaderDashboard,
     EliminarOrden,
     ModificarOrden,
     AgregarProductosOrden,
+    DetalleOrden
   },
   computed: {
-    ...mapGetters(["allOrdenes", "noEntregadas", "idiomas"]),
+  
+      ...mapGetters(["allOrdenes", "noEntregadas", "idiomas"]),
   },
   data() {
     return {
