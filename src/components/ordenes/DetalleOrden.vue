@@ -13,29 +13,33 @@
         >
       </template>
       <v-card>
-        <v-card-title class="headline primary">
+        <v-card-title class="headline primary text-center">
           <v-row>
-            <v-col>
+            <v-col class="col-12 col-md-6">
               <h3 class="text-white">Detalle de la Orden</h3>
             </v-col>
-            <v-col>
+            <v-col class="col-12 col-md-6">
               <h4 class="text-white">Tipo: {{ orden.tipo }}</h4>
             </v-col>
           </v-row>
         </v-card-title>
         <v-card-text>
           <v-row class="text-center">
-            <v-col cols="6">
+            <v-col class="col-12 col-md-6">
               <label class="identifier">Id Orden: </label
               ><span class="information">{{ orden._id }}</span>
             </v-col>
-            <v-col cols="6">
+            <v-col class="col-12 col-md-6">
               <label class="identifier">Fecha: </label
-              ><span class="information">{{ orden.fecha }}</span>
+              ><span class="information">{{
+                `${new Date(orden.fecha).getDay()} / ${new Date(
+                  orden.fecha
+                ).getMonth()} / ${new Date(orden.fecha).getFullYear()}`
+              }}</span>
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="4" class="d-flex flex-column">
+            <v-col class="d-flex flex-column col-12 col-md-4">
               <label class="identifier">Cliente:</label
               ><span class="information">{{
                 orden.cliente.nombreCompleto
@@ -52,7 +56,7 @@
                 orden.observacion
               }}</span>
             </v-col>
-            <v-col cols="8">
+            <v-col class="col-12 col-md-8 overflow-auto">
               <table class="col-12">
                 <thead class="text-white">
                   <th scope="col">Cantidad</th>
@@ -78,23 +82,27 @@
             <v-col cols="12" class="d-flex flex-row">
               <div class="col-6 bg">
                 <label class="identifier">Subtotal: </label>
-                <span class="information">${{ orden.subtotal }}</span>
+                <span class="price">${{ orden.subtotal }}</span>
               </div>
               <div class="col-6 bg">
                 <label class="identifier">Propina: </label>
-                <span class="information">${{ orden.propina }}</span>
+                <span class="price">${{ orden.propina }}</span>
               </div>
             </v-col>
 
-              <div class="col-12 bg">
-                <label class="identifier">Total: </label>
-                <span class="information">${{ orden.total }}</span>
-              </div>
+            <div class="col-12 bg total">
+              <label class="identifier">Total: </label>
+              <span class="price">${{ orden.total }}</span>
+            </div>
           </v-row>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="teal darken-4" class="text-white" @click="dialog = false">
+          <v-btn
+            color="teal darken-4"
+            class="text-white"
+            @click="dialog = false"
+          >
             Ok
           </v-btn>
         </v-card-actions>
@@ -134,44 +142,74 @@ export default {
   padding: 0.2em;
   padding-left: 0.5em;
   border-radius: 25px;
-  text-decoration: underline;
 }
 .information {
+  line-height: 15px;
+  text-align: center;
   padding: 0.4rem;
   font-size: 1.1em;
-  font-weight: 800;
+  font-weight: 600;
+  color: #000;
+  border-bottom: 2px solid #009ac9;
 }
 table {
   border-collapse: collapse;
   font-weight: 500;
 }
-table thead,
-table tbody tr{
-  background: linear-gradient(90deg, #161736 20%, #171ECF );
+table thead{
+  background: linear-gradient(90deg, #4969be 40%, #009ac9 50%);
   transition: 0.6s;
 }
-table thead th{
+table thead th {
   padding: 10px;
 }
+table tbody tr{
+  border-bottom: 1px solid;
+}
 table tbody tr td {
-  color: #fff;
-  padding: 5px 10px;
+  color: #000;
+  padding: 0.5rem 1rem;
   text-align: center;
 }
-.bg{
-    color: #fff;
-    background: linear-gradient(90deg, #161736 30%, #171ECF );
-    text-align: center;
-    border-radius: 25px;
-    margin: 0.2em;
-    transition: 0.5s;
+.bg {
+  color: #000;
+  /*background: linear-gradient(90deg, #161736 30%, #171ECF);*/
+  text-align: center;
+  border-radius: 25px;
+  margin: 0.2em;
+  cursor: pointer;
+  transition: 0.5s;
 }
 .price {
-  position: relative;
-  font-weight: 700;
+  padding: 0.4rem;
+  font-size: 1.1em;
+  font-weight: 800;
 }
-table tbody tr:hover,
-.bg:hover{
+
+/*table tbody tr:hover{
+
+}*/
+/*.bg:hover {
   filter: hue-rotate(90deg);
+}*/
+.total {
+  color: #fff;
+  font-size: 30px;
+  background: linear-gradient(90deg, #4969be 10%, #009ac9 50%);
+  /*background-size: 1px 5px;*/
+  transition: 1.5s;
+  /*animation: bgColor 2.5s linear infinite;*/
 }
+.total:hover{
+  filter: hue-rotate(180deg);
+}
+
+/*@keyframes bgColor {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}*/
 </style>

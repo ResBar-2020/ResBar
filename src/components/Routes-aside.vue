@@ -33,11 +33,18 @@
       </v-list-item>
     </v-list>
 
-    <template v-slot:append>
+    
+      <div class="mx-8 bg px-5 py-1">
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        inset
+        color="white"
+        label="Dark Mode"
+      ></v-switch>
+    </div>
       <div class="pa-2" v-show="!mini">
         <v-btn @click="logout" block class="black--text white">Logout</v-btn>
       </div>
-    </template>
   </v-navigation-drawer>
 </template>
 
