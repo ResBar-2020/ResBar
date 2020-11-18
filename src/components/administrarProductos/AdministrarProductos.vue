@@ -22,12 +22,12 @@
     </template>
 
     <!-- <v-container> -->
-    <v-div app dark class="primary text-lg-center rounded-t-xl my-2">
+    <div app dark class="primary text-lg-center rounded-t-xl my-2">
       <v-btn text rounded color="white">Entradas</v-btn>
       <v-btn text rounded color="white">Platos</v-btn>
       <v-btn text rounded color="white">Bebidas</v-btn>
       <v-btn text rounded color="white">Postres</v-btn>
-    </v-div>
+    </div>
 
     <v-simple-table id="myTable">
       <template v-slot:default>
@@ -37,6 +37,7 @@
             <th id="tituloTabla" class="text-center white--text">Nombre</th>
             <th id="tituloTabla" class="text-center white--text">Precio</th>
             <th id="tituloTabla" class="text-center white--text">Categoria</th>
+            <th id="tituloTabla" class="text-center white--text">Preparado</th>
             <th id="tituloTabla" class="text-center white--text">Acciones</th>
           </tr>
         </thead>
@@ -46,6 +47,8 @@
             <td>Deditos de Queso</td>
             <td>$ 1.5</td>
             <td>Entradas</td>
+            <td>No</td>
+
             <td class="mx-2">
                 <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }" >
@@ -70,6 +73,8 @@
             <td>Nachos</td>
             <td>$ 2.0</td>
             <td>Entradas</td>
+            <td>No</td>
+
 
             <td>
               <v-tooltip bottom>
@@ -108,5 +113,7 @@ export default {
     };
   },
   methods: {},
+
+  created(){}
 };
 </script>
