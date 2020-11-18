@@ -1,9 +1,13 @@
 <template>
   <div>
-    <h1>[Productos]</h1>
-    <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
+    <header-dashboard
+        title="RESBAR PRODUCTOS"
+        subtitle="TODOS LOS PRODUCTOS"
+      ></header-dashboard>
+<br>    <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
     <div>
     <AdministrarProductos></AdministrarProductos>
+    
     </div>
  
   </div>
@@ -13,8 +17,9 @@
 <script>
 
 
-import { mapMutations } from "vuex";
-import AdministrarProductos from "../components/administrarProductos/AdministrarProductos"
+import { mapMutations, mapGetters, mapActions  } from "vuex";
+import AdministrarProductos from "../components/administrarProductos/AdministrarProductos";
+import HeaderDashboard from "../components/headerDashboard";
 
 export default {
   data() {
@@ -26,10 +31,17 @@ export default {
     };
   },
   components: {
-   AdministrarProductos
+   AdministrarProductos,
+   HeaderDashboard
   },
   methods: {
+    ...mapActions(["getOrdenes", "getIdioma"]),
     ...mapMutations(["showMessage"])
+  },
+  computed:{
+          ...mapGetters(["idiomas"]),
+  },
+  created(){
   }
 };
 </script>
