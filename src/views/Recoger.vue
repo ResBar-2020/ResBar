@@ -52,13 +52,24 @@
                 </div>
                 <v-divider class="mx-2"></v-divider>
                 <h3>{{idioma.views[2].labels.actions.title}}</h3>
-                <div>
+                <div v-if="orden.entregada==false">
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon text-color="white"> mdi-coin</v-icon></v-btn>
                     <agregar-productos-orden :orden="orden"/>
                     <modificar-orden :orden="orden"/>
                     <eliminar-orden :orden="orden" />
                   </v-chip-group>
+                </div>
+                <div v-else>
+                  <v-chip-group active-class="deep-purple accent-4 white--text" column>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
+                      <v-icon> mdi-coin</v-icon></v-btn>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
+                      <v-icon>mdi-plus</v-icon></v-btn>
+                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="pink">
+                      <v-icon>mdi-clipboard</v-icon></v-btn>
+                    <eliminar-orden :orden="orden" />
+                </v-chip-group>
                 </div>
               </v-card>
               <v-divider></v-divider> 
@@ -127,15 +138,15 @@ export default {
      if(orden.entregada===false && !orden.cobrada){
        this.alerta('error', this.idiomas[0].views[0].alerts.unpaid);
      }else{
-       orden.entregada==true; 
+       orden.entregada=true; 
        await this.modificarEtapaRecoger(orden);
        this.cambiarLista();
        this.alerta('success',  this.idiomas[0].views[0].alerts.success);
      }
     },
 
-      async cambiarLista(){
-         await this.getOrdenesRecoger();
+    async cambiarLista(){
+        await this.getOrdenesRecoger();
         if(!this.showComplete){
           this.listaRecoger = this.ordenesRecoger.filter(orden => orden.entregada===false);
         }else{
