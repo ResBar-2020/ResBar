@@ -92,14 +92,14 @@
 
             <div class="col-12 bg total">
               <label class="identifier">Total: </label>
-              <span class="price">${{ orden.total }}</span>
+              <span class="totalPrice">${{ orden.total }}</span>
             </div>
           </v-row>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="teal darken-4"
+            color="primary"
             class="text-white"
             @click="dialog = false"
           >
@@ -146,34 +146,46 @@ export default {
 .information {
   line-height: 15px;
   text-align: center;
-  padding: 0.4rem;
+  padding: 0.6rem;
   font-size: 1.1em;
   font-weight: 600;
-  color: #000;
-  border-bottom: 2px solid #009ac9;
+  box-shadow: -15px -15px 15px rgba(255,255,255,0.2),
+              15px 15px 15px rgba(0,0,0,0.1),
+              inset -5px -5px 5px rgba(255,255,255,0.2),
+              inset 5px 5px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
 }
 table {
   border-collapse: collapse;
   font-weight: 500;
 }
-table thead{
+table thead {
   background: linear-gradient(90deg, #4969be 40%, #009ac9 50%);
   transition: 0.6s;
+  border-radius: 12px;
 }
 table thead th {
   padding: 10px;
 }
-table tbody tr{
-  border-bottom: 1px solid;
+table thead th:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+table thead th:last-child {
+  border-radius: 0 12px 12px 0;
+}
+table tbody tr {
+  box-shadow: -15px -15px 15px rgba(255,255,255,0.2),
+              15px 15px 15px rgba(0,0,0,0.1),
+              inset -5px -5px 5px rgba(255,255,255,0.2),
+              inset 5px 5px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
 }
 table tbody tr td {
-  color: #000;
   padding: 0.5rem 1rem;
   text-align: center;
 }
 .bg {
-  color: #000;
-  /*background: linear-gradient(90deg, #161736 30%, #171ECF);*/
   text-align: center;
   border-radius: 25px;
   margin: 0.2em;
@@ -181,35 +193,28 @@ table tbody tr td {
   transition: 0.5s;
 }
 .price {
+  padding: 1rem;
+  font-size: 1.1em;
+  font-weight: 800;
+  box-shadow: -15px -15px 15px rgba(255,255,255,0.2),
+              15px 15px 15px rgba(0,0,0,0.1),
+              inset -5px -5px 5px rgba(255,255,255,0.2),
+              inset 5px 5px 5px rgba(0,0,0,0.1);
+  border-radius: 12px;
+}
+.totalPrice{
   padding: 0.4rem;
   font-size: 1.1em;
   font-weight: 800;
 }
 
-/*table tbody tr:hover{
-
-}*/
-/*.bg:hover {
-  filter: hue-rotate(90deg);
-}*/
 .total {
   color: #fff;
   font-size: 30px;
   background: linear-gradient(90deg, #4969be 10%, #009ac9 50%);
-  /*background-size: 1px 5px;*/
   transition: 1.5s;
-  /*animation: bgColor 2.5s linear infinite;*/
 }
-.total:hover{
+.total:hover {
   filter: hue-rotate(180deg);
 }
-
-/*@keyframes bgColor {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}*/
 </style>
