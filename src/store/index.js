@@ -5,7 +5,7 @@ import domicilio from './modules/domicilio'
 import ordenes from './modules/ordenes'
 import recoger from './modules/recoger'
 import idioma from "./modules/idioma";
-import authentication from "./modules/credentials";
+import credentials from "./modules/credentials";
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
 
@@ -52,7 +52,7 @@ export default new Vuex.Store({
               clave: user.clave
             }
 
-          }, authentication.authentication).then((res) => {
+          }, credentials.authentication).then((res) => {
             //Si el objeto no esta vacio asigna los valores
             if (res.data.docs.length > 0) {
               localStorage.setItem("rol", res.data.docs[0].rol);

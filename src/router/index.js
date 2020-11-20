@@ -58,6 +58,11 @@ Vue.use(VueRouter)
       path: '/ordenes/nuevaOrden',
       name: 'nuevaOrden',
       component: () => import('../views/nuevaOrden.vue')
+    },
+    {
+      path: '/*',
+      name: 'error404',
+      component: () => import('../views/Error404.vue')
     }
 ]
 

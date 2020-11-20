@@ -53,6 +53,9 @@ export default {
 };
 </script>
 <style scoped>
+.container{
+  padding: 0;
+}
 .v-main{
   padding: 0 !important;
 }
