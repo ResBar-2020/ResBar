@@ -16,6 +16,7 @@
                 v-model="user.loggin"
                 :rules="validRules"
                 autocomplete="off"
+                @keyup.enter="authenticate(user)"
               />
               <v-text-field
                 :label="idioma.layouts[0].labels.password"
@@ -25,6 +26,7 @@
                 prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword"
+                @keyup.enter="authenticate(user)"
               />
             </v-form>
           </v-card-text>

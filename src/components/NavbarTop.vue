@@ -52,6 +52,8 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import Swal from "sweetalert2"
+
 export default {
   //TODO Agregar props para recibir las rutas
   props: ["items"],
@@ -63,9 +65,19 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.removeItem("rol");
-      localStorage.removeItem("username");
-      this.$router.go("Login");
+      Swal.fire({
+        title: "¿Seguro que quiere salir?",
+        showDenyButton: true,
+        confirmButtonText: `Salir`,
+        denyButtonText:'Cancelar'
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          localStorage.removeItem("rol");
+          localStorage.removeItem("username");
+          this.$router.go("Login");
+        }
+      });
     },
   },
   computed: {

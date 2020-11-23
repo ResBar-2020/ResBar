@@ -86,7 +86,7 @@ p {
   font-size: 1.5em;
   letter-spacing: 1px;
   line-height: 1em;
-  color: black;
+  font-weight: 500;  
 }
 span{
     color: red;
