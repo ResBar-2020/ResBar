@@ -22,7 +22,7 @@
   height: 93vh;
   margin: 0;
   padding: 0;
-  background: url(/img/404bg.e3b443ad.png) rgba(0, 0, 0, 0.7);
+  background: url("../assets/images/404bg.png") rgba(0, 0, 0, 0.7);
   border: none;
   background-size: cover;
 }
