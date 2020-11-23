@@ -12,7 +12,7 @@
         <v-img src="../assets/logo.svg"></v-img>
       </v-list-item-avatar>
 
-      <v-list-item-title>{{ username }}</v-list-item-title>
+      <v-list-item-title class="username">{{ username }}</v-list-item-title>
 
       <v-btn icon @click.stop="mini = !mini">
         <v-icon>mdi-chevron-left</v-icon>
@@ -42,7 +42,7 @@
       ></v-switch>
     </div>
     <div class="pa-2" v-show="!mini">
-      <v-btn @click="logout" block class="black--text white">Logout</v-btn>
+      <v-btn @click="logout" block>Logout</v-btn>
     </div>
   </v-navigation-drawer>
 </template>
@@ -66,7 +66,7 @@ export default {
         title: "¿Seguro que quiere salir?",
         showDenyButton: true,
         confirmButtonText: `Salir`,
-        denyButtonText:'Cancelar'
+        denyButtonText: "Cancelar",
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -82,3 +82,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.username {
+  text-transform: uppercase;
+  font-weight: 600;
+  text-shadow: 0 0 25px white;
+}
+.theme--dark.v-btn:not(.v-btn--flat):not(.v-btn--text):not(.v-btn--outlined) {
+  background-color: rgb(244,67,54);
+  color: #fff;
+}
+</style>
