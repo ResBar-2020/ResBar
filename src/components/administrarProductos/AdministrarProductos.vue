@@ -3,7 +3,7 @@
     <template>
       <v-container class="lighten-5 my-2">
         <v-row no-gutters>
-          <v-col cols="11" >
+          <v-col cols="11">
             <div mr-3>
               <v-text-field
                 v-model="search"
@@ -14,27 +14,74 @@
               ></v-text-field>
             </div>
           </v-col>
-          <v-col class="mt-2" cols="1" >
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn color="blue darken-4" dark v-bind="attrs" v-on="on" @click="modalNuevoProducto=true">
-                    Agregar
-                  </v-btn>
-                </template>
-                <span>Nuevo Producto</span>
-              </v-tooltip>
+          <v-col class="mt-2" cols="1">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="blue darken-4"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="modalNuevoProducto = true"
+                >
+                  Agregar
+                </v-btn>
+              </template>
+              <span>Nuevo Producto</span>
+            </v-tooltip>
           </v-col>
         </v-row>
       </v-container>
     </template>
 
     <!-- <v-container> -->
-    <div app dark class="primary text-lg-center rounded-t-xl my-2">
-      <v-btn text rounded color="white">Entradas</v-btn>
-      <v-btn text rounded color="white">Platos</v-btn>
-      <v-btn text rounded color="white">Bebidas</v-btn>
-      <v-btn text rounded color="white">Postres</v-btn>
-    </div>
+
+    <v-card>
+      <v-tabs
+        background-color="primary accent-4 rounded-t-xl"
+        centered
+        dark
+        icons-and-text
+      >
+        <v-tabs-slider></v-tabs-slider>
+
+        <v-tab
+          href="#tab-2"
+          @click="categoria = 'Entradas'"
+          class="flex-grow-1 prevDrag"
+        >
+          Entradas
+          <v-icon>mdi-baguette</v-icon>
+        </v-tab>
+
+        <v-tab
+          href="#tab-3"
+          @click="categoria = 'Platos'"
+          class="flex-grow-1 prevDrag"
+        >
+          Platos
+          <v-icon>mdi-food-croissant</v-icon>
+        </v-tab>
+
+        <v-tab
+          href="#tab-4"
+          @click="categoria = 'Bebidas'"
+          class="flex-grow-1 prevDrag"
+        >
+          Bebidas
+          <v-icon>mdi-beer</v-icon>
+        </v-tab>
+
+        <v-tab
+          href="#tab-1"
+          @click="categoria = 'Postres'"
+          class="flex-grow-1 prevDrag"
+        >
+          Postres
+          <v-icon>mdi-ice-cream</v-icon>
+        </v-tab>
+      </v-tabs>
+    </v-card>
 
     <v-simple-table id="myTable">
       <template v-slot:default>
@@ -48,11 +95,15 @@
           </tr>
         </thead>
         <tbody class="text-center" v-if="productos">
-          <tr v-for="(producto,index) in allProductos" :key="index">
-            <td>{{producto.nombre}}</td>
-            <td>$ {{producto.precio}}</td>
-            <td>{{producto.categoria.nombre}}</td>
-            <td>{{producto.preparado?"si":"no"}}</td>
+          <tr
+            v-for="(producto, index) in allProductos"
+            :key="index"
+            v-show="categoria === producto.categoria.nombre"
+          >
+            <td>{{ producto.nombre }}</td>
+            <td>$ {{ producto.precio }}</td>
+            <td>{{ producto.categoria.nombre }}</td>
+            <td>{{ producto.preparado ? "si" : "no" }}</td>
 
             <td class="mx-2">
               <v-tooltip bottom>
@@ -80,7 +131,6 @@
               </v-tooltip>
             </td>
           </tr>
-          
         </tbody>
       </template>
     </v-simple-table>
@@ -130,11 +180,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="red"
-                dark
-                @click="modalNuevoProducto = false"
-              >
+              <v-btn color="red" dark @click="modalNuevoProducto = false">
                 Cancelar
               </v-btn>
               <v-btn
@@ -153,7 +199,7 @@
 </template>
 
 <script>
-import { mapState,mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "AdministrarProductos",
   data() {
@@ -161,18 +207,41 @@ export default {
       search: "",
       modalNuevoProducto: false,
       esPreparado: false,
+      categoria: "Entradas",
     };
   },
   methods: {
-        ...mapActions(["getProductos"]),
+    ...mapActions(["getProductos"]),
   },
 
   created() {
     this.getProductos();
+    console.log(this.$vuetify.theme.dark);
   },
-  computed:{
-        ...mapState(['productos']),
-        ...mapGetters(['allProductos'])
-  }
+  computed: {
+    ...mapState(["productos"]),
+    ...mapGetters(["allProductos"]),
+  },
+  watch: {
+    //Probando el dark mode para aplicar distinto css
+    status(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
+
+      // Do whatever makes sense now
+      if (newValue === "success") {
+        this.complex = {
+          deep: "some deep object",
+        };
+      }
+    },
+  },
 };
 </script>
+
+<style scoped>
+.prevDrag {
+  -webkit-user-drag: none;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+</style>

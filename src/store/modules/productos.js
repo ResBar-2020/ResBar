@@ -2,10 +2,10 @@ import axios from 'axios'
 import credentials from "./credentials";
 const url = "http://localhost:5984/productos/"
 
- const getters = {
+const getters = {
     allProductos: state => state.productos,
 
- };
+};
 
 const state = {
     productos: [],
@@ -13,13 +13,13 @@ const state = {
 };
 
 const actions = {
-    async getProductos({commit}){
-    const response = await axios.post(`${url}_find`, {
-        "selector":{
-            
-        }
-    }, credentials.authentication);
-        commit('setProductos',response.data.docs);
+    async getProductos({ commit }) {
+        const response = await axios.post(`${url}_find`, {
+            "selector": {
+
+            }
+        }, credentials.authentication);
+        commit('setProductos', response.data.docs);
     },
     // async updateOrden({commit},orden){
     // const response = await axios.put(`${url}${orden._id}`,orden,{
@@ -34,8 +34,8 @@ const actions = {
 };
 
 const mutations = {
-    setProductos(state,data){
-      state.productos = data;
+    setProductos(state, data) {
+        state.productos = data;
     }
 };
 

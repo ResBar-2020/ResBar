@@ -1,23 +1,18 @@
 <template>
   <div>
     <header-dashboard
-        title="RESBAR PRODUCTOS"
-        subtitle="TODOS LOS PRODUCTOS"
-      ></header-dashboard>
-<br>    <v-btn color="info" @click="showMessage(snackbar)">mostrar snackbar</v-btn>
-    <div>
-    <AdministrarProductos></AdministrarProductos>
-    
-    </div>
- 
+      title="RESBAR PRODUCTOS"
+      subtitle="TODOS LOS PRODUCTOS"
+    ></header-dashboard>
+    <v-container elevation="10" outlined>
+      <AdministrarProductos></AdministrarProductos>
+    </v-container>
   </div>
 </template>
 
 
 <script>
-
-
-import { mapMutations, mapGetters, mapActions  } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import AdministrarProductos from "../components/administrarProductos/AdministrarProductos";
 import HeaderDashboard from "../components/headerDashboard";
 
@@ -26,22 +21,27 @@ export default {
     return {
       snackbar: {
         message: "desde productos",
-        timout: 2000
-      }
+        timout: 2000,
+      },
     };
   },
   components: {
-   AdministrarProductos,
-   HeaderDashboard
+    AdministrarProductos,
+    HeaderDashboard,
   },
   methods: {
-    ...mapActions(["getOrdenes", "getIdioma"]),
-    ...mapMutations(["showMessage"])
+    ...mapActions(["getIdioma"]),
+    ...mapMutations(["showMessage"]),
   },
-  computed:{
-          ...mapGetters(["idiomas"]),
+  computed: {
+    ...mapGetters(["idiomas"]),
   },
-  created(){
-  }
+  created() {},
 };
 </script>
+
+<style scoped>
+* {
+  background: #f5f5f5 !important;
+}
+</style>
