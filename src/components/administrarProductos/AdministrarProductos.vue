@@ -40,7 +40,6 @@
       <template v-slot:default>
         <thead class="primary">
           <tr>
-            <th id="tituloTabla" class="text-center white--text">Id</th>
             <th id="tituloTabla" class="text-center white--text">Nombre</th>
             <th id="tituloTabla" class="text-center white--text">Precio</th>
             <th id="tituloTabla" class="text-center white--text">Categoria</th>
@@ -48,13 +47,12 @@
             <th id="tituloTabla" class="text-center white--text">Acciones</th>
           </tr>
         </thead>
-        <tbody class="text-center">
-          <tr>
-            <td>1</td>
-            <td>Deditos de Queso</td>
-            <td>$ 1.5</td>
-            <td>Entradas</td>
-            <td>No</td>
+        <tbody class="text-center" v-if="productos">
+          <tr v-for="(producto,index) in allProductos" :key="index">
+            <td>{{producto.nombre}}</td>
+            <td>$ {{producto.precio}}</td>
+            <td>{{producto.categoria.nombre}}</td>
+            <td>{{producto.preparado?"si":"no"}}</td>
 
             <td class="mx-2">
               <v-tooltip bottom>
@@ -82,39 +80,7 @@
               </v-tooltip>
             </td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>Nachos</td>
-            <td>$ 2.0</td>
-            <td>Entradas</td>
-            <td>No</td>
-
-            <td>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    color="blue"
-                    dark
-                    v-bind="attrs"
-                    v-on="on"
-                    class="mr-2"
-                    small
-                  >
-                    <v-icon dark> mdi-pencil </v-icon>
-                  </v-btn>
-                </template>
-                <span>Modificar</span>
-              </v-tooltip>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn color="red" dark v-bind="attrs" v-on="on" small>
-                    <v-icon dark> mdi-delete </v-icon>
-                  </v-btn>
-                </template>
-                <span>Borrar</span>
-              </v-tooltip>
-            </td>
-          </tr>
+          
         </tbody>
       </template>
     </v-simple-table>
@@ -187,7 +153,7 @@
 </template>
 
 <script>
-// import { mapMutations } from "vuex";
+import { mapState,mapActions, mapGetters } from "vuex";
 export default {
   name: "AdministrarProductos",
   data() {
@@ -197,8 +163,16 @@ export default {
       esPreparado: false,
     };
   },
-  methods: {},
+  methods: {
+        ...mapActions(["getProductos"]),
+  },
 
-  created() {},
+  created() {
+    this.getProductos();
+  },
+  computed:{
+        ...mapState(['productos']),
+        ...mapGetters(['allProductos'])
+  }
 };
 </script>

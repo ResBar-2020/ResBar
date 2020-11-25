@@ -6,6 +6,8 @@ import ordenes from './modules/ordenes'
 import recoger from './modules/recoger'
 import idioma from "./modules/idioma";
 import credentials from "./modules/credentials";
+import productos from "./modules/productos";
+
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
 
@@ -78,5 +80,6 @@ export default new Vuex.Store({
     ordenes,
     idioma,
     recoger,
+    productos
   }
 })
