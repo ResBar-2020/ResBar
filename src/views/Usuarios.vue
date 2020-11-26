@@ -186,7 +186,7 @@
       <!-- Inicia modal para editar usuario -->
       <v-dialog v-model="modalEdit" width="500">
         <v-card>
-          <v-card-title class="headline"> Modificar Usuario </v-card-title>
+          <v-card-title class="headline amber darken-4" style="color: #fff;"> Modificar Usuario </v-card-title>
           <v-card-text>
             <template>
               <v-form v-model="valid" ref="form" lazy-validation>
@@ -399,6 +399,7 @@ export default {
 }
 #myTable {
   border: none;
+  border-collapse: collapse;
 }
 #myTable tbody tr {
   transition: 0.5s;
@@ -409,5 +410,8 @@ export default {
   background: #4c89b8;
   color: #fff;
   box-shadow: 0 0.125rem 0.8rem #00579c;
+}
+#myTable tbody tr td{
+  padding: 0.8em;
 }
 </style>
