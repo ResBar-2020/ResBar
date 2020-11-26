@@ -1,3 +1,4 @@
+<!-- TODO Agregar el idioma -->
 <template>
   <v-app>
     <header-dashboard
@@ -42,7 +43,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(usuario, index) in usuarios" :key="index" v-show="filtrar(index)">
+            <tr
+              v-for="(usuario, index) in usuarios"
+              :key="index"
+              v-show="filtrar(index)"
+            >
               <td>{{ usuario.nombreCompleto }}</td>
               <td>{{ usuario.loggin }}</td>
               <td>{{ usuario.clave }}</td>
@@ -110,6 +115,7 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Nombre completo"
+                            v-model="selectedUser.nombreCompleto"
                             required
                           ></v-text-field>
                         </v-col>
@@ -118,6 +124,7 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Nombre de usuario"
+                            v-model="selectedUser.loggin"
                             required
                           ></v-text-field>
                         </v-col>
@@ -126,13 +133,19 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Contraseña"
+                            v-model="selectedUser.clave"
                             required
                           ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
-                          <v-select label="Rol" required></v-select>
+                          <v-select
+                            label="Rol"
+                            :items="Roles"
+                            v-model="selectedUser.rol"
+                            required
+                          ></v-select>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -145,7 +158,8 @@
                   class="red"
                   color="white"
                   text
-                  @click="modalAgregar = false"
+                  @click="
+                    modalAgregar = false;"
                 >
                   Cancelar
                 </v-btn>
@@ -153,7 +167,8 @@
                   class="green darken-1"
                   color="white"
                   text
-                  @click="modalAgregar = false"
+                  @click="modalAgregar = false;
+                  createUser();"
                 >
                   Aceptar
                 </v-btn>
@@ -215,7 +230,16 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="red" color="white" text @click="modalEdit = false; getUsers()">
+            <v-btn
+              class="red"
+              color="white"
+              text
+              @click="
+                modalEdit = false;
+                getUsers();
+                showSnackbar('Accion Cancelada')
+              "
+            >
               Cancelar
             </v-btn>
             <v-btn
@@ -270,7 +294,8 @@
               class="green darken-1"
               color="white"
               text
-              @click="modalEliminar = false"
+              @click="modalEliminar = false;
+              removeUser()"
             >
               Aceptar
             </v-btn>
@@ -297,17 +322,39 @@ export default {
       modalEliminar: false,
       search: "",
       valid: true,
+      snackbar: {
+        message: "",
+        timout: 2000,
+      },
     };
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getUsers", "updateUser"]),
+    ...mapActions(["getUsers", "addUser", "updateUser", "deleteUser"]),
     getSelectedUser(user) {
       this.selectedUser = user;
+    },
+    showSnackbar(message){
+        this.selectedUser = {}
+        this.snackbar.message = message;
+        this.showMessage(this.snackbar);
+    },
+    createUser() {
+      if (JSON.stringify(this.selectedUser) != '{}') {
+        this.addUser(this.selectedUser);
+        this.showSnackbar("Agregado con exito")
+      }
     },
     modifyUser() {
       if (this.selectedUser !== undefined) {
         this.updateUser(this.selectedUser);
+        this.showSnackbar("Editado con exito")
+      }
+    },
+    removeUser() {
+      if (this.selectedUser !== undefined) {
+        this.deleteUser(this.selectedUser);
+        this.showSnackbar("Eliminado con exito")
       }
     },
     filtrar(valor) {
@@ -341,7 +388,7 @@ export default {
 #myTable {
   border: none;
 }
-#myTable tbody tr{
+#myTable tbody tr {
   border: none;
 }
 </style>

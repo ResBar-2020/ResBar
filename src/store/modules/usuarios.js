@@ -8,42 +8,63 @@ const getters = {
 const state = {
     usuarios: []
 }
+async function obtenerTodos() {
+    const response = await axios.post(`${url}_find`, {
+        "selector": {
+
+        }
+    }, credentials.authentication);
+    return response;
+}
+
 const actions = {
     async getUsers({commit}) {
-        const response = await axios.post(`${url}_find`, {
-            "selector": {
-
-            }
-        }, credentials.authentication);
+        const response = await obtenerTodos();
         commit('setUsuarios', response.data.docs);
-        
+
     },
-    async updateUser({commit},usuario){
-        const response = await axios.put(`${url}${usuario._id}`,usuario,{
+
+    async addUser({commit}, usuario){
+        await axios.post(`${url}`, usuario, {
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        },credentials.authentication);
+
+        const response = await obtenerTodos();
+        commit('setUsuarios', response.data.docs);
+    },
+
+    async updateUser({commit}, usuario) {
+        await axios.put(`${url}${usuario._id}`, usuario, {
             params: {
                 "rev": usuario._rev
             },
             "auth": credentials.authentication.auth,
             "headers": credentials.authentication.headers,
         }, credentials.authentication);
-        commit('updateUser', response.data.docs);
-        const response2 = await axios.post(`${url}_find`, {
-            "selector": {
 
-            }
+        const response = await obtenerTodos();
+        commit('setUsuarios', response.data.docs);
+    },
+
+    async deleteUser({commit}, usuario){
+        await axios.delete(`${url}${usuario._id}`, {
+            params: {
+                "rev": usuario._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
         }, credentials.authentication);
-        commit('setUsuarios', response2.data.docs);
-        },
+        
+        const response = await obtenerTodos();
+        commit('setUsuarios', response.data.docs);
+    }
 }
 
 const mutations = {
     setUsuarios(state, data) {
         state.usuarios = data;
     },
-    //TODO bandera para mostrar el snackbar
-    updateUser(data){
-        console.log(data)
-    }
 }
 
 export default {
