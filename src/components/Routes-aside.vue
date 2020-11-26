@@ -28,7 +28,7 @@
         </v-list-item-icon>
 
         <v-list-item-content>
-          <v-btn text :to="item.route">{{ item.title }}</v-btn>
+          <v-btn text :to="item.route" @click="mini=true">{{ item.title }}</v-btn>
         </v-list-item-content>
       </v-list-item>
     </v-list>
