@@ -99,6 +99,7 @@
             v-for="(producto, index) in allProductos"
             :key="index"
             v-show="categoria === producto.categoria.nombre"
+            @click="productoSelected=producto"
           >
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
@@ -115,6 +116,7 @@
                     v-on="on"
                     class="mr-2"
                     small
+                    @click="modalEditarProducto=true"
                   >
                     <v-icon dark> mdi-pencil </v-icon>
                   </v-btn>
@@ -123,7 +125,7 @@
               </v-tooltip>
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn color="red" dark v-bind="attrs" v-on="on" small>
+                  <v-btn color="red" dark v-bind="attrs" v-on="on" small @click="modalEliminarProducto=true">
                     <v-icon dark> mdi-delete </v-icon>
                   </v-btn>
                 </template>
@@ -162,7 +164,7 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
-                      :items="['Entrada', 'Plato', 'Bebida', 'Postre']"
+                      :items="categorias"
                       label="Categoría"
                     ></v-select>
                   </v-col>
@@ -195,6 +197,105 @@
         </v-dialog>
       </v-row>
     </template>
+
+<!-- inicia modal editar -->
+    <template>
+      <v-row justcategoriaSelectedify="center">
+        <v-dialog v-model="modalEditarProducto" persistent max-width="600px">
+          <v-card>
+            <v-card-title>
+              <span class="headline">Editar Producto</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Nombre del producto"
+                      required
+                      v-model="productoSelected.nombre"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col>
+                    <v-switch
+                      :label="`Es Preparado`"
+                      v-model="productoSelected.preparado"
+                    
+                    ></v-switch>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      :items="categorias"
+                      label="Categoría"
+                    ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Precio $"
+                      type="number"
+                      min="0"
+                      step="0.01"
+                      required
+                      v-model="productoSelected.precio"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" dark @click="modalEditarProducto = false">
+                Cancelar
+              </v-btn>
+              <v-btn
+                color="blue darken-4"
+                dark
+                @click="modalEditarProducto = false"
+              >
+                Guardar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </template>
+<!-- termina modal editar -->
+
+<!-- inicia modal borrar -->
+    <template>
+      <v-row justify="center">
+        <v-dialog v-model="modalEliminarProducto" persistent max-width="600px">
+          <v-card>
+            <v-card-title>
+              <span class="headline">Eliminar Producto</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col>
+                  ¿Desea eliminar el producto:<strong> {{productoSelected.nombre}}? </strong> 
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" dark @click="modalEliminarProducto=false">
+                Cancelar
+              </v-btn>
+              <v-btn
+                color="blue darken-4"
+                dark
+                @click="modalEliminarProducto=false"
+              >
+                Confirmar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+    </template>
+<!-- Termina modal borrar -->
   </v-app>
 </template>
 
@@ -205,6 +306,11 @@ export default {
   data() {
     return {
       search: "",
+      modalEditarProducto: false,
+      modalEliminarProducto: false,
+      categorias: ['Entrada', 'Plato', 'Bebida', 'Postre'],
+      productoSelected: {},
+      categoriaSelected:'', 
       modalNuevoProducto: false,
       esPreparado: false,
       categoria: "Entradas",
@@ -212,7 +318,8 @@ export default {
   },
   methods: {
     ...mapActions(["getProductos"]),
-  },
+  
+},
 
   created() {
     this.getProductos();
@@ -221,6 +328,7 @@ export default {
   computed: {
     ...mapState(["productos"]),
     ...mapGetters(["allProductos"]),
+    
   },
   watch: {
     //Probando el dark mode para aplicar distinto css
