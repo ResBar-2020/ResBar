@@ -7,19 +7,20 @@
     <v-container>
       <!-- Inica fila de boton agregar y campo de texto buscar -->
       <v-row id="fila">
-        <!-- Btn agregar usuario -->
-        <v-col cols="2">
-          <v-btn class="my-5" color="primary" @click="modalAgregar = true">
-            Agregar<v-icon dark class="mx-2"> mdi-plus-circle </v-icon>
-          </v-btn>
-        </v-col>
         <!-- Campo de texto Buscar usuario -->
-        <v-col cols="4">
+        <v-col class="col-md-6 col-12">
           <v-text-field
+            class="col-12"
             v-model="search"
             append-icon="mdi-magnify"
             label="Buscar"
           ></v-text-field>
+        </v-col>
+        <!-- Btn agregar usuario -->
+        <v-col class="col-md-4 col-8 offset-4">
+          <v-btn color="primary" @click="modalAgregar = true">
+            Agregar<v-icon dark class="mx-2"> mdi-plus-circle </v-icon>
+          </v-btn>
         </v-col>
       </v-row>
       <!-- Termina fila de boton agregar y campo de texto buscar -->
@@ -29,38 +30,31 @@
         <template v-slot:default>
           <thead class="primary">
             <tr>
-              <th id="tituloTabla" class="text-left white--text" text>
-                ID
-              </th>
               <th id="tituloTabla" class="text-left white--text">
                 Nombre completo
               </th>
               <th id="tituloTabla" class="text-left white--text">
                 Nombre de usuario
               </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Contraseña
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Rol
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Acciones
-              </th>
+              <th id="tituloTabla" class="text-left white--text">Contraseña</th>
+              <th id="tituloTabla" class="text-left white--text">Rol</th>
+              <th id="tituloTabla" class="text-left white--text">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in datos" :key="item.name">
-              <td>{{ item.id }}</td>
-              <td>{{ item.nombreCompleto }}</td>
-              <td>{{ item.login }}</td>
-              <td>{{ item.clave }}</td>
-              <td>{{ item.rol }}</td>
+            <tr v-for="(usuario, index) in usuarios" :key="index" v-show="filtrar(index)">
+              <td>{{ usuario.nombreCompleto }}</td>
+              <td>{{ usuario.loggin }}</td>
+              <td>{{ usuario.clave }}</td>
+              <td>{{ usuario.rol }}</td>
               <td>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEdit = true"
+                      @click="
+                        modalEdit = true;
+                        getSelectedUser(usuario);
+                      "
                       color="green darken-1"
                       class="mx-2"
                       fab
@@ -69,9 +63,7 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <v-icon dark>
-                        mdi-pencil-box-outline
-                      </v-icon>
+                      <v-icon dark> mdi-pencil-box-outline </v-icon>
                     </v-btn>
                   </template>
                   <span>Modificar</span>
@@ -79,7 +71,11 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEliminar = true"
+                      v-show="usuario.rol !== 'ADMIN'"
+                      @click="
+                        modalEliminar = true;
+                        getSelectedUser(usuario);
+                      "
                       color="red"
                       class="mx-2"
                       fab
@@ -88,9 +84,7 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <v-icon dark>
-                        mdi-delete
-                      </v-icon>
+                      <v-icon dark> mdi-delete </v-icon>
                     </v-btn>
                   </template>
                   <span>Eliminar</span>
@@ -107,9 +101,7 @@
         <v-col cols="12">
           <v-dialog v-model="modalAgregar" persistent max-width="500">
             <v-card>
-              <v-card-title class="headline">
-                Agregar Usuario
-              </v-card-title>
+              <v-card-title class="headline"> Agregar Usuario </v-card-title>
               <v-card-text>
                 <template>
                   <v-form v-model="valid">
@@ -175,9 +167,7 @@
       <!-- Inicia modal para editar usuario -->
       <v-dialog v-model="modalEdit" width="500">
         <v-card>
-          <v-card-title class="headline">
-            Modificar Usuario
-          </v-card-title>
+          <v-card-title class="headline"> Modificar Usuario </v-card-title>
           <v-card-text>
             <template>
               <v-form v-model="valid">
@@ -186,6 +176,7 @@
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
                         label="Nombre completo"
+                        v-model="selectedUser.nombreCompleto"
                         required
                       ></v-text-field>
                     </v-col>
@@ -194,18 +185,28 @@
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
                         label="Nombre de usuario"
+                        v-model="selectedUser.loggin"
                         required
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Contraseña" required></v-text-field>
+                      <v-text-field
+                        label="Contraseña"
+                        required
+                        v-model="selectedUser.clave"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-select label="Rol" required></v-select>
+                      <v-select
+                        label="Rol"
+                        :items="Roles"
+                        v-model="selectedUser.rol"
+                        required
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -214,14 +215,17 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn class="red" color="white" text @click="modalEdit = false">
+            <v-btn class="red" color="white" text @click="modalEdit = false; getUsers()">
               Cancelar
             </v-btn>
             <v-btn
               class="green darken-1"
               color="white"
               text
-              @click="modalEdit = false"
+              @click="
+                modalEdit = false;
+                modifyUser();
+              "
             >
               Aceptar
             </v-btn>
@@ -233,13 +237,20 @@
       <!-- INICIA MODAL PARA ELIMINAR USUARIO -->
       <v-dialog v-model="modalEliminar" width="400">
         <v-card>
-          <v-card-title>Eliminar Usuario</v-card-title>
+          <v-card-title class="red" style="color: #fff"
+            >Eliminar Usuario</v-card-title
+          >
 
           <v-card-text>
             <v-container>
               <v-row>
                 <v-col cols="12" class="text-center"
-                  ><h3>¿Desea eliminar esta usuario?</h3></v-col
+                  ><h3>
+                    ¿Desea eliminar a
+                    <span style="font-weight: 800"
+                      >{{ selectedUser.nombreCompleto }}?</span
+                    >
+                  </h3></v-col
                 >
               </v-row>
             </v-container></v-card-text
@@ -272,42 +283,49 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
+
 export default {
   components: { HeaderDashboard },
   data() {
     return {
+      selectedUser: {},
+      Roles: ["ADMIN", "MESERO"],
       modalAgregar: false,
       modalEdit: false,
       modalEliminar: false,
-      datos: [
-        {
-          id: 1,
-          nombreCompleto: "Jon Jairo",
-          login: "jon_user",
-          clave: 159,
-          rol: "Administrador",
-        },
-        {
-          id: 1,
-          nombreCompleto: "Mario Moreno",
-          login: "mario_user",
-          clave: "estaEsUnaContra",
-          rol: "Administrador",
-        },
-        {
-          id: 1,
-          nombreCompleto: "Karina Restrepo",
-          login: "kari_user",
-          clave: 1234,
-          rol: "Administrador",
-        },
-      ],
+      search: "",
+      valid: true,
     };
   },
   methods: {
     ...mapMutations(["showMessage"]),
+    ...mapActions(["getUsers", "updateUser"]),
+    getSelectedUser(user) {
+      this.selectedUser = user;
+    },
+    modifyUser() {
+      if (this.selectedUser !== undefined) {
+        this.updateUser(this.selectedUser);
+      }
+    },
+    filtrar(valor) {
+      if (this.search === "") return true;
+      let array = (
+        this.usuarios[valor].nombreCompleto +
+        this.usuarios[valor].loggin +
+        this.usuarios[valor].clave +
+        this.usuarios[valor].rol
+      ).toUpperCase();
+      return array.indexOf(this.search.toUpperCase()) >= 0;
+    },
+  },
+  computed: {
+    ...mapGetters(["usuarios"]),
+  },
+  created() {
+    this.getUsers();
   },
 };
 </script>
@@ -321,6 +339,9 @@ export default {
   font-size: 16px;
 }
 #myTable {
-  border: 1px solid lightgray;
+  border: none;
+}
+#myTable tbody tr{
+  border: none;
 }
 </style>
