@@ -109,13 +109,14 @@
               <v-card-title class="headline"> Agregar Usuario </v-card-title>
               <v-card-text>
                 <template>
-                  <v-form v-model="valid">
+                  <v-form v-model="valid" ref="form" lazy-validation>
                     <v-container>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Nombre completo"
                             v-model="selectedUser.nombreCompleto"
+                            :rules="validRules"
                             required
                           ></v-text-field>
                         </v-col>
@@ -125,6 +126,7 @@
                           <v-text-field
                             label="Nombre de usuario"
                             v-model="selectedUser.loggin"
+                            :rules="validRules"
                             required
                           ></v-text-field>
                         </v-col>
@@ -134,6 +136,7 @@
                           <v-text-field
                             label="Contraseña"
                             v-model="selectedUser.clave"
+                            :rules="validRules"
                             required
                           ></v-text-field>
                         </v-col>
@@ -144,6 +147,7 @@
                             label="Rol"
                             :items="Roles"
                             v-model="selectedUser.rol"
+                            :rules="validRules"
                             required
                           ></v-select>
                         </v-col>
@@ -185,13 +189,14 @@
           <v-card-title class="headline"> Modificar Usuario </v-card-title>
           <v-card-text>
             <template>
-              <v-form v-model="valid">
+              <v-form v-model="valid" ref="form" lazy-validation>
                 <v-container>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
                         label="Nombre completo"
                         v-model="selectedUser.nombreCompleto"
+                        :rules="validRules"
                         required
                       ></v-text-field>
                     </v-col>
@@ -201,6 +206,7 @@
                       <v-text-field
                         label="Nombre de usuario"
                         v-model="selectedUser.loggin"
+                        :rules="validRules"
                         required
                       ></v-text-field>
                     </v-col>
@@ -211,6 +217,7 @@
                         label="Contraseña"
                         required
                         v-model="selectedUser.clave"
+                        :rules="validRules"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -220,6 +227,7 @@
                         label="Rol"
                         :items="Roles"
                         v-model="selectedUser.rol"
+                        :rules="validRules"
                         required
                       ></v-select>
                     </v-col>
@@ -322,6 +330,7 @@ export default {
       modalEliminar: false,
       search: "",
       valid: true,
+      validRules: [(v) => !!v || "El campo es requerido"],
       snackbar: {
         message: "",
         timout: 2000,
@@ -367,6 +376,9 @@ export default {
       ).toUpperCase();
       return array.indexOf(this.search.toUpperCase()) >= 0;
     },
+    validate() {
+      this.$refs.form[0].validate()
+    },
   },
   computed: {
     ...mapGetters(["usuarios"]),
@@ -389,6 +401,13 @@ export default {
   border: none;
 }
 #myTable tbody tr {
-  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+  box-shadow: 0 0.125rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+#myTable tbody tr:hover {
+  background: #4c89b8;
+  color: #fff;
+  box-shadow: 0 0.125rem 0.8rem #00579c;
 }
 </style>
