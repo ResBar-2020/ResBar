@@ -279,7 +279,7 @@
                 <v-col cols="12" class="text-center"
                   ><h3>
                     ¿Desea eliminar a
-                    <span style="font-weight: 800"
+                    <span style="font-weight: 800; color: red"
                       >{{ selectedUser.nombreCompleto }}?</span
                     >
                   </h3></v-col
@@ -413,5 +413,6 @@ export default {
 }
 #myTable tbody tr td{
   padding: 0.8em;
+  font-weight: 600;
 }
 </style>
