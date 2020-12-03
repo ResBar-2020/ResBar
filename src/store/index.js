@@ -8,6 +8,7 @@ import idioma from "./modules/idioma";
 import credentials from "./modules/credentials";
 import productos from "./modules/productos";
 import usuarios from "./modules/usuarios";
+import categorias from "./modules/categorias";
 
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
@@ -82,6 +83,7 @@ export default new Vuex.Store({
     idioma,
     recoger,
     productos,
-    usuarios
+    usuarios,
+    categorias
   }
 })
