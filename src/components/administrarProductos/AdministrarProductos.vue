@@ -238,7 +238,14 @@
                     ></v-switch>
                   </v-col>
                   <v-col cols="12">
-                    <v-select :items="categorias" label="Categoría"></v-select>
+                    <v-select
+                    v-model="productoSelected.categoria"
+                    :items="allCategorias"
+                    item-text="nombre" 
+                    item-value="_id"
+                    return-object
+                    label="Categoría">
+                    </v-select>
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
@@ -261,7 +268,7 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalEditarProducto = false"
+                @click="modalEditarProducto = false; editProduct()"
               >
                 Guardar
               </v-btn>
@@ -338,7 +345,7 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getProductos", "getCategorias", "addProduct"]),
+    ...mapActions(["getProductos", "getCategorias", "addProduct", "updateProduct"]),
     
     showSnackbar(message){
         this.selectedUser = {}
@@ -353,13 +360,13 @@ export default {
       }
     },
 
-    mostrarCategorias(){
-
-      this.listaDeCategorias = this.allCategorias.map(function(item) {
-        return item.nombre;        
-      })
-      
-    }
+    editProduct() {
+      if (this.productoSelected !== undefined) {
+        this.updateProduct(this.productoSelected);
+        this.showSnackbar("Editado con exito")
+      }
+    },
+    
 
   },
 

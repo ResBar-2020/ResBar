@@ -41,6 +41,19 @@ const actions = {
         commit('setProductos', response.data.docs);
     },
 
+    async updateProduct({commit}, producto) {
+        await axios.put(`${url}${producto._id}`, producto, {
+            params: {
+                "rev": producto._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        }, credentials.authentication);
+
+        const response = await obtenerTodos();
+        commit('setProductos', response.data.docs);
+    },
+
     // async updateOrden({commit},orden){
     // const response = await axios.put(`${url}${orden._id}`,orden,{
     //     params: {
