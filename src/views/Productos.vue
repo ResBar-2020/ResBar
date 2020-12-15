@@ -30,8 +30,11 @@ export default {
     HeaderDashboard,
   },
   methods: {
-    ...mapActions(["getIdioma"]),
+    ...mapActions(["getIdioma", "addProduct"]),
     ...mapMutations(["showMessage"]),
+
+
+
   },
   computed: {
     ...mapGetters(["idiomas"]),

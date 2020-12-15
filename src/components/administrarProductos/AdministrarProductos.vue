@@ -162,17 +162,25 @@
                   <v-col cols="12">
                     <v-text-field
                       label="Nombre del producto"
+                      v-model="nuevoProducto.nombre"
                       required
                     ></v-text-field>
                   </v-col>
                   <v-col>
                     <v-switch
                       :label="`Es Preparado`"
-                      v-model="esPreparado"
+                      v-model="nuevoProducto.preparado"
                     ></v-switch>
                   </v-col>
                   <v-col cols="12">
-                    <v-select :items="categorias" label="Categoría"></v-select>
+                    <v-select
+                    v-model="nuevoProducto.categoria"
+                    :items="allCategorias"
+                    item-text="nombre" 
+                    item-value="_id"
+                    return-object
+                    label="Categoría">
+                    </v-select>
                   </v-col>
                   <v-col cols="12">
                     <v-text-field
@@ -180,6 +188,7 @@
                       type="number"
                       min="0"
                       step="0.01"
+                      v-model="nuevoProducto.precio"
                       required
                     ></v-text-field>
                   </v-col>
@@ -194,7 +203,7 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalNuevoProducto = false"
+                @click="modalNuevoProducto = false; createProduct()"
               >
                 Guardar
               </v-btn>
@@ -304,7 +313,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapMutations, mapState, mapActions, mapGetters } from "vuex";
 export default {
   name: "AdministrarProductos",
   data() {
@@ -312,28 +321,58 @@ export default {
       search: "",
       modalEditarProducto: false,
       modalEliminarProducto: false,
-      categorias: ["Entrada", "Plato", "Bebida", "Postre"],
+      // categorias: ["Entrada", "Plato", "Bebida", "Postre"],
       productoSelected: {},
+      nuevoProducto: {}, 
       categoriaSelected: "",
       modalNuevoProducto: false,
       esPreparado: false,
       categoria: "Entradas",
+      listaDeCategorias: [], 
+      snackbar: {
+        message: "",
+        timout: 2000,
+      },
 
     };
   },
   methods: {
-    ...mapActions(["getProductos", "getCategorias"]),
+    ...mapMutations(["showMessage"]),
+    ...mapActions(["getProductos", "getCategorias", "addProduct"]),
+    
+    showSnackbar(message){
+        this.selectedUser = {}
+        this.snackbar.message = message;
+        this.showMessage(this.snackbar);
+    },
+
+    createProduct() {
+      if (JSON.stringify(this.nuevoProducto) != '{}') {
+        this.addProduct(this.nuevoProducto);
+        this.showSnackbar("Agregado con exito")
+      }
+    },
+
+    mostrarCategorias(){
+
+      this.listaDeCategorias = this.allCategorias.map(function(item) {
+        return item.nombre;        
+      })
+      
+    }
 
   },
 
   created() {
     this.getProductos();
-    this.getCategorias(); 
+    this.getCategorias();
     console.log(this.$vuetify.theme.dark);
   },
   computed: {
     ...mapState(["productos", "categorias"]),
     ...mapGetters(["allProductos", "allCategorias"]),
+
+
   },
   watch: {
     //Probando el dark mode para aplicar distinto css

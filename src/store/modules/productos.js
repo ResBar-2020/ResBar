@@ -12,6 +12,15 @@ const state = {
     query: ''
 };
 
+async function obtenerTodos() {
+    const response = await axios.post(`${url}_find`, {
+        "selector": {
+
+        }
+    }, credentials.authentication);
+    return response;
+}
+
 const actions = {
     async getProductos({ commit }) {
         const response = await axios.post(`${url}_find`, {
@@ -21,6 +30,17 @@ const actions = {
         }, credentials.authentication);
         commit('setProductos', response.data.docs);
     },
+
+    async addProduct({commit}, producto){
+        await axios.post(`${url}`, producto, {
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        },credentials.authentication);
+
+        const response = await obtenerTodos();
+        commit('setProductos', response.data.docs);
+    },
+
     // async updateOrden({commit},orden){
     // const response = await axios.put(`${url}${orden._id}`,orden,{
     //     params: {
