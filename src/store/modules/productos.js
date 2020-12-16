@@ -64,7 +64,7 @@ const actions = {
         }, credentials.authentication);
         
         const response = await obtenerTodos();
-        commit('setUsuarios', response.data.docs);
+        commit('setProductos', response.data.docs);
     }
 
     // async updateOrden({commit},orden){
