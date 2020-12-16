@@ -45,17 +45,13 @@
       >
         <v-tabs-slider></v-tabs-slider>
 
-
-        <div>
-        <v-tab 
+        <v-tab
           href="#tab-2"
           @click="categoria = 'Entradas'"
           class="flex-grow-1 prevDrag"
         >
           Entradas
-          <v-icon>mdi-baguette</v-icon>
         </v-tab>
-        </div>
 
         <v-tab
           href="#tab-3"
@@ -63,7 +59,6 @@
           class="flex-grow-1 prevDrag"
         >
           Platos
-          <v-icon>mdi-food-croissant</v-icon>
         </v-tab>
 
         <v-tab
@@ -72,7 +67,6 @@
           class="flex-grow-1 prevDrag"
         >
           Bebidas
-          <v-icon>mdi-beer</v-icon>
         </v-tab>
 
         <v-tab
@@ -81,7 +75,6 @@
           class="flex-grow-1 prevDrag"
         >
           Postres
-          <v-icon>mdi-ice-cream</v-icon>
         </v-tab>
       </v-tabs>
     </v-card>
@@ -102,10 +95,11 @@
             v-for="(producto, index) in allProductos"
             :key="index"
             @click="productoSelected = producto"
+            v-show="producto.categoria.nombre === categoria && buscar(index)"
           >
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
-            <td>{{producto.categoria.nombre}}</td>
+            <td>{{ producto.categoria.nombre }}</td>
             <td>{{ producto.preparado ? "si" : "no" }}</td>
 
             <td class="mx-2">
@@ -174,12 +168,13 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
-                    v-model="nuevoProducto.categoria"
-                    :items="allCategorias"
-                    item-text="nombre" 
-                    item-value="_id"
-                    return-object
-                    label="Categoría">
+                      v-model="nuevoProducto.categoria"
+                      :items="allCategorias"
+                      item-text="nombre"
+                      item-value="_id"
+                      return-object
+                      label="Categoría"
+                    >
                     </v-select>
                   </v-col>
                   <v-col cols="12">
@@ -203,7 +198,10 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalNuevoProducto = false; createProduct()"
+                @click="
+                  modalNuevoProducto = false;
+                  createProduct();
+                "
               >
                 Guardar
               </v-btn>
@@ -239,12 +237,13 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
-                    v-model="productoSelected.categoria"
-                    :items="allCategorias"
-                    item-text="nombre" 
-                    item-value="_id"
-                    return-object
-                    label="Categoría">
+                      v-model="productoSelected.categoria"
+                      :items="allCategorias"
+                      item-text="nombre"
+                      item-value="_id"
+                      return-object
+                      label="Categoría"
+                    >
                     </v-select>
                   </v-col>
                   <v-col cols="12">
@@ -268,7 +267,10 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalEditarProducto = false; editProduct()"
+                @click="
+                  modalEditarProducto = false;
+                  editProduct();
+                "
               >
                 Guardar
               </v-btn>
@@ -306,7 +308,10 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalEliminarProducto = false; removeProduct()"
+                @click="
+                  modalEliminarProducto = false;
+                  removeProduct();
+                "
               >
                 Confirmar
               </v-btn>
@@ -330,51 +335,65 @@ export default {
       modalEliminarProducto: false,
       // categorias: ["Entrada", "Plato", "Bebida", "Postre"],
       productoSelected: {},
-      nuevoProducto: {}, 
+      nuevoProducto: {},
       categoriaSelected: "",
       modalNuevoProducto: false,
       esPreparado: false,
       categoria: "Entradas",
-      listaDeCategorias: [], 
+      listaDeCategorias: [],
       snackbar: {
         message: "",
         timout: 2000,
       },
-
     };
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getProductos", "getCategorias", "addProduct", "updateProduct", "deleteProduct"]),
-    
-    showSnackbar(message){
-        this.selectedUser = {}
-        this.snackbar.message = message;
-        this.showMessage(this.snackbar);
+    ...mapActions([
+      "getProductos",
+      "getCategorias",
+      "addProduct",
+      "updateProduct",
+      "deleteProduct",
+    ]),
+
+    showSnackbar(message) {
+      this.selectedUser = {};
+      this.snackbar.message = message;
+      this.showMessage(this.snackbar);
     },
 
     createProduct() {
-      if (JSON.stringify(this.nuevoProducto) != '{}') {
+      if (JSON.stringify(this.nuevoProducto) != "{}") {
         this.addProduct(this.nuevoProducto);
-        this.showSnackbar("Agregado con exito")
+        this.showSnackbar("Agregado con exito");
       }
     },
 
     editProduct() {
       if (this.productoSelected !== undefined) {
         this.updateProduct(this.productoSelected);
-        this.showSnackbar("Editado con exito")
+        this.showSnackbar("Editado con exito");
       }
     },
 
     removeProduct() {
       if (this.productoSelected !== undefined) {
         this.deleteProduct(this.productoSelected);
-        this.showSnackbar("Eliminado con exito")
+        this.showSnackbar("Eliminado con exito");
       }
     },
-    
+    buscar: function (x) {
+      //(this.search!=null || this.search != undefined)?((this.search.trim() === "") ? true: false):true;
 
+      return this.search.trim() != ""
+        ? (this.allProductos[x].nombre + this.allProductos[x].precio)
+            .toUpperCase()
+            .indexOf(this.search.toUpperCase()) >= 0
+          ? true
+          : false
+        : true;
+    },
   },
 
   created() {
@@ -385,8 +404,6 @@ export default {
   computed: {
     ...mapState(["productos", "categorias"]),
     ...mapGetters(["allProductos", "allCategorias"]),
-
-
   },
   watch: {
     //Probando el dark mode para aplicar distinto css
