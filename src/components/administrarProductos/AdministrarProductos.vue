@@ -306,7 +306,7 @@
               <v-btn
                 color="blue darken-4"
                 dark
-                @click="modalEliminarProducto = false"
+                @click="modalEliminarProducto = false; removeProduct()"
               >
                 Confirmar
               </v-btn>
@@ -345,7 +345,7 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getProductos", "getCategorias", "addProduct", "updateProduct"]),
+    ...mapActions(["getProductos", "getCategorias", "addProduct", "updateProduct", "deleteProduct"]),
     
     showSnackbar(message){
         this.selectedUser = {}
@@ -364,6 +364,13 @@ export default {
       if (this.productoSelected !== undefined) {
         this.updateProduct(this.productoSelected);
         this.showSnackbar("Editado con exito")
+      }
+    },
+
+    removeProduct() {
+      if (this.productoSelected !== undefined) {
+        this.deleteProduct(this.productoSelected);
+        this.showSnackbar("Eliminado con exito")
       }
     },
     

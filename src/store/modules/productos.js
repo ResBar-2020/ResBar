@@ -54,6 +54,19 @@ const actions = {
         commit('setProductos', response.data.docs);
     },
 
+    async deleteProduct({commit}, producto){
+        await axios.delete(`${url}${producto._id}`, {
+            params: {
+                "rev": producto._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        }, credentials.authentication);
+        
+        const response = await obtenerTodos();
+        commit('setUsuarios', response.data.docs);
+    }
+
     // async updateOrden({commit},orden){
     // const response = await axios.put(`${url}${orden._id}`,orden,{
     //     params: {
