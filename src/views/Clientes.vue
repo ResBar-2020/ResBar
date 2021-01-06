@@ -29,46 +29,37 @@
         <template v-slot:default>
           <thead class="primary">
             <tr>
-              <th id="tituloTabla" class="text-left white--text" text>
-                ID
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Nombre
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Celular
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                WhatsApp
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Dirección
-              </th>
+              <th id="tituloTabla" class="text-left white--text">Nombre</th>
+              <th id="tituloTabla" class="text-left white--text">Celular</th>
+              <th id="tituloTabla" class="text-left white--text">WhatsApp</th>
+              <th id="tituloTabla" class="text-left white--text">Dirección</th>
               <th id="tituloTabla" class="text-left white--text">
                 Departamento
               </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Municipio
-              </th>
-              <th id="tituloTabla" class="text-left white--text">
-                Acciones
-              </th>
+              <th id="tituloTabla" class="text-left white--text">Municipio</th>
+
+              <th id="tituloTabla" class="text-left white--text">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in datos" :key="item.name">
-              <td>{{ item.id }}</td>
-              <td>{{ item.nombreCompleto }}</td>
-              <td>{{ item.celular }}</td>
-              <td>{{ item.whatsapp }}</td>
-              <td>{{ item.direccion }}</td>
-              <td>{{ item.departamento }}</td>
-              <td>{{ item.municipio }}</td>
+            <tr
+              v-for="(cliente, index) in clientes"
+              :key="index"
+              v-show="filtrar(index)"
+            >
+              <td>{{ cliente.nombreCompleto}}</td>
+              <td>{{ cliente.celular }}</td>
+              <td>{{ cliente.whatsapp }}</td>
+              <td>{{ cliente.direccion }}</td>
+              <td>{{ cliente.departamento }}</td>
+              <td>{{ cliente.municipio }}</td>
+
               <td>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEdit = true"
+                      @click="modalEdit = true
+                      getSelectedCliente(cliente);"
                       color="green darken-1"
                       class="mx-2"
                       fab
@@ -77,9 +68,7 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <v-icon dark>
-                        mdi-pencil-box-outline
-                      </v-icon>
+                      <v-icon dark> mdi-pencil-box-outline </v-icon>
                     </v-btn>
                   </template>
                   <span>Modificar</span>
@@ -87,7 +76,9 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEliminar = true"
+                      @click="modalEliminar = true
+                      getSelectedCliente(cliente);
+                      "
                       color="red"
                       class="mx-2"
                       fab
@@ -96,9 +87,7 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      <v-icon dark>
-                        mdi-delete
-                      </v-icon>
+                      <v-icon dark> mdi-delete </v-icon>
                     </v-btn>
                   </template>
                   <span>Eliminar</span>
@@ -120,36 +109,39 @@
             scrollable
           >
             <v-card>
-              <v-card-title class="headline">
-                Agregar Cliente
-              </v-card-title>
+              <v-card-title class="headline"> Agregar Cliente </v-card-title>
               <v-card-text>
                 <template>
-                  <v-form v-model="valid">
+                  <v-form >
                     <v-container>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Nombre completo"
-                            required
+                            v-model="selectedCliente.nombreCompleto"
                           ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
-                          <v-text-field label="Teléfono de casa"></v-text-field>
+                          <v-text-field 
+                          label="Teléfono de casa"
+                          v-model="selectedCliente.telefonoCasa"
+                          ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
-                          <v-text-field label="Celular" required></v-text-field>
+                          <v-text-field label="Celular" 
+                          v-model="selectedCliente.celular"
+                          ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="WhatsApp"
-                            required
+                            v-model="selectedCliente.whatsapp"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -157,7 +149,7 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Dirección"
-                            required
+                            v-model="selectedCliente.direccion"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -165,7 +157,7 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Departamento"
-                            required
+                            v-model="selectedCliente.departamento"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -173,20 +165,8 @@
                         <v-col cols="12" class="mx-auto">
                           <v-text-field
                             label="Municipio"
-                            required
+                            v-model="selectedCliente.municipio"
                           ></v-text-field>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col cols="12" class="mx-auto">
-                          <v-text-field
-                            label="Punto de referencia"
-                          ></v-text-field>
-                        </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col cols="12" class="mx-auto">
-                          <v-text-field label="Observaciones"></v-text-field>
                         </v-col>
                       </v-row>
                     </v-container>
@@ -207,7 +187,10 @@
                   class="green darken-1"
                   color="white"
                   text
-                  @click="modalAgregar = false"
+                    @click="
+                      modalAgregar = false;
+                      createCliente();
+                    "
                 >
                   Aceptar
                 </v-btn>
@@ -221,62 +204,64 @@
       <!-- Inicia Modal para editar Cliente -->
       <v-dialog v-model="modalEdit" width="500" scrollable>
         <v-card>
-          <v-card-title class="headline">
-            Modificar Cliente
-          </v-card-title>
+          <v-card-title class="headline"> Modificar Cliente </v-card-title>
           <v-card-text>
             <template>
-              <v-form v-model="valid">
+              <v-form >
                 <v-container>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
                         label="Nombre completo"
-                        required
+                        v-model="selectedCliente.nombreCompleto"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Teléfono de casa"></v-text-field>
+                      <v-text-field
+                       label="Teléfono de casa"
+                       v-model="selectedCliente.telefonoCasa"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Celular" required></v-text-field>
+                      <v-text-field 
+                      label="Celular"
+                      v-model="selectedCliente.celular"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="WhatsApp" required></v-text-field>
+                      <v-text-field 
+                      label="WhatsApp"
+                      v-model="selectedCliente.whatsapp"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Dirección" required></v-text-field>
+                      <v-text-field label="Dirección"
+                      v-model="selectedCliente.direccion"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
                         label="Departamento"
-                        required
+                        v-model="selectedCliente.departamento"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Municipio" required></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Punto de referencia"></v-text-field>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Observaciones"></v-text-field>
+                      <v-text-field 
+                      label="Municipio" 
+                      v-model="selectedCliente.municipio"
+                      ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -343,48 +328,63 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 export default {
   components: { HeaderDashboard },
+  computed: {
+    ...mapGetters(["clientes"]),
+  },
   data() {
     return {
+      selectedCliente: {},
       modalAgregar: false,
       modalEdit: false,
       modalEliminar: false,
-      datos: [
-        {
-          id: 1,
-          nombreCompleto: "Jon Jairo",
-          celular: 70707070,
-          whatsapp: 70707070,
-          direccion: "Barrio Lomas Turbas",
-          departamento: "Santa Ana",
-          municipio: "Chalchuapa",
-        },
-        {
-          id: 1,
-          nombreCompleto: "Felipe Mari",
-          celular: 73737070,
-          whatsapp: 73737070,
-          direccion: "Colonia Torogoz",
-          departamento: "Santa Ana",
-          municipio: "Chalchuapa",
-        },
-        {
-          id: 1,
-          nombreCompleto: "San Gregorio",
-          celular: 72727070,
-          whatsapp: 72727070,
-          direccion: "Colonia el divino niño Jesús",
-          departamento: "Santa Ana",
-          municipio: "Chalchuapa",
-        },
-      ],
+      search: "",
+      snackbar: {
+        message: "",
+        timout: 2000,
+      },
     };
   },
   methods: {
     ...mapMutations(["showMessage"]),
+    ...mapActions(["getClientes", "addCliente"]),
+
+    filtrar(valor) {
+      if (this.search === "") return true;
+      let array = (
+        this.clientes[valor].nombreCompleto +
+        this.clientes[valor].celular +
+        this.clientes[valor].whatsapp +
+        this.clientes[valor].direccion +
+        this.clientes[valor].departamento +
+        this.clientes[valor].municipio 
+      ).toUpperCase();
+      return array.indexOf(this.search.toUpperCase()) >= 0;
+    },
+
+    getSelectedCliente(cliente) {
+      this.selectedCliente = cliente;
+    },    
+
+    showSnackbar(message) {
+      this.selectedCliente = {};
+      this.snackbar.message = message;
+      this.showMessage(this.snackbar);
+    },
+
+    createCliente() {
+      if (JSON.stringify(this.selectedCliente) != "{}") {
+        this.addCliente(this.selectedCliente);
+        this.showSnackbar("Agregado con exito");
+        console.log("Agregar");
+      }
+    },
+  },
+  created() {
+    this.getClientes();
   },
 };
 </script>

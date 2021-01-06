@@ -10,6 +10,7 @@ import productos from "./modules/productos";
 import usuarios from "./modules/usuarios";
 import categorias from "./modules/categorias";
 import bitacoras from "./modules/bitacoras";
+import clientes from "./modules/clientes";
 
 Vue.use(Vuex)
 axios.defaults.baseURL = "http://localhost:5984"
@@ -86,6 +87,7 @@ export default new Vuex.Store({
     productos,
     usuarios,
     categorias,
-    bitacoras
+    bitacoras,
+    clientes
   }
 })
