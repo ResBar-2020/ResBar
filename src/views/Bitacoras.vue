@@ -105,18 +105,11 @@
 
         <v-data-table
           :headers="headers"
-          :items="bitacoras"
+          :items="allBitacoras"
           :items-per-page="5"
           :search="search"
           class="mytable"
-          ><template slot="items" slot-scope="props">
-            <td>{{ props.item.id }}</td>
-            <td>{{ props.item.fecha }}</td>
-            <td>{{ props.item.accion }}</td>
-            <td>{{ props.item.nombreCompleto }}</td>
-            <td>{{ props.item.loggin }}</td>
-            <td>{{ props.item.descripcion }}</td>
-          </template>
+        >
         </v-data-table>
 
         <br />
@@ -251,11 +244,14 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 
 export default {
   components: { HeaderDashboard },
+  computed: {
+    ...mapGetters(["allBitacoras"]),
+  },
   data() {
     return {
       //para el primer Date Picker (DESDE)
@@ -276,134 +272,76 @@ export default {
       dialog: false,
 
       search: "",
+
       headers: [
-        { text: "ID", value: "id", class: "primary white--text" },
-        { text: "Fecha", value: "fecha", class: "primary white--text" },
-        { text: "Acción", value: "accion", class: "primary white--text" },
+        {
+          text: "Fecha",
+          value: "fecha",
+          class: "primary white--text",
+          align: "center",
+          sortable: false,
+        },
+        {
+          text: "Acción",
+          value: "accion",
+          class: "primary white--text",
+          align: "center",
+          sortable: false,
+        },
         {
           text: "Nombre Completo",
           value: "nombreCompleto",
           class: "primary white--text",
+          align: "center",
+          sortable: false,
         },
-        { text: "Loggin", value: "loggin", class: "primary white--text" },
+        {
+          text: "Loggin",
+          value: "loggin",
+          class: "primary white--text",
+          align: "center",
+          sortable: false,
+        },
         {
           text: "Descripción",
           value: "descripcion",
           class: "primary white--text",
+          align: "center",
+          sortable: false,
         },
       ],
-      bitacoras: [
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-        {
-          id: 552,
-          fecha: "2020 - 08 - 01",
-          accion: "Inicio de Sesión",
-          nombreCompleto: "Administrador",
-          loggin: "admin",
-          descripcion: "Se inicio sesión usando su loggin y clave.",
-        },
-      ],
+
       snackbar: {
         message: "desde bitacoras",
         timout: 2000,
       },
     };
   },
+
   methods: {
     ...mapMutations(["showMessage"]),
+    ...mapActions(["getBitacoras"]),
+  },
+  created() {
+    this.getBitacoras();
   },
 };
 </script>
 
 <style scoped>
 .mytable {
-  position: relative;
-  text-align: center;
   border-collapse: collapse;
-  box-shadow: 5px 5px 15px rgb(36, 50, 0);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  max-width: 90vw;
+  box-shadow: 0 0.135rem 0.8rem rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  font-size: 100px !important;
+  padding: 1px;
+  font-family: Roboto, sans-serif;
+  line-height: 1.5;
 }
-.myth {
-  background: rgb(46, 70, 0);
-  color: #fff;
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th,
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th,
+.v-data-table > .v-data-table__wrapper > table > header > tr > th {
+    font-size: 100px;
 }
 </style>
