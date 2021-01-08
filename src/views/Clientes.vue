@@ -47,7 +47,7 @@
               :key="index"
               v-show="filtrar(index)"
             >
-              <td>{{ cliente.nombreCompleto}}</td>
+              <td>{{ cliente.nombreCompleto }}</td>
               <td>{{ cliente.celular }}</td>
               <td>{{ cliente.whatsapp }}</td>
               <td>{{ cliente.direccion }}</td>
@@ -58,8 +58,10 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEdit = true
-                      getSelectedCliente(cliente);"
+                      @click="
+                        modalEdit = true;
+                        getSelectedCliente(cliente);
+                      "
                       color="green darken-1"
                       class="mx-2"
                       fab
@@ -76,8 +78,9 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      @click="modalEliminar = true
-                      getSelectedCliente(cliente);
+                      @click="
+                        modalEliminar = true;
+                        getSelectedCliente(cliente);
                       "
                       color="red"
                       class="mx-2"
@@ -112,7 +115,7 @@
               <v-card-title class="headline"> Agregar Cliente </v-card-title>
               <v-card-text>
                 <template>
-                  <v-form >
+                  <v-form>
                     <v-container>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
@@ -124,16 +127,17 @@
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
-                          <v-text-field 
-                          label="Teléfono de casa"
-                          v-model="selectedCliente.telefonoCasa"
+                          <v-text-field
+                            label="Teléfono de casa"
+                            v-model="selectedCliente.telefonoCasa"
                           ></v-text-field>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12" class="mx-auto">
-                          <v-text-field label="Celular" 
-                          v-model="selectedCliente.celular"
+                          <v-text-field
+                            label="Celular"
+                            v-model="selectedCliente.celular"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -187,10 +191,10 @@
                   class="green darken-1"
                   color="white"
                   text
-                    @click="
-                      modalAgregar = false;
-                      createCliente();
-                    "
+                  @click="
+                    modalAgregar = false;
+                    createCliente();
+                  "
                 >
                   Aceptar
                 </v-btn>
@@ -207,7 +211,7 @@
           <v-card-title class="headline"> Modificar Cliente </v-card-title>
           <v-card-text>
             <template>
-              <v-form >
+              <v-form>
                 <v-container>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
@@ -220,31 +224,32 @@
                   <v-row>
                     <v-col cols="12" class="mx-auto">
                       <v-text-field
-                       label="Teléfono de casa"
-                       v-model="selectedCliente.telefonoCasa"
+                        label="Teléfono de casa"
+                        v-model="selectedCliente.telefonoCasa"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field 
-                      label="Celular"
-                      v-model="selectedCliente.celular"
+                      <v-text-field
+                        label="Celular"
+                        v-model="selectedCliente.celular"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field 
-                      label="WhatsApp"
-                      v-model="selectedCliente.whatsapp"
+                      <v-text-field
+                        label="WhatsApp"
+                        v-model="selectedCliente.whatsapp"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field label="Dirección"
-                      v-model="selectedCliente.direccion"
+                      <v-text-field
+                        label="Dirección"
+                        v-model="selectedCliente.direccion"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -258,9 +263,9 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" class="mx-auto">
-                      <v-text-field 
-                      label="Municipio" 
-                      v-model="selectedCliente.municipio"
+                      <v-text-field
+                        label="Municipio"
+                        v-model="selectedCliente.municipio"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -277,7 +282,9 @@
               class="green darken-1"
               color="white"
               text
-              @click="modalEdit = false"
+              @click="modalEdit = false;
+              modificarCliente();
+              "
             >
               Aceptar
             </v-btn>
@@ -315,7 +322,8 @@
               class="green darken-1"
               color="white"
               text
-              @click="modalEliminar = false"
+              @click="modalEliminar = false;
+              removerCliente();"
             >
               Aceptar
             </v-btn>
@@ -350,7 +358,12 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getClientes", "addCliente"]),
+    ...mapActions([
+      "getClientes",
+      "addCliente",
+      "updateCliente",
+      "deleteCliente",
+    ]),
 
     filtrar(valor) {
       if (this.search === "") return true;
@@ -360,14 +373,14 @@ export default {
         this.clientes[valor].whatsapp +
         this.clientes[valor].direccion +
         this.clientes[valor].departamento +
-        this.clientes[valor].municipio 
+        this.clientes[valor].municipio
       ).toUpperCase();
       return array.indexOf(this.search.toUpperCase()) >= 0;
     },
 
     getSelectedCliente(cliente) {
       this.selectedCliente = cliente;
-    },    
+    },
 
     showSnackbar(message) {
       this.selectedCliente = {};
@@ -379,9 +392,26 @@ export default {
       if (JSON.stringify(this.selectedCliente) != "{}") {
         this.addCliente(this.selectedCliente);
         this.showSnackbar("Agregado con exito");
-        console.log("Agregar");
+        console.log("Agregar cliente");
       }
     },
+
+    modificarCliente() {
+      if (this.selectedCliente !== undefined) {
+        this.updateCliente(this.selectedCliente);
+        this.showSnackbar("Editado con exito");
+        console.log("Modificar cliente");
+      }
+    },
+
+    removerCliente() {
+      if (this.selectedCliente !== undefined) {
+        this.deleteCliente(this.selectedCliente);
+        this.showSnackbar("Eliminado con exito");
+        console.log("Eliminar cliente");
+      }
+    },
+
   },
   created() {
     this.getClientes();

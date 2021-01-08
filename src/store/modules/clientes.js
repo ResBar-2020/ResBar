@@ -34,7 +34,32 @@ const actions = {
         commit('setClientes', response.data.docs);
     },
 
-    
+    async updateCliente({commit}, cliente) {
+        await axios.put(`${url}${cliente._id}`, cliente, {
+            params: {
+                "rev": cliente._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        }, credentials.authentication);
+
+        const response = await obtenerTodos();
+        commit('setClientes', response.data.docs);
+    },
+
+    async deleteCliente({commit}, cliente){
+        await axios.delete(`${url}${cliente._id}`, {
+            params: {
+                "rev": cliente._rev
+            },
+            "auth": credentials.authentication.auth,
+            "headers": credentials.authentication.headers,
+        }, credentials.authentication);
+        
+        const response = await obtenerTodos();
+        commit('setClientes', response.data.docs);
+    }
+   
 }
 
 const mutations = {
