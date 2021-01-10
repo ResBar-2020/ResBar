@@ -36,49 +36,28 @@
 
     <!-- <v-container> -->
 
-    <v-card>
-      <v-tabs
-        background-color="primary accent-4 rounded-t-xl"
-        centered
-        dark
-        icons-and-text
+    <template>
+  <v-card>
+    <v-tabs
+      v-model="catSelected"
+      background-color="primary"
+      dark
+    >
+
+     <v-tab
+        v-for="categoria in allCategorias"
+        :key="categoria.nombre"
       >
-        <v-tabs-slider></v-tabs-slider>
+        {{ categoria.nombre }}
+      </v-tab>
+    </v-tabs>
 
-        <v-tab
-          href="#tab-2"
-          @click="categoria = 'Entradas'"
-          class="flex-grow-1 prevDrag"
-        >
-          Entradas
-        </v-tab>
-
-        <v-tab
-          href="#tab-3"
-          @click="categoria = 'Platos'"
-          class="flex-grow-1 prevDrag"
-        >
-          Platos
-        </v-tab>
-
-        <v-tab
-          href="#tab-4"
-          @click="categoria = 'Bebidas'"
-          class="flex-grow-1 prevDrag"
-        >
-          Bebidas
-        </v-tab>
-
-        <v-tab
-          href="#tab-1"
-          @click="categoria = 'Postres'"
-          class="flex-grow-1 prevDrag"
-        >
-          Postres
-        </v-tab>
-      </v-tabs>
-    </v-card>
-
+    <v-tabs-items v-model="catSelected">
+      <v-tab-item
+        v-for="categoria in allCategorias"
+        :key="categoria.nombre"
+      >
+        <v-card flat>
     <v-simple-table id="myTable">
       <template v-slot:default>
         <thead class="primary">
@@ -95,7 +74,7 @@
             v-for="(producto, index) in allProductos"
             :key="index"
             @click="productoSelected = producto"
-            v-show="producto.categoria.nombre === categoria && buscar(index)"
+            v-show="filtroCategoria(producto.categoria.nombre)"
           >
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
@@ -138,7 +117,13 @@
           </tr>
         </tbody>
       </template>
-    </v-simple-table>
+    </v-simple-table>        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
+</template>
+
+
 
     <!-- </v-container> -->
 
@@ -339,8 +324,8 @@ export default {
       categoriaSelected: "",
       modalNuevoProducto: false,
       esPreparado: false,
-      categoria: "Entradas",
       listaDeCategorias: [],
+      catSelected: 'TODOS', 
       snackbar: {
         message: "",
         timout: 2000,
@@ -394,6 +379,14 @@ export default {
           : false
         : true;
     },
+    filtroCategoria: function(nombreCategoria){
+      if(nombreCategoria === this.allCategorias[this.catSelected].nombre){
+        return true
+      }else{
+        return false
+      }
+    }
+
   },
 
   created() {
