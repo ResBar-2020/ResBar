@@ -74,7 +74,7 @@
             v-for="(producto, index) in allProductos"
             :key="index"
             @click="productoSelected = producto"
-            v-show="filtroCategoria(producto.categoria.nombre)"
+            v-show="filtroCategoria(producto.categoria.nombre) && buscar(index)"
           >
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
