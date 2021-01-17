@@ -82,6 +82,7 @@
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
+                       <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
                     </nobr>
                   </td>
                 </tr>
@@ -119,6 +120,7 @@
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
+                      <cobrar-orden :orden="orden" v-if="orden.cobrada==false"/>
                     </nobr>
                   </td>
                 </tr>
@@ -139,13 +141,15 @@ import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import DetalleOrden from "../components/ordenes/DetalleOrden"
+import CobrarOrden from "../components/ordenes/CobrarOrden";
 export default {
   components: {
     HeaderDashboard,
     EliminarOrden,
     ModificarOrden,
     AgregarProductosOrden,
-    DetalleOrden
+    DetalleOrden,
+    CobrarOrden
   },
   computed: {
   

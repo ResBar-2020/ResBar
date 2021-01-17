@@ -50,7 +50,7 @@
                 <h3>{{idioma.views[0].labels.actions.title}}</h3>
                 <div>
                   <v-chip-group active-class="deep-purple accent-4 white--text"  column>
-                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center white--text action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon> mdi-coin</v-icon></v-btn>
+                    <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
                     <agregar-productos-orden :orden="orden"/>
                     <modificar-orden :orden="orden"/>
                     <eliminar-orden :orden="orden"  />
@@ -88,9 +88,10 @@ import EliminarOrden from "../components/ordenes/EliminarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import { toastAlert } from "../store/modules/utilidades.js";
+import CobrarOrden from "../components/ordenes/CobrarOrden";
 
 export default {
-  components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard},
+  components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard, CobrarOrden, },
   computed: {
     ...mapGetters(['ordenes','idiomas']),
   },
