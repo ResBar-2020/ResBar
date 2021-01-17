@@ -43,11 +43,12 @@
                 <th scope="col">{{idioma.views[1].labels.table.waiter}}</th>
                 <th scope="col">{{idioma.views[1].labels.table.client}}</th>
                 <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.table}}</th>
-                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.observation}}</th>
+               
                 <th scope="col">{{idioma.views[1].labels.table.total}}</th>
                 <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.orderType}}</th>
                 <!--<th scope="col">Tiempo preparacion</th>-->
                 <th scope="col">{{idioma.views[1].labels.table.options}}</th>
+                 <th scope="col" class="d-none d-md-table-cell">Tiempo</th>
               </thead>
               <tbody v-if="todas">
                 <tr
@@ -61,7 +62,7 @@
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
                   <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-table-cell">{{ orden.observacion }}</td>
+                 
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
@@ -85,6 +86,14 @@
                        <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
                     </nobr>
                   </td>
+                   <td class="d-none d-md-table-cell">
+                    <nobr>
+
+                    <semaforo :orden="orden"/>
+
+                    </nobr>
+
+                  </td>
                 </tr>
               </tbody>
               <tbody v-else>
@@ -99,7 +108,7 @@
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
                   <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                  <td class="d-none d-md-table-cell">{{ orden.observacion }}</td>
+                 
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
@@ -123,6 +132,14 @@
                       <cobrar-orden :orden="orden" v-if="orden.cobrada==false"/>
                     </nobr>
                   </td>
+                   <td class="d-none d-md-table-cell">
+                    <nobr>
+
+                    <semaforo :orden="orden"/>
+                    
+                    </nobr>
+
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -142,6 +159,7 @@ import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import DetalleOrden from "../components/ordenes/DetalleOrden"
 import CobrarOrden from "../components/ordenes/CobrarOrden";
+import Semaforo from "../components/ordenes/Semaforo"
 export default {
   components: {
     HeaderDashboard,
@@ -149,7 +167,8 @@ export default {
     ModificarOrden,
     AgregarProductosOrden,
     DetalleOrden,
-    CobrarOrden
+    CobrarOrden,
+    Semaforo
   },
   computed: {
   

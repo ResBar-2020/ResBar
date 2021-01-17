@@ -149,7 +149,6 @@ export default {
       dialog: false,
       efectivo: 0.0,
       vuelto: 0,
-      
     };
   },
 
@@ -177,29 +176,24 @@ export default {
       var mensaje = confirm("¿Desea confirmar el pago?");
 
       if (mensaje) {
-
         if (this.efectivo.toString.length > 0 && proceso >= 0) {
-          this.orden.cobrada=true;
-          this.ordenLocal=this.orden;
+          this.orden.cobrada = true;
+          this.ordenLocal = this.orden;
           this.guardarCambios();
 
           alert("Pago Realizado con exito!");
           this.dialog = false;
-
-
-
-
-        }else {
-          alert("El pago no pudo ser Realizado\nRevise que el efectivo ingresado sea igual o mayor al TOTAL a pagar")
-          this.efectivo=0;
-          }
-     
-     
-     } 
-    }, cancelar(){
-      this.dialog = false
-      this.efectivo=0
-
+        } else {
+          alert(
+            "El pago no pudo ser Realizado\nRevise que el efectivo ingresado sea igual o mayor al TOTAL a pagar"
+          );
+          this.efectivo = 0;
+        }
+      }
+    },
+    cancelar() {
+      this.dialog = false;
+      this.efectivo = 0;
     },
 
     ...mapActions(["updateOrden", "getOrdenes"]),
