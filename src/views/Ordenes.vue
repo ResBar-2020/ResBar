@@ -178,7 +178,7 @@
       class="tickets mostrar-impresion"
     >
       <div class="ticketcliente mostrar-impresion">
-        <p class="centrado mostrar-impresion">
+        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
           <br />
           {{ this.parametros[0].valor }}
           <br />
@@ -238,7 +238,7 @@
             Cambio: $
             <br />
             <hr class="hr1" />
-            <p class="centrado">
+            <p v-if="this.parametros.length>0" class="centrado">
             {{this.parametros[1].valor}}
             </p>
           </div>
@@ -266,6 +266,7 @@ export default {
     AgregarProductosOrden,
     DetalleOrden,
     CobrarOrden,
+
   },
   computed: {
     ...mapGetters(["allOrdenes", "noEntregadas", "idiomas", "parametros"]),
