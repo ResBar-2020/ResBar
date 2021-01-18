@@ -4,17 +4,15 @@
     <div class="ticketcliente">
       <p class="centrado">
         <br />
-            Parametro
+            {{this.parametros[0].valor}}
         <br />
-            Param
+        Telefono: {{this.parametros[2].valor}}
         <br />
-        Telefono:
+        Nit:  {{this.parametros[3].valor}}
         <br />
-        Nit: 
+        Giro: {{this.parametros[4].valor}}
         <br />
-        Giro: 
-        <br />
-        Direccion: 
+        Direccion: {{this.parametros[5].valor}}
       </p>
       <p class="izquierda">
         <hr class="hr1">
@@ -61,7 +59,7 @@
         Cambio: $0.00
         <br />
         <hr class="hr1">
-        ¡GRACIAS POR SU COMPRA!
+        {{this.parametros[1].valor}}
       </div>
       </div>
     </div>
@@ -73,12 +71,11 @@
 </template>
 
 <script>
-//import restMethods from "./../utils/restMethods.js";
-import { mapState } from "vuex";
+
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      parametros: '',
       preparados: [],
       nopreparados: [],
       propina: null,
@@ -86,15 +83,17 @@ export default {
   },
   created() {
     console.log('creando'); 
-    this.parametros = ''; 
+    this.getParametros();
   },
   updated() {
     this.imprimirElemento();
   },
   computed: {
-    ...mapState(["store"])
+    ...mapGetters(["parametros"]),
   },
   methods: {
+    ...mapActions(["getParametros"]),
+
     imprimirElemento() {
       var elemento = document.querySelector(".tickets");
       var ventana = window.open("", "PRINT", "height=800,width=1000");
@@ -114,19 +113,15 @@ export default {
       //this.$router.push("dashboard");
       return true;
     },
-    /*
-    getParametros() {
-      rm.getJson("parametros")
-        .then(r => {
-          this.parametros = r.data;
-          console.log(this.parametros);
-        })
-        .catch(e => {
-          console.error(e); 
-          this.parametros = [];
-        });
+
+    obtenerParametros() {
+      this.getParametros().then(r => {
+        this.parametros = r;
+      }).catch(e =>{
+        console.log('Error obteniendo los parametros', e);
+      })
     },
-    */
+
     filtrarPreparados() {
      /*
      this.preparados = this.store.cuentaTicket.resumen.filter(
