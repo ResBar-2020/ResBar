@@ -10,14 +10,28 @@ const state = {
     idioma: [],
 };
 
+async function obtenerTodos() {
+    const response = await axios.post(`${URL_BASE}_find`, {
+        "selector": {
+
+        }
+    }, credentials.authentication);
+    return response;
+}
+
 const actions = {
+    async getIdiomas({commit}) {
+        const response = await obtenerTodos();
+        commit('languajes', response.data.docs);
+
+    },
+
     async getIdioma({commit}) {
         const parametroIdioma = await axios.post(`${URL_PARAMTEROS}_find`, {
             "selector": {
                 "_id": "12"
             }
         }, credentials.authentication);
-        console.log('idioma: ', parametroIdioma.data.docs[0].valor);
         
         const response = await axios.post(`${URL_BASE}_find`, {
             "selector": {
@@ -25,7 +39,6 @@ const actions = {
             }
 
         }, credentials.authentication);
-        console.log('response data: ', response.data.docs[0]);
         commit('languajes', response.data.docs);
     },
 };

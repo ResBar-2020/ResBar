@@ -54,7 +54,7 @@
                 <h3>{{idioma.views[2].labels.actions.title}}</h3>
                 <div v-if="orden.entregada==false">
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple" @click="showMessage(snackbar)"><v-icon text-color="white"> mdi-coin</v-icon></v-btn>
+                   <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
                     <agregar-productos-orden :orden="orden"/>
                     <modificar-orden :orden="orden"/>
                     <eliminar-orden :orden="orden" />
@@ -62,8 +62,7 @@
                 </div>
                 <div v-else>
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                    <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
-                      <v-icon> mdi-coin</v-icon></v-btn>
+                     <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
                     <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
                       <v-icon>mdi-plus</v-icon></v-btn>
                     <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="pink">
@@ -102,9 +101,11 @@ import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import { toastAlert } from "../store/modules/utilidades.js";
+import CobrarOrden from "../components/ordenes/CobrarOrden";
 
 export default {
-  components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard},
+  components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard,
+    CobrarOrden},
   computed: {
     ...mapGetters(['ordenesRecoger', 'ordenesRecogerPendientes','idiomas']),
   },

@@ -7,9 +7,12 @@
     <v-container>
       <v-form v-model="valid">
         <v-container>
+          <div v-for="parametro in parametros" :key="parametro.id">
+            {{parametro.value}}
+            </div>
           <v-row>
             <v-col cols="12" md="8">
-              <v-text-field v-model="nombreNegocio" required>
+              <v-text-field v-model="parametros[0].valor" required>
                 <template v-slot:label>
                   Nombre del negocio
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -22,7 +25,7 @@
 
           <v-row>
             <v-col cols="12" md="8">
-              <v-text-field v-model="descTicket" required>
+              <v-text-field v-model="parametros[1].valor" required>
                 <template v-slot:label>
                   Descripcion final (pie de ticket)
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -35,7 +38,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="telefono" required>
+              <v-text-field v-model="parametros[2].valor" required>
                 <template v-slot:label>
                   Telefono
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -48,7 +51,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="nit" required>
+              <v-text-field v-model="parametros[3].valor" required>
                 <template v-slot:label>
                   NIT
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -61,7 +64,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="giro" required>
+              <v-text-field v-model="parametros[4].valor" required>
                 <template v-slot:label>
                   Giro
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -74,7 +77,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="direccion" required>
+              <v-text-field v-model="parametros[5].valor" required>
                 <template v-slot:label>
                   Direccion
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -87,7 +90,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-checkbox v-model="imprimirTicket" required>
+              <v-checkbox v-model="parametros[6].valor" required>
                 <template v-slot:label>
                   Imprimir ticket de productos preparados
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -100,7 +103,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="tiempoPreparacion" type="number">
+              <v-text-field v-model="parametros[7].valor" type="number">
                 <template v-slot:label>
                   Tiempo máximo de preparación de orden (minutos)
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -113,7 +116,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="propina" type="number">
+              <v-text-field v-model="parametros[8].valor" type="number">
                 <template v-slot:label>
                   Propina ($)
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -126,7 +129,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="tiempoDomicilio" type="number">
+              <v-text-field v-model="parametros[9].valor" type="number">
                 <template v-slot:label>
                   Tiempo máximo de entrega domicilio (minutos)
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -142,7 +145,7 @@
 
           <v-row>
             <v-col md="8">
-              <v-text-field v-model="costoDomicilio" type="number">
+              <v-text-field v-model="parametros[10].valor" type="number">
                 <template v-slot:label>
                   Costo de envio a domicilio ($)
                   <v-icon style="vertical-align: middle; color: darkblue">
@@ -158,14 +161,8 @@
 
           <v-row>
             <v-col md="8">
-              <v-select :items="idiomas">
-                <template v-slot:label>
-                  Idioma del sistema
-                  <v-icon style="vertical-align: middle; color: darkblue">
-                    mdi-earth
-                  </v-icon>
-                </template>
-              </v-select>
+              <v-text-field v-model="parametros[11].valor" append-icon="mdi-earth" disabled>
+              </v-text-field>
             </v-col>
           </v-row>
 
@@ -182,12 +179,13 @@
 
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 import HeaderDashboard from "../components/headerDashboard";
 export default {
   components: { HeaderDashboard },
   data() {
     return {
+      valid: true,
       snackbar: {
         message: "desde parametros",
         timout: 2000,
@@ -195,7 +193,15 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["showMessage"]),
+    ...mapMutations(["setParametros", "languajes"]),
+    ...mapActions(["obtenerTodos", "getParametros", "updateParametros", "getIdioma"]),
+  },
+  computed: {
+    ...mapGetters(["parametros", "idiomas"]),
+  },
+  created() {
+    this.getIdioma();
+    this.getParametros();
   },
 };
 </script>
