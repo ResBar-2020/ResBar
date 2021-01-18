@@ -60,10 +60,15 @@ Vue.use(VueRouter)
       component: () => import('../views/nuevaOrden.vue')
     },
     {
+      path: '/ticket',
+      name: 'ticket',
+      component: () => import('../views/Ticket.vue')
+    },
+    {
       path: '/*',
       name: 'error404',
       component: () => import('../views/Error404.vue')
-    }
+    },
 ]
 
 const router = new VueRouter({
