@@ -105,7 +105,7 @@
                         :orden="orden"
                         v-if="orden.cobrada == false"
                       />
-                      <v-btn v-if="orden.tipo == 'MESA'" class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
+                      <v-btn class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
                         <v-icon @click="OrdenSelected = orden;" dark > mdi-printer </v-icon>
                       </v-btn>
                     </nobr>
@@ -159,7 +159,7 @@
                         :orden="orden"
                         v-if="orden.cobrada == false"
                       />
-                    <v-btn v-if="orden.tipo == 'MESA'" class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
+                    <v-btn class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
                       <v-icon @click="OrdenSelected = orden;" dark > mdi-printer </v-icon>
                     </v-btn>
                     </nobr>
@@ -227,15 +227,11 @@
         <div class="total">
           <div class="izquierda">
             <hr class="hr1" />
-            Subtotal: $ {{ OrdenSelected.subtotal }}
+            Subtotal: $ {{ parseFloat(OrdenSelected.subtotal).toFixed(2) }}
             <br />
-            Propina: $ {{ OrdenSelected.propina }}
+            Propina: $ {{ parseFloat(OrdenSelected.propina).toFixed(2) }}
             <br />
-            Total: $ {{ OrdenSelected.total }}
-            <br />
-            Efectivo: $
-            <br />
-            Cambio: $
+            Total: $ {{ parseFloat(OrdenSelected.total).toFixed(2) }}
             <br />
             <hr class="hr1" />
             <p v-if="this.parametros.length>0" class="centrado">
@@ -246,6 +242,113 @@
       </div>
     </div>
     <!-- Fin Ticket cobrar -->
+
+    <!-- Ticket llevar domicilio  -->
+    <div id="ticket"
+      v-show="OrdenSelected.tipo == 'RECOGER'"
+      class="tickets2 mostrar-impresion"
+    >
+      <div class="ticketcliente mostrar-impresion">
+        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
+          <br />
+          {{ this.parametros[0].valor }}
+          <br />
+          Telefono: {{ this.parametros[2].valor }}
+          <br />
+          Nit: {{ this.parametros[3].valor }}
+          <br />
+          Giro: {{ this.parametros[4].valor }}
+          <br />
+          Direccion: {{ this.parametros[5].valor }}
+        </p>
+        <p class="izquierda"></p>
+        <hr class="hr1" />
+        {{ new Date().toLocaleString() }}
+        <br />
+        <div v-if="OrdenSelected.tipo == 'RECOGER'">
+          Cuenta: {{ trunkId(OrdenSelected._id)}}
+          <br />
+          Tipo: ORDEN PARA LLEVAR
+          <br />
+          Cliente: {{ OrdenSelected.cliente.nombreCompleto }}
+          <br />
+          <hr class="" />
+          <p></p>
+        </div>
+
+        <div v-if="OrdenSelected.tipo == 'DOMICILIO'">
+            Cuenta: {{ trunkId(OrdenSelected._id)}}
+          <br />
+          Tipo: DOMICILIO
+          <br />
+          Cliente: {{ OrdenSelected.cliente.nombreCompleto }}
+          <br />
+          Telefono Casa: {{ OrdenSelected.cliente.telefonoCasa }}
+          <br/>
+          Celular: {{ OrdenSelected.cliente.celular }}
+          <br/>
+          Whatsapp: {{ OrdenSelected.cliente.whatsapp }}
+          <br/>
+          Dirección: {{ OrdenSelected.cliente.direccion }} , {{OrdenSelected.cliente.municipio}} , 
+          {{OrdenSelected.cliente.departamento}}
+          <br/>
+
+          <hr class="" />
+          <p></p>
+        </div>
+
+        <table class="ticketcliente">
+          <thead>
+            <tr>
+              <th class="producto">Nombre</th>
+              <th class="cantidad">Ct</th>
+              <th class="precio">c/u</th>
+              <th class="total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(producto, index) in OrdenSelected.detalleOrden"
+              :key="index"
+            >
+              <td class="producto">{{ producto.nombre }}</td>
+              <td class="cantidad">{{ producto.cantidad }}</td>
+              <td class="precio">{{ producto.precio }}</td>
+              <td class="precio">${{ producto.cantidad * producto.precio }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="total">
+          <div class="izquierda">
+            <hr class="hr1" />
+            Subtotal: $ {{ parseFloat(OrdenSelected.subtotal).toFixed(2) }}
+            <br />
+            <div v-if="OrdenSelected.tipo == 'DOMICILIO'">
+            Costo de Envio: {{OrdenSelected.costoEnvio}}
+            </div>
+
+            Propina: $ {{ parseFloat(OrdenSelected.propina).toFixed(2) }}
+            <br />
+            Total: $ {{ parseFloat(OrdenSelected.total).toFixed(2)}}
+            <br />
+            <hr class="hr1" />
+            <p v-if="this.parametros.length>0" class="centrado">
+            {{this.parametros[1].valor}}
+            </p>
+          
+          
+            <hr class="hr1" />
+            <p>
+              DESPRENDIBLE <br>
+              Orden: {{ trunkId(OrdenSelected._id)}}<br>
+              Total:  {{ parseFloat(OrdenSelected.total).toFixed(2)}}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Ticket llevar -->
   </div>
 </template>
 
@@ -315,7 +418,13 @@ export default {
 
     imprimirElemento() {
       console.log(this.OrdenSelected);
-      var elemento = document.querySelector('.tickets'); 
+
+      var elemento = ''; 
+      if(this.OrdenSelected.tipo == 'MESA'){
+        elemento = document.querySelector('.tickets'); 
+      }else{
+        elemento = document.querySelector('.tickets2'); 
+      }
       while( elemento == null ){
         elemento = document.querySelector('.tickets'); 
       } 
@@ -336,6 +445,9 @@ export default {
       //this.$router.push("dashboard");
       return true;
     },
+    trunkId(id){
+      return String(id).substr(15); 
+    }
   },
   created() {
     this.getIdioma();
