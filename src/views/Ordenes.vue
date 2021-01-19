@@ -49,15 +49,16 @@
                 <th scope="col" class="d-none d-md-table-cell">
                   {{ idioma.views[1].labels.table.table }}
                 </th>
-                <th scope="col" class="d-none d-md-table-cell">
-                  {{ idioma.views[1].labels.table.observation }}
-                </th>
+               
                 <th scope="col">{{ idioma.views[1].labels.table.total }}</th>
                 <th scope="col" class="d-none d-md-table-cell">
                   {{ idioma.views[1].labels.table.orderType }}
                 </th>
                 <!--<th scope="col">Tiempo preparacion</th>-->
                 <th scope="col">{{ idioma.views[1].labels.table.options }}</th>
+                 <th scope="col" class="d-none d-md-table-cell">
+                  Tiempo
+                </th>
               </thead>
               <tbody v-if="todas">
                 <tr
@@ -78,9 +79,7 @@
                         : idioma.views[1].labels.table.noTable
                     }}
                   </td>
-                  <td class="d-none d-md-table-cell">
-                    {{ orden.observacion }}
-                  </td>
+                  
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
@@ -140,9 +139,7 @@
                         : idioma.views[1].labels.table.noTable
                     }}
                   </td>
-                  <td class="d-none d-md-table-cell">
-                    {{ orden.observacion }}
-                  </td>
+                  
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
