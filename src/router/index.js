@@ -55,6 +55,11 @@ Vue.use(VueRouter)
       component: () => import('../views/Usuarios.vue')
     },
     {
+      path: '/menuProductos',
+      name: 'menuProductos',
+      component: () => import('../views/MenuProductos.vue')
+    },
+    {
       path: '/ordenes/nuevaOrden',
       name: 'nuevaOrden',
       component: () => import('../views/nuevaOrden.vue')
@@ -63,7 +68,7 @@ Vue.use(VueRouter)
       path: '/*',
       name: 'error404',
       component: () => import('../views/Error404.vue')
-    }
+    },
 ]
 
 const router = new VueRouter({

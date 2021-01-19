@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div v-for="(idioma) in idiomas" :key="idioma._id" >
+    <div class="oculto" v-for="idioma in idiomas" :key="idioma._id">
       <header-dashboard
         :title="idioma.views[1].labels.title"
         :subtitle="idioma.views[1].labels.subtitle"
@@ -9,7 +9,10 @@
       <v-container fluid>
         <v-row>
           <v-col class="col-md-4 offset-md-1 col-12">
-            <v-text-field v-model="search" :label="idioma.views[1].labels.search"></v-text-field>
+            <v-text-field
+              v-model="search"
+              :label="idioma.views[1].labels.search"
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -23,11 +26,12 @@
                 class="utilities"
                 @click="showMessage(snackbar)"
               >
-                <v-icon>mdi-plus</v-icon> {{idioma.views[1].labels.new}}</v-btn
+                <v-icon>mdi-plus</v-icon>
+                {{ idioma.views[1].labels.new }}</v-btn
               >
             </router-link>
           </v-col>
-          <v-col class="d-flex align-center justify-start  col-md-6 col-12">
+          <v-col class="d-flex align-center justify-start col-md-6 col-12">
             <v-switch
               :label="idioma.views[1].labels.toggle"
               color="primary"
@@ -40,29 +44,43 @@
             <table class="col-12">
               <thead>
                 <th scope="col" class="d-none d-md-table-cell">Id</th>
-                <th scope="col">{{idioma.views[1].labels.table.waiter}}</th>
-                <th scope="col">{{idioma.views[1].labels.table.client}}</th>
-                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.table}}</th>
-               
-                <th scope="col">{{idioma.views[1].labels.table.total}}</th>
-                <th scope="col" class="d-none d-md-table-cell">{{idioma.views[1].labels.table.orderType}}</th>
+                <th scope="col">{{ idioma.views[1].labels.table.waiter }}</th>
+                <th scope="col">{{ idioma.views[1].labels.table.client }}</th>
+                <th scope="col" class="d-none d-md-table-cell">
+                  {{ idioma.views[1].labels.table.table }}
+                </th>
+                <th scope="col" class="d-none d-md-table-cell">
+                  {{ idioma.views[1].labels.table.observation }}
+                </th>
+                <th scope="col">{{ idioma.views[1].labels.table.total }}</th>
+                <th scope="col" class="d-none d-md-table-cell">
+                  {{ idioma.views[1].labels.table.orderType }}
+                </th>
                 <!--<th scope="col">Tiempo preparacion</th>-->
-                <th scope="col">{{idioma.views[1].labels.table.options}}</th>
-                 <th scope="col" class="d-none d-md-table-cell">Tiempo</th>
+                <th scope="col">{{ idioma.views[1].labels.table.options }}</th>
               </thead>
               <tbody v-if="todas">
                 <tr
                   v-for="(orden, index) in allOrdenes"
                   :key="index"
                   v-show="filtrar(index)"
+                  @click="OrdenSelected = orden"
                 >
                   <td class="d-none d-md-table-cell">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                 
+                  <td class="d-none d-md-table-cell">
+                    {{
+                      orden.mesa
+                        ? orden.mesa
+                        : idioma.views[1].labels.table.noTable
+                    }}
+                  </td>
+                  <td class="d-none d-md-table-cell">
+                    {{ orden.observacion }}
+                  </td>
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
@@ -77,14 +95,21 @@
                     >
                   </td>
                   <!--<td>{{ orden.tiempoPreparacion }}</td>-->
-                  <td>
+                  <td @click="OrdenSelected = orden;">
                     <nobr>
                       <detalle-orden :orden="orden" />
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
-                       <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
+                      <cobrar-orden
+                        :orden="orden"
+                        v-if="orden.cobrada == false"
+                      />
+                      <v-btn class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
+                        <v-icon @click="OrdenSelected = orden;" dark > mdi-printer </v-icon>
+                      </v-btn>
                     </nobr>
+
                   </td>
                    <td class="d-none d-md-table-cell">
                     <nobr>
@@ -101,14 +126,23 @@
                   v-for="(orden, index) in noEntregadas"
                   :key="index"
                   v-show="filtrar(index)"
+                  @click="OrdenSelected = orden"
                 >
                   <td class="d-none d-md-table-cell">
                     {{ String(orden._id.substring(18, 24)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
-                  <td class="d-none d-md-table-cell">{{ orden.mesa ? orden.mesa : idioma.views[1].labels.table.noTable }}</td>
-                 
+                  <td class="d-none d-md-table-cell">
+                    {{
+                      orden.mesa
+                        ? orden.mesa
+                        : idioma.views[1].labels.table.noTable
+                    }}
+                  </td>
+                  <td class="d-none d-md-table-cell">
+                    {{ orden.observacion }}
+                  </td>
                   <td>${{ orden.total }}</td>
                   <td class="d-none d-md-table-cell">
                     <v-chip
@@ -129,8 +163,15 @@
                       <agregar-productos-orden :orden="orden" />
                       <modificar-orden :orden="orden" />
                       <eliminar-orden :orden="orden" />
-                      <cobrar-orden :orden="orden" v-if="orden.cobrada==false"/>
+                      <cobrar-orden
+                        :orden="orden"
+                        v-if="orden.cobrada == false"
+                      />
+                    <v-btn class="mx-2" @click="imprimirElemento()" fab dark small color="purple">
+                      <v-icon @click="OrdenSelected = orden;" dark > mdi-printer </v-icon>
+                    </v-btn>
                     </nobr>
+
                   </td>
                    <td class="d-none d-md-table-cell">
                     <nobr>
@@ -147,6 +188,183 @@
         </v-row>
       </v-container>
     </div>
+            <!-- Ticket cobrar -->
+    <div id="ticket"
+      v-show="OrdenSelected.tipo == 'MESA'"
+      class="tickets mostrar-impresion"
+    >
+      <div class="ticketcliente mostrar-impresion">
+        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
+          <br />
+          {{ this.parametros[0].valor }}
+          <br />
+          Telefono: {{ this.parametros[2].valor }}
+          <br />
+          Nit: {{ this.parametros[3].valor }}
+          <br />
+          Giro: {{ this.parametros[4].valor }}
+          <br />
+          Direccion: {{ this.parametros[5].valor }}
+        </p>
+        <p class="izquierda"></p>
+        <hr class="hr1" />
+        {{ new Date().toLocaleString() }}
+        <br />
+        Cuenta: {{ OrdenSelected._id }}
+        <br />
+        Mesa: {{ OrdenSelected.mesa }}
+        <br />
+        Mesero:{{ OrdenSelected.mesero }}
+        <br />
+        <hr class="" />
+        <p></p>
+
+        <table class="ticketcliente">
+          <thead>
+            <tr>
+              <th class="producto">Nombre</th>
+              <th class="cantidad">Ct</th>
+              <th class="precio">c/u</th>
+              <th class="total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(producto, index) in OrdenSelected.detalleOrden"
+              :key="index"
+            >
+              <td class="producto">{{ producto.nombre }}</td>
+              <td class="cantidad">{{ producto.cantidad }}</td>
+              <td class="precio">{{ producto.precio }}</td>
+              <td class="precio">${{ producto.cantidad * producto.precio }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="total">
+          <div class="izquierda">
+            <hr class="hr1" />
+            Subtotal: $ {{ parseFloat(OrdenSelected.subtotal).toFixed(2) }}
+            <br />
+            Propina: $ {{ parseFloat(OrdenSelected.propina).toFixed(2) }}
+            <br />
+            Total: $ {{ parseFloat(OrdenSelected.total).toFixed(2) }}
+            <br />
+            <hr class="hr1" />
+            <p v-if="this.parametros.length>0" class="centrado">
+            {{this.parametros[1].valor}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Ticket cobrar -->
+
+    <!-- Ticket llevar domicilio  -->
+    <div id="ticket"
+      v-show="OrdenSelected.tipo == 'RECOGER'"
+      class="tickets2 mostrar-impresion"
+    >
+      <div class="ticketcliente mostrar-impresion">
+        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
+          <br />
+          {{ this.parametros[0].valor }}
+          <br />
+          Telefono: {{ this.parametros[2].valor }}
+          <br />
+          Nit: {{ this.parametros[3].valor }}
+          <br />
+          Giro: {{ this.parametros[4].valor }}
+          <br />
+          Direccion: {{ this.parametros[5].valor }}
+        </p>
+        <p class="izquierda"></p>
+        <hr class="hr1" />
+        {{ new Date().toLocaleString() }}
+        <br />
+        <div v-if="OrdenSelected.tipo == 'RECOGER'">
+          Cuenta: {{ trunkId(OrdenSelected._id)}}
+          <br />
+          Tipo: ORDEN PARA LLEVAR
+          <br />
+          Cliente: {{ OrdenSelected.cliente.nombreCompleto }}
+          <br />
+          <hr class="" />
+          <p></p>
+        </div>
+
+        <div v-if="OrdenSelected.tipo == 'DOMICILIO'">
+            Cuenta: {{ trunkId(OrdenSelected._id)}}
+          <br />
+          Tipo: DOMICILIO
+          <br />
+          Cliente: {{ OrdenSelected.cliente.nombreCompleto }}
+          <br />
+          Telefono Casa: {{ OrdenSelected.cliente.telefonoCasa }}
+          <br/>
+          Celular: {{ OrdenSelected.cliente.celular }}
+          <br/>
+          Whatsapp: {{ OrdenSelected.cliente.whatsapp }}
+          <br/>
+          Dirección: {{ OrdenSelected.cliente.direccion }} , {{OrdenSelected.cliente.municipio}} , 
+          {{OrdenSelected.cliente.departamento}}
+          <br/>
+
+          <hr class="" />
+          <p></p>
+        </div>
+
+        <table class="ticketcliente">
+          <thead>
+            <tr>
+              <th class="producto">Nombre</th>
+              <th class="cantidad">Ct</th>
+              <th class="precio">c/u</th>
+              <th class="total">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(producto, index) in OrdenSelected.detalleOrden"
+              :key="index"
+            >
+              <td class="producto">{{ producto.nombre }}</td>
+              <td class="cantidad">{{ producto.cantidad }}</td>
+              <td class="precio">{{ producto.precio }}</td>
+              <td class="precio">${{ producto.cantidad * producto.precio }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="total">
+          <div class="izquierda">
+            <hr class="hr1" />
+            Subtotal: $ {{ parseFloat(OrdenSelected.subtotal).toFixed(2) }}
+            <br />
+            <div v-if="OrdenSelected.tipo == 'DOMICILIO'">
+            Costo de Envio: {{OrdenSelected.costoEnvio}}
+            </div>
+
+            Propina: $ {{ parseFloat(OrdenSelected.propina).toFixed(2) }}
+            <br />
+            Total: $ {{ parseFloat(OrdenSelected.total).toFixed(2)}}
+            <br />
+            <hr class="hr1" />
+            <p v-if="this.parametros.length>0" class="centrado">
+            {{this.parametros[1].valor}}
+            </p>
+          
+          
+            <hr class="hr1" />
+            <p>
+              DESPRENDIBLE <br>
+              Orden: {{ trunkId(OrdenSelected._id)}}<br>
+              Total:  {{ parseFloat(OrdenSelected.total).toFixed(2)}}
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Ticket llevar -->
   </div>
 </template>
 
@@ -157,7 +375,7 @@ import HeaderDashboard from "../components/headerDashboard";
 import EliminarOrden from "../components/ordenes/EliminarOrden";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
-import DetalleOrden from "../components/ordenes/DetalleOrden"
+import DetalleOrden from "../components/ordenes/DetalleOrden";
 import CobrarOrden from "../components/ordenes/CobrarOrden";
 import Semaforo from "../components/ordenes/Semaforo"
 export default {
@@ -171,13 +389,13 @@ export default {
     Semaforo
   },
   computed: {
-  
-      ...mapGetters(["allOrdenes", "noEntregadas", "idiomas"]),
+    ...mapGetters(["allOrdenes", "noEntregadas", "idiomas", "parametros"]),
   },
   data() {
     return {
       todas: false,
       search: "",
+      OrdenSelected: "",
       snackbar: {
         message: "desde ordenes",
         timout: 2000,
@@ -186,7 +404,7 @@ export default {
   },
   methods: {
     ...mapMutations(["showMessage"]),
-    ...mapActions(["getOrdenes", "getIdioma"]),
+    ...mapActions(["getOrdenes", "getIdioma", "getParametros"]),
     filtrar(valor_orden) {
       if (this.todas) {
         if (this.search === "") return true;
@@ -214,10 +432,44 @@ export default {
         return array.indexOf(this.search.toUpperCase()) >= 0;
       }
     },
+
+    imprimirElemento() {
+      console.log(this.OrdenSelected);
+
+      var elemento = ''; 
+      if(this.OrdenSelected.tipo == 'MESA'){
+        elemento = document.querySelector('.tickets'); 
+      }else{
+        elemento = document.querySelector('.tickets2'); 
+      }
+      while( elemento == null ){
+        elemento = document.querySelector('.tickets'); 
+      } 
+      var ventana = window.open("", "PRINT", "height=800,width=1000");
+      ventana.document.write(
+        "<html><head><title>" + document.title + "</title>"
+      );
+      ventana.document.write('<link rel="stylesheet" href="./ticket.css">');
+      ventana.document.write("</head><body >");
+      ventana.document.write(elemento.innerHTML);
+      ventana.document.write("</body></html>");
+      ventana.document.close();
+      ventana.focus();
+      ventana.onload = function () {
+        ventana.print();
+        ventana.close();
+      };
+      //this.$router.push("dashboard");
+      return true;
+    },
+    trunkId(id){
+      return String(id).substr(15); 
+    }
   },
   created() {
     this.getIdioma();
     this.getOrdenes();
+    this.getParametros();
   },
 };
 </script>
@@ -269,7 +521,11 @@ table tr:hover {
   box-shadow: 0 0.125rem 0.8rem #00579c;
   color: #fff;
 }
-/*table tr:hover td:first-child {
+
+#ticket {
+  display: none; 
+}
+ /*table tr:hover td:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }

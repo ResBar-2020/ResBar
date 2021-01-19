@@ -39,6 +39,8 @@ export default {
         route: "/parametros",
         icon: "mdi-format-paragraph",
       },
+      { title: "Menú", route: "/menuProductos", icon: "mdi-food" },
+
     ],
   }),
   components: { routesAside, NavbarTop},

@@ -318,7 +318,6 @@ export default {
       search: "",
       modalEditarProducto: false,
       modalEliminarProducto: false,
-      // categorias: ["Entrada", "Plato", "Bebida", "Postre"],
       productoSelected: {},
       nuevoProducto: {},
       categoriaSelected: "",
