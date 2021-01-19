@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <p id="screen" class="semaforo"> 00:00:00</p>
+    <p class="semaforo">{{ tiempoTranscurrido }}</p>
     <span class="btn btn-sm semaforoBtn" @click="modificartiempo">
       <i class="fa fa-times-circle" aria-hidden="true"></i>
     </span>
@@ -9,7 +9,6 @@
 
 <script>
 import { mapActions } from "vuex";
-
 
 export default {
   name: "Semaforo",
@@ -22,10 +21,10 @@ export default {
       maximofuera: 20,
       ordenLocal: { ...this.orden },
       timeInicial: 0,
-      pantalla:" ",
-      tiempo:null,
-      
-
+      pantalla: " ",
+      tiempo: null,
+      tiempoTranscurrido: "00:00:00",
+      mostrarBtn: true,
     };
   },
 
@@ -44,9 +43,51 @@ export default {
         this.guardarCambios();
       }
     },
-    
-    
+
+    cambiarValor() {
+     const self = this;
+      
+      var tiempoinicio = Date.parse(self.orden.tiempoPreparacion);
+      
+      setInterval(function() {
+       
+       /* app.timeInicial = parseFloat(app.timeInicial) + 1;
+        app.tiempoTranscurrido = String(app.timeInicial);
+        console.log(app.tiempoTranscurrido);*/
+
+         var t = new Date();
+         var segundos = (t - tiempoinicio) / 1000;
+         self.tiempoTranscurrido=self.secondsToHMS(segundos);
+         console.log(self.tiempoTranscurrido);
+
+
+
+
+
+
+      }, 1000);
+    },
+
+      secondsToHMS: function (secs) {
+      function z(n) {
+        return (n < 10 ? "0" : "") + n;
+      }
+      var sign = secs < 0 ? "-" : "";
+      secs = Math.abs(secs);
+      return (
+        sign +
+        z((secs / 3600) | 0) +
+        ":" +
+        z(((secs % 3600) / 60) | 0) +
+        ":" +
+        parseInt(z(secs % 60))
+      );
+    },
+
     ...mapActions(["updateOrden", "getOrdenes"]),
+  },
+  mounted() {
+    this.cambiarValor();
   },
 };
 </script>
