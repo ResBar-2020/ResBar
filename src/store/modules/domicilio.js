@@ -7,8 +7,6 @@ const getters = {
 
 const state = {
     ordenes: [],
-    pagesize: 4,
-    nextPage: 1,
 };
 
 
@@ -20,7 +18,6 @@ const actions = {
             "selector": {
                 "tipo": "DOMICILIO"
             },
-            "limit":state.pagesize
         },credentials.authentication);
         commit('setOrdenesDomicilio',response.data.docs);
     },
