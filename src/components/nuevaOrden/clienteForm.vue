@@ -12,15 +12,25 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-switch v-model="domicilio" label="A domicilio"></v-switch>
-        <v-text-field v-if="!domicilio" label="Mesero"></v-text-field>
+        <v-row>
+        <v-radio-group
+                        v-model="ordenLocal"
+                        mandatory
+                        @change="asignarTipo()"
+                        class="ml-3" row>
+                        <v-radio label="Mesa" value="MESA"></v-radio>
+                        <v-radio label="Domicilio" value="DOMICILIO"></v-radio>
+                        <v-radio label="Recoger" value="RECOGER"></v-radio>
+                      </v-radio-group>
+                    </v-row>
+        <v-text-field v-if="!domicilio&&!recoger" label="Mesero"></v-text-field>
         <v-text-field
-          v-if="!domicilio"
+          v-if="!domicilio&&!recoger"
           label="Mesa"
           type="number"
         ></v-text-field>
         <v-textarea
-          v-show="domicilio"
+          v-show="domicilio||!recoger"
           outlined
           name="input-7-4"
           label="Dirección"
@@ -55,10 +65,36 @@ export default {
   props: {},
   data() {
     return {
+      ordenLocal: {},
       domicilio: false,
+      recoger: false,
       search: "",
     };
   },
+  created: function () {
+    this.asignarTipo();
+  },
+  methods: {
+    //asigna un valor booleano a la variable mesa que nos sirve para mostrar o no mostrar el input para mesa
+    asignarTipo() {
+      switch (this.ordenLocal) {
+        case "DOMICILIO":
+          this.domicilio= true;
+          this.recoger= false;
+          break;
+        case "MESA":
+          this.domicilio = false;
+          this.recoger= false;
+          break;
+        case "RECOGER":
+          this.domicilio= false;
+          this.recoger= true;
+          break;
+        default:
+          console.log("tipo desconocido");
+      }
+    },
+  },  
 };
 </script>
 <style>

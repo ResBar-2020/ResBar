@@ -62,7 +62,8 @@
                 </div>
                 <div v-else>
                   <v-chip-group active-class="deep-purple accent-4 white--text" column>
-                     <cobrar-orden :orden="orden" v-if="orden.cobrada==false" />
+                     <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
+                      <v-icon>mdi-coin</v-icon></v-btn>
                     <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="deep-purple">
                       <v-icon>mdi-plus</v-icon></v-btn>
                     <v-btn :disabled="orden.cobrada" class="mr-2 text-center action" small fab color="pink">
