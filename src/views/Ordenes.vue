@@ -173,7 +173,7 @@
                    <td class="d-none d-md-table-cell">
                     <nobr>
 
-                    <semaforo :orden="orden" />
+                    <semaforo :orden="orden"/>
                     
                     </nobr>
 

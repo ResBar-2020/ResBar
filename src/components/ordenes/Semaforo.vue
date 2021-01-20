@@ -9,30 +9,33 @@
     </p>
     <span class="seman" v-else>
       Entregada
-      <v-icon color="white" >mdi-check-circle-outline</v-icon>
+      <v-icon class="text-center " color="white"
+        >mdi-check-circle-outline</v-icon
+      >
     </span>
     <span
       v-if="mostrarBtn"
       class="btn btn-sm semaforoBtn text-center"
       @click="modificartiempo"
     >
-      <v-icon>{{ icono }}</v-icon>
+      <v-icon class="text-center " color="black">{{ icono }}</v-icon>
     </span>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Semaforo",
   props: ["orden"],
+  computed: {
+    ...mapGetters(["parametros"]),
+  },
   data() {
     return {
       local: true,
       maxim: 0,
-      maximolocal: 8,
-      maximofuera: 20,
       ordenLocal: { ...this.orden },
       timeInicial: 0,
       color: "#00579c",
@@ -65,6 +68,7 @@ export default {
 
         if (mensaje) {
           this.orden.tiempoPreparacion = null;
+          this.orden.domicilioEtapa = 2;
           this.ordenLocal = this.orden;
           this.guardarCambios();
         }
@@ -160,9 +164,10 @@ export default {
       if (this.orden.tipo == "RECOGER" || this.orden.tipo == "DOMICILIO") {
         this.local = false;
         this.maxim =
-          parseFloat(this.maximolocal) + parseFloat(this.maximofuera);
+          parseFloat(this.parametros[7].valor) +
+          parseFloat(this.parametros[9].valor);
       } else {
-        this.maxim = parseFloat(this.maximolocal);
+        this.maxim = parseFloat(this.parametros[7].valor);
       }
     },
 
@@ -182,10 +187,13 @@ export default {
       );
     },
 
-    ...mapActions(["updateOrden", "getOrdenes"]),
+    ...mapActions(["updateOrden", "getOrdenes", "getParametros"]),
   },
   mounted() {
     this.cambiarValor();
+  },
+  created() {
+    this.getParametros();
   },
 };
 </script>
@@ -193,12 +201,15 @@ export default {
 <style scoped>
 .semaforo {
   border-radius: 20px 0 0 20px;
-  padding: 2px 15px;
-  width: 90%;
+  padding: 4px 15px;
+  width: 70%;
+  height: 100%;
+  border: 1px;
   text-align: center;
   color: rgb(255, 255, 255);
   text-shadow: 0 5px 10px rgba(100, 0, 0, 0.3);
   transition: 0.5s;
+  box-sizing: border-box;
 }
 
 .semaforo:hover {
@@ -207,17 +218,23 @@ export default {
 
 .semaforoBtn {
   border-radius: 0 20px 20px 0;
-  width: 20%;
-  padding: 2px;
+  width: 30%;
+  height: 100%;
+  padding: 3px;
   background: transparent;
   color: #c21c00;
   border: 1px solid #c21c00;
   transition: 0.4s;
+  box-sizing: border-box;
 }
 
 .semaforoBtn:hover {
   background: #c21c00;
   color: #fff;
+}
+
+.mdi-timer-off {
+  height: 0.5em;
 }
 
 .seman {

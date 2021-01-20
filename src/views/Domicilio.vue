@@ -24,7 +24,7 @@
       <v-row>
         <v-col  v-for="(orden,index) in listaDomicilios" :key="index" v-show="filtro(index)">
           <template >
-            <v-card  max-width="374" hover height="360" elevation="17">
+            <v-card  max-width="374" hover height="390" elevation="17">
               <v-banner
                 elevation="6"
                 single-line
