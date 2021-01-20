@@ -9,8 +9,8 @@ import credentials from "./modules/credentials";
 import productos from "./modules/productos";
 import usuarios from "./modules/usuarios";
 import categorias from "./modules/categorias";
-import categorias from "./modules/bitacoras";
-import categorias from "./modules/clientes";
+import bitacoras from "./modules/bitacoras";
+import clientesindex from "./modules/clientes";
 import parametros from "./modules/parametros";
 
 Vue.use(Vuex)
