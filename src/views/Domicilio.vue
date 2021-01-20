@@ -56,6 +56,11 @@
                     <eliminar-orden :orden="orden"  />
                   </v-chip-group>
                 </div>
+                <div>
+                   <semaforo  :orden="orden" />
+                 
+                   
+                </div>
               </v-card>
               <v-divider></v-divider>
               <v-card-actions>
@@ -89,9 +94,10 @@ import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import ModificarOrden from "../components/ordenes/ModificarOrden";
 import { toastAlert } from "../store/modules/utilidades.js";
 import CobrarOrden from "../components/ordenes/CobrarOrden";
+import Semaforo from "../components/ordenes/Semaforo";
 
 export default {
-  components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard, CobrarOrden, },
+  components: {ModificarOrden, AgregarProductosOrden, EliminarOrden, DetalleDomicilio, HeaderDashboard, CobrarOrden,Semaforo, },
   computed: {
     ...mapGetters(['ordenes','idiomas']),
   },
@@ -174,4 +180,6 @@ export default {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
 </style>

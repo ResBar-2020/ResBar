@@ -68,7 +68,7 @@
                   @click="OrdenSelected = orden"
                 >
                   <td class="d-none d-md-table-cell">
-                    {{ String(orden._id.substring(18, 24)) }}
+                    {{ String(orden._id.substring(26)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
@@ -113,7 +113,7 @@
                    <td class="d-none d-md-table-cell">
                     <nobr>
 
-                    <semaforo :orden="orden"/>
+                    <semaforo :orden="orden" />
 
                     </nobr>
 
@@ -128,7 +128,7 @@
                   @click="OrdenSelected = orden"
                 >
                   <td class="d-none d-md-table-cell">
-                    {{ String(orden._id.substring(18, 24)) }}
+                    {{ String(orden._id.substring(26)) }}
                   </td>
                   <td>{{ orden.mesero }}</td>
                   <td>{{ orden.cliente.nombreCompleto }}</td>
@@ -173,7 +173,7 @@
                    <td class="d-none d-md-table-cell">
                     <nobr>
 
-                    <semaforo :orden="orden"/>
+                    <semaforo :orden="orden" />
                     
                     </nobr>
 
@@ -460,7 +460,7 @@ export default {
       return true;
     },
     trunkId(id){
-      return String(id).substr(15); 
+      return String(id).substr(26); 
     }
   },
   created() {
