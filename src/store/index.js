@@ -10,7 +10,7 @@ import productos from "./modules/productos";
 import usuarios from "./modules/usuarios";
 import categorias from "./modules/categorias";
 import bitacoras from "./modules/bitacoras";
-import clientesindex from "./modules/clientes";
+import clientes from "./modules/clientes";
 import parametros from "./modules/parametros";
 
 Vue.use(Vuex)
