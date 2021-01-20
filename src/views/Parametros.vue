@@ -187,7 +187,7 @@ export default {
     return {
       valid: true,
       snackbar: {
-        message: "desde parametros",
+        message: "Desde parametros",
         timout: 2000,
       },
     };
