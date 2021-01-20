@@ -22,7 +22,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col cols="12" md="8">
               <v-text-field v-model="parametros[1].valor" required>
@@ -35,7 +34,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[2].valor" required>
@@ -48,7 +46,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[3].valor" required>
@@ -61,7 +58,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[4].valor" required>
@@ -74,7 +70,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[5].valor" required>
@@ -87,7 +82,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-checkbox v-model="parametros[6].valor" required>
@@ -100,7 +94,6 @@
               </v-checkbox>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[7].valor" type="number">
@@ -113,7 +106,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[8].valor" type="number">
@@ -126,7 +118,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[9].valor" type="number">
@@ -142,7 +133,6 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[10].valor" type="number">
@@ -158,14 +148,12 @@
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-text-field v-model="parametros[11].valor" append-icon="mdi-earth" disabled>
               </v-text-field>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col md="8">
               <v-btn color="primary" elevation="2" rounded>ACTUALIZAR</v-btn>
