@@ -20,7 +20,6 @@
           <v-divider></v-divider>
 
           <v-stepper-step editable step="2"> Productos </v-stepper-step>
-
         </v-stepper-header>
 
         <v-stepper-items>
@@ -54,6 +53,7 @@
                         v-model="ordenLocal.cliente.nombreCompleto"
                         label="Cliente"
                         required
+                        disabled
                       ></v-text-field>
 
                       <v-text-field
@@ -95,7 +95,7 @@
             </v-card>
 
             <v-btn color="primary" @click="e1 = 2"> Continuar </v-btn>
-            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
+            <v-btn text @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -103,7 +103,7 @@
               <v-card-text class="pa-0">
                 <v-row>
                   <v-col cols="12">
-                    <v-simple-table dense >
+                    <v-simple-table dense>
                       <thead>
                         <tr>
                           <th class="text-center" scope="col">Nombre</th>
@@ -154,7 +154,6 @@
                             <v-btn fab small
                               ><v-icon dark>mdi-delete</v-icon></v-btn
                             >
-                            
                           </td>
                         </tr>
                       </tbody>
@@ -164,10 +163,11 @@
               </v-card-text>
             </v-card>
 
-            <v-btn color="primary" @click="(dialog = false), guardarCambios()"> Guardar </v-btn>
-            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
+            <v-btn color="primary" @click="(dialog = false), guardarCambios()">
+              Guardar
+            </v-btn>
+            <v-btn text @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
-
         </v-stepper-items>
       </v-stepper>
     </v-dialog>
@@ -218,10 +218,16 @@ export default {
       } else {
         produ.cantidad = 0;
       }
+      this.calcularSubtotal(produ);
     },
     //incrementar cantidad del producto
     incProducto(produ) {
       produ.cantidad++;
+      this.calcularSubtotal(produ);
+    },
+    //recalcula el subtotal del producto endviado en el parametro
+    calcularSubtotal(produ) {
+      produ.subtotal = produ.precio * produ.cantidad;
     },
     // lanzar peticion axios para cambiar el valor en la base
     async guardarCambios() {
@@ -229,6 +235,9 @@ export default {
       //alerta
     },
     ...mapActions(["updateOrden", "getOrdenes"]),
+  },
+  watch: {
+
   },
 };
 </script>
@@ -238,7 +247,6 @@ export default {
   text-align: center;
   cursor: pointer;
   margin-left: 1em;
- 
 }
 .inp {
   width: 4em;
@@ -246,7 +254,6 @@ export default {
 }
 .td-cant {
   width: 9em;
- 
 }
 /* /cantidad input*/
 
