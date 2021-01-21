@@ -58,11 +58,11 @@
 
                           <v-input
                             v-else
-                            v-model="editedOrden.cliente"
+                            v-model="orden.cliente"
                             required
                             disabled
                           >
-                            {{ editedOrden.cliente.nombreCompleto }}
+                            {{ orden.cliente.nombreCompleto }}
                           </v-input>
                         </v-col>
                       </v-row>
@@ -199,6 +199,7 @@ export default {
       tab: null,
       mesa: false,
       editedOrden: null,
+      subtotal: 0,
     };
   },
   created() {
@@ -243,7 +244,12 @@ export default {
     },
     // lanzar peticion axios para cambiar el valor en la base
     async guardarCambios() {
-      this.editedOrden.cliente = this.clienteSeleccionado;
+      if (this.clienteSeleccionado!=null) {
+        this.editedOrden.cliente = this.clienteSeleccionado;
+      }else{
+        this.editedOrden.cliente = this.orden.cliente;
+      }
+      
       await this.updateOrden(this.editedOrden);
       //alerta
     },
@@ -252,6 +258,21 @@ export default {
   computed: {
     ...mapGetters(["clienteSeleccionado"]),
   },
+  watch:{
+    "editedOrden.detalleOrden":{
+      deep:true,
+      handler(newVal){
+        let sum =0;
+        newVal.forEach(detalle => {
+          sum +=detalle.subtotal;
+        });
+        this.editedOrden.subtotal = sum;
+        this.editedOrden.propina = this.editedOrden.subtotal*0.05;
+        this.editedOrden.total = this.editedOrden.propina + this.editedOrden.subtotal +this.editedOrden.costoEnvio;
+
+      }
+    }
+  }
 };
 </script>
 <style scoped>
