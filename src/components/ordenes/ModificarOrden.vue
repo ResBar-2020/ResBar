@@ -20,6 +20,7 @@
           <v-divider></v-divider>
 
           <v-stepper-step editable step="2"> Productos </v-stepper-step>
+
         </v-stepper-header>
 
         <v-stepper-items>
@@ -31,7 +32,7 @@
                   <v-col cols="12" class="d-flex flex-column">
                     <v-textarea
                       prepend-inner-icon="mdi-comment"
-                      v-model="ordenLocal.observacion"
+                      v-model="editedOrden.observacion"
                       label="Observaciones"
                       rows="1"
                     ></v-textarea>
@@ -43,27 +44,26 @@
                 <v-row>
                   <v-col cols="6">
                     <form>
-                      <!--<v-text-field
-                          v-model="ordenLocal._id"
-                          label="ID Orden"
-                          disabled
-                        ></v-text-field>-->
-
-                      <v-text-field
-                        v-model="ordenLocal.cliente.nombreCompleto"
-                        label="Cliente"
+                      <v-row>
+                        <v-col> <v-input
+                        v-model="clienteSeleccionado"
+                        v-if="clienteSeleccionado != null"
                         required
                         disabled
-                      ></v-text-field>
+                      >
+                      {{clienteSeleccionado.nombreCompleto}}
+                      </v-input></v-col>
+               
+                      </v-row>
 
                       <v-text-field
-                        v-model="ordenLocal.mesero"
+                        v-model="editedOrden.mesero"
                         label="Mesero"
                         required
                       ></v-text-field>
 
                       <v-text-field
-                        v-model="ordenLocal.mesa"
+                        v-model="editedOrden.mesa"
                         label="Mesa"
                         required
                         v-if="mesa"
@@ -74,11 +74,12 @@
                     <v-row>
                       <seleccionar-cliente
                         class="selectorCliente ml-4 mt-2"
-                      ></seleccionar-cliente>
+                      >
+                      </seleccionar-cliente>
                     </v-row>
                     <v-row>
                       <v-radio-group
-                        v-model="ordenLocal.tipo"
+                        v-model="editedOrden.tipo"
                         mandatory
                         @change="asignarTipo()"
                         class="ml-3"
@@ -95,7 +96,7 @@
             </v-card>
 
             <v-btn color="primary" @click="e1 = 2"> Continuar </v-btn>
-            <v-btn text @click="dialog = false"> Cancelar </v-btn>
+            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -103,7 +104,7 @@
               <v-card-text class="pa-0">
                 <v-row>
                   <v-col cols="12">
-                    <v-simple-table dense>
+                    <v-simple-table dense >
                       <thead>
                         <tr>
                           <th class="text-center" scope="col">Nombre</th>
@@ -115,7 +116,7 @@
                       </thead>
                       <tbody>
                         <tr
-                          v-for="detalle in ordenLocal.detalleOrden"
+                          v-for="detalle in editedOrden.detalleOrden"
                           :key="detalle.nombre"
                         >
                           <td>{{ detalle.nombre }}</td>
@@ -154,6 +155,7 @@
                             <v-btn fab small
                               ><v-icon dark>mdi-delete</v-icon></v-btn
                             >
+                            
                           </td>
                         </tr>
                       </tbody>
@@ -163,11 +165,10 @@
               </v-card-text>
             </v-card>
 
-            <v-btn color="primary" @click="(dialog = false), guardarCambios()">
-              Guardar
-            </v-btn>
-            <v-btn text @click="dialog = false"> Cancelar </v-btn>
+            <v-btn color="primary" @click="(dialog = false), guardarCambios()"> Guardar </v-btn>
+            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
+
         </v-stepper-items>
       </v-stepper>
     </v-dialog>
@@ -175,8 +176,10 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import SeleccionarCliente from "../nuevaOrden/SeleccionarCliente";
+
+
 export default {
   components: { SeleccionarCliente },
   name: "ModificarOrden",
@@ -184,19 +187,19 @@ export default {
   data() {
     return {
       e1: 1,
-      ordenLocal: { ...this.orden },
       dialog: false,
       tab: null,
       mesa: false,
     };
   },
-  created: function () {
+  created() {
+    this.editedOrden = Object.assign({} , this.orden),
     this.asignarTipo();
   },
   methods: {
     //asigna un valor booleano a la variable mesa que nos sirve para mostrar o no mostrar el input para mesa
     asignarTipo() {
-      switch (this.ordenLocal.tipo) {
+      switch (this.editedOrden.tipo) {
         case "DOMICILIO":
           this.mesa = false;
           break;
@@ -218,27 +221,31 @@ export default {
       } else {
         produ.cantidad = 0;
       }
-      this.calcularSubtotal(produ);
     },
     //incrementar cantidad del producto
     incProducto(produ) {
       produ.cantidad++;
-      this.calcularSubtotal(produ);
-    },
-    //recalcula el subtotal del producto endviado en el parametro
-    calcularSubtotal(produ) {
-      produ.subtotal = produ.precio * produ.cantidad;
+      produ.subtotal=produ.precio*produ
     },
     // lanzar peticion axios para cambiar el valor en la base
     async guardarCambios() {
-      await this.updateOrden(this.ordenLocal);
+      await this.updateOrden(this.editedOrden);
       //alerta
     },
     ...mapActions(["updateOrden", "getOrdenes"]),
   },
-  watch: {
-
+  watch:{
+    clienteSeleccionado:{
+      deep:true,
+     handler(newVal){
+        console.log(newVal);
+        
+     }
+    }
   },
+  computed:{
+    ...mapGetters(["clienteSeleccionado"]),
+  }
 };
 </script>
 <style scoped>
@@ -247,6 +254,7 @@ export default {
   text-align: center;
   cursor: pointer;
   margin-left: 1em;
+ 
 }
 .inp {
   width: 4em;
@@ -254,6 +262,7 @@ export default {
 }
 .td-cant {
   width: 9em;
+ 
 }
 /* /cantidad input*/
 

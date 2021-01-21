@@ -40,7 +40,7 @@
               <!-- Campo de texto Buscar cliente -->
               <v-col cols="6">
                 <v-text-field
-                  v-model="search"
+         
                   append-icon="mdi-magnify"
                   label="Buscar"
                 ></v-text-field>
@@ -68,7 +68,7 @@
                 <tbody>
                   <tr
                     :class="key === selectedRow ? 'custom-highlight-row' : ''"
-                    @click="rowSelect(key)"
+                    @click="rowSelect(item,key)"
                     v-for="(item, key) in datos"
                     :key="item.name"
                   >
@@ -90,7 +90,7 @@
               class="green darken-1"
               color="white"
               text
-              @click="selectClient = false"
+              @click="selectClient = false;agregarCliente()"
             >
               Agregar
             </v-btn>
@@ -109,7 +109,7 @@
             </v-card-title>
             <v-card-text>
               <template>
-                <v-form v-model="valid">
+                <v-form >
                   <v-container>
                     <v-row>
                       <v-col cols="12" class="mx-auto">
@@ -196,6 +196,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -240,13 +241,19 @@ export default {
           direccion: "Ciudad nueva",
         },
       ],
+      clienteSeleccionado:null
     };
   },
   methods: {
-    rowSelect(id) {
-      console.dir(id);
-      this.selectedRow = id;
+    ...mapMutations(["seleccionarCliente"]),
+    rowSelect(cliente,key) {
+      console.dir(key);
+      this.selectedRow = key;
+      this.clienteSeleccionado = cliente;
     },
+    agregarCliente(){
+      this.seleccionarCliente(this.clienteSeleccionado);
+    }
   },
 };
 </script>

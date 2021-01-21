@@ -3,10 +3,12 @@ import credentials from "./credentials";
 const url = "http://localhost:5984/clientes/"
 
 const getters = {
-    clientes: state => state.clientes
+    clientes: state => state.clientes,
+    clienteSeleccionado: state => state.clienteSeleccionado
 }
 const state = {
-    clientes: []
+    clientes: [],
+    clienteSeleccionado: null
 }
 async function obtenerTodos() {
     const response = await axios.post(`${url}_find`, {
@@ -66,6 +68,9 @@ const mutations = {
     setClientes(state, data) {
         state.clientes = data;
     },
+    seleccionarCliente(state,cliente){
+        state.clienteSeleccionado = cliente;
+    }
 };
 
 export default {
