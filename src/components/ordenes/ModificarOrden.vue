@@ -47,6 +47,7 @@
                       <v-row>
                         <v-col> <v-input
                         v-model="clienteSeleccionado"
+                        @change="edited"
                         v-if="clienteSeleccionado != null"
                         required
                         disabled
@@ -190,6 +191,7 @@ export default {
       dialog: false,
       tab: null,
       mesa: false,
+      editedOrden:null
     };
   },
   created() {
@@ -221,27 +223,23 @@ export default {
       } else {
         produ.cantidad = 0;
       }
+      this.calcularSubtotal(produ);
     },
     //incrementar cantidad del producto
     incProducto(produ) {
       produ.cantidad++;
-      produ.subtotal=produ.precio*produ
+      this.calcularSubtotal(produ);
     },
+    calcularSubtotal(produ){
+      produ.subtotal=produ.precio*produ.cantidad;
+    },   
     // lanzar peticion axios para cambiar el valor en la base
     async guardarCambios() {
+      this.editedOrden.cliente = this.clienteSeleccionado;
       await this.updateOrden(this.editedOrden);
       //alerta
     },
     ...mapActions(["updateOrden", "getOrdenes"]),
-  },
-  watch:{
-    clienteSeleccionado:{
-      deep:true,
-     handler(newVal){
-        console.log(newVal);
-        
-     }
-    }
   },
   computed:{
     ...mapGetters(["clienteSeleccionado"]),
