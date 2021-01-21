@@ -47,8 +47,11 @@
                     <v-icon left> mdi-label </v-icon> {{idioma.views[2].labels.total}}: $ •
                     {{ orden.total}}
                   </v-chip>
-                  <div>{{idioma.views[2].labels.timePrep}} :</div>
-                  <div> {{orden.tiempoPreparacion}}</div>
+                  <div>
+                      {{idioma.componentes[1].labels.whatsapp +
+                          ": " +
+                          orden.cliente.whatsapp}}
+                  </div>
                 </div>
                 <v-divider class="mx-2"></v-divider>
                 <h3>{{idioma.views[2].labels.actions.title}}</h3>
@@ -70,6 +73,9 @@
                       <v-icon>mdi-clipboard</v-icon></v-btn>
                     <eliminar-orden :orden="orden" />
                 </v-chip-group>
+                </div>
+                <div>
+                  <semaforo :orden="orden"/>
                 </div>
               </v-card>
               <v-divider></v-divider> 
@@ -103,10 +109,11 @@ import ModificarOrden from "../components/ordenes/ModificarOrden";
 import AgregarProductosOrden from "../components/ordenes/AgregarProductos";
 import { toastAlert } from "../store/modules/utilidades.js";
 import CobrarOrden from "../components/ordenes/CobrarOrden";
+import Semaforo from "../components/ordenes/Semaforo";
 
 export default {
   components: {EliminarOrden, ModificarOrden, AgregarProductosOrden, DetalleRecoger, HeaderDashboard,
-    CobrarOrden},
+    CobrarOrden,Semaforo},
   computed: {
     ...mapGetters(['ordenesRecoger', 'ordenesRecogerPendientes','idiomas']),
   },
