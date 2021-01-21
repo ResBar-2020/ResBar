@@ -20,7 +20,6 @@
           <v-divider></v-divider>
 
           <v-stepper-step editable step="2"> Productos </v-stepper-step>
-
         </v-stepper-header>
 
         <v-stepper-items>
@@ -45,16 +44,27 @@
                   <v-col cols="6">
                     <form>
                       <v-row>
-                        <v-col> <v-input
-                        v-model="clienteSeleccionado"
-                        @change="edited"
-                        v-if="clienteSeleccionado != null"
-                        required
-                        disabled
-                      >
-                      {{clienteSeleccionado.nombreCompleto}}
-                      </v-input></v-col>
-               
+                        <v-col>
+                          Cliente:
+                          <v-input
+                            v-model="clienteSeleccionado"
+                            @change="editedOrden.cliente = clienteSeleccionado"
+                            v-if="clienteSeleccionado != null"
+                            required
+                            disabled
+                          >
+                            {{ clienteSeleccionado.nombreCompleto }}
+                          </v-input>
+
+                          <v-input
+                            v-else
+                            v-model="editedOrden.cliente"
+                            required
+                            disabled
+                          >
+                            {{ editedOrden.cliente.nombreCompleto }}
+                          </v-input>
+                        </v-col>
                       </v-row>
 
                       <v-text-field
@@ -73,9 +83,7 @@
                   </v-col>
                   <v-col cols="6">
                     <v-row>
-                      <seleccionar-cliente
-                        class="selectorCliente ml-4 mt-2"
-                      >
+                      <seleccionar-cliente class="selectorCliente ml-4 mt-2">
                       </seleccionar-cliente>
                     </v-row>
                     <v-row>
@@ -97,7 +105,7 @@
             </v-card>
 
             <v-btn color="primary" @click="e1 = 2"> Continuar </v-btn>
-            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
+            <v-btn text @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -105,7 +113,7 @@
               <v-card-text class="pa-0">
                 <v-row>
                   <v-col cols="12">
-                    <v-simple-table dense >
+                    <v-simple-table dense>
                       <thead>
                         <tr>
                           <th class="text-center" scope="col">Nombre</th>
@@ -156,7 +164,6 @@
                             <v-btn fab small
                               ><v-icon dark>mdi-delete</v-icon></v-btn
                             >
-                            
                           </td>
                         </tr>
                       </tbody>
@@ -166,10 +173,11 @@
               </v-card-text>
             </v-card>
 
-            <v-btn color="primary" @click="(dialog = false), guardarCambios()"> Guardar </v-btn>
-            <v-btn text  @click="dialog = false"> Cancelar </v-btn>
+            <v-btn color="primary" @click="(dialog = false), guardarCambios()">
+              Guardar
+            </v-btn>
+            <v-btn text @click="dialog = false"> Cancelar </v-btn>
           </v-stepper-content>
-
         </v-stepper-items>
       </v-stepper>
     </v-dialog>
@@ -179,7 +187,6 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import SeleccionarCliente from "../nuevaOrden/SeleccionarCliente";
-
 
 export default {
   components: { SeleccionarCliente },
@@ -191,13 +198,14 @@ export default {
       dialog: false,
       tab: null,
       mesa: false,
-      editedOrden:null
+      editedOrden: null,
     };
   },
   created() {
-    this.editedOrden = Object.assign({} , this.orden),
+    this.editedOrden = Object.assign({}, this.orden);
     this.asignarTipo();
   },
+
   methods: {
     //asigna un valor booleano a la variable mesa que nos sirve para mostrar o no mostrar el input para mesa
     asignarTipo() {
@@ -230,9 +238,9 @@ export default {
       produ.cantidad++;
       this.calcularSubtotal(produ);
     },
-    calcularSubtotal(produ){
-      produ.subtotal=produ.precio*produ.cantidad;
-    },   
+    calcularSubtotal(produ) {
+      produ.subtotal = produ.precio * produ.cantidad;
+    },
     // lanzar peticion axios para cambiar el valor en la base
     async guardarCambios() {
       this.editedOrden.cliente = this.clienteSeleccionado;
@@ -241,9 +249,9 @@ export default {
     },
     ...mapActions(["updateOrden", "getOrdenes"]),
   },
-  computed:{
+  computed: {
     ...mapGetters(["clienteSeleccionado"]),
-  }
+  },
 };
 </script>
 <style scoped>
@@ -252,7 +260,6 @@ export default {
   text-align: center;
   cursor: pointer;
   margin-left: 1em;
- 
 }
 .inp {
   width: 4em;
@@ -260,7 +267,6 @@ export default {
 }
 .td-cant {
   width: 9em;
- 
 }
 /* /cantidad input*/
 
