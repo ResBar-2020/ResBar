@@ -50,10 +50,20 @@
                   <v-col cols="6">
                   <div>
                     <label class="box total"
-                      >{{idioma.componentes[1].labels.nameclient}}: <span>{{ orden.cliente.nombreCompleto }}</span></label
+                      >{{idioma.componentes[1].labels.nameclient}}: 
+                      <span>{{ orden.cliente.nombreCompleto }}</span></label
                     >
                     <label class="box total"
-                      >{{idioma.views[2].labels.timePrep}}: <span>{{orden.tiempoPreparacion}}</span></label
+                      >{{idioma.componentes[1].labels.whatsapp}}: 
+                      <span>{{orden.cliente.whatsapp}}</span></label
+                    >
+                    <label class="box total"
+                      >{{idioma.componentes[1].labels.celphone}}: 
+                      <span>{{orden.cliente.celular}}</span></label
+                    >
+                   <label class="box total"
+                      >{{idioma.componentes[1].labels.phone}}: 
+                      <span>{{orden.cliente.telefonoCasa}}</span></label
                     >
                     <label class="box envio"
                       >{{idioma.views[2].labels.total}}
