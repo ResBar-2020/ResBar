@@ -24,7 +24,6 @@
               <v-btn
                 color="light-blue darken-4"
                 class="utilities"
-                @click="showMessage(snackbar)"
               >
                 <v-icon>mdi-plus</v-icon>
                 {{ idioma.views[1].labels.new }}</v-btn

@@ -22,7 +22,7 @@
 
 <script>
 import ClienteForm from "../components/nuevaOrden/clienteForm.vue";
-import AgregarProductos from "../components/AgregarProductos";
+import AgregarProductos from "../components/nuevaOrden/AgregarProductos";
 
 export default {
   name: "nuevaOrden",
