@@ -29,6 +29,10 @@
                 {{idioma.componentes[1].labels.detailorder}}
                 <v-icon>mdi-format-list-bulleted-square</v-icon>
               </v-tab>
+              <v-tab href="#tab-2">
+                {{idioma.componentes[1].labels.client}}
+                <v-icon>mdi-account</v-icon>
+              </v-tab>
             </v-tabs>
 
             <v-tabs-items v-model="tab">
@@ -49,31 +53,45 @@
                   </v-col>
                   <v-col cols="6">
                   <div>
-                    <label class="box total"
-                      >{{idioma.componentes[1].labels.nameclient}}: 
-                      <span>{{ orden.cliente.nombreCompleto }}</span></label
-                    >
-                    <label class="box total"
-                      >{{idioma.componentes[1].labels.whatsapp}}: 
-                      <span>{{orden.cliente.whatsapp}}</span></label
-                    >
-                    <label class="box total"
-                      >{{idioma.componentes[1].labels.celphone}}: 
-                      <span>{{orden.cliente.celular}}</span></label
-                    >
-                   <label class="box total"
-                      >{{idioma.componentes[1].labels.phone}}: 
-                      <span>{{orden.cliente.telefonoCasa}}</span></label
-                    >
-                    <label class="box envio"
-                      >{{idioma.views[2].labels.total}}
-                      <span>${{ orden.total }}</span></label
-                    >
+                    <label class="box envio">{{idioma.views[2].labels.subtotal}}:
+                      <span>${{ orden.subtotal.toFixed(2) }}</span>
+                    </label>
+                    <label class="box envio">{{idioma.views[2].labels.tip}}:
+                      <span>${{ orden.propina.toFixed(2) }}</span>
+                    </label>
+                    <label class="box total">{{idioma.views[2].labels.total}}: 
+                      <span>${{ orden.total.toFixed(2) }}</span>
+                    </label>                    >
                   </div>
                   </v-col>
                 </v-row>
               </v-tab-item>
-            
+              <!-- tab numero dos -->
+              <v-tab-item :value="'tab-2'" class="bg">
+                <v-card-title>
+                  <span class="headline prod_title">{{idioma.componentes[1].labels.contactclient}}</span>
+                </v-card-title>
+                <div>
+                  <v-card-text>
+                    <span class="cliente">{{idioma.componentes[1].labels.nameclient}}:</span>
+                    <span class="item">
+                      {{ orden.cliente.nombreCompleto }}</span
+                    >
+                  </v-card-text>
+                  <v-card-text>
+                    <span class="cliente">{{idioma.componentes[1].labels.whatsapp}}:</span>
+                    <span class="item"> {{ orden.cliente.whatsapp }}</span>
+                  </v-card-text>
+                  <v-card-text>
+                    <span class="cliente">{{idioma.componentes[1].labels.phone}}:</span>
+                    <span class="item"> {{ orden.cliente.telefonoCasa }}</span>
+                  </v-card-text>
+                  <v-card-text>
+                    <span class="cliente">{{idioma.componentes[1].labels.celphone}}:</span>
+                    <span class="item"> {{ orden.cliente.celular }}</span>
+                  </v-card-text>
+                </div>
+              </v-tab-item>
             </v-tabs-items>
             <v-card-actions class="indigo darken-4">
               <v-spacer></v-spacer>
@@ -91,12 +109,11 @@
   </div>
 </template>
 
-
 <script>
 import {mapGetters} from "vuex";
 
 export default {
-  name: "DetalleRecoger",
+  name: "DetalleDomicilio",
   props: ["orden"],
   computed: {
     ...mapGetters(['idiomas']),
@@ -109,7 +126,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .productos {

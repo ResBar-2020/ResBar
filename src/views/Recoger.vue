@@ -45,7 +45,7 @@
                 <div>
                   <v-chip class="ma-2 v-card--hover" color="purple" outlined>
                     <v-icon left> mdi-label </v-icon> {{idioma.views[2].labels.total}}: $ •
-                    {{ orden.total}}
+                    {{ orden.total.toFixed(2)}}
                   </v-chip>
                   <div>
                       {{idioma.componentes[1].labels.whatsapp +
