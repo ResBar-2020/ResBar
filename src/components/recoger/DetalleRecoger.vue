@@ -113,7 +113,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-  name: "DetalleDomicilio",
+  name: "DetalleRecoger",
   props: ["orden"],
   computed: {
     ...mapGetters(['idiomas']),
