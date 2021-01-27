@@ -87,7 +87,7 @@
 
               <div class="col-4 bg">
                 <label class="identifier">Propina: </label>
-                <span class="price">${{ orden.propina }}</span>
+                <span class="price">${{ parseFloat(orden.propina).toFixed(2) }}</span>
               </div>
 
               <div class="col-4 bg">
