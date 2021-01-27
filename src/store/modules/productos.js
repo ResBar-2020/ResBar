@@ -27,7 +27,7 @@ const actions = {
             "selector": {}
         }, credentials.authentication);
         commit('setProductos', response.data.docs.map(function(obj) {
-            let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0, preparado: obj.preparado };
+            let rObj = { ...obj, cantidad: 0, subtotal: 0};
             return rObj;
         }));
     },

@@ -350,7 +350,7 @@
           
           
             <hr class="hr1" />
-            <p>
+            <p v-if="OrdenSelected.tipo == 'DOMICILIO'">
               DESPRENDIBLE <br>
               Orden: {{ trunkId(OrdenSelected._id)}}<br>
               Total:  {{ parseFloat(OrdenSelected.total).toFixed(2)}}

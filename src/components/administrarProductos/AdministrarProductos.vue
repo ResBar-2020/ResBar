@@ -76,6 +76,7 @@
             @click="productoSelected = producto"
             v-show="filtroCategoria(producto.categoria.nombre) && buscar(index)"
           >
+          
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
             <td>{{ producto.categoria.nombre }}</td>
@@ -362,9 +363,12 @@ export default {
     },
 
     removeProduct() {
-      if (this.productoSelected !== undefined) {
+
+      try {
         this.deleteProduct(this.productoSelected);
         this.showSnackbar("Eliminado con exito");
+      } catch (error) {
+        this.showSnackbar("Error al eliminar")
       }
     },
     buscar: function (x) {
