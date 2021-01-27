@@ -1,9 +1,9 @@
 <template>
   <v-app>
-      <v-container class="lighten-5 my-2">
+      <v-container class="lighten-5">
         <v-row no-gutters justify="center">
           <v-col cols="5">
-            <div mr-3>
+            <div>
               <v-text-field
                 v-model="search"
                 append-icon="mdi-magnify"
@@ -113,7 +113,6 @@ export default {
       "getCategorias",
 
     ]),
-
         disminuirCantidad(produ) {
             if (produ.cantidad > 1) {
                 produ.cantidad--;
@@ -121,32 +120,19 @@ export default {
                 produ.cantidad = 0;
             }
             produ.subtotal = produ.cantidad * produ.precio;
-            // console.log("subtotal: "+produ.subtotal);
         },
-
         aumentarCantidad(produ) {
             produ.cantidad++;
             produ.subtotal = produ.cantidad * produ.precio;
-            // console.log("subtotal: "+produ.subtotal);
         },
-
-        // subtotal(produ) {
-        //     let sub = produ.cantidad * produ.precio;
-        //     sub = sub.toFixed(2);
-        //     return +sub;
-        // },
-
         calcularSubtotalTotal() {
             this.nuevaOrden.subtotal = 0;
             this.nuevaOrden.detalleOrden.forEach(produ => {
                 this.nuevaOrden.subtotal += produ.subtotal;
             });
             this.nuevaOrden.subtotal = Math.round(this.nuevaOrden.subtotal * 100) / 100;
-                        console.log("TOTAL: "+this.nuevaOrden.subtotal);
-
             this.$store.state.sub= this.nuevaOrden.subtotal
             this.$store.dispatch('obtenerSubtotalAction');
-            // console.log("TOTAL: "+this.nuevaOrden.subtotal);
         },
 
     buscar: function (x) {
