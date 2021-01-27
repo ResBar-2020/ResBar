@@ -24,24 +24,25 @@ async function obtenerTodos() {
 const actions = {
     async getProductos({ commit }) {
         const response = await axios.post(`${url}_find`, {
-            "selector": {
-
-            }
+            "selector": {}
         }, credentials.authentication);
-        commit('setProductos', response.data.docs);
+        commit('setProductos', response.data.docs.map(function(obj) {
+            let rObj = { cantidad: 0, nombre: obj.nombre, precio: obj.precio, categoria: obj.categoria, subtotal: 0, preparado: obj.preparado };
+            return rObj;
+        }));
     },
 
-    async addProduct({commit}, producto){
+    async addProduct({ commit }, producto) {
         await axios.post(`${url}`, producto, {
             "auth": credentials.authentication.auth,
             "headers": credentials.authentication.headers,
-        },credentials.authentication);
+        }, credentials.authentication);
 
         const response = await obtenerTodos();
         commit('setProductos', response.data.docs);
     },
 
-    async updateProduct({commit}, producto) {
+    async updateProduct({ commit }, producto) {
         await axios.put(`${url}${producto._id}`, producto, {
             params: {
                 "rev": producto._rev
@@ -54,7 +55,7 @@ const actions = {
         commit('setProductos', response.data.docs);
     },
 
-    async deleteProduct({commit}, producto){
+    async deleteProduct({ commit }, producto) {
         await axios.delete(`${url}${producto._id}`, {
             params: {
                 "rev": producto._rev
@@ -62,7 +63,7 @@ const actions = {
             "auth": credentials.authentication.auth,
             "headers": credentials.authentication.headers,
         }, credentials.authentication);
-        
+
         const response = await obtenerTodos();
         commit('setProductos', response.data.docs);
     }
@@ -86,5 +87,8 @@ const mutations = {
 };
 
 export default {
-    state, getters, actions, mutations
+    state,
+    getters,
+    actions,
+    mutations
 }

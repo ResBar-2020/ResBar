@@ -52,13 +52,14 @@
           <tr
             v-for="(producto, index) in allProductos"
             :key="index"
-            @click="productoSelected = producto"
+            @click="productoSelected = producto, guardarDetalleOrden(), calcularSubtotalTotal()"
             v-show="filtroCategoria(producto.categoria.nombre) && buscar(index)"
           >
             <td>{{ producto.nombre }}</td>
             <td>$ {{ producto.precio }}</td>
             <td>
                   <v-btn
+                  @click="disminuirCantidad(producto)"
                 class="mx-2"
                 fab
                 dark
@@ -66,8 +67,9 @@
                 color="primary">
               <v-icon dark>mdi-minus</v-icon>
               </v-btn>
-              <input class="inputN" type="number" value="0" min="0" max="99" step="1">
+              <input class="inputN" type="number" v-model.lazy.number="producto.cantidad" value="0" min="0" max="99" step="1">
               <v-btn
+              @click="aumentarCantidad(producto)"
                 class="mx-2"
                 fab
                 dark
@@ -79,7 +81,7 @@
           </tr>
         </tbody>
       </template>
-    </v-simple-table>        
+    </v-simple-table>   
     </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -91,14 +93,17 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
-  name: "AdministrarProductos",
+  name: "AgregarProductos",
   data() {
     return {
+      productos:[],
+      nuevaOrden:{
+        detalleOrden:{},
+        subtotal:0
+      },
       search: "",
       productoSelected: {},
-      producto:{
-
-      },
+      producto:{},
       catSelected: 'TODOS', 
     };
   },
@@ -106,7 +111,44 @@ export default {
     ...mapActions([
       "getProductos",
       "getCategorias",
+
     ]),
+
+        disminuirCantidad(produ) {
+            if (produ.cantidad > 1) {
+                produ.cantidad--;
+            } else {
+                produ.cantidad = 0;
+            }
+            produ.subtotal = produ.cantidad * produ.precio;
+            // console.log("subtotal: "+produ.subtotal);
+        },
+
+        aumentarCantidad(produ) {
+            produ.cantidad++;
+            produ.subtotal = produ.cantidad * produ.precio;
+            // console.log("subtotal: "+produ.subtotal);
+        },
+
+        // subtotal(produ) {
+        //     let sub = produ.cantidad * produ.precio;
+        //     sub = sub.toFixed(2);
+        //     return +sub;
+        // },
+
+        calcularSubtotalTotal() {
+            this.nuevaOrden.subtotal = 0;
+            this.nuevaOrden.detalleOrden.forEach(produ => {
+                this.nuevaOrden.subtotal += produ.subtotal;
+            });
+            this.nuevaOrden.subtotal = Math.round(this.nuevaOrden.subtotal * 100) / 100;
+                        console.log("TOTAL: "+this.nuevaOrden.subtotal);
+
+            this.$store.state.sub= this.nuevaOrden.subtotal
+            this.$store.dispatch('obtenerSubtotalAction');
+            // console.log("TOTAL: "+this.nuevaOrden.subtotal);
+        },
+
     buscar: function (x) {
       return this.search.trim() != ""
         ? (this.allProductos[x].nombre + this.allProductos[x].precio)
@@ -123,6 +165,13 @@ export default {
         return false
       }
     },
+
+    guardarDetalleOrden(){
+      this.nuevaOrden.detalleOrden = this.allProductos.filter(prod => prod.cantidad > 0);
+      this.$store.state.productosOrden=this.nuevaOrden.detalleOrden
+      this.$store.dispatch('crearDetalleOrdenAction');
+    },
+
   },
   created() {
     this.getProductos();

@@ -58,7 +58,7 @@
   </v-container>
 </template>
 <script>
-import { mapMutations, mapActions, mapState } from "vuex";
+import { mapMutations, mapActions, mapState, mapGetters } from "vuex";
 import SeleccionarCliente from "../nuevaOrden/SeleccionarCliente";
 export default {
   components: { SeleccionarCliente },
@@ -66,9 +66,7 @@ export default {
   props: {},
   data() {
     return {
-      
       selectedOrden:{},
-
       newOrden:{
             fecha: null,
             mesero: '',
@@ -83,7 +81,7 @@ export default {
             detalleOrden: {},
             subtotal: null,
             propina: null,
-            costoEnvio: null,
+            costoEnvio: 0,
             total: null
       },
       ordenLocal: {},
@@ -97,9 +95,11 @@ export default {
     };
   },
   created: function () {
+    this.getParametros();
     this.asignarTipo();
   },
   computed: {
+    ...mapGetters(["parametros"]),
     ...mapState(["nuevaOrden"]),
     clienteSeleccionadoNombre: {
       get() {
@@ -112,7 +112,7 @@ export default {
   },
   methods: {
      ...mapMutations(["setOrdenes", "showMessage","crearNuevaOrden"]),
-    ...mapActions(["getOrdenes","addOrden", "crearNuevaOrdenAction"]),
+    ...mapActions(["getOrdenes","addOrden", "crearNuevaOrdenAction", "getParametros"]),
     
     redireccionarAOrdenes() {
             window.location.href = '../../views/Ordenes';
@@ -126,6 +126,14 @@ export default {
             this.newOrden.fecha = new Date().toISOString();
             this.newOrden.tiempoPreparacion = new Date().toISOString();
             this.newOrden.cliente = this.$store.state.clienteSeleccionado;
+            this.newOrden.detalleOrden = this.$store.state.detalleOrden;
+            this.newOrden.subtotal = this.$store.state.subtotal;
+            this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));            
+            if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
+                this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
+            } else {
+                        this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina + this.parametros[10].valor;
+            }
              this.$store.state.nuevaOrden=this.newOrden;
              if (JSON.stringify(this.newOrden) != "{}") {
                this.addOrden(this.newOrden);
@@ -137,7 +145,15 @@ export default {
       this.snackbar.message = message;
       this.showMessage(this.snackbar);
     },
-
+     factorPropina() {
+            let valor = this.parametros[8].valor;
+            try {
+                valor = valor / 100;
+                return parseFloat(valor);
+            } catch (error) {
+                console.error(error);
+            }
+        },
     //asigna un valor booleano a la variable mesa que nos sirve para mostrar o no mostrar el input para mesa
     asignarTipo() {
       switch (this.ordenLocal) {
@@ -145,6 +161,7 @@ export default {
           this.domicilio= true;
           this.recoger= false;
           this.newOrden.tipo="DOMICILIO"
+          this.newOrden.costoEnvio= this.parametros[10].valor
           break;
         case "MESA":
           this.domicilio = false;

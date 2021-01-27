@@ -18,13 +18,15 @@ axios.defaults.baseURL = "http://localhost:5984"
 
 export default new Vuex.Store({
 
-
     state: {
         nuevaOrden: {},
-
+        detalleOrden: {},
+        productosOrden: {},
+        subtotal: 0,
+        sub: 0,
+        total: {},
         clienteSeleccionado: {},
         cliente: {},
-
         rol: localStorage.getItem("rol") || null,
         username: localStorage.getItem("username") || null,
         snackbar: {
@@ -33,20 +35,25 @@ export default new Vuex.Store({
             timeout: 2000
         },
         error: false
-
     },
+
     getters: {
         error: state => state.error
     },
+
     mutations: {
         crearNuevaOrden() {
             this.state.nuevaOrden.cliente = this.state.cliente
         },
-
         seleccionarCliente() {
             this.state.clienteSeleccionado = this.state.cliente
         },
-
+        crearDetalleOrden() {
+            this.state.detalleOrden = this.state.productosOrden
+        },
+        obtenerSubtotal() {
+            this.state.subtotal = this.state.sub
+        },
         authenticate(state, data) {
             state.rol = data.rol;
             state.username = data.username;
@@ -64,11 +71,15 @@ export default new Vuex.Store({
         async crearNuevaOrdenAction({ commit }) {
             commit('crearNuevaOrden');
         },
-
         async seleccionarClienteAction({ commit }) {
             commit('seleccionarCliente');
         },
-
+        async crearDetalleOrdenAction({ commit }) {
+            commit('crearDetalleOrden');
+        },
+        async obtenerSubtotalAction({ commit }) {
+            commit('obtenerSubtotal');
+        },
         authenticate: async(context, user) => {
 
             if (user.loggin != undefined && user.clave != undefined) {

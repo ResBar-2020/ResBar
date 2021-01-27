@@ -208,7 +208,6 @@ export default {
   computed: {
     ...mapState(["clienteSeleccionado", "cliente"]),
     ...mapGetters(["clientes"]),
-    // ...mapGetters(["clientes"]),
   },
   data() {
     return {
@@ -255,10 +254,6 @@ export default {
       this.$store.state.cliente=this.clienteSelected
       this.$store.dispatch('seleccionarClienteAction');
     },
-    // nuevaOrdenCliente() {
-    //         this.$store.state.nuevaOrden.cliente = this.clienteSelected;
-    //         this.$store.dispatch('seleccionarClienteAction');
-    //     },
     limpiarSeleccionado(){
       this.clienteSelected = {}
     }
