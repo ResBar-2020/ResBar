@@ -23,12 +23,13 @@
           v-model="newOrden.mesa"
         ></v-text-field>
         <v-textarea
+        disabled
         rows="1"
           v-show="domicilio"
           outlined
           name="input-7-4"
           label="Dirección"
-          value=""
+          v-model="clienteSeleccionadoDireccion"
         ></v-textarea>
         <v-textarea
         rows="1"
@@ -45,7 +46,7 @@
             > Cancelar </v-btn>
           </v-col>
           <v-col>
-            <v-btn class="white--text" block color="indigo" @click="guardarOrden(),redireccionarAOrdenes()" >
+            <v-btn class="white--text" block color="indigo" @click="guardarOrden()" >
               Crear Orden
             </v-btn>
           </v-col>
@@ -109,6 +110,14 @@ export default {
         this.$store.commit('seleccionarClienteAction', value);
       },
     },
+    clienteSeleccionadoDireccion: {
+      get() {
+        return this.$store.state.clienteSeleccionado.direccion;
+      },
+      set(value) {
+        this.$store.commit('seleccionarClienteAction', value);
+      },
+    },
   },
   methods: {
      ...mapMutations(["setOrdenes", "showMessage","crearNuevaOrden"]),
@@ -135,9 +144,12 @@ export default {
                         this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina + this.parametros[10].valor;
             }
              this.$store.state.nuevaOrden=this.newOrden;
-             if (JSON.stringify(this.newOrden) != "{}") {
+             if (JSON.stringify(this.newOrden.detalleOrden) != "{}") {
                this.addOrden(this.newOrden);
-               this.showSnackbar("Agregado con exito");
+               this.showSnackbar("Orden creada con éxito");
+               this.redireccionarAOrdenes();
+      }else{
+        this.showSnackbar("La orden no contiene productos");
       }
     },
     showSnackbar(message) {
