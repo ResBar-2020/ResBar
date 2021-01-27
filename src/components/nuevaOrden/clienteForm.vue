@@ -55,6 +55,51 @@
 
       </v-col>
     </v-row>
+    <!-- Ticket cocina -->
+    <div id="ticket"
+      v-show="false"
+      class="tickets mostrar-impresion">
+      <div class="ticketcliente mostrar-impresion">
+        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
+          <br />
+          {{ this.parametros[0].valor }}
+          <br />
+          Telefono: {{ this.parametros[2].valor }}
+          <br />
+          Nit: {{ this.parametros[3].valor }}
+          <br />
+          Giro: {{ this.parametros[4].valor }}
+          <br />
+          Direccion: {{ this.parametros[5].valor }}
+        </p>
+        <p class="izquierda"></p>
+        <hr class="hr1" />
+        {{ new Date().toLocaleString() }}
+        <br />
+        Mesa: {{ newOrden.mesa }}
+        <br />
+        Mesero: {{ newOrden.mesero }}
+        <br />
+        <hr class="" />
+        <p></p>
+
+        <table class="ticketcliente">
+          <thead>
+            <tr>
+              <th class="producto">Nombre</th>
+              <th class="cantidad">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(producto, index) in prodCocina" :key="index">
+              <td class="producto">{{ producto.nombre }}</td>
+              <td class="cantidad">{{ producto.cantidad }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Fin Ticket cocina -->
   </v-container>
 </template>
 <script>
@@ -92,6 +137,7 @@ export default {
         message: "",
         timout: 2000,
       },
+      prodCocina: []
     };
   },
   created: function () {
@@ -123,12 +169,15 @@ export default {
     },
 
     guardarOrden() {
+            this.newOrden.detalleOrden = this.$store.state.detalleOrden;
+            this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
+            localStorage.setItem('prod', JSON.stringify(this.prodCocina));
             this.newOrden.fecha = new Date().toISOString();
             this.newOrden.tiempoPreparacion = new Date().toISOString();
             this.newOrden.cliente = this.$store.state.clienteSeleccionado;
-            this.newOrden.detalleOrden = this.$store.state.detalleOrden;
             this.newOrden.subtotal = this.$store.state.subtotal;
             this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));            
+            this.imprimirElemento();       
             if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
                 this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
             } else {
@@ -177,6 +226,24 @@ export default {
           console.log("tipo desconocido");
       }
     },
+    imprimirElemento() {
+      var elemento = document.querySelector('.tickets'); 
+      var ventana = window.open("", "PRINT", "height=800,width=1000");
+      ventana.document.write(
+        "<html><head><title>" + document.title + "</title>"
+      );
+      ventana.document.write('<link rel="stylesheet" href="./ticket.css">');
+      ventana.document.write("</head><body >");
+      ventana.document.write(elemento.innerHTML);
+      ventana.document.write("</body></html>");
+      ventana.document.close();
+      ventana.focus();
+      ventana.onload = function () {
+        ventana.print();
+        ventana.close();
+      };
+      return true;
+    }
   },  
 };
 </script>
