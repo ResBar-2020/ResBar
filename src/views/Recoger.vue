@@ -33,7 +33,7 @@
                 elevation="6"
                 single-line
                 sticky
-                :class="{'primary lighten-3': orden.entregada==false,'primary darken-4':orden.entregada==true}"
+                :class="{'blue darken-1': orden.entregada==false,'blue darken-4':orden.entregada==true}"
               >
                 {{orden.entregada==false?idioma.views[2].labels.state.todo:idioma.views[2].labels.state.complete}}
               </v-banner>
@@ -43,7 +43,7 @@
                   {{ orden.cliente.nombreCompleto }}
                 </h3>
                 <div>
-                  <v-chip class="ma-2 v-card--hover" color="purple" outlined>
+                  <v-chip class="ma-2 v-card--hover" color="red" outlined>
                     <v-icon left> mdi-label </v-icon> {{idioma.views[2].labels.total}}: $ •
                     {{ orden.total.toFixed(2)}}
                   </v-chip>
