@@ -23,13 +23,12 @@
           v-model="newOrden.mesa"
         ></v-text-field>
         <v-textarea
-        disabled
-        rows="1"
+        rows="3"
           v-show="domicilio"
           outlined
           name="input-7-4"
           label="Dirección"
-          v-model="clienteSeleccionadoDireccion"
+          v-model="nuevaDireccion"
         ></v-textarea>
         <v-textarea
         rows="1"
@@ -119,9 +118,17 @@ export default {
             tipo: '',
             domicilioEtapa: 0,
             mesa: '',
-            cliente: {},
-            cobrada: 'false',
-            entregada: 'false',
+            cliente: {
+               nombreCompleto: "",
+               telefonoCasa: "",
+               celular: "",
+               whatsapp: "",
+               direccion: "",
+               departamento: "",
+               municipio: ""
+            },
+            cobrada: false,
+            entregada: false,
             observacion: '',
             tiempoPreparacion: null,
             detalleOrden: {},
@@ -130,6 +137,7 @@ export default {
             costoEnvio: 0,
             total: null
       },
+      nuevaDireccion:"",
       ordenLocal: {},
       domicilio: false,
       recoger: false,
@@ -143,6 +151,7 @@ export default {
   },
   created: function () {
     this.getParametros();
+    this.getOrdenes();
     this.asignarTipo();
   },
   computed: {
@@ -179,14 +188,20 @@ export default {
 
     guardarOrden() {
             this.newOrden.detalleOrden = this.$store.state.detalleOrden;
-            this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
-            localStorage.setItem('prod', JSON.stringify(this.prodCocina));
+            // this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
+            // localStorage.setItem('prod', JSON.stringify(this.prodCocina));
             this.newOrden.fecha = new Date().toISOString();
             this.newOrden.tiempoPreparacion = new Date().toISOString();
-            this.newOrden.cliente = this.$store.state.clienteSeleccionado;
+            this.newOrden.cliente.nombreCompleto = this.$store.state.clienteSeleccionado.nombreCompleto;
+            this.newOrden.cliente.telefonoCasa = this.$store.state.clienteSeleccionado.telefonoCasa;
+            this.newOrden.cliente.celular = this.$store.state.clienteSeleccionado.celular;
+            this.newOrden.cliente.whatsapp = this.$store.state.clienteSeleccionado.whatsapp;
+            this.newOrden.cliente.direccion = this.nuevaDireccion;
+            this.newOrden.cliente.departamento = this.$store.state.clienteSeleccionado.departamento;
+            this.newOrden.cliente.municipio = this.$store.state.clienteSeleccionado.municipio;
             this.newOrden.subtotal = this.$store.state.subtotal;
-            this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));            
-            this.imprimirElemento();       
+            this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));
+            // this.imprimirElemento();       
             if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
                 this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
             } else {
@@ -196,6 +211,7 @@ export default {
              if (JSON.stringify(this.newOrden.detalleOrden) != "{}") {
                this.addOrden(this.newOrden);
                this.showSnackbar("Orden creada con éxito");
+               this.getOrdenes();
                this.redireccionarAOrdenes();
       }else{
         this.showSnackbar("La orden no contiene productos");
@@ -219,6 +235,7 @@ export default {
     asignarTipo() {
       switch (this.ordenLocal) {
         case "DOMICILIO":
+          this.nuevaDireccion=this.clienteSeleccionadoDireccion;
           this.domicilio= true;
           this.recoger= false;
           this.newOrden.tipo="DOMICILIO"
