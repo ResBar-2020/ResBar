@@ -23,12 +23,13 @@
           v-model="newOrden.mesa"
         ></v-text-field>
         <v-textarea
-        rows="3"
+          readonly
+          rows="3"
           v-show="domicilio"
           outlined
           name="input-7-4"
           label="Dirección"
-          v-model="nuevaDireccion"
+          v-model="clienteSeleccionadoDireccion"
         ></v-textarea>
         <v-textarea
         rows="1"
@@ -175,7 +176,7 @@ export default {
     },
   },
   methods: {
-     ...mapMutations(["setOrdenes", "showMessage","crearNuevaOrden"]),
+    ...mapMutations(["setOrdenes", "showMessage","crearNuevaOrden"]),
     ...mapActions(["getOrdenes","addOrden", "crearNuevaOrdenAction", "getParametros"]),
     
     redireccionarAOrdenes() {
@@ -196,7 +197,7 @@ export default {
             this.newOrden.cliente.telefonoCasa = this.$store.state.clienteSeleccionado.telefonoCasa;
             this.newOrden.cliente.celular = this.$store.state.clienteSeleccionado.celular;
             this.newOrden.cliente.whatsapp = this.$store.state.clienteSeleccionado.whatsapp;
-            this.newOrden.cliente.direccion = this.nuevaDireccion;
+            this.newOrden.cliente.direccion = this.clienteSeleccionadoDireccion;
             this.newOrden.cliente.departamento = this.$store.state.clienteSeleccionado.departamento;
             this.newOrden.cliente.municipio = this.$store.state.clienteSeleccionado.municipio;
             this.newOrden.subtotal = this.$store.state.subtotal;
@@ -235,7 +236,7 @@ export default {
     asignarTipo() {
       switch (this.ordenLocal) {
         case "DOMICILIO":
-          this.nuevaDireccion=this.clienteSeleccionadoDireccion;
+          // this.nuevaDireccion=this.clienteSeleccionadoDireccion;
           this.domicilio= true;
           this.recoger= false;
           this.newOrden.tipo="DOMICILIO"
