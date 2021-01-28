@@ -251,7 +251,13 @@ export default {
       }
     },
     guardarClienteSeleccionado(){
-      this.$store.state.cliente=this.clienteSelected
+      this.$store.state.cliente.nombreCompleto=this.clienteSelected.nombreCompleto
+      this.$store.state.cliente.telefonoCasa=this.clienteSelected.telefonoCasa
+      this.$store.state.cliente.celular=this.clienteSelected.celular
+      this.$store.state.cliente.whatsapp=this.clienteSelected.whatsapp
+      this.$store.state.cliente.direccion=this.clienteSelected.direccion
+      this.$store.state.cliente.departamento=this.clienteSelected.departamento
+      this.$store.state.cliente.municipio=this.clienteSelected.municipio
       this.$store.dispatch('seleccionarClienteAction');
     },
     limpiarSeleccionado(){

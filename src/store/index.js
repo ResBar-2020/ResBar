@@ -25,8 +25,24 @@ export default new Vuex.Store({
         subtotal: 0,
         sub: 0,
         total: {},
-        clienteSeleccionado: {},
-        cliente: {},
+        clienteSeleccionado: {
+            nombreCompleto: "",
+            telefonoCasa: "",
+            celular: "",
+            whatsapp: "",
+            direccion: "",
+            departamento: "",
+            municipio: ""
+        },
+        cliente: {
+            nombreCompleto: "",
+            telefonoCasa: "",
+            celular: "",
+            whatsapp: "",
+            direccion: "",
+            departamento: "",
+            municipio: ""
+        },
         rol: localStorage.getItem("rol") || null,
         username: localStorage.getItem("username") || null,
         snackbar: {
