@@ -61,19 +61,7 @@
       v-show="false"
       class="tickets mostrar-impresion">
       <div class="ticketcliente mostrar-impresion">
-        <p v-if="this.parametros.length>0" class="centrado mostrar-impresion">
-          <br />
-          {{ this.parametros[0].valor }}
-          <br />
-          Telefono: {{ this.parametros[2].valor }}
-          <br />
-          Nit: {{ this.parametros[3].valor }}
-          <br />
-          Giro: {{ this.parametros[4].valor }}
-          <br />
-          Direccion: {{ this.parametros[5].valor }}
-        </p>
-        <p class="izquierda"></p>
+        <h2 style="text-align:center">COCINA</h2>
         <hr class="hr1" />
         {{ new Date().toLocaleString() }}
         <br />
@@ -83,21 +71,9 @@
         <br />
         <hr class="" />
         <p></p>
-
-        <table class="ticketcliente">
-          <thead>
-            <tr>
-              <th class="producto">Nombre</th>
-              <th class="cantidad">Cantidad</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(producto, index) in prodCocina" :key="index">
-              <td class="producto">{{ producto.nombre }}</td>
-              <td class="cantidad">{{ producto.cantidad }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="tableCocina"></div>
+        <hr class="hr1" />
+        <p>Observaciones: {{ newOrden.observacion }}</p>
       </div>
     </div>
     <!-- Fin Ticket cocina -->
@@ -132,7 +108,7 @@ export default {
             entregada: false,
             observacion: '',
             tiempoPreparacion: null,
-            detalleOrden: {},
+            detalleOrden: [],
             subtotal: null,
             propina: null,
             costoEnvio: 0,
@@ -189,8 +165,7 @@ export default {
 
     guardarOrden() {
             this.newOrden.detalleOrden = this.$store.state.detalleOrden;
-            // this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
-            // localStorage.setItem('prod', JSON.stringify(this.prodCocina));
+            this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
             this.newOrden.fecha = new Date().toISOString();
             this.newOrden.tiempoPreparacion = new Date().toISOString();
             this.newOrden.cliente.nombreCompleto = this.$store.state.clienteSeleccionado.nombreCompleto;
@@ -202,7 +177,7 @@ export default {
             this.newOrden.cliente.municipio = this.$store.state.clienteSeleccionado.municipio;
             this.newOrden.subtotal = this.$store.state.subtotal;
             this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));
-            // this.imprimirElemento();       
+            this.imprimirElemento();       
             if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
                 this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
             } else {
@@ -257,22 +232,41 @@ export default {
       }
     },
     imprimirElemento() {
+      let prodCocina = this.prodCocina;
       var elemento = document.querySelector('.tickets'); 
-      var ventana = window.open("", "PRINT", "height=800,width=1000");
-      ventana.document.write(
-        "<html><head><title>" + document.title + "</title>"
-      );
+      var ventana = window.open("", "PRINT", "height=700,width=500");
+      ventana.document.write("<html><head><title>" + document.title + "</title>");
       ventana.document.write('<link rel="stylesheet" href="./ticket.css">');
-      ventana.document.write("</head><body >");
+      ventana.document.write("</head><body>");
+      let tableCo = `<table class="ticketcliente" style="width: 100%;">
+          <thead>
+            <tr>
+              <th class="producto">Nombre</th>
+              <th class="cantidad">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+          ${prodCocina.map(prod =>{
+            return `<tr style="text-align: center;">
+              <td class="producto">${prod.nombre}</td>
+              <td class="cantidad">${prod.cantidad}</td>
+            </tr>`
+          }).join('')}            
+          </tbody>
+        </table>`;
+      document.getElementById("tableCocina").innerHTML = tableCo;
       ventana.document.write(elemento.innerHTML);
       ventana.document.write("</body></html>");
       ventana.document.close();
       ventana.focus();
+      ventana.onafterprint = () => {
+        alert("a cerrar")
+          setTimeout(ventana.close, 500);
+      };
       ventana.onload = function () {
         ventana.print();
-        ventana.close();
+        setTimeout(ventana.close(), 500);
       };
-      return true;
     }
   },  
 };
