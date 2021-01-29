@@ -121,7 +121,7 @@ export default {
       search: "",
       snackbar: {
         message: "",
-        timout: 2000,
+        timout: 4000,
       },
       prodCocina: []
     };
@@ -165,7 +165,6 @@ export default {
 
     guardarOrden() {
             this.newOrden.detalleOrden = this.$store.state.detalleOrden;
-            this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
             this.newOrden.fecha = new Date().toISOString();
             this.newOrden.tiempoPreparacion = new Date().toISOString();
             this.newOrden.cliente.nombreCompleto = this.$store.state.clienteSeleccionado.nombreCompleto;
@@ -177,7 +176,6 @@ export default {
             this.newOrden.cliente.municipio = this.$store.state.clienteSeleccionado.municipio;
             this.newOrden.subtotal = this.$store.state.subtotal;
             this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));
-            this.imprimirElemento();       
             if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
                 this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
             } else {
@@ -185,10 +183,12 @@ export default {
             }
              this.$store.state.nuevaOrden=this.newOrden;
              if (JSON.stringify(this.newOrden.detalleOrden) != "{}") {
-               this.addOrden(this.newOrden);
-               this.showSnackbar("Orden creada con éxito");
-               this.getOrdenes();
-               this.redireccionarAOrdenes();
+              this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
+              this.addOrden(this.newOrden);
+              this.showSnackbar("Orden creada con éxito");
+              this.getOrdenes();
+              this.imprimirElemento();
+              this.redireccionarAOrdenes();
       }else{
         this.showSnackbar("La orden no contiene productos");
       }

@@ -1,7 +1,10 @@
 <template>
   <div >
     <component :is="layout"></component>
-    <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">{{ snackbar.message }}</v-snackbar>
+    <v-snackbar
+    right
+    v-model="snackbar.show" 
+    :timeout="snackbar.timeout">{{ snackbar.message }}</v-snackbar>
   </div>
 </template>
 
