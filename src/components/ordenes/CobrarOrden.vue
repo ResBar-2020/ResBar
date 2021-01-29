@@ -44,17 +44,20 @@
               ><span class="information">{{
                 orden.cliente.nombreCompleto
               }}</span>
-              <label class="identifier">Mesero:</label
-              ><span class="information">{{ orden.mesero }}</span>
+              <label class="identifier" v-if="orden.mesa">Mesero:</label
+              ><span class="information" v-if="orden.mesa">{{ orden.mesero }}</span>
+
               <label class="identifier" v-if="orden.mesa">Mesa:</label
               ><span class="information" v-if="orden.mesa">{{
                 orden.mesa
               }}</span>
+
               <label class="identifier" v-if="orden.observacion"
                 >Observacion:</label
               ><span class="information" v-if="orden.observacion">{{
                 orden.observacion
               }}</span>
+
             </v-col>
             <v-col class="col-12 col-md-8 overflow-auto">
               <table class="col-12">
@@ -87,7 +90,9 @@
 
               <div class="col-4 bg">
                 <label class="identifier">Propina: </label>
-                <span class="price">${{ parseFloat(orden.propina).toFixed(2) }}</span>
+                <span class="price"
+                  >${{ parseFloat(orden.propina).toFixed(2) }}</span
+                >
               </div>
 
               <div class="col-4 bg">
@@ -109,6 +114,10 @@
                 v-model.number="efectivo"
                 min="0"
                 name="efectivo"
+                autofocus
+                
+                
+                
               />
             </div>
 
@@ -139,6 +148,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "CobrarOrden",
   props: ["orden"],
@@ -158,7 +168,9 @@ export default {
       //alerta
     },
 
-    generarvuelto: function () {
+  
+
+    generarvuelto: function() {
       if (this.efectivo.toString.length > 0) {
         var proceso = this.efectivo - this.orden.total;
       }
@@ -168,28 +180,53 @@ export default {
         this.vuelto = 0;
       }
 
-      return this.vuelto;
+      return this.vuelto.toFixed(2);
     },
 
     cobrarorden() {
       var proceso = this.efectivo - this.orden.total;
-      var mensaje = confirm("¿Desea confirmar el pago?");
+      Swal.fire({
+        title: "¿Desea Confirmar el Pago?",
+        icon: "question",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, ¡Pagar!",
+      })
+      .then((result) => {
 
-      if (mensaje) {
+      if (result.isConfirmed) {
         if (this.efectivo.toString.length > 0 && proceso >= 0) {
           this.orden.cobrada = true;
           this.ordenLocal = this.orden;
           this.guardarCambios();
 
-          alert("Pago Realizado con exito!");
+          Swal.fire(
+                "Transaccion Exitosa",
+                "¡El pago ha sido realizado!",
+                "success"
+              );
+
           this.dialog = false;
         } else {
-          alert(
-            "El pago no pudo ser Realizado\nRevise que el efectivo ingresado sea igual o mayor al TOTAL a pagar"
-          );
+
+          Swal.fire(
+                "¡Error al pagar!",
+                "El pago no pudo ser procesado Revise que el efectivo ingresado sea igual o mayor al TOTAL a pagar",
+                "error"
+              );
+
           this.efectivo = 0;
+
         }
       }
+      });
     },
     cancelar() {
       this.dialog = false;

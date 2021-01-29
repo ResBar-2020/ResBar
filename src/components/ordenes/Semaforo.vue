@@ -25,6 +25,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   name: "Semaforo",
@@ -59,19 +60,39 @@ export default {
       this.color = "#00579c";
       console.log(this.tiempoTranscurrido);
 
-      //alerta
+     
     },
 
     modificartiempo() {
       if (this.local == true) {
-        var mensaje = confirm("¿Desea detener el conteo?");
-
-        if (mensaje) {
-          this.orden.tiempoPreparacion = null;
-          this.orden.domicilioEtapa = 2;
-          this.ordenLocal = this.orden;
-          this.guardarCambios();
-        }
+        Swal
+          .fire({
+            title: "¿Desea detener el conteo?",
+            icon: "question",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, ¡Detener!",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.orden.tiempoPreparacion = null;
+              this.orden.domicilioEtapa = 2;
+              this.ordenLocal = this.orden;
+              this.guardarCambios();
+              Swal.fire(
+                "Detenido!",
+                "El tiempo se detuvo exitosamente",
+                "success"
+              );
+            }
+          });
       }
     },
 
@@ -221,7 +242,7 @@ export default {
   width: 30%;
   height: 100%;
   padding: 3px;
-  background: transparent;
+  background: white;
   color: #c21c00;
   border: 1px solid #c21c00;
   transition: 0.4s;
