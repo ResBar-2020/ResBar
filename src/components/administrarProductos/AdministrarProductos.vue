@@ -351,6 +351,7 @@ export default {
     createProduct() {
       if (JSON.stringify(this.nuevoProducto) != "{}") {
         this.addProduct(this.nuevoProducto);
+        this.nuevoProducto={};
         this.showSnackbar("Agregado con exito");
       }
     },
