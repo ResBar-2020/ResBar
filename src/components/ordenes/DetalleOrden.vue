@@ -44,8 +44,10 @@
               ><span class="information">{{
                 orden.cliente.nombreCompleto
               }}</span>
-              <label class="identifier">Mesero:</label
-              ><span class="information">{{ orden.mesero }}</span>
+              <label v-show="orden.tipo!=&quot;DOMICILIO&quot;" class="identifier">Mesero:</label
+              ><span v-show="orden.tipo!=&quot;DOMICILIO&quot;" class="information">{{ orden.mesero }}</span>
+              <label v-show="orden.tipo==&quot;DOMICILIO&quot;" class="identifier">Direccion:</label
+              ><span v-show="orden.tipo==&quot;DOMICILIO&quot;" class="information">{{ orden.cliente.direccion }}</span>
               <label class="identifier" v-if="orden.mesa">Mesa:</label
               ><span class="information" v-if="orden.mesa">{{
                 orden.mesa
@@ -80,13 +82,17 @@
           </v-row>
           <v-row>
             <v-col cols="12" class="d-flex flex-row">
-              <div class="col-6 bg">
+              <div class="col-4 bg">
                 <label class="identifier">Subtotal: </label>
                 <span class="price">${{ orden.subtotal }}</span>
               </div>
-              <div class="col-6 bg">
+              <div class="col-4 bg">
                 <label class="identifier">Propina: </label>
                 <span class="price">${{ parseFloat(orden.propina).toFixed(2) }}</span>
+              </div>
+              <div class="col-4 bg" v-show="orden.tipo==&quot;DOMICILIO&quot;">
+                <label class="identifier">Costo de envio: </label>
+                <span class="price">${{ orden.costoEnvio }}</span>
               </div>
             </v-col>
 

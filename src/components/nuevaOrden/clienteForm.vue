@@ -20,16 +20,16 @@
           v-if="!domicilio&&!recoger"
           label="Mesa"
           type="number"
+          min="0"
           v-model="newOrden.mesa"
         ></v-text-field>
         <v-textarea
-          readonly
           rows="3"
           v-show="domicilio"
           outlined
           name="input-7-4"
           label="Dirección"
-          v-model="clienteSeleccionadoDireccion"
+          v-model="nuevaDireccion"
         ></v-textarea>
         <v-textarea
         rows="1"
@@ -121,14 +121,13 @@ export default {
       search: "",
       snackbar: {
         message: "",
-        timout: 4000,
+        timout: 2000,
       },
       prodCocina: []
     };
   },
   created: function () {
     this.getParametros();
-    this.getOrdenes();
     this.asignarTipo();
   },
   computed: {
@@ -151,6 +150,11 @@ export default {
       },
     },
   },
+  watch:{
+    clienteSeleccionadoDireccion: function (direccion) {
+      this.nuevaDireccion=direccion
+    }
+  },
   methods: {
     ...mapMutations(["setOrdenes", "showMessage","crearNuevaOrden"]),
     ...mapActions(["getOrdenes","addOrden", "crearNuevaOrdenAction", "getParametros"]),
@@ -162,39 +166,43 @@ export default {
     getSelectedOrden(orden) {
       this.selectedOrden = orden;
     },
-
+    
     guardarOrden() {
-            this.newOrden.detalleOrden = this.$store.state.detalleOrden;
             this.newOrden.fecha = new Date().toISOString();
-            this.newOrden.tiempoPreparacion = new Date().toISOString();
             this.newOrden.cliente.nombreCompleto = this.$store.state.clienteSeleccionado.nombreCompleto;
             this.newOrden.cliente.telefonoCasa = this.$store.state.clienteSeleccionado.telefonoCasa;
             this.newOrden.cliente.celular = this.$store.state.clienteSeleccionado.celular;
             this.newOrden.cliente.whatsapp = this.$store.state.clienteSeleccionado.whatsapp;
-            this.newOrden.cliente.direccion = this.clienteSeleccionadoDireccion;
+            this.newOrden.cliente.direccion = this.nuevaDireccion;
             this.newOrden.cliente.departamento = this.$store.state.clienteSeleccionado.departamento;
             this.newOrden.cliente.municipio = this.$store.state.clienteSeleccionado.municipio;
+            this.newOrden.tiempoPreparacion = new Date().toISOString();
+            this.newOrden.detalleOrden = this.$store.state.detalleOrden;
             this.newOrden.subtotal = this.$store.state.subtotal;
             this.newOrden.propina=parseFloat((this.$store.state.subtotal * this.factorPropina()).toFixed(2));
-            if (this.newOrden.tipo=="MESA" || this.newOrden.tipo=="RECOGER") {
-                this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;              
-            } else {
-                        this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina + this.parametros[10].valor;
+            if (this.newOrden.tipo=="MESA") {
+              this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;
+            }
+            if (this.newOrden.tipo=="DOMICILIO") {
+              this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina + this.parametros[10].valor;
+              this.newOrden.costoEnvio= this.parametros[10].valor
+            }
+            if (this.newOrden.tipo=="RECOGER") {
+              this.newOrden.total=this.$store.state.subtotal + this.newOrden.propina;
             }
              this.$store.state.nuevaOrden=this.newOrden;
+            //  Valida que detalleOrden no este vacio 
              if (JSON.stringify(this.newOrden.detalleOrden) != "{}") {
-              this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
-              this.addOrden(this.newOrden);
-              this.showSnackbar("Orden creada con éxito");
-              this.getOrdenes();
-              this.imprimirElemento();
-              this.redireccionarAOrdenes();
-      }else{
-        this.showSnackbar("La orden no contiene productos");
-      }
-    },
+               this.showSnackbar("Orden creada exitosamente");
+               this.addOrden(this.newOrden);
+               this.prodCocina = this.newOrden.detalleOrden.filter(prod => prod.preparado===true);
+               this.imprimirElemento();
+               this.redireccionarAOrdenes();
+               }else{
+                 this.showSnackbar("La orden no contiene productos");
+                }
+             },
     showSnackbar(message) {
-      this.selectedCategoria = {};
       this.snackbar.message = message;
       this.showMessage(this.snackbar);
     },
@@ -211,21 +219,23 @@ export default {
     asignarTipo() {
       switch (this.ordenLocal) {
         case "DOMICILIO":
-          // this.nuevaDireccion=this.clienteSeleccionadoDireccion;
+          this.newOrden.tipo="DOMICILIO"
           this.domicilio= true;
           this.recoger= false;
-          this.newOrden.tipo="DOMICILIO"
-          this.newOrden.costoEnvio= this.parametros[10].valor
+          // this.newOrden.tipo="DOMICILIO"
+          // this.newOrden.costoEnvio= this.parametros[10].valor
           break;
         case "MESA":
+          this.newOrden.tipo="MESA"
           this.domicilio = false;
           this.recoger= false;
-          this.newOrden.tipo="MESA"
+          // this.newOrden.tipo="MESA"
           break;
         case "RECOGER":
+          this.newOrden.tipo="RECOGER"
           this.domicilio= false;
           this.recoger= true;
-          this.newOrden.tipo="RECOGER"
+          // this.newOrden.tipo="RECOGER"
           break;
         default:
           console.log("tipo desconocido");
